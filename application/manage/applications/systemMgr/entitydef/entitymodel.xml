@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of System Manage Component</title>
+    <description>None</description>
+    <version>1.0</version>
+
+    <!-- ========================================================= -->
+    <!-- ======================== Data Model ===================== -->
+    <!-- The modules in this file are as follows:                  -->
+    <!--  - org.ofbiz.accounting.budget -->
+    <!--  - org.ofbiz.accounting.finaccount -->
+    <!--  - org.ofbiz.accounting.fixedasset -->
+    <!--  - org.ofbiz.accounting.invoice -->
+    <!--  - org.ofbiz.accounting.ledger -->
+    <!--  - org.ofbiz.accounting.payment -->
+    <!--  - org.ofbiz.accounting.tax -->
+    <!--  - org.ofbiz.accounting.rate -->
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
+    <!-- org.ofbiz.accounting.budget -->
+    <!-- ========================================================= -->
+     
+    <!-- 异常表begin by gss 2016-1-9 -->
+    <entity entity-name="ExceptionPage" package-name="org.ofbiz.systemMgr.exceptionPage"
+        title="ExceptionPage ">
+        <field name="exceptionPageId" type="id-ne"></field><!-- 页面编号 -->
+        <field name="pageTitle" type="name"></field><!--页面标题 -->
+        <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N-->
+        <field name="contentId" type="id-ne"></field><!--异常页面描述-->
+        <prim-key field="exceptionPageId"/>
+        <relation type="one"  title="ContenteId" rel-entity-name="Content">
+        <key-map field-name="contentId" rel-field-name="contentId"/>
+        </relation>
+    </entity>
+    <!--异常表 end by gss 2016-1-9 -->
+    
+    <!-- 号段表begin by gss 2016-1-9 -->
+    <entity entity-name="SegmentNumber" package-name="org.ofbiz.systemMgr.segmentNumber"
+        title="SegmentNumber ">
+        <field name="segmentNumberId" type="id-ne"></field><!-- 号段编号 -->
+        <field name="segmentNoFrom" type="name"></field><!--号段自 -->
+        <field name="segmentNoTo" type="name"></field><!--号段至-->
+        <field name="currentNo" type="name"></field><!--当前编号-->
+        <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N-->
+        <field name="isInside" type="indicator"></field><!--内部给号 Y N-->
+        <prim-key field="segmentNumberId"/>
+    </entity>
+    <!--号段表 end by gss 2016-1-9 -->
+    <!-- 支付宝接口 设置 --> 
+    <entity entity-name="PaymentGatewayAliPay"
+            package-name="org.ofbiz.accounting.payment"
+            title="AliPay Payment Gateway Config">
+      <field name="paymentGatewayConfigId" type="id-ne"></field><!--支付类型ID -->
+      <field name="paymentName" type="name"></field><!--支付名称 -->
+      <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N-->
+      <field name="isDefault" type="indicator"></field><!--设置默认  默认Y 否N-->
+      <field name="apiKey" type="name"></field><!--Api-Key-->
+      <field name="secretKey" type="name"></field><!--Secret-key-->
+      <field name="payAccount" type="name"></field><!--收款账号-->
+      <field name="payUrl" type="name"></field><!--后台回调地址-->
+      <field name="backUrl" type="name"></field><!--前台回调地址-->
+      <field name="mobileBindUrl" type="name"></field><!--手机支付回调-->
+      <field name="desContentId" type="name"></field><!--支付问题描述-->
+      <field name="imgContentId" type="name"></field><!--支付图标-->
+      <field name="description" type="long-varchar"></field><!--支付描述-->
+      <prim-key field="paymentGatewayConfigId"/>
+      <relation type="one" fk-name="PGAP_PGC" rel-entity-name="PaymentGatewayConfig">
+        <key-map field-name="paymentGatewayConfigId"/>
+      </relation>
+    </entity>
+   <!-- 支付宝接口 设置 --> 
+   
+   <!-- 微信接口 设置 --> 
+    <entity entity-name="PaymentGatewayWeixinPay"
+            package-name="org.ofbiz.accounting.payment"
+            title="Payment Gateway WeixinPay">
+      <field name="paymentGatewayConfigId" type="id-ne"></field><!--支付类型ID -->
+      <field name="paymentName" type="name"></field><!--支付名称 -->
+      <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N-->
+      <field name="isDefault" type="indicator"></field><!--设置默认  默认Y 否N-->
+      <field name="apiKey" type="name"></field><!--公众号-->
+      <field name="secretKey" type="name"></field><!--appKey-->
+      <field name="partner" type="name"></field><!--商户号-->
+      <field name="partnerKey" type="name"></field><!--商户标识-->
+      <field name="notifyUrl" type="name"></field><!--通知URL-->
+      <field name="desContentId" type="name"></field><!--支付问题描述-->
+      <field name="imgContentId" type="name"></field><!--支付图标-->
+      <field name="description" type="long-varchar"></field><!--支付图标-->
+      <prim-key field="paymentGatewayConfigId"/>
+      <relation type="one" fk-name="PGWP_PGC" rel-entity-name="PaymentGatewayConfig">
+        <key-map field-name="paymentGatewayConfigId"/>
+      </relation>
+    </entity>
+   <!-- 微信接口 设置 --> 
+   
+    <!-- 订单规则表begin by gss 2016-1-9 -->
+    <entity entity-name="OrderRule" package-name="org.ofbiz.content.article"
+        title="OrderRule ">
+        <field name="orderRuleId" type="id-ne"></field><!--订单规则编号-->
+        <field name="isReturn" type="indicator"></field><!--是否允许退单 -->
+        <field name="ordinaryCancelStamp" type="numeric"></field><!--普通订单自动取消时间-->
+        <field name="ordinaryCancelUom" type="name"></field><!--普通订单自动取消时间单位-->
+        <field name="groupCancelStamp" type="numeric"></field><!--团购订单自动取消时间-->
+        <field name="groupCancelUom" type="name"></field><!--团购订单自动取消时间单位-->
+        <field name="seckillCancelStamp" type="numeric"></field><!--秒杀订单自动取消时间-->
+        <field name="seckillCancelUom" type="name"></field><!--秒杀订单取消时间单位-->
+        <field name="carOrderCancelStamp" type="numeric"></field><!--买车订单自动取消时间-->
+        <field name="carOrderCancelUom" type="name"></field><!--买车订单自动取消时间单位-->
+        <field name="confirmOrderStamp" type="numeric"></field><!--订单自动确认收货时间 -->
+        <field name="returnToexamineStamp" type="numeric"></field><!--退单自动审核时间 -->
+        <field name="returnCancelStamp" type="numeric"></field><!--退单自动取消时间 -->
+        <field name="returnConfirmStamp" type="numeric"></field><!--退单自动确认收货时间 -->
+        <field name="reviewStamp" type="numeric"></field><!--自动评价时间 -->
+        <field name="returnCommitStamp" type="numeric"></field><!--可提交退货时间-->
+        <field name="hotelChargebackStamp" type="name"></field><!--酒店退单时间-->
+
+        <field name="returnContentId" type="id-ne"></field><!--退货说明-->
+        <field name="refundContentId" type="id-ne"></field><!--退款说明-->
+        <prim-key field="orderRuleId"/>
+        <relation type="one" fk-name="RETURN_CONTENT_ID" title="ContenteId" rel-entity-name="Content">
+        <key-map field-name="returnContentId" rel-field-name="contentId"/>
+        </relation>
+        <relation type="one" fk-name="REFUND_CONTENT_ID" title="ContenteId" rel-entity-name="Content">
+        <key-map field-name="refundContentId" rel-field-name="contentId"/>
+        </relation>
+    </entity>
+    <!--订单规则表 end by gss 2016-1-9 -->
+    <!-- 订单类型设置 begin -->
+    <entity entity-name="OrderRuleType" package-name="org.ofbiz.content.article" title="OrderRuleType">
+        <field name="orderRuleTypeId" type="id-ne"></field><!--订单类型设置编号-->
+        <field name="orderRuleId" type="id-ne"></field><!--订单规则编号-->
+        <field name="orderTypeId" type="id-ne"></field><!--订单类型编号-->
+        <field name="ordinaryCancelStamp" type="numeric"></field><!--普通订单自动取消时间-->
+        <field name="ordinaryCancelUom" type="name"></field><!--普通订单自动取消时间单位-->
+        <prim-key field="orderRuleTypeId"/>
+    </entity>
+    <!-- 订单类型设置 end -->
+    <!-- 前端设置规则begin by liruishi 2017-3-29 -->
+    <entity entity-name="FrontRule" package-name="org.ofbiz.content.rule">
+    	<field name="frontRuleId" type="id-ne"></field><!--前端规则编号-->
+    	<field name="guessLikeShowNum" type="numeric"></field><!-- 猜你喜欢展示条数 -->
+        <field name="hotBrandShowNum" type="numeric"></field><!-- 热门品牌展示条数 -->
+        <field name="customerServiceNumber" type="id"></field><!--客服电话-->
+        <field name="reserveUseInteger" type="numeric"></field><!--预定使用积分-->
+        <prim-key field="frontRuleId"/>
+    </entity>
+    <!-- 前端设置规则end by liruishi 2017-3-29 -->
+        <!-- 默认地址begin by gss 2016-1-9 -->
+    <entity entity-name="DefaultAddress" package-name="org.ofbiz.systemMgr.defaultAddress"
+        title="DefaultAddress">
+        <field name="defaultAddressId" type="id-ne"></field><!-- 默认地址ID -->
+        <field name="stateProvinceGeoId" type="id-ne"></field><!--省 -->
+        <field name="cityGeoId" type="id-ne"></field><!--市-->
+        <field name="countyGeoId" type="id-ne"></field><!--区-->
+        <prim-key field="defaultAddressId"/>
+    </entity>
+    <!--默认地址 end by gss 2016-1-9 -->
+
+    <!-- start 消息管理表 -->
+    <entity entity-name="MessageTemplate" package-name="org.ofbiz.systemMgr.messageTemplate"
+        title="MessageTemplate">
+        <!-- 主键ID -->
+        <field name="messageTemplateId" type="id-ne"></field>
+        <!-- 是否启用  1：是	0：否 -->
+        <field name="isUse" type="indicator"></field>
+        <!-- 发送方式 0：订单类， 1：商品类 2：活动类 -->
+        <field name="templateType" type="indicator"></field>
+        <!-- 模板名称 -->
+        <field name="templateName" type="name"></field>
+        <!-- 发送方式 0：短信， 1：app消息 2：pc系统消息 -->
+        <field name="sendMode" type="indicator"></field>
+        <!-- 模板内容 -->
+        <field name="templateContent" type="very-long"></field>
+        <!--  短信签名 -->
+        <field name="messageSignature" type="id-ne"></field>
+        <!-- 消息锻链 -->
+        <field name="messageChain" type="name"></field>
+        <!-- 链接url -->
+        <field name="linkUrl" type="url"></field>
+        <!-- 链接id -->
+        <field name="linkId" type="id-ne"></field>
+        <field name="linkName" type="name"></field>
+        <!-- 一级链接类型 商品链接，订单链接，活动链接 -->
+        <field name="firstLinkType" type="id-ne"></field>
+        <!-- 二级链接类型 -->
+        <field name="secondLinkType" type="id-ne"></field>
+        <prim-key field="messageTemplateId"/>
+    </entity>
+    <!-- end 消息管理表 -->
+
+
+    <!-- 渠道管理 -->
+    <entity entity-name="PartyChannel" package-name="org.ofbiz.systemMgr.PartyChannel"
+            title="MessageTemplate">
+        <!-- 主键ID -->
+        <field name="channelId" type="id-ne"></field>
+        <field name="channelCode" type="name"></field>
+        <field name="channelName" type="name"></field>
+        <field name="remark" type="description"></field>
+        <!--启用1，不启用0-->
+        <field name="status" type="indicator"></field>
+        <prim-key field="channelId"/>
+    </entity>
+
+    <!--审核开关设置-->
+    <entity entity-name="ProductRules" package-name="org.ofbiz.systemMgr.productRules"
+            title="ProductRules">
+        <!-- 主键ID -->
+        <field name="rulesId" type="id-ne"></field>
+        <!--启用Y，不启用N-->
+        <field name="physicalProductStatus" type="indicator"></field>
+        <field name="virtualProductStatus" type="indicator"></field>
+        <prim-key field="rulesId"/>
+    </entity>
+</entitymodel>

@@ -1,0 +1,65 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Content Component WebSite Services</description>
+    <vendor>OFBiz</vendor>
+    <service engine="java" name="ServerImagesList" invoke="listServerImages2" location="com.qihua.ofbiz.content.images.ImagesService" auth="false">
+        <attribute name="page" type="Integer" mode="IN" optional="false"/>
+        <attribute name="classify" type="String" mode="IN"/>
+        <attribute name="status" type="Integer" mode="OUT"/>
+        <attribute name="curPageNum" type="Integer" mode="OUT"/>
+        <attribute name="maxPageNum" type="Integer" mode="OUT"/>
+        <attribute name="imglist" type="java.util.List" mode="OUT"/>
+        <attribute name="classifylist" type="java.util.List" mode="OUT"/>
+        <attribute name="isInner" type="String" mode="IN"/>
+        <attribute name="ownerPartyId" type="String" mode="IN"/>
+    </service>
+
+    <service name="uploadAdditionalViewImages" engine="simple"
+             location="component://content/script/org/ofbiz/content/content/ImageServices.xml" invoke="uploadAdditionalViewImages" auth="true" transaction-timeout="180">
+        <description>Upload Additional View Images For Product</description>
+        <!--<permission-service service-name="genericContentPermission" main-action="UPDATE" />-->
+        <attribute name="uploadedFile0" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile0_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile0_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="uploadedFile1" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile1_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile1_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="uploadedFile2" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile2_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile2_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="uploadedFile3" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile3_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile3_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="uploadedFile4" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile4_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile4_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="uploadedFile5" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile5_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile5_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="contentIds" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="status" type="String" mode="OUT"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="type" type="String" mode="IN" optional="true" default-value="other"/>
+        <attribute name="curProductContentTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="ownerPartyId" type="String" mode="IN"/>
+    </service>
+</services>

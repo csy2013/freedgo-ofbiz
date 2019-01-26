@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods-v2.xsd">
+
+    <!-- ================================================================ -->
+    <!-- PartySettleAmount Services -->
+    <!-- ================================================================ -->
+
+    <simple-method method-name="createPartySettleAmount" short-description="Create an PartySettleAmount">
+        <check-permission permission="PARTY" action="_CREATE">
+
+        </check-permission>
+        <check-errors/>
+
+        <now-timestamp field="nowTimestamp"/>
+        <make-value value-field="newEntity" entity-name="PartySettleAmount"/>
+        <set-nonpk-fields map="parameters" value-field="newEntity"/>
+
+        <if-empty field="parameters.settleId">
+            <sequenced-id sequence-name="PartySettleAmount" field="settleId" />
+            <set from-field="settleId" field="newEntity.settleId"/>
+            <else>
+                <set field="newEntity.settleId" from-field="parameters.settleId"/>
+                <check-id field="newEntity.settleId"/>
+                <check-errors/>
+            </else>
+        </if-empty>
+        <create-value value-field="newEntity"  />
+    </simple-method>
+
+    <simple-method method-name="updatePartySettleAmount" short-description="Update an PartySettleAmount">
+        <check-permission permission="PARTY" action="_UPDATE">
+        </check-permission>
+        <check-errors/>
+        <entity-one entity-name="PartySettleAmount" value-field="lookedUpValue"/>
+        <!-- save this value before overwriting it so we can compare it later -->
+        <!-- <field-to-field field-name="primaryParentCategoryId" map-name="lookedUpValue" to-map-name="saveIdMap"/> -->
+        <set-nonpk-fields map="parameters" value-field="lookedUpValue"/>
+        <log level="info" message="settleId =====================${lookedUpValue}"/>
+        <store-value value-field="lookedUpValue"/>
+    </simple-method>
+
+
+
+    
+</simple-methods>

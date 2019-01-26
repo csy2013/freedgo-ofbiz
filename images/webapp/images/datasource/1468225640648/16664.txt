@@ -1,0 +1,74 @@
+// 1.当前用户的岗位 ，0：销售岗(查询当前个人)、1：管理岗(当前组织（不包含字节点的组织）用户)、2：超级岗(全部会员)
+        User user = (User) request.getSession().getAttribute(BaseCtrl.USER_KEY);
+        try {
+            if (user == null) {
+                return new Res<Object>(Status.ARGS_FAIL, "无用户登录", new Object());
+            }
+            if (user.getPositionStatus() == null) {
+                return new Res<Object>(Status.ARGS_FAIL, "用户无岗位", new Object());
+            }
+            
+            List<Organization> orLists = new ArrayList<>();
+            /*if (user.getPositionStatus().intValue() != 2) {*/
+            orLists = organizationDao.getOrganizationByUserPosition(user);
+            if (orLists == null || orLists.size() == 0) {
+                return new Res<Object>(Status.SERVICE_FAIL, "当前登录用户未设置组织结机构！", new Object());
+            }
+            /*}*/
+            
+            // 管理岗(特殊)
+            if (user.getPositionStatus().intValue() == 1) {
+                List<Organization> orGlLists = new ArrayList<>();
+                String deptCodeRemoveZero = "1";
+                int pdOneNodel = organizationDao.getOrganizationIsNotRootNodel(user).intValue();
+                // 循环查询字子级用户 like deptCode
+                if (pdOneNodel > 0) {// 根节点存在此用户
+                    orGlLists = organizationDao.getOrganizationByLikeDeptCode("1");
+                } else {
+                    for (int i = 0; i < orLists.size(); i++) {
+                        deptCodeRemoveZero = JcommonUtil.deletStrRightZero(orLists.get(i).getDeptCode());
+                        List<Organization> neworList = organizationDao
+                                .getOrganizationByLikeDeptCode(deptCodeRemoveZero);
+                        if (i == 0 && neworList != null) {
+                            orGlLists = neworList;
+                        } else {
+                            // 移除重复数据再新增
+                            orGlLists.removeAll(neworList);
+                            orGlLists.addAll(neworList);
+                        }
+                    }
+                }
+                orLists = orGlLists;
+            }
+            // 通过用户 跨库查询库查询会员
+            String loginName = "";
+            for (int i = 0; i < orLists.size(); i++) {
+                if (i == 0) {
+                    loginName = "'" + orLists.get(i).getUser().getLoginName() + "'";
+                } else {
+                    loginName += ",'" + orLists.get(i).getUser().getLoginName() + "'";
+                }
+            }
+            String customer_sql = " SELECT  *  FROM OC_CUSTOMER_BASE ";
+            String customer_rowid_sql = " SELECT row_id  FROM OC_CUSTOMER_BASE ";
+            
+            String current_user_str="";//当前登录关联的用户
+            
+            if (user.getPositionStatus().intValue() == 0 && !("").equals(loginName)) {//销售只看自己的
+                customer_sql += " WHERE BELONG_EMP in ('" + user.getLoginName() + "')  ";
+                customer_rowid_sql += " WHERE BELONG_EMP in ('" + user.getLoginName() + "') ";
+                current_user_str="'" + user.getLoginName() + "'";
+            } else if (user.getPositionStatus().intValue() == 1 && !("").equals(loginName)) {//管理只看自己组织及以下的
+                customer_sql += " WHERE BELONG_EMP in (" + loginName + ") ";
+                customer_rowid_sql += " WHERE BELONG_EMP in (" + loginName + ") ";
+                current_user_str=loginName;
+            }
+            request.getSession().setAttribute(BaseCtrl.CUSTOMER_SQL, customer_sql);
+            request.getSession().setAttribute(BaseCtrl.CUSTOMER_ROWID_SQL, customer_rowid_sql);
+            request.getSession().setAttribute(BaseCtrl.CURRENT_USER_STR, current_user_str);
+            
+            return new Res<Object>(Status.SUCCESS, "查询登录用户关联的会员SQL成功", new Object());
+            
+        } catch (Exception e) {
+            throw new MmoException(Status.SERVICE_FAIL, "查询登录用户关联的会员SQL错误!", e);
+        }

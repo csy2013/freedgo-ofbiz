@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+    <!-- 团购券自动过期-->
+    <!--  <TemporalExpression tempExprId="MIDNIGHT_DAILY" tempExprTypeId="TIME_OF_DAY_RANGE" description="Every Day" string1="00:00:00" string2="00:00:00"/> -->
+    <!-- 每分钟 -->
+	<!-- <TemporalExpression tempExprId="MINUTE_EVERY_1" tempExprTypeId="MINUTE_RANGE" integer1="0" integer2="59"/> -->
+    <!-- 每15分钟 -->
+    <!-- <TemporalExpression tempExprId="AUTOEXPIRETICKET" tempExprTypeId="FREQUENCY" description="Every 15 Minutes" integer1="12" integer2="15"/> -->
+    <!-- <JobSandbox jobId="AUTOEXPIRETICKET" jobName="auto Expire Ticket" runTime="2000-01-01 00:00:00.000" serviceName="autoExpireTicket" poolId="pool" runAsUser="system" tempExprId="MIDNIGHT_DAILY" maxRecurrenceCount="-1"/> -->
+    <JobSandbox jobId="AUTOEXPIRETICKET" jobName="auto Expire Ticket" runTime="2010-01-01 00:00:00.000" serviceName="autoExpireTicket" poolId="pool" runAsUser="system" tempExprId="HOUR_00" maxRecurrenceCount="-1"/>
+</entity-engine-xml>

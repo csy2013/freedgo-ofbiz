@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <property key="groupOrder">
+        <value xml:lang="en">groupOrder</value>
+        <value xml:lang="zh">拼团</value>
+    </property>
+    <property key="groupOrderList">
+        <value xml:lang="en">groupOrderList</value>
+        <value xml:lang="zh">拼团列表</value>
+    </property>
+    <property key="ProdPromoManage">
+        <value xml:lang="en">ProdPromoManage</value>
+        <value xml:lang="zh">营销管理</value>
+    </property>
+    <property key="secKillList">
+        <value xml:lang="en">secKillList</value>
+        <value xml:lang="zh">秒杀列表</value>
+    </property>
+    <property key="secKill">
+        <value xml:lang="en">secKill</value>
+        <value xml:lang="zh">秒杀</value>
+    </property>
+
+    <property key="activityCode">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动编码</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityName</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityAuditStatus">
+        <value xml:lang="en">activityAuditStatus</value>
+        <value xml:lang="zh">活动状态</value>
+    </property>
+    <property key="addGroupOrder">
+        <value xml:lang="zh">新增拼团</value>
+    </property>
+
+    <property key="activityStartDate">
+        <value xml:lang="en">activityStartDate</value>
+        <value xml:lang="zh">活动开始时间</value>
+    </property>
+    <property key="activityEndDate">
+        <value xml:lang="en">activityEndDate</value>
+        <value xml:lang="zh">活动结束时间</value>
+    </property>
+    <property key="activityStatus">
+        <value xml:lang="en">activityStatus</value>
+        <value xml:lang="zh">活动状态</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    <property key="activityName">
+        <value xml:lang="en">activityCode</value>
+        <value xml:lang="zh">活动名称</value>
+    </property>
+    
+    <property key="activityCollection">
+        <value xml:lang="zh">活动收藏</value>
+    </property>
+     <property key="activityType">
+        <value xml:lang="en">activityType</value>
+        <value xml:lang="zh">活动类型</value>
+    </property>
+     <property key="activityDes">
+        <value xml:lang="en">activityDes</value>
+        <value xml:lang="zh">活动描述</value>
+    </property>
+     <property key="productId">
+        <value xml:lang="en">productId</value>
+        <value xml:lang="zh">商品编码</value>
+    </property>
+    <property key="hasGroup">
+        <value xml:lang="en">hasGroup</value>
+        <value xml:lang="zh">已成团</value>
+    </property>
+    <property key="leaveQuantity">
+        <value xml:lang="en">leaveQuantity</value>
+        <value xml:lang="zh">剩余数量</value>
+    </property>
+     <property key="Operation">
+        <value xml:lang="en">Operation</value>
+        <value xml:lang="zh">操作</value>
+    </property>
+     <property key="NoActivityCollectionData">
+        <value xml:lang="en">NoActivityCollectionData</value>
+        <value xml:lang="zh">没有收藏活动数据</value>
+    </property>
+</resource>

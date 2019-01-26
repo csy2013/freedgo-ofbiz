@@ -1,0 +1,1498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of activity Component</title>
+    <description>add by changsy at 2016.01.08</description>
+    <version>1.0</version>
+    <!-- ========================================================= -->
+    <!-- org.ofbiz.product.promo -->
+    <!-- ========================================================= -->
+
+
+    <entity entity-name="ProductPromo"
+            package-name="org.ofbiz.product.promo"
+            title="产品促销表">
+        <field name="productPromoId" type="id-ne"></field>
+        <field name="promoName" type="name">
+            <description>促销名称</description>
+        </field>
+        <field name="promoText" type="description">
+            <description>促销说明</description>
+        </field>
+        <field name="promoType" type="id-ne">
+            <description>促销类型</description>
+        </field>
+        <field name="userEntered" type="indicator">
+            <description>是否用户输入</description>
+        </field>
+        <field name="showToCustomer" type="indicator">
+            <description>促销显示给客户</description>
+        </field>
+        <field name="requireCode" type="indicator">
+            <description>是否需要请求代码</description>
+        </field>
+        <field name="useLimitPerOrder" type="numeric">
+            <description>每个订单使用次数</description>
+        </field>
+        <field name="useLimitPerCustomer" type="numeric">
+            <description>每个客户使用限制</description>
+        </field>
+        <field name="useLimitPerPromotion" type="numeric">
+            <description>每个促销使用限制</description>
+        </field>
+        <field name="billbackFactor" type="fixed-point">
+            <description>账单恢复因素</description>
+        </field>
+        <field name="overrideOrgPartyId" type="id">
+            <description>组织机构会员标识</description>
+        </field>
+        <field name="createdDate" type="date-time"></field>
+        <field name="createdByUserLogin" type="id-vlong"></field>
+        <field name="lastModifiedDate" type="date-time"></field>
+        <field name="lastModifiedByUserLogin" type="id-vlong"></field>
+        <field name="promoStatus" type="id-ne">
+            <description>促销状态</description>
+        </field>
+        <field name="promoCode" type="name">
+            <description>促销代码</description>
+        </field>
+        <!--产品参与类型-->
+        <field name="promoProductType" type="name"/>
+        <prim-key field="productPromoId"/>
+        <relation type="one" fk-name="PROD_PRMO_OPA" rel-entity-name="Party">
+            <key-map field-name="overrideOrgPartyId" rel-field-name="partyId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRMO_CUL" title="CreatedBy" rel-entity-name="UserLogin">
+            <key-map field-name="createdByUserLogin" rel-field-name="userLoginId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRMO_LMCUL" title="LastModifiedBy" rel-entity-name="UserLogin">
+            <key-map field-name="lastModifiedByUserLogin" rel-field-name="userLoginId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PROM_ENUM" title="PromoType" rel-entity-name="Enumeration">
+            <key-map field-name="promoType" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" rel-entity-name="ProductStorePromoAppl" fk-name="PROD_PROMO_PSPA">
+            <key-map field-name="productPromoId"/>
+        </relation>
+    </entity>
+
+    <view-entity entity-name="ProductSubtractPromo" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPO" entity-name="ProductPromo"></member-entity>
+        <member-entity entity-alias="PPA" entity-name="ProductPromoAction"></member-entity>
+        <alias-all entity-alias="PPO"/>
+        <alias entity-alias="PPA" name="productPromoActionEnumId"/>
+        <view-link entity-alias="PPA" rel-entity-alias="PPO">
+            <key-map field-name="productPromoId"/>
+            <entity-condition distinct="true">
+                <condition-list>
+                    <condition-expr field-name="promoType" operator="equals" value="PROMO_SUBTRACT" entity-alias="PPO"/>
+                    <condition-expr field-name="requireCode" operator="equals" value="N" entity-alias="PPO"/>
+                </condition-list>
+            </entity-condition>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="ProductSpecialPricePromo" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPO" entity-name="ProductPromo"></member-entity>
+        <member-entity entity-alias="PPA" entity-name="ProductPromoAction"></member-entity>
+        <member-entity entity-alias="PSPA" entity-name="ProductStorePromoAppl"></member-entity>
+        <alias-all entity-alias="PPO"/>
+        <alias entity-alias="PPA" name="productPromoActionEnumId"/>
+        <alias entity-alias="PPA" name="quantity"/>
+        <alias entity-alias="PPA" name="amount"/>
+        <alias entity-alias="PPA" name="productId"/>
+        <alias entity-alias="PSPA" name="productStoreId"/>
+        <alias entity-alias="PSPA" name="thruDate"/>
+        <alias entity-alias="PSPA" name="fromDate"/>
+        <view-link entity-alias="PPO" rel-entity-alias="PPA">
+            <key-map field-name="productPromoId"/>
+        </view-link>
+        <view-link entity-alias="PPO" rel-entity-alias="PSPA">
+            <key-map field-name="productPromoId"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="ProductSecKillPromo" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPO" entity-name="ProductPromo"></member-entity>
+        <member-entity entity-alias="PPA" entity-name="ProductPromoAction"></member-entity>
+        <alias-all entity-alias="PPO"/>
+        <alias entity-alias="PPA" name="productPromoActionEnumId"/>
+        <view-link entity-alias="PPA" rel-entity-alias="PPO">
+            <key-map field-name="productPromoId"/>
+            <entity-condition distinct="true">
+                <condition-list>
+                    <condition-expr field-name="promoType" operator="equals" value="PROMO_SEC_KILL" entity-alias="PPO"/>
+                    <condition-expr field-name="requireCode" operator="equals" value="N" entity-alias="PPO"/>
+                </condition-list>
+            </entity-condition>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="ProductGiftPromo" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPO" entity-name="ProductPromo"></member-entity>
+        <member-entity entity-alias="PPA" entity-name="ProductPromoAction"></member-entity>
+        <alias-all entity-alias="PPO"/>
+        <alias entity-alias="PPA" name="productPromoActionEnumId"/>
+        <view-link entity-alias="PPA" rel-entity-alias="PPO">
+            <key-map field-name="productPromoId"/>
+            <entity-condition distinct="true">
+                <condition-list>
+                    <condition-expr field-name="productPromoActionEnumId" operator="equals" value="PROMO_GWP"/>
+                    <condition-expr field-name="requireCode" operator="equals" value="N" entity-alias="PPO"/>
+                    <condition-expr field-name="promoType" operator="equals" value="PROMO_GIFT" entity-alias="PPO"/>
+                </condition-list>
+            </entity-condition>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="ProductDiscountPromo" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPO" entity-name="ProductPromo"></member-entity>
+        <member-entity entity-alias="PPA" entity-name="ProductPromoAction"></member-entity>
+        <alias-all entity-alias="PPO"/>
+        <alias entity-alias="PPA" name="productPromoActionEnumId"/>
+        <view-link entity-alias="PPA" rel-entity-alias="PPO">
+            <key-map field-name="productPromoId"/>
+            <entity-condition distinct="true">
+                <condition-list>
+                    <condition-expr field-name="productPromoActionEnumId" operator="equals" value="PROMO_ORDER_PERCENT"/>
+                    <condition-expr field-name="requireCode" operator="equals" value="N" entity-alias="PPO"/>
+                    <condition-expr field-name="promoType" operator="equals" value="PROMO_DISCOUNT" entity-alias="PPO"/>
+                </condition-list>
+            </entity-condition>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="ProductCouponPromo" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPO" entity-name="ProductPromo"></member-entity>
+        <member-entity entity-alias="PPA" entity-name="ProductPromoAction"></member-entity>
+        <alias-all entity-alias="PPO"/>
+        <alias entity-alias="PPA" name="productPromoActionEnumId"/>
+        <view-link entity-alias="PPA" rel-entity-alias="PPO">
+            <key-map field-name="productPromoId"/>
+            <entity-condition distinct="true">
+                <condition-list>
+                    <!--<condition-expr field-name="productPromoActionEnumId" operator="equals" value="PROMO_ORDER_PERCENT"/>-->
+                    <condition-expr field-name="requireCode" operator="equals" value="Y" entity-alias="PPO"/>
+                    <condition-expr field-name="promoType" operator="in" value="COUPON_TYPE_DISC,COUPON_TYPE_SUB,COUPON_TYPE_SUB1,COUPON_TYPE_GIFT" entity-alias="PPO"/>
+                </condition-list>
+            </entity-condition>
+        </view-link>
+    </view-entity>
+
+
+    <entity entity-name="ProductPromoAction"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Action Entity">
+        <field name="productPromoId" type="id-ne"></field>
+        <field name="productPromoRuleId" type="id-ne"></field>
+        <field name="productPromoCondSeqId" type="id-ne"></field>
+        <field name="productPromoActionSeqId" type="id-ne"></field>
+        <field name="productPromoActionEnumId" type="id-ne"></field>
+        <field name="orderAdjustmentTypeId" type="id"></field>
+        <field name="serviceName" type="long-varchar"></field>
+        <field name="quantity" type="fixed-point"></field>
+        <field name="amount" type="fixed-point"></field>
+        <field name="productId" type="id"></field>
+        <field name="partyId" type="id"></field>
+        <field name="useCartQuantity" type="indicator"></field>
+        <prim-key field="productPromoId"/>
+        <prim-key field="productPromoRuleId"/>
+        <prim-key field="productPromoActionSeqId"/>
+        <prim-key field="productPromoCondSeqId"/>
+        <relation type="one" fk-name="PROD_PRACT_ENUM" title="Action" rel-entity-name="Enumeration">
+            <key-map field-name="productPromoActionEnumId" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRACT_PR" rel-entity-name="ProductPromo">
+            <key-map field-name="productPromoId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRACT_RL" rel-entity-name="ProductPromoRule">
+            <key-map field-name="productPromoId"/>
+            <key-map field-name="productPromoRuleId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCON_RL" rel-entity-name="ProductPromoCond">
+            <key-map field-name="productPromoId"/>
+            <key-map field-name="productPromoRuleId"/>
+            <key-map field-name="productPromoCondSeqId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRACT_OATYPE" rel-entity-name="OrderAdjustmentType">
+            <key-map field-name="orderAdjustmentTypeId"/>
+        </relation>
+        <relation type="many" rel-entity-name="ProductPromoCategory">
+            <key-map field-name="productPromoId"/>
+            <key-map field-name="productPromoRuleId"/>
+            <key-map field-name="productPromoActionSeqId"/>
+        </relation>
+        <relation type="many" rel-entity-name="ProductPromoProduct">
+            <key-map field-name="productPromoId"/>
+            <key-map field-name="productPromoRuleId"/>
+            <key-map field-name="productPromoActionSeqId"/>
+        </relation>
+    </entity>
+    <entity entity-name="ProductPromoCategory"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Category Entity">
+        <field name="productPromoId" type="id-ne"></field>
+        <field name="productPromoRuleId" type="id-ne"></field>
+        <field name="productPromoActionSeqId" type="id-ne"></field>
+        <field name="productPromoCondSeqId" type="id-ne"></field>
+        <field name="productCategoryId" type="id-ne"></field>
+        <field name="andGroupId" type="id"></field>
+        <field name="productPromoApplEnumId" type="id-ne"></field>
+        <field name="includeSubCategories" type="indicator"></field>
+        <prim-key field="productPromoId"/>
+        <prim-key field="productPromoRuleId"/>
+        <prim-key field="productPromoActionSeqId"/>
+        <prim-key field="productPromoCondSeqId"/>
+        <prim-key field="productCategoryId"/>
+        <prim-key field="andGroupId"/>
+        <relation type="one" fk-name="PROD_PRCAT_PROMO" rel-entity-name="ProductPromo">
+            <key-map field-name="productPromoId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCAT_PRCAT" rel-entity-name="ProductCategory">
+            <key-map field-name="productCategoryId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCAT_ENUM" title="Appl" rel-entity-name="Enumeration">
+            <key-map field-name="productPromoApplEnumId" rel-field-name="enumId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="ProductPromoCond"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Condition Entity">
+        <field name="productPromoId" type="id-ne"></field>
+        <field name="productPromoRuleId" type="id-ne"></field>
+        <field name="productPromoCondSeqId" type="id-ne"></field>
+        <field name="inputParamEnumId" type="id"></field>
+        <field name="operatorEnumId" type="id"></field>
+        <!--在条件值多个的情况逗号分隔-->
+        <field name="condValue" type="long-varchar"></field>
+        <field name="otherValue" type="long-varchar"></field>
+        <prim-key field="productPromoId"/>
+        <prim-key field="productPromoRuleId"/>
+        <prim-key field="productPromoCondSeqId"/>
+        <relation type="one" fk-name="PROD_PRCOND_PROMO" rel-entity-name="ProductPromo">
+            <key-map field-name="productPromoId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCOND_RULE" rel-entity-name="ProductPromoRule">
+            <key-map field-name="productPromoId"/>
+            <key-map field-name="productPromoRuleId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCOND_INENUM" title="InputParam" rel-entity-name="Enumeration">
+            <key-map field-name="inputParamEnumId" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCOND_OPENUM" title="Operator" rel-entity-name="Enumeration">
+            <key-map field-name="operatorEnumId" rel-field-name="enumId"/>
+        </relation>
+        <relation type="many" rel-entity-name="ProductPromoCategory">
+            <key-map field-name="productPromoId"/>
+            <key-map field-name="productPromoRuleId"/>
+            <key-map field-name="productPromoCondSeqId"/>
+        </relation>
+        <relation type="many" rel-entity-name="ProductPromoProduct">
+            <key-map field-name="productPromoId"/>
+            <key-map field-name="productPromoRuleId"/>
+            <key-map field-name="productPromoCondSeqId"/>
+        </relation>
+    </entity>
+    <entity entity-name="ProductPromoProduct"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Category Entity">
+        <field name="productPromoId" type="id-ne"></field>
+        <field name="productPromoRuleId" type="id-ne"></field>
+        <field name="productPromoActionSeqId" type="id-ne"></field>
+        <field name="productPromoCondSeqId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <field name="productPromoApplEnumId" type="id-ne"></field>
+        <prim-key field="productPromoId"/>
+        <prim-key field="productPromoRuleId"/>
+        <prim-key field="productPromoActionSeqId"/>
+        <prim-key field="productPromoCondSeqId"/>
+        <prim-key field="productId"/>
+        <relation type="one" fk-name="PROD_PRPRD_PROMO" rel-entity-name="ProductPromo">
+            <key-map field-name="productPromoId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRPRD_PROD" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRPRD_ENUM" title="Appl" rel-entity-name="Enumeration">
+            <key-map field-name="productPromoApplEnumId" rel-field-name="enumId"/>
+        </relation>
+    </entity>
+    <view-entity entity-name="ProductPromoAndProduct" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPO" entity-name="ProductPromo"></member-entity>
+        <member-entity entity-alias="PPP" entity-name="ProductPromoProduct"></member-entity>
+        <member-entity entity-alias="PSR" entity-name="ProductStorePromoAppl"></member-entity>
+        <alias-all entity-alias="PPO"/>
+        <alias-all entity-alias="PPP"/>
+        <alias name="productStoreId" entity-alias="PSR"/>
+        <alias name="thruDate" entity-alias="PSR"/>
+        <alias name="fromDate" entity-alias="PSR"/>
+        <view-link entity-alias="PPO" rel-entity-alias="PPP" rel-optional="true">
+            <key-map field-name="productPromoId"/>
+        </view-link>
+        <view-link entity-alias="PPO" rel-entity-alias="PSR">
+            <key-map field-name="productPromoId"/>
+        </view-link>
+    </view-entity>
+    <entity entity-name="ProductPromoRule"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Rule Entity">
+        <field name="productPromoId" type="id-ne"></field>
+        <field name="productPromoRuleId" type="id-ne"></field>
+        <field name="ruleName" type="name"></field>
+        <prim-key field="productPromoId"/>
+        <prim-key field="productPromoRuleId"/>
+        <relation type="one" fk-name="PROD_PRRLE_PROMO" rel-entity-name="ProductPromo">
+            <key-map field-name="productPromoId"/>
+        </relation>
+    </entity>
+    <entity entity-name="ProductPromoUse"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Use Entity">
+        <field name="orderId" type="id-ne"></field>
+        <field name="promoSequenceId" type="id-ne"></field>
+        <field name="productPromoId" type="id-ne"></field>
+        <field name="productPromoCodeId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="totalDiscountAmount" type="currency-amount"></field>
+        <field name="quantityLeftInActions" type="fixed-point"></field>
+
+        <prim-key field="orderId"/>
+        <prim-key field="promoSequenceId"/>
+        <relation type="one" fk-name="PROD_PRUSE_PROMO" rel-entity-name="ProductPromo">
+            <key-map field-name="productPromoId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRUSE_CODE" rel-entity-name="ProductPromoCode">
+            <key-map field-name="productPromoCodeId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRUSE_ORDR" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRUSE_PTY" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+        <index name="PRODPRUSE_PRMPTY" unique="false">
+            <index-field name="productPromoId"/>
+            <index-field name="partyId"/>
+        </index>
+        <index name="PRODPRUSE_PCDPTY" unique="false">
+            <index-field name="productPromoCodeId"/>
+            <index-field name="partyId"/>
+        </index>
+    </entity>
+    <view-entity entity-name="ProductPromoUseCheck"
+                 package-name="org.ofbiz.product.promo"
+                 title="Product Promotion Use Check View Entity">
+        <member-entity entity-alias="PPU" entity-name="ProductPromoUse"/>
+        <member-entity entity-alias="OH" entity-name="OrderHeader"/>
+        <alias-all entity-alias="PPU"/>
+        <alias entity-alias="OH" name="statusId"/>
+        <view-link entity-alias="PPU" rel-entity-alias="OH">
+            <key-map field-name="orderId"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="ProductPromoCodeAndParty" package-name="org.ofbiz.product.promo" title="Product Promotion party View Entity">
+        <member-entity entity-alias="PPC" entity-name="ProductPromoCode"/>
+        <member-entity entity-alias="PPCP" entity-name="ProductPromoCodeParty"/>
+        <alias-all entity-alias="PPC"/>
+        <alias entity-alias="PPCP" name="partyId"/>
+        <view-link entity-alias="PPC" rel-entity-alias="PPCP">
+            <key-map field-name="productPromoCodeId"/>
+        </view-link>
+    </view-entity>
+
+    <entity entity-name="ProductPromoContent"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promo Content Entity">
+        <field name="productPromoId" type="id-ne"/>
+        <field name="contentId" type="id-ne"/>
+        <field name="productPromoContentTypeId" type="id-ne"/>
+        <field name="fromDate" type="date-time"/>
+        <field name="thruDate" type="date-time"/>
+        <prim-key field="productPromoId"/>
+        <prim-key field="contentId"/>
+        <prim-key field="productPromoContentTypeId"/>
+        <prim-key field="fromDate"/>
+        <relation type="one" fk-name="PRODPR_CNT_PROD_PR" rel-entity-name="ProductPromo">
+            <key-map field-name="productPromoId"/>
+        </relation>
+        <relation type="one" fk-name="PRODPR_CNT_CNT" rel-entity-name="Content">
+            <key-map field-name="contentId"/>
+        </relation>
+        <relation type="one" fk-name="PRODPR_CNT_TYPE" rel-entity-name="ProductContentType">
+            <key-map field-name="productPromoContentTypeId" rel-field-name="productContentTypeId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="ProductGroupOrder"
+            package-name="org.ofbiz.product.product"
+            title="Product Group Order Entity">
+        <field name="groupOrderId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <field name="fromDate" type="date-time"></field>
+        <field name="thruDate" type="date-time"></field>
+        <field name="reqOrderQty" type="fixed-point"></field>
+        <field name="soldOrderQty" type="fixed-point"></field>
+        <field name="jobId" type="id-ne"></field>
+        <prim-key field="groupOrderId"/>
+        <relation type="one" fk-name="PROD_GROUP_ORDER" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+        <relation type="one" fk-name="GROUP_ORDER_JOB" rel-entity-name="JobSandbox">
+            <key-map field-name="jobId"/>
+        </relation>
+    </entity>
+
+
+    <!-- ========================================================= -->
+    <!-- org.ofbiz.product.activity -->
+    <!-- ========================================================= -->
+    <entity entity-name="ProductActivity"
+            package-name="org.ofbiz.product.activity"
+            title="Product Promotion Entity">
+        <field name="activityId" type="id-ne"></field>
+        <field name="activityName" type="name"></field>
+        <field name="activityType" type="id"></field>
+        <field name="activityAuditStatus" type="id"></field>
+        <field name="activityCode" type="name"></field>
+        <field name="publishDate" type="date-time"></field>
+        <field name="endDate" type="date-time"></field>
+        <field name="activityStartDate" type="date-time"></field>
+        <field name="activityEndDate" type="date-time"></field>
+        <!--活动总数量-->
+        <field name="activityQuantity" type="numeric"></field>
+        <field name="scoreValue" type="numeric"></field>
+        <field name="productPrice" type="currency-precise"></field>
+        <field name="activityPayType" type="id"></field>
+        <field name="activityDesc" type="very-long"></field>
+        <!--单个ID限购数量-->
+        <field name="limitQuantity" type="numeric"></field>
+        <field name="hasGroup" type="indicator"></field>
+        <field name="leaveQuantity" type="numeric"></field>
+        <field name="averageCustomerRating" type="fixed-point"></field>
+        <field name="hasBuyQuantity" type="numeric"></field>
+        <field name="occupiedQuantityTotal" type="numeric"></field>
+        <!--价格更新标记-->
+        <field name="isUpdatePrice" type="indicator"></field>
+        <!-- 团购排序号-->
+        <field name="sequenceNum" type="numeric"></field>
+        <!--是否支持随时退-->
+        <field name="isAnyReturn" type="indicator"></field>
+        <!--是否支持超时退-->
+        <field name="isSupportOverTimeReturn" type="indicator"></field>
+        <!--活动可积分-->
+        <field name="isSupportScore" type="indicator"></field>
+        <!--退货返回积分-->
+        <field name="isSupportReturnScore" type="indicator"></field>
+        <!--推荐到首页-->
+        <field name="isShowIndex" type="indicator"></field>
+        <!--是否包邮-->
+        <field name="isPostageFree" type="indicator"></field>
+        <!--审核信息-->
+        <field name="auditMessage" type="very-long-varchar"/>
+
+        <prim-key field="activityId"/>
+        <relation type="one" fk-name="PRODUCT_ACTYTPE_ENUM" title="activityType" rel-entity-name="Enumeration">
+            <key-map field-name="activityType" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" fk-name="ACTI_PAYTPE_ENUM" title="activityPayType" rel-entity-name="Enumeration">
+            <key-map field-name="activityPayType" rel-field-name="enumId"/>
+        </relation>
+        <relation type="many" rel-entity-name="ProductActivityGoods" fk-name="ACTI_GODS_REL">
+            <key-map field-name="activityId"/>
+        </relation>
+    </entity>
+    <entity entity-name="ProductActivityGoods" package-name="org.ofbiz.product.activity">
+        <field name="activityId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <field name="shipmentType" type="id"></field>
+        <!--活动数量-->
+        <field name="activityQuantity" type="numeric"></field>
+        <field name="activityPrice" type="currency-precise"></field>
+        <field name="virtualProductStartDate" type="date-time"></field>
+        <field name="virtualProductEndDate" type="date-time"></field>
+
+        <!--是否支持随时退-->
+        <field name="isAnyReturn" type="indicator"></field>
+        <!--是否支持超时退-->
+        <field name="isSupportOverTimeReturn" type="indicator"></field>
+        <!--活动可积分-->
+        <field name="isSupportScore" type="indicator"></field>
+        <!--退货返回积分-->
+        <field name="isSupportReturnScore" type="indicator"></field>
+        <!--推荐到首页-->
+        <field name="isShowIndex" type="indicator"></field>
+        <!--是否包邮-->
+        <field name="isPostageFree" type="indicator"></field>
+
+        <field name="hasGroup" type="indicator"></field>
+        <field name="leaveQuantity" type="numeric"></field>
+        <field name="averageCustomerRating" type="fixed-point"></field>
+        <field name="hasBuyQuantity" type="numeric"></field>
+        <field name="occupiedQuantityTotal" type="numeric"></field>
+
+        <prim-key field="activityId"/>
+        <prim-key field="productId"/>
+        <relation type="one" fk-name="FK_PAG_PA" rel-entity-name="ProductActivity">
+            <key-map field-name="activityId"/>
+        </relation>
+        <relation type="one" fk-name="FK_PAG_PD" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+    </entity>
+
+    <!-- 拼团信息表 -->
+    <entity entity-name="TogetherGroup" package-name="org.ofbiz.product.activity">
+        <field name="togetherId" type="id-ne" />
+        <!-- 创建拼团的用户-->
+        <field name="createUserId" type="id-ne"/>
+        <!-- 拼团状态 TOGETHER_RUNING拼团中 TOGETHER_DONE已成团 TOGETHER_FAIL未成团 -->
+        <field name="status" type="id-ne"/>
+        <field name="productId" type="id-ne" />
+        <!--当前人数 -->
+        <field name="currentNum" type="numeric" />
+        <!-- 活动id -->
+        <field name="activityId" type="id-ne" />
+        <!-- 创建时间-->
+        <field name="createDate" type="date-time" />
+        <!-- 多少人成团-->
+        <field name="limitUserNum" type="numeric" />
+        <prim-key field="togetherId"/>
+        <relation type="one" rel-entity-name="Product" fk-name="GROUP_PRODUCT_REL">
+            <key-map field-name="productId" />
+        </relation>
+        <relation type="many" rel-entity-name="TogetherGroupRelOrder">
+            <key-map field-name="togetherId"/>
+        </relation>
+        <relation type="one" rel-entity-name="ProductActivityGoods" fk-name="ACTIVITY_GOODS_GROUP_REL">
+            <key-map field-name="activityId" />
+        </relation>
+    </entity>
+
+    <!-- 拼团关联订单列表 -->
+    <entity entity-name="TogetherGroupRelOrder" package-name="org.ofbiz.product.activity">
+        <field name="togetherId" type="id-ne" />
+        <field name="orderUserId" type="id-ne" />
+        <field name="orderId" type="id-ne" />
+        <!-- 用户头像 -->
+        <field name="headImgUrl" type="long-varchar"/>
+        <!-- 创建时间 ===-->
+        <field name="createDate" type="date-time" />
+        <prim-key field="togetherId" />
+        <prim-key field="orderId" />
+        <relation type="many" rel-entity-name="UserLogin" fk-name="ORDER_USER_REL">
+            <key-map field-name="partyId" />
+        </relation>
+        <relation type="one" rel-entity-name="TogetherGroup" fk-name="TOGETHER_GROUP_ORDER_REL">
+            <key-map field-name="togetherId" />
+        </relation>
+        <relation type="one" rel-entity-name="OrderHeader" fk-name="ORDER_HREADER_REL">
+            <key-map field-name="orderId" />
+        </relation>
+    </entity>
+
+
+    <!--活动对应店铺 -->
+    <entity entity-name="ProductStoreProductActAppl" package-name="org.ofbiz.product.store">
+        <field name="productStoreId" type="id-ne">
+            <description>对应店铺</description>
+        </field>
+        <field name="activityId" type="id-ne">
+            <description>活动促销唯一标识</description>
+        </field>
+        <field name="fromDate" type="date-time">
+            <description>促销开始时间</description>
+        </field>
+        <field name="thruDate" type="date-time">
+            <description>促销结束时间</description>
+        </field>
+        <prim-key field="productStoreId"/>
+        <prim-key field="activityId"/>
+        <prim-key field="fromDate"/>
+        <relation type="one" fk-name="PRDSTRPGAL_PRDS" rel-entity-name="ProductStore">
+            <key-map field-name="productStoreId"/>
+        </relation>
+        <relation type="one" fk-name="PRDSTRPRMO_PAY" rel-entity-name="ProductActivity">
+            <key-map field-name="activityId"/>
+        </relation>
+    </entity>
+
+    <!--活动对应的信息查询-->
+    <view-entity entity-name="ProductActivityInfo" package-name="org.ofbiz.product.store">
+        <member-entity entity-alias="PAY" entity-name="ProductActivity"/>
+        <member-entity entity-alias="PAYG" entity-name="ProductActivityGoods"/>
+        <member-entity entity-alias="PGOR" entity-name="ProductGroupOrderRule"/>
+        <member-entity entity-alias="PSPAA" entity-name="ProductStoreProductActAppl"/>
+        <alias-all entity-alias="PAYG"/>
+        <alias name="activityId" entity-alias="PAY"/>
+        <alias name="activityDesc" entity-alias="PAY"/>
+        <alias name="activityCode" entity-alias="PAY"/>
+        <alias name="limitQuantity" entity-alias="PAY"/>
+        <alias name="activityType" entity-alias="PAY"/>
+        <alias name="activityAuditStatus" entity-alias="PAY"/>
+        <alias name="activityStartDate" entity-alias="PAY"/>
+        <alias name="activityEndDate" entity-alias="PAY"/>
+        <alias name="activityId" entity-alias="PGOR"/>
+        <alias name="productPromoId" entity-alias="PGOR"/>
+        <alias name="thruDate" entity-alias="PSPAA"/>
+        <alias name="fromDate" entity-alias="PSPAA"/>
+        <alias name="activityQuantity" entity-alias="PAYG"/>
+        <alias name="occupiedQuantityTotal" entity-alias="PAYG"/>
+        <alias name="hasBuyQuantity" entity-alias="PAYG"/>
+        <alias name="productStoreId" entity-alias="PSPAA"/>
+
+        <view-link entity-alias="PAY" rel-entity-alias="PAYG">
+            <key-map field-name="activityId"/>
+        </view-link>
+        <view-link entity-alias="PAY" rel-entity-alias="PGOR">
+            <key-map field-name="activityId"/>
+        </view-link>
+        <view-link entity-alias="PAY" rel-entity-alias="PSPAA">
+            <key-map field-name="activityId"/>
+        </view-link>
+
+    </view-entity>
+
+    <!--店铺和优惠券关联-->
+    <view-entity entity-name="ProductStorePromoAndAct"
+                 package-name="org.ofbiz.product.activity"
+                 title="Product Store Promotion and Applicability View Entity">
+        <member-entity entity-alias="PSPAA" entity-name="ProductStoreProductActAppl"/>
+        <member-entity entity-alias="PA" entity-name="ProductActivity"/>
+        <alias-all entity-alias="PSPAA"/>
+        <alias-all entity-alias="PA"/>
+        <view-link entity-alias="PSPAA" rel-entity-alias="PA">
+            <key-map field-name="activityId"/>
+        </view-link>
+    </view-entity>
+
+
+
+    <entity entity-name="ProductGroupOrderRule" package-name="org.ofbiz.product.activity">
+        <field name="activityId" type="id-ne"></field>
+        <field name="seqId" type="id-ne"></field>
+        <field name="orderQuantity" type="numeric"></field>
+        <field name="orderPrice" type="currency-precise"></field>
+        <field name="productPromoId" type="id-ne"></field>
+        <prim-key field="activityId"/>
+        <prim-key field="seqId"/>
+
+    </entity>
+
+    <entity entity-name="ProductActivityPartyLevel" package-name="org.ofbiz.product.activity">
+        <field name="activityId" type="id-ne"></field>
+        <field name="levelId" type="id-ne"></field>
+        <field name="levelName" type="name"></field>
+        <prim-key field="activityId"/>
+        <prim-key field="levelId"/>
+        <relation type="one" fk-name="FK_PAP_PAY" rel-entity-name="ProductActivity">
+            <key-map field-name="activityId"/>
+        </relation>
+        <relation type="one" rel-entity-name="PartyLevelType">
+            <key-map field-name="levelId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="ProductActivityArea" package-name="org.ofbiz.product.activity">
+        <field name="activityId" type="id-ne"></field>
+        <field name="communityId" type="id-ne"></field>
+        <field name="communityName" type="name"></field>
+        <prim-key field="activityId"/>
+        <prim-key field="communityId"/>
+        <relation type="one" rel-entity-name="ProductActivity">
+            <key-map field-name="activityId"/>
+        </relation>
+        <relation type="one" fk-name="PAA_C_FK" rel-entity-name="Community">
+            <key-map field-name="communityId"/>
+        </relation>
+    </entity>
+
+    <!-- 活动收藏  begin by gss 2015-1-21 -->
+    <entity entity-name="ProductActivityCollection"
+            package-name="org.ofbiz.product.activity"
+            title="Product Activity Collection">
+        <field name="activityId" type="id-ne"></field><!-- 活动ID -->
+        <field name="partyId" type="id-ne"></field><!-- 会员Id -->
+        <field name="activityType" type="id"></field><!-- 活动类型 -->
+        <prim-key field="partyId"/>
+        <prim-key field="activityId"/>
+        <relation type="one" fk-name="PartyId" title="partyId" rel-entity-name="Party">
+            <key-map field-name="partyId" rel-field-name="partyId"/>
+        </relation>
+        <relation type="one" fk-name="ACTIVITY_ID" title="activityId" rel-entity-name="ProductActivity">
+            <key-map field-name="activityId" rel-field-name="activityId"/>
+        </relation>
+    </entity>
+
+
+    <!-- 活动管理  begin by qianjin 2016.02.15 -->
+    <entity entity-name="ProductActivityManager"
+            package-name="org.ofbiz.product.activity"
+            title="Product Activity Manager">
+        <field name="productActivityManagerId" type="id-ne"></field>
+        <field name="templateId" type="id-ne"></field>
+        <field name="activityManagerName" type="name"></field>
+        <field name="activityManagerText" type="id-ne"></field>
+        <field name="sequenceId" type="numeric"></field>
+        <field name="productStoreId" type="name"></field><!--店铺编码 -->
+        <field name="contentId" type="name"></field>
+        <field name="isUsed" type="indicator"></field>
+        <field name="fromDate" type="date-time"></field>
+        <field name="thruDate" type="date-time"></field>
+        <prim-key field="productActivityManagerId"/>
+        <relation type="one" fk-name="PAM_CONTENT" rel-entity-name="Content">
+            <key-map field-name="activityManagerText" rel-field-name="contentId"/>
+        </relation>
+        <relation type="many" rel-entity-name="SubjectColumnActivityAssoc">
+            <key-map field-name="productActivityManagerId"/>
+        </relation>
+    </entity>
+
+    <!-- 专题栏目  begin by zhajh 2018.04.25 -->
+    <entity entity-name="SubjectColumn"
+            package-name="org.ofbiz.product.activity"
+            title="Product Activity Column">
+        <field name="subjectColumnId" type="id-ne"></field>
+        <field name="columnName" type="name"></field>
+        <prim-key field="subjectColumnId"/>
+    </entity>
+
+    <!--专题栏目和商品的关系表-->
+    <entity entity-name="SubjectColumnProductAssoc"
+            package-name="org.ofbiz.product.activity"
+            title="Product Activity Column">
+        <field name="subjectColumnProductAssocId" type="id-ne"></field>
+        <field name="subjectColumnId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <prim-key field="subjectColumnProductAssocId"/>
+    </entity>
+
+
+    <!--专题栏目和专题的关系表-->
+    <entity entity-name="SubjectColumnActivityAssoc"
+            package-name="org.ofbiz.product.activity"
+            title="Product Activity Column">
+        <field name="subjectColumnActivityAssocId" type="id-ne"></field>
+        <field name="subjectColumnId" type="id-ne"></field>
+        <field name="productActivityManagerId" type="id-ne"></field>
+        <prim-key field="subjectColumnActivityAssocId"/>
+        <relation type="one" rel-entity-name="SubjectColumn">
+            <key-map field-name="subjectColumnId"/>
+        </relation>
+    </entity>
+
+
+
+
+
+    <!-- 活动管理关联  begin by qianjin 2016.02.15 -->
+    <entity entity-name="ProductActivityManagerAssoc"
+            package-name="org.ofbiz.product.activity"
+            title="Product Activity Manager Assoc">
+        <field name="productActivityManagerAssocId" type="id-ne"></field>
+        <field name="productActivityManagerId" type="id-ne"></field>
+        <field name="productActivityId" type="id-ne"></field>
+        <field name="imgContentId" type="id-ne"></field>
+        <field name="sequenceId" type="numeric"></field>
+        <prim-key field="productActivityManagerAssocId"/>
+        <relation type="one" fk-name="PAMA_PAM" rel-entity-name="ProductActivityManager">
+            <key-map field-name="productActivityManagerId"/>
+        </relation>
+        <relation type="one" fk-name="PAMA_PA" rel-entity-name="ProductActivity">
+            <key-map field-name="productActivityId" rel-field-name="activityId"/>
+        </relation>
+        <relation type="one" fk-name="PAMA_CONTENT" rel-entity-name="Content">
+            <key-map field-name="imgContentId" rel-field-name="contentId"/>
+        </relation>
+    </entity>
+
+    <!-- 专题活动表 begin by qianjin 2016.02.22 -->
+    <entity entity-name="ProductTopicActivity"
+            package-name="org.ofbiz.product.activity"
+            title="Product Topic Activity">
+        <field name="productTopicActivityId" type="id-ne"></field>
+        <field name="topicActivityName" type="name"></field>
+        <field name="smallImg" type="id-ne"></field>
+        <field name="bigImg" type="id-ne"></field>
+        <field name="linkType" type="id-ne"></field>
+        <field name="linkUrl" type="url"></field>
+        <field name="linkId" type="id-ne"></field>
+        <field name="linkName" type="name"></field>
+        <field name="tagId" type="id-ne"></field>
+        <!-- 是否启用  0：是	1：否 -->
+        <field name="isUse" type="indicator"></field>
+        <!-- 是否所有站点  0：是	1：否 -->
+        <field name="isAllWebSite" type="indicator"></field>
+        <!-- 是否所有社区  0：是	1：否 -->
+        <field name="isAllCommunity" type="indicator"></field>
+        <field name="sequenceId" type="numeric"></field>
+        <prim-key field="productTopicActivityId"/>
+        <relation type="one" fk-name="PTA_CONTENT1" rel-entity-name="Content">
+            <key-map field-name="smallImg" rel-field-name="contentId"/>
+        </relation>
+        <relation type="one" fk-name="PTA_CONTENT2" rel-entity-name="Content">
+            <key-map field-name="bigImg" rel-field-name="contentId"/>
+        </relation>
+    </entity>
+    <!-- 专题活动表 end by qianjin 2016.02.22 -->
+
+    <!-- 专题活动站点表 begin by qianjin 2016.02.22 -->
+    <entity entity-name="ProductTopicActivityWebSite"
+            package-name="org.ofbiz.product.activity"
+            title="Product Topic Activity Web Site">
+        <field name="productTopicActivityWebSiteId" type="id-ne"></field>
+        <field name="productTopicActivityId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="productTopicActivityWebSiteId"/>
+        <relation type="one" fk-name="PTAWS_PTA" rel-entity-name="ProductTopicActivity">
+            <key-map field-name="productTopicActivityId"/>
+        </relation>
+        <relation type="one" fk-name="PTAWS_WS" rel-entity-name="WebSite">
+            <key-map field-name="webSiteId"/>
+        </relation>
+    </entity>
+    <!-- 专题活动站点表 end by qianjin 2016.02.22 -->
+
+    <!-- 专题活动社区表 begin by qianjin 2016.02.22 -->
+    <entity entity-name="ProductTopicActivityCommunity"
+            package-name="org.ofbiz.product.activity"
+            title="Product Topic Activity Community">
+        <field name="productTopicActivityCommunityId" type="id-ne"></field>
+        <field name="productTopicActivityId" type="id-ne"></field>
+        <field name="communityId" type="id-ne"></field>
+        <prim-key field="productTopicActivityCommunityId"/>
+        <relation type="one" fk-name="PTAC_PTA" rel-entity-name="ProductTopicActivity">
+            <key-map field-name="productTopicActivityId"/>
+        </relation>
+        <relation type="one" fk-name="PTAC_COMMUNITY" rel-entity-name="Community">
+            <key-map field-name="communityId"/>
+        </relation>
+    </entity>
+    <!-- 专题活动社区表 end by qianjin 2016.02.22 -->
+
+    <!--增加促销审批表 by changsy 2016.04.18-->
+    <entity entity-name="ProductPromoAudit" package-name="org.ofbiz.product.promo">
+        <field name="promoAuditId" type="id-ne"/>
+        <field name="productPromoId" type="id-ne"/>
+        <field name="auditMessage" type="very-long-varchar"/>
+        <!--对应 ENUM ACTY_AUDIT_STUATS-->
+        <field name="result" type="name"/>
+        <prim-key field="promoAuditId"/>
+    </entity>
+
+
+    <!--优惠劵-->
+    <entity entity-name="ProductPromoCoupon" package-name="org.ofbiz.product.promo">
+
+        <field name="couponCode" type="id-ne"/>
+        <field name="couponName" type="name"/>
+        <!--优惠劵类型-->
+        <field name="couponType" type="id-ne"/>
+        <!--优惠劵状态-->
+        <field name="couponStatus" type="id-ne"/>
+        <!--满-->
+        <field name="payFill" type="numeric"/>
+        <!--减-->
+        <field name="payReduce" type="currency-amount"/>
+        <!--抵用金额-->
+        <field name="arrivedAmount" type="currency-amount"/>
+        <!--使用积分-->
+        <field name="useIntegral" type="numeric"/>
+        <!--优惠范围-->
+        <field name="couponRange" type="id-ne"/>
+        <field name="couponPreCustomer" type="numeric"/>
+        <field name="couponPerDay" type="numeric"/>
+        <field name="couponQuantity" type="numeric"/>
+        <field name="startDate" type="date-time"/>
+        <field name="endDate" type="date-time"/>
+        <field name="useBeginDate" type="date-time"/>
+        <field name="useEndDate" type="date-time"/>
+        <!--发布类型-->
+        <field name="publishType" type="id-ne"/>
+        <!--使用限制-->
+        <field name="useWithScore" type="id-ne"/>
+        <!--保留-->
+        <field name="businessPartyId" type="id-ne"/>
+        <field name="couponDesc" type="very-long-varchar"/>
+        <field name="userCount" type="numeric"/>
+        <!--保留作为查询时使用-->
+        <field name="orderCount" type="numeric"/>
+        <!--区分部分产品和所有产品 COUPON_PRT_PART_IN，COUPON_PRT_ALL-->
+        <field name="couponProductType" type="name"/>
+        <!--适用范围 S:自营 A:全渠道 -->
+        <field name="applyScope" type="indicator"></field>
+
+        <!--代金券有效期类型   ROLL滚动   FIX固定    -->
+        <field name="validitType" type="name"/>
+        <!--代金券有效期-->
+        <field name="validitDays" type="numeric"/>
+        <!--该代金券是否被删除  Y已删除  N未删除-->
+        <field name="isDel" type="indicator"></field>
+
+
+        <prim-key field="couponCode"/>
+        <relation type="one" rel-entity-name="ProductStoreCouponAppl">
+            <key-map field-name="couponCode"/>
+        </relation>
+        <relation type="many" rel-entity-name="ProductCouponProduct" fk-name="PCO_PCP_REL">
+            <key-map field-name="couponCode"/>
+        </relation>
+    </entity>
+
+    <!--店铺和优惠券关联-->
+    <view-entity entity-name="ProductStorePromoAndCoupon"
+                 package-name="org.ofbiz.product.store"
+                 title="Product Store Promotion and Applicability View Entity">
+        <member-entity entity-alias="PSCA" entity-name="ProductStoreCouponAppl"/>
+        <member-entity entity-alias="PP" entity-name="ProductPromoCoupon"/>
+        <member-entity entity-alias="PG" entity-name="PartyGroup"/>
+        <alias-all entity-alias="PSCA"/>
+        <!--<alias entity-alias="PP" name="promoName"/>-->
+        <!--<alias entity-alias="PP" name="userEntered"/>-->
+        <alias-all entity-alias="PP"/>
+        <alias-all entity-alias="PG"/>
+        <view-link entity-alias="PSCA" rel-entity-alias="PP">
+            <key-map field-name="couponCode"/>
+        </view-link>
+        <view-link entity-alias="PSCA" rel-entity-alias="PG">
+            <key-map field-name="productStoreId"/>
+        </view-link>
+    </view-entity>
+
+
+    <!--优惠劵对应产品-->
+    <entity entity-name="ProductCouponProduct"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Category Entity">
+        <field name="couponCode" type="id-ne"></field>
+        <!--产品、分类、品牌的ID-->
+        <field name="productId" type="id-ne"></field>
+        <prim-key field="couponCode"/>
+        <prim-key field="productId"/>
+        <relation type="one" fk-name="PROD_PCP_COUP" rel-entity-name="ProductPromoCoupon">
+            <key-map field-name="couponCode"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PCP_PROD" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+    </entity>
+
+    <!--优惠劵对应分类-->
+    <entity entity-name="ProductCouponCategory"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Category Entity">
+        <field name="couponCode" type="id-ne"></field>
+        <!--产品ID-->
+        <field name="categoryId" type="id-ne"></field>
+        <prim-key field="couponCode"/>
+        <prim-key field="productId"/>
+        <relation type="one" fk-name="PROD_PCC_COUP" rel-entity-name="ProductPromoCoupon">
+            <key-map field-name="couponCode"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PCC_PROD" rel-entity-name="ProductCategory">
+            <key-map field-name="categoryId" rel-field-name="productCategoryId"/>
+        </relation>
+    </entity>
+
+    <!--优惠劵对应品牌-->
+    <entity entity-name="ProductCouponBrand"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Category Entity">
+        <field name="couponCode" type="id-ne"></field>
+        <!--产品、分类、品牌的ID-->
+        <field name="brandId" type="id-ne"></field>
+        <prim-key field="couponCode"/>
+        <prim-key field="productId"/>
+        <relation type="one" fk-name="PROD_PCB_COUP" rel-entity-name="ProductPromoCoupon">
+            <key-map field-name="couponCode"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PCB_PROD" rel-entity-name="ProductBrand">
+            <key-map field-name="brandId" rel-field-name="productBrandId"/>
+        </relation>
+    </entity>
+    <!--优惠劵对应会员等级-->
+    <entity entity-name="ProductCouponPartyLevel"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Category Entity">
+        <field name="couponCode" type="id-ne"></field>
+        <field name="partyLevel" type="id-ne"></field>
+        <prim-key field="couponCode"/>
+        <prim-key field="partyLevel"/>
+        <relation type="one" fk-name="PROD_PAREL_COUP" rel-entity-name="ProductPromoCoupon">
+            <key-map field-name="couponCode"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PAREL_PAR" rel-entity-name="PartyLevel">
+            <key-map field-name="partyLevel" rel-field-name="partyId"/>
+        </relation>
+    </entity>
+    <entity entity-name="ProductCouponAudit" package-name="org.ofbiz.product.promo">
+        <field name="couponAuditId" type="id-ne"/>
+        <field name="couponCode" type="id-ne"/>
+        <field name="auditMessage" type="very-long-varchar"/>
+        <!--对应 ENUM ACTY_AUDIT_STUATS-->
+        <field name="result" type="name"/>
+        <prim-key field="couponAuditId"/>
+    </entity>
+    <entity entity-name="ProductStoreCouponAppl"
+            package-name="org.ofbiz.product.store"
+            title="Product Store Coupon Applicability Entity">
+        <field name="productStoreId" type="id-ne"></field>
+        <field name="couponCode" type="id-ne"></field>
+        <field name="fromDate" type="date-time"></field>
+        <field name="thruDate" type="date-time"></field>
+        <prim-key field="productStoreId"/>
+        <prim-key field="couponCode"/>
+        <prim-key field="fromDate"/>
+        <relation type="one" fk-name="PRDSTRPRMO_PRDS" rel-entity-name="ProductStore">
+            <key-map field-name="productStoreId"/>
+        </relation>
+        <relation type="one" fk-name="FK_PRDSTRPRMO_CPN" rel-entity-name="ProductPromoCoupon">
+            <key-map field-name="couponCode"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="ProductPromoCode"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Entity">
+        <field name="productPromoCodeId" type="id-ne"></field>
+        <field name="couponCode" type="id-ne"></field>
+        <field name="productPromoId" type="id-ne"></field>
+        <field name="userEntered" type="indicator"></field>
+        <field name="requireEmailOrParty" type="indicator"></field>
+        <field name="useLimitPerCode" type="numeric"></field>
+        <field name="useLimitPerCustomer" type="numeric"></field>
+        <field name="fromDate" type="date-time"></field>
+        <field name="thruDate" type="date-time"></field>
+        <field name="createdDate" type="date-time"></field>
+        <field name="createdByUserLogin" type="id-vlong"></field>
+        <field name="lastModifiedDate" type="date-time"></field>
+        <field name="lastModifiedByUserLogin" type="id-vlong"></field>
+        <field name="promoCodeStatus" type="indicator">
+            <description>C:创建未使用,G:领取未使用,D:已过期,U:已使用</description>
+        </field>
+        <!--有效，失效，已领取,已使用-->
+        <field name="codeStatus" type="id-ne"/>
+        <!--是否已经24小时提前通知 Y通知  N不通知-->
+        <field name="isNotify" type="indicator"/>
+        <prim-key field="productPromoCodeId"/>
+        <relation type="one" fk-name="PROD_PRCOD_PPC" rel-entity-name="ProductPromoCoupon">
+            <key-map field-name="couponCode"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCOD_CUL" title="CreatedBy" rel-entity-name="UserLogin">
+            <key-map field-name="createdByUserLogin" rel-field-name="userLoginId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCOD_LMCUL" title="LastModifiedBy" rel-entity-name="UserLogin">
+            <key-map field-name="lastModifiedByUserLogin" rel-field-name="userLoginId"/>
+        </relation>
+    </entity>
+
+    <!--用户优惠劵表-->
+    <entity entity-name="ProductPromoCodeParty"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Party Entity">
+        <field name="productPromoCodeId" type="id-ne"></field>
+        <!--优惠券来源  SOURCE_TYPE_QUESTION用户答题，SOURCE_TYPE_REDPACKAGE 拆红包获得-->
+        <field name="sourceTypeId" type="name"></field>
+        <field name="partyId" type="id-ne"></field>
+        <!--使用时间-->
+        <field name="useDate" type="date-time"/>
+        <!--用户领取优惠券时间-->
+        <field name="getDate" type="date-time"/>
+        <!--用户领取积分对应的业务标识-->
+        <field name="valueId" type="id-ne"/>
+        <prim-key field="productPromoCodeId"/>
+        <prim-key field="partyId"/>
+        <relation type="one" fk-name="PROD_PRCDP_PCD" rel-entity-name="ProductPromoCode">
+            <key-map field-name="productPromoCodeId"/>
+        </relation>
+        <relation type="one" fk-name="PROD_PRCDP_PRTY" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+
+
+    <view-entity entity-name="ProductPromoCouponInfo" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPC" entity-name="ProductPromoCoupon"></member-entity>
+        <member-entity entity-alias="PCA" entity-name="ProductCouponAudit"></member-entity>
+        <member-entity entity-alias="PCP" entity-name="ProductCouponProduct"></member-entity>
+        <member-entity entity-alias="PSCA" entity-name="ProductStoreCouponAppl"></member-entity>
+        <alias-all entity-alias="PPC"/>
+        <alias entity-alias="PCP" name="productId"/>
+        <alias entity-alias="PSCA" name="productStoreId"/>
+        <alias name="result" entity-alias="PCA"/>
+        <view-link entity-alias="PPC" rel-entity-alias="PCA">
+            <key-map field-name="couponCode"/>
+        </view-link>
+        <view-link entity-alias="PPC" rel-entity-alias="PCP" rel-optional="true">
+            <key-map field-name="couponCode"/>
+        </view-link>
+        <view-link entity-alias="PPC" rel-entity-alias="PSCA">
+            <key-map field-name="couponCode"/>
+        </view-link>
+        <relation type="many" rel-entity-name="ProductCouponProduct">
+            <key-map field-name="couponCode"/>
+        </relation>
+    </view-entity>
+
+    <view-entity entity-name="ProductPromoCouponAndStore" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPC" entity-name="ProductPromoCoupon"></member-entity>
+        <member-entity entity-alias="PSCA" entity-name="ProductStoreCouponAppl"></member-entity>
+        <member-entity entity-alias="PS" entity-name="ProductStore"></member-entity>
+        <alias-all entity-alias="PPC"/>
+        <alias entity-alias="PS" name="storeName"/>
+        <alias entity-alias="PSCA" name="productStoreId"/>
+        <view-link entity-alias="PPC" rel-entity-alias="PSCA">
+            <key-map field-name="couponCode"/>
+        </view-link>
+        <view-link entity-alias="PSCA" rel-entity-alias="PS">
+            <key-map field-name="productStoreId"/>
+        </view-link>
+        <relation type="many" rel-entity-name="ProductCouponProduct" fk-name="PCO_PCP_REL">
+            <key-map field-name="couponCode"/>
+        </relation>
+
+    </view-entity>
+
+    <!--用户使用的优惠劵-->
+    <view-entity entity-name="PromoCouponCodeAndParty" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPC" entity-name="ProductPromoCode"></member-entity>
+        <member-entity entity-alias="PPCP" entity-name="ProductPromoCodeParty"></member-entity>
+        <alias-all entity-alias="PPC"/>
+        <alias name="partyId" entity-alias="PPCP"/>
+        <view-link entity-alias="PPC" rel-entity-alias="PPCP">
+            <key-map field-name="productPromoCodeId"/>
+        </view-link>
+    </view-entity>
+    <!--消费使用的优惠劵-->
+    <view-entity entity-name="PromoCouponCodeOrder" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPC" entity-name="ProductPromoCode"></member-entity>
+        <member-entity entity-alias="OPPC" entity-name="OrderProductPromoCode"></member-entity>
+        <alias-all entity-alias="PPC"/>
+        <alias name="orderId" entity-alias="OPPC"/>
+        <view-link entity-alias="PPC" rel-entity-alias="OPPC">
+            <key-map field-name="productPromoCodeId"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="PromoCouponCodePartyOrder" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PPC" entity-name="ProductPromoCode"></member-entity>
+        <member-entity entity-alias="PPCP" entity-name="ProductPromoCodeParty"></member-entity>
+        <member-entity entity-alias="OPPC" entity-name="OrderProductPromoCode"/>
+        <alias-all entity-alias="PPC"/>
+        <alias name="partyId" entity-alias="PPCP"/>
+        <alias name="orderDate" entity-alias="PPCP" field="useDate"/>
+        <view-link entity-alias="PPC" rel-entity-alias="PPCP">
+            <key-map field-name="productPromoCodeId"/>
+        </view-link>
+        <view-link entity-alias="PPC" rel-entity-alias="OPPC" rel-optional="true">
+            <key-map field-name="productPromoCodeId"/>
+        </view-link>
+
+    </view-entity>
+    <!--增加优惠劵表 end by changsy 2016.04.20-->
+
+    <!-- 增加优惠券和会员的关系表 spj -->
+    <!-- <entity entity-name="CouponParty" package-name="org.ofbiz.product.promo">
+    	<field name="couponId" type="id-ne"/> 优惠券id
+    	<field name="partyId" type="id-ne"/> 会员id
+    	<field name="batch" type="id-ne"/> 优惠券批次
+        <prim-key field="partyId"/>
+        <prim-key field="batch"/>
+        <prim-key field="couponId"/>
+    </entity> -->
+
+
+    <!--产品组合促销 add by changsy 20180309-->
+    <entity entity-name="ProductGroupPromo" package-name="org.ofbiz.product.promo" title="组合产品促销">
+        <field name="productGrpId" type="id-ne">
+            <description>唯一标识</description>
+        </field>
+        <field name="promoName" type="name">
+            <description>促销名称</description>
+        </field>
+        <field name="promoCode" type="name">
+            <description>促销编码</description>
+        </field>
+        <field name="promoPrice" type="currency-amount">
+            <description>促销价格</description>
+        </field>
+        <field name="promoStatus" type="id-ne">
+            <description>促销状态</description>
+        </field>
+        <field name="fromDate" type="date-time">
+            <description>促销开始时间</description>
+        </field>
+        <field name="thruDate" type="date-time">
+            <description>促销结束时间</description>
+        </field>
+        <prim-key field="productGrpId"/>
+        <relation type="many" rel-entity-name="ProGrpPromoProduct">
+            <key-map field-name="productGrpId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="ProGrpPromoProduct" package-name="org.ofbiz.product.promo" title="组合产品促销产品">
+        <field name="productGrpId" type="id-ne">
+            <description>组合产品促销唯一标识</description>
+        </field>
+        <field name="productId" type="id-ne">
+            <description>产品标识</description>
+        </field>
+        <field name="quantity" type="numeric">
+            <description>产品数量</description>
+        </field>
+        <prim-key field="productGrpId"/>
+        <prim-key field="productId"/>
+        <relation type="one" fk-name="PGPP_PD_FK" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+        <relation type="one" fk-name="PGPP_PGP_FK" rel-entity-name="ProductGroupPromo">
+            <key-map field-name="productGrpId"/>
+        </relation>
+    </entity>
+    <!--商家组合促销对应店铺 -->
+    <entity entity-name="ProductStoreProductGrpAppl" package-name="org.ofbiz.product.store">
+        <field name="productStoreId" type="id-ne">
+            <description>对应店铺</description>
+        </field>
+        <field name="productGrpId" type="id-ne">
+            <description>组合产品促销唯一标识</description>
+        </field>
+        <field name="fromDate" type="date-time">
+            <description>促销开始时间</description>
+        </field>
+        <field name="thruDate" type="date-time">
+            <description>促销结束时间</description>
+        </field>
+        <prim-key field="productStoreId"/>
+        <prim-key field="productGrpId"/>
+        <prim-key field="fromDate"/>
+        <relation type="one" fk-name="PRDSTRPGAL_PRDS" rel-entity-name="ProductStore">
+            <key-map field-name="productStoreId"/>
+        </relation>
+        <relation type="one" fk-name="PRDSTRPRMO_COUPON" rel-entity-name="ProductGroupPromo">
+            <key-map field-name="productGrpId"/>
+        </relation>
+    </entity>
+
+    <!--增加组合商品审批表 by changsy 2018.03.13-->
+    <entity entity-name="ProductGrpPromoAudit" package-name="org.ofbiz.product.promo">
+        <field name="promoAuditId" type="id-ne"/>
+        <field name="productGrpId" type="id-ne"/>
+        <field name="auditMessage" type="very-long-varchar"/>
+        <!--对应 ENUM ACTY_AUDIT_STUATS-->
+        <field name="result" type="name"/>
+        <prim-key field="promoAuditId"/>
+    </entity>
+
+
+    <view-entity entity-name="ProductGroupPromoInfo" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PGP" entity-name="ProductGroupPromo"></member-entity>
+        <member-entity entity-alias="PPP" entity-name="ProGrpPromoProduct"></member-entity>
+        <member-entity entity-alias="PGPA" entity-name="ProductGrpPromoAudit"></member-entity>
+        <member-entity entity-alias="PSPGA" entity-name="ProductStoreProductGrpAppl"></member-entity>
+        <alias-all entity-alias="PGP">
+            <exclude field="fromDate"/>
+            <exclude field="thruDate"/>
+        </alias-all>
+        <alias entity-alias="PPP" name="productId"/>
+        <alias entity-alias="PPP" name="quantity"/>
+        <alias entity-alias="PSPGA" name="productStoreId"/>
+        <alias entity-alias="PSPGA" name="fromDate"/>
+        <alias entity-alias="PSPGA" name="thruDate"/>
+        <alias name="result" entity-alias="PGPA"/>
+        <view-link entity-alias="PGP" rel-entity-alias="PPP">
+            <key-map field-name="productGrpId"/>
+        </view-link>
+        <view-link entity-alias="PGP" rel-entity-alias="PGPA">
+            <key-map field-name="productGrpId"/>
+        </view-link>
+        <view-link entity-alias="PGP" rel-entity-alias="PSPGA">
+            <key-map field-name="productGrpId"/>
+        </view-link>
+    </view-entity>
+
+    <view-entity entity-name="ProductGroupPromoInfo1" package-name="org.ofbiz.product.promo">
+        <member-entity entity-alias="PGP" entity-name="ProductGroupPromo"></member-entity>
+        <member-entity entity-alias="PGPA" entity-name="ProductGrpPromoAudit"></member-entity>
+        <member-entity entity-alias="PSPGA" entity-name="ProductStoreProductGrpAppl"></member-entity>
+        <alias-all entity-alias="PGP">
+            <exclude field="fromDate"/>
+            <exclude field="thruDate"/>
+        </alias-all>
+        <alias entity-alias="PSPGA" name="productStoreId"/>
+        <alias entity-alias="PSPGA" name="fromDate"/>
+        <alias entity-alias="PSPGA" name="thruDate"/>
+        <alias name="result" entity-alias="PGPA"/>
+        <view-link entity-alias="PGP" rel-entity-alias="PGPA">
+            <key-map field-name="productGrpId"/>
+        </view-link>
+        <view-link entity-alias="PGP" rel-entity-alias="PSPGA">
+            <key-map field-name="productGrpId"/>
+        </view-link>
+        <relation type="many" rel-entity-name="ProGrpPromoProduct" fk-name="PGP1_PSPGA">
+            <key-map field-name="productGrpId"/>
+        </relation>
+    </view-entity>
+
+    <!-- Add by zhajh at 20180403 拆红包设置表 20180403 Begin -->
+    <entity entity-name="RedPackageSetting"
+            package-name="org.ofbiz.product.promo"
+            title="Open Red Packet Setting">
+        <field name="packageId" type="id-ne"></field>
+        <field name="packageName" type="name"></field>
+        <!--拆红包有效时间-->
+        <field name="hourRange" type="numeric"></field>
+        <!--人数-->
+        <field name="nums" type="numeric"></field>
+        <!--描述-->
+        <field name="remark" type="long-varchar"></field>
+        <!-- 是否启用  0：是	1：否 -->
+        <field name="isUsed" type="indicator"></field>
+        <!-- 是否有效 1：有效 0：失效 -->
+        <field name="status" type="indicator"></field>
+        <prim-key field="packageId"/>
+    </entity>
+
+    <!--用户发起红包表-->
+    <entity entity-name="UserRedPackage"
+            package-name="org.ofbiz.product.promo"
+            title="UserRedPackage">
+        <field name="packageId" type="id-ne"></field>
+        <field name="userPackageId" type="id-ne"></field>
+        <!--发起红包人-->
+        <field name="createPersonId" type="id-ne"></field>
+        <!--红包优惠券总额-->
+        <field name="amountTotal" type="currency-amount"></field>
+        <!--已经领取数量-->
+        <field name="getNums" type="numeric"></field>
+        <!--红包数量-->
+        <field name="couponNums" type="numeric"></field>
+        <!--红包创建时间-->
+        <field name="createDate" type="date-time"></field>
+        <prim-key field="userPackageId"/>
+    </entity>
+
+    <!--用户发起红包表领取明细-->
+    <entity entity-name="UserRedPackageDetail"
+            package-name="org.ofbiz.product.promo"
+            title="UserRedPackageDetail">
+        <field name="userPackageId" type="id-ne"></field>
+        <field name="userPackageDetailId" type="id-ne"></field>
+        <!--如果红包没有被领取则party__id为空-->
+        <field name="partyId" type="id-ne"></field>
+        <field name="couponCodeId" type="id-ne"></field>
+        <!--用户优惠劵ID-->
+        <field name="couponId" type="id-ne"></field>
+        <!--I: 已生成 init  G：已领取 GET -->
+        <field name="status" type="indicator"></field>
+        <prim-key field="userPackageDetailId"/>
+    </entity>
+
+    <!--首页红包弹出框时间表-->
+    <entity entity-name="RedPackageIndexHistory"
+            package-name="org.ofbiz.product.promo"
+            title="RedPackageIndexHistory">
+        <field name="rpihId" type="id-ne"></field>
+        <!--用户partyId-->
+        <field name="partyId" type="id-ne"></field>
+        <!--上次弹出时间-->
+        <field name="lastVisitTime" type="date-time"></field>
+        <prim-key field="rpihId"/>
+    </entity>
+
+
+    <!-- 红包对应的代金劵列表 -->
+    <entity entity-name="RedPackageCouponSetting" package-name="org.ofbiz.product.promo">
+        <field name="packageId" type="id-ne">
+            <description>红包标识</description>
+        </field>
+        <field name="couponId" type="id-ne">
+            <description>代金劵标识</description>
+        </field>
+        <prim-key field="packageId"/>
+        <prim-key field="couponId"/>
+        <relation type="one" fk-name="REDPACKAGE_SET" rel-entity-name="RedPackageSetting">
+            <key-map field-name="packageId"/>
+        </relation>
+        <relation type="one" fk-name="PROMO_COUPON" rel-entity-name="ProductPromoCoupon">
+            <key-map field-name="couponId" rel-field-name="couponCode"/>
+        </relation>
+    </entity>
+    <!-- Add by zhajh at 20180403 拆红包设置表 20180403 Begin -->
+
+
+    <!--Add by zhajh  at 20180404 答题设置 Begin-->
+
+    <entity entity-name="QuestionSetting"
+            package-name="org.ofbiz.product.promo"
+            title="Question Setting">
+        <!--答题标识-->
+        <field name="questionId" type="id-ne"></field>
+        <!--积分设置：每答对几题-->
+        <field name="scoreQuestNums" type="numeric"></field>
+        <!--赠送积分数-->
+        <field name="scoreNums" type="numeric"></field>
+        <!--代金劵设置:每答对几题-->
+        <field name="couponQuestNums" type="numeric"></field>
+        <!-- 是否启用  0：是	1：否 -->
+        <field name="isUsed" type="indicator"></field>
+        <!-- 是否有效 1：有效 0：失效 -->
+        <field name="status" type="indicator"></field>
+        <prim-key field="questionId"/>
+    </entity>
+
+    <!-- 代金劵列表 -->
+    <entity entity-name="QuestionCouponSetting" package-name="org.ofbiz.product.promo">
+        <field name="questionId" type="id-ne">
+            <description>答题标识</description>
+        </field>
+        <field name="couponId" type="id-ne">
+            <description>代金劵标识</description>
+        </field>
+        <prim-key field="questionId"/>
+        <prim-key field="couponId"/>
+        <relation type="one" fk-name="QUESTON_SET" rel-entity-name="QuestionSetting">
+            <key-map field-name="questionId"/>
+        </relation>
+        <relation type="one" fk-name="PROMO_COUPON" rel-entity-name="ProductPromoCoupon">
+            <key-map field-name="couponId" rel-field-name="couponCode"/>
+        </relation>
+    </entity>
+    <!--Add by zhajh  at 20180404 答题设置 End-->
+
+    <!--审核日志表-->
+    <entity entity-name="PromoAuditLog"
+            package-name="org.ofbiz.product.promo"
+            title="Product Promotion Category Entity">
+        <field name="ppalId" type="id-ne"></field>
+        <field name="businessId" type="id-long-ne"></field>
+        <field name="auditType" type="id-ne"></field>
+        <field name="auditPerson" type="id-ne"></field>
+        <field name="auditMessage" type="very-long-varchar"></field>
+        <field name="createDate" type="date-time"></field>
+        <prim-key field="ppalId"/>
+    </entity>
+
+
+
+    <!--店铺和组合商品关联-->
+    <view-entity entity-name="ProductStorePromoAndGrp"
+                 package-name="org.ofbiz.product.promo"
+                 title="Product Store Promotion and Group View Entity">
+        <member-entity entity-alias="PSPGA" entity-name="ProductStoreProductGrpAppl"/>
+        <member-entity entity-alias="PG" entity-name="ProductGroupPromo"/>
+        <alias-all entity-alias="PSPGA"/>
+        <alias-all entity-alias="PG"/>
+        <alias entity-alias="PG" name="createdStamp" field="createdStamp"/>
+        <view-link entity-alias="PSPGA" rel-entity-alias="PG">
+            <key-map field-name="productGrpId"/>
+        </view-link>
+    </view-entity>
+
+</entitymodel>

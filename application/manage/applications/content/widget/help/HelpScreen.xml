@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- 跳转帮助分类列表页面 start  -->
+    <screen name="helpCategoryList">
+        <section>
+             <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                	<!-- 面包屑导航 -->
+                	<decorator-section name="pre-body">
+               			<column-container>
+               				<column style="body-title">          
+               					<label>帮助管理</label>
+               					<label style="sub-title">帮助分类列表</label>
+               				</column>        
+               				<column style="breadcrumb">      
+               					<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+   						       	<link target="" text="帮助管理" style="breadcrumb"/>
+   						       	<link target="" text="帮助分类列表" style="breadcrumb active"/>
+     						</column>    
+               			</column-container>
+                	</decorator-section>
+                	<!-- body内容 -->
+                    <decorator-section name="body">
+                   		<section>
+							<condition>
+								<if-has-permission permission="CONSULT_HELPCATEGORY" action="_VIEW" />
+							</condition>
+							<widgets>
+		                        <platform-specific>
+				          			<html>
+				          				<html-template location="component://content/webapp/customermgr/help/HelpCategory.ftl"/>
+				          			</html>
+				          		</platform-specific>
+				          	</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要帮助分类查看的权限"/>
+							</fail-widgets>
+						</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 跳转帮助分类页面 end  -->
+
+
+	<!-- 跳转帮助信息列表页面 start  -->
+	<screen name="helpInfoList">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>帮助管理</label>
+								<label style="sub-title">帮助信息列表</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="帮助管理" style="breadcrumb"/>
+								<link target="" text="帮助信息列表" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="CONSULT_HELPINFO" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/customermgr/help/HelpInfoList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要帮助分类查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转帮助信息页面 end  -->
+
+
+  	<!-- 跳转帮助信息新增页面 start add by yangpeng-->
+  	<screen name="HelpInfoAdd">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>帮助中心</label>
+								<label style="sub-title">帮助添加</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="帮助中心" style="breadcrumb"/>
+								<link target="" text="添加帮助信息" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="CONSULT_HELPINFO" action="_CREATE" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/customermgr/help/HelpInfoAdd.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要帮助分类查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+    </screen>
+    <!-- 跳转帮助信息新增页面 end add by yangpeng-->
+
+	<!-- 跳转帮助信息编辑页面 start add by yangpeng-->
+	<screen name="HelpInfoEdit">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>帮助中心</label>
+								<label style="sub-title">帮助编辑</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="帮助中心" style="breadcrumb"/>
+								<link target="" text="编辑帮助信息" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="CONSULT_HELPINFO" action="_UPDATE" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/customermgr/help/HelpInfoEdit.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要帮助分类查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转帮助信息编辑页面 end add by yangpeng-->
+
+
+
+	<!-- 跳转服务支持列表页面 start  -->
+	<screen name="ServiceSupport">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>帮助管理</label>
+								<label style="sub-title">服务支持</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="帮助管理" style="breadcrumb"/>
+								<link target="" text="服务支持" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="CONSULT_SERVICESUPPORT" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/customermgr/help/ServiceSupport.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要帮助分类查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转服务支持页面 end  -->
+
+	<!-- 跳转服务支持列表页面 start  -->
+	<screen name="editServiceSupportPage">
+		<section>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<!--<condition>
+								<if-has-permission permission="CONSULT_HELPCATEGORY" action="_VIEW" />
+							</condition>-->
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/customermgr/help/ServiceSupportEdit.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要帮助分类查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转服务支持页面 end  -->
+
+
+</screens>

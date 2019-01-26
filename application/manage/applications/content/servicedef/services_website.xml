@@ -1,0 +1,354 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Content Component WebSite Services</description>
+    <vendor>OFBiz</vendor>
+
+    <!-- WebSite Services -->
+   <!-- <service name="createWebSite" default-entity-name="WebSite" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="createWebSite">
+        <description>Create a WebSite</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="siteName" optional="false"/>
+    </service>
+    <service name="deleteWebSite" default-entity-name="WebSite" engine="simple" auth="true"
+             location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="deleteWebSite">
+        <description>Create a WebSite</description>
+        <permission-service service-name="contentManagerPermission" main-action="DELETE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+    <service name="updateWebSite" default-entity-name="WebSite" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="updateWebSite">
+        <description>Update a WebSite</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="siteName" optional="true" mode="IN" />
+    </service>-->
+    <!-- WebSite Services -->
+    <service name="createWebSite" default-entity-name="WebSite" engine="simple" auth="true"
+             location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="createWebSite">
+        <description>Create a WebSite</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <!-- <auto-attributes include="pk" mode="IN" optional="false" /> -->
+        <!-- begin by gss 2015/12/21 -->
+        <auto-attributes include="pk" mode="IN" optional="true" />
+        <!-- end by gss 2015/12/21 -->
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="productStoreId1" type="List" mode="IN" optional="true"/>
+        <override name="siteName" optional="false"/>
+    </service>
+
+
+
+
+
+    <!-- begin by gss 2015/12/21 根据名称查询站点 -->
+    <service name="findWebSiteByName" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.website.WebSiteServices" invoke="findWebSiteByName">
+        <description>Finds Website by Sitename </description>
+        <attribute type="String" mode="INOUT" name="siteName1" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="webSites" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="webSiteListSize" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+    </service>
+    <!-- end by gss 2015/12/21 根据名称查询站点 -->
+
+    <!-- begin by gss 2015/12/21 删除站点 -->
+    <service name="deleteWebSite" default-entity-name="WebSite" engine="java" auth="true"
+             location="org.ofbiz.content.website.WebSiteServices" invoke="deleteWebSite">
+        <description>remove WebSite</description>
+        <attribute type="String" mode="INOUT" name="deleteId" optional="true"/>
+    </service>
+    <!-- end by gss 2015/12/21 删除站点 -->
+
+    <!-- begin by gss 2015/12/21 根据ID查询站点 -->
+    <service name="FindWebSiteById" default-entity-name="WebSite" engine="java" auth="true"
+             location="com.qihua.ofbiz.website.WebSiteServices" invoke="FindWebSiteById">
+        <description>remove WebSite</description>
+        <attribute type="String" mode="INOUT" name="webSiteId" optional="true"/>
+        <attribute type="Boolean" mode="OUT" name="status" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="webSite" optional="true"/>
+    </service>
+    <!-- begin by gss 2015/12/21 根据ID查询站点 -->
+
+    <service name="updateWebSite" default-entity-name="WebSite" engine="simple" auth="true"
+             location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="updateWebSite">
+        <description>Update a WebSite</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <!-- begin by gss 2015/12/21 add店铺ID -->
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <!-- end by gss 2015/12/21 add店铺ID -->
+    </service>
+
+    <!-- 编辑站点启动状态  begin by gss  2015-12-24 -->
+    <service name="editSiteStatus" default-entity-name="WebSite" engine="java" auth="true"
+             location="com.qihua.ofbiz.website.WebSiteServices" invoke="editSiteStatus">
+        <description>Update a WebSiteisEnabled</description>
+        <attribute name="webSiteId" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="INOUT" optional="true"/>
+        <attribute name="status" type="Boolean" mode="OUT" optional="true"/>
+    </service>
+    <!-- 编辑站点启动状态  begin by gss  2015-12-24 -->
+
+    <!-- 上下移动站点  begin by gss  2015-12-24 -->
+    <service name="moveWebSite" default-entity-name="WebSite" engine="java" auth="true"
+             location="com.qihua.ofbiz.website.WebSiteServices" invoke="moveWebSite">
+        <description>Update a WebSiteisEnabled</description>
+        <attribute name="webSiteId" type="String" mode="IN" optional="true"/>
+        <attribute name="nextwebSiteId" type="String" mode="IN" optional="true"/>
+    </service>
+    <!-- 上下移动站点  begin by gss  2015-12-24 -->
+
+    <!-- WebSite Content Services -->
+    <service name="createWebSiteContent" default-entity-name="WebSiteContent" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="createWebSiteContent">
+        <description>Create a WebSite Content</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="fromDate" optional="true"/>
+    </service>
+    <service name="updateWebSiteContent" default-entity-name="WebSiteContent" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="updateWebSiteContent">
+        <description>Update a WebSite Content</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="removeWebSiteContent" default-entity-name="WebSiteContent" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="removeWebSiteContent">
+        <description>Remove a WebSite Content</description>
+        <permission-service service-name="contentManagerPermission" main-action="DELETE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <!-- WebSite ContentType Services -->
+    <service name="createWebSiteContentType" default-entity-name="WebSiteContentType" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="createWebSiteContentType">
+        <description>Create a WebSite ContentType</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="updateWebSiteContentType" default-entity-name="WebSiteContentType" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="updateWebSiteContentType">
+        <description>Update a WebSite ContentType</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="removeWebSiteContentType" default-entity-name="WebSiteContentType" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="removeWebSiteContentType">
+        <description>Remove a WebSite ContentType</description>
+        <permission-service service-name="contentManagerPermission" main-action="DELETE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <!-- WebSite Path Alias Services -->
+    <service name="createWebSitePathAlias" default-entity-name="WebSitePathAlias" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="createWebSitePathAlias">
+        <description>Create a WebSite Path Alias</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="udpateWebSitePathAlias" default-entity-name="WebSitePathAlias" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="updateWebSitePathAlias">
+        <description>Update a WebSite Path Alias</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="removeWebSitePathAlias" default-entity-name="WebSitePathAlias" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="removeWebSitePathAlias">
+        <description>Remove a WebSite Path Alias</description>
+        <permission-service service-name="contentManagerPermission" main-action="DELETE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+    <service name="getWebSitePathAlias" default-entity-name="WebSitePathAlias" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="getWebSitePathAlias">
+        <description>Get a WebSite Path Alias</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes mode="OUT" include="nonpk" optional="false"/>
+    </service>
+
+    <!-- WebSiteRole services -->
+    <service name="webSiteRoleInterface" engine="interface">
+        <description>WebSite Role Interface</description>
+        <auto-attributes entity-name="WebSiteRole" include="all" mode="IN" optional="false"/>
+        <override name="thruDate" optional="true"/>
+        <override name="sequenceNum" optional="true"/>
+    </service>
+
+    <service name="addWebSiteRole" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="createWebSiteRole">
+        <description>Add WebSite Role; NOTE: This service is being deprecated in favor of createWebSiteRole</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <implements service="webSiteRoleInterface"/>
+        <override name="fromDate" optional="true"/>
+    </service>
+    <service name="createWebSiteRole" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="createWebSiteRole">
+        <description>Add WebSite Role</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <implements service="webSiteRoleInterface"/>
+        <override name="fromDate" optional="true"/>
+    </service>
+    <service name="updateWebSiteRole" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="updateWebSiteRole">
+        <description>Add WebSite Role</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <implements service="webSiteRoleInterface"/>
+    </service>
+    <service name="removeWebSiteRole" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="removeWebSiteRole">
+        <description>Remove WebSite Role</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes entity-name="WebSiteRole" include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <!-- auto-create website content records -->
+    <service name="autoCreateWebSiteContent" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="quickCreateWebSiteContent">
+        <description>Auto Create Content Publish Points</description>
+        <attribute name="webSiteId" type="String" mode="IN" optional="false"/>
+        <attribute name="webSiteContentTypeId" type="List" mode="IN" optional="false"/>
+    </service>
+
+    <service name="generateMissingSeoUrlForWebsite" engine="simple" auth="true"
+            location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml" invoke="generateMissingSeoUrlForWebsite" transaction-timeout="36000000">
+        <description>Generate Missing Seo URL's for Website</description>
+        <attribute name="webSiteId" type="String" mode="IN" optional="false"/>
+        <attribute name="prodCatalogId" type="String" mode="IN" optional="false"/>
+        <attribute name="typeGenerate" type="List" mode="IN" optional="false"/>
+    </service>
+
+    <!--<service name="createDaoJiaIndexTemplate" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+            default-entity-name="WebSiteIndexTemplate" invoke="createDaoJiaIndexTemplate">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="IN" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="templateName" optional="false"/>
+    </service>
+
+    <service name="updateDaoJiaIndexTemplate" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="WebSiteIndexTemplate" invoke="updateDaoJiaIndexTemplate">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="templateName" optional="false"/>
+    </service>
+    <service name="deleteDaoJiaIndexTemplateContent" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="WebSiteIndexTemplate" invoke="deleteDaoJiaIndexTemplateContent">
+        <description>删除到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="DELETE"/>
+        <attribute name="advertId" type="String" mode="IN" optional="true"/>
+
+    </service>
+    &lt;!&ndash;专题&ndash;&gt;
+    <service name="createChannel" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="SpecialPage" invoke="createChannel">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="IN" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="pageName" optional="false"/>
+    </service>
+
+    <service name="updateChannel" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="SpecialPage" invoke="updateChannel">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="pageName" optional="false"/>
+    </service>
+    <service name="deleteChannelContent" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="SpecialPage" invoke="deleteChannelContent">
+        <description>删除到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="DELETE"/>
+        <attribute name="advertId" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    &lt;!&ndash;活动&ndash;&gt;
+    <service name="createActivity" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="SpecialPage" invoke="createActivity">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="IN" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="pageName" optional="false"/>
+    </service>
+
+    <service name="updateActivity" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="SpecialPage" invoke="updateActivity">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="pageName" optional="false"/>
+    </service>
+    <service name="deleteActivityContent" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="SpecialPage" invoke="deleteActivityContent">
+        <description>删除到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="DELETE"/>
+        <attribute name="advertId" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+
+    <service name="createRecommendProduct" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="WebSiteRecommendProduct" invoke="createRecommendProduct">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="CREATE"/>
+        <auto-attributes include="pk" mode="IN" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+
+    <service name="updateRecommendProduct" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="WebSiteRecommendProduct" invoke="updateRecommendProduct">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="UPDATE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="deleteRecommendProduct" engine="simple" auth="true" location="component://content/script/org/ofbiz/content/website/WebSiteServices.xml"
+             default-entity-name="WebSiteRecommendProduct" invoke="deleteRecommendProduct">
+        <description>创建到家服务的首页模块</description>
+        <permission-service service-name="contentManagerPermission" main-action="DELETE"/>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>-->
+</services>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <!-- Order Manager security -->
+    <SecurityPermission name="ORDERMGR_ADMIN" parentPermissionId="0" description="订单管理" permissionId="ORDERMGR_ADMIN"/>
+    <SecurityPermission name="ORDERMGR_VIEW" parentPermissionId="ORDERMGR_ADMIN" description="订单查看" permissionId="ORDERMGR_VIEW"/>
+    <SecurityPermission name="ORDERMGR_CREATE" parentPermissionId="ORDERMGR_ADMIN" description="订单创建" permissionId="ORDERMGR_CREATE"/>
+    <SecurityPermission name="ORDERMGR_UPDATE" parentPermissionId="ORDERMGR_ADMIN" description="订单修改" permissionId="ORDERMGR_UPDATE"/>
+    <SecurityPermission name="ORDERMGR_DELETE" parentPermissionId="ORDERMGR_ADMIN" description="订单删除" permissionId="ORDERMGR_DELETE"/>
+
+    <SecurityPermission name="ORDERMGR_ROLE_VIEW" parentPermissionId="ORDERMGR_ADMIN" description="有限订单查看" permissionId="ORDERMGR_ROLE_VIEW"/>
+    <SecurityPermission name="ORDERMGR_ROLE_CREATE" parentPermissionId="ORDERMGR_ADMIN" description="有限订单创建" permissionId="ORDERMGR_ROLE_CREATE"/>
+    <SecurityPermission name="ORDERMGR_ROLE_UPDATE" parentPermissionId="ORDERMGR_ADMIN" description="有限订单修改" permissionId="ORDERMGR_ROLE_UPDATE"/>
+    <SecurityPermission name="ORDERMGR_ROLE_DELETE" parentPermissionId="ORDERMGR_ADMIN" description="有限订单删除" permissionId="ORDERMGR_ROLE_DELETE"/>
+    <SecurityPermission name="ORDERMGR_NOTE" parentPermissionId="ORDERMGR_ADMIN" description="订单备注" permissionId="ORDERMGR_NOTE"/>
+    <SecurityPermission name="ORDERMGR_RETURN" parentPermissionId="ORDERMGR_ADMIN" description="订单退货管理" permissionId="ORDERMGR_RETURN"/>
+    <SecurityPermission name="ORDERMGR_SALES_ENTRY" parentPermissionId="ORDERMGR_ADMIN" description="销售订单管理" permissionId="ORDERMGR_SALES_ENTRY"/>
+    <SecurityPermission name="ORDERMGR_SALES_PRICEMOD" parentPermissionId="ORDERMGR_ADMIN" description="销售订单价格调整" permissionId="ORDERMGR_SALES_PRICEMOD"/>
+    <SecurityPermission name="ORDERMGR_PURCHASE_ENTRY" parentPermissionId="ORDERMGR_ADMIN" description="购买订单管理" permissionId="ORDERMGR_PURCHASE_ENTRY"/>
+    <SecurityPermission name="ORDERMGR_PURCHASE_VIEW" parentPermissionId="ORDERMGR_ADMIN" description="购买订单查看" permissionId="ORDERMGR_PURCHASE_VIEW"/>
+    <SecurityPermission name="ORDERMGR_PURCHASE_CREATE" parentPermissionId="ORDERMGR_ADMIN" description="购买订单创建" permissionId="ORDERMGR_PURCHASE_CREATE"/>
+    <SecurityPermission name="ORDERMGR_SALES_CREATE" parentPermissionId="ORDERMGR_ADMIN" description="销售订单创建" permissionId="ORDERMGR_SALES_CREATE"/>
+    <SecurityPermission name="ORDERMGR_SALES_UPDATE" parentPermissionId="ORDERMGR_ADMIN" description="销售订单修改" permissionId="ORDERMGR_SALES_UPDATE"/>
+    <SecurityPermission name="ORDERMGR_SEND_CONFIRMATION" parentPermissionId="ORDERMGR_ADMIN" description="销售订单确认." permissionId="ORDERMGR_SEND_CONFIRMATION"/>
+    <SecurityPermission name="ORDERMGR_QUOTE_PRICE" parentPermissionId="ORDERMGR_ADMIN" description="询价管理" permissionId="ORDERMGR_QUOTE_PRICE"/>
+    <SecurityPermission name="ORDERMGR_CRQ_CREATE" parentPermissionId="ORDERMGR_ADMIN" description="销售请求管理" permissionId="ORDERMGR_CRQ_CREATE"/>
+    <SecurityPermission name="ORDERMGR_4C_CREATE" parentPermissionId="ORDERMGR_ADMIN" description="销售预测创建" permissionId="ORDERMGR_4C_CREATE"/>
+    <SecurityPermission name="ORDERMGR_4C_UPDATE" parentPermissionId="ORDERMGR_ADMIN" description="销售预测修改" permissionId="ORDERMGR_4C_UPDATE"/>
+
+
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_CREATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_DELETE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_UPDATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_RETURN"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_NOTE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_PURCHASE_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_QUOTE_PRICE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_CRQ_ADMIN"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_CRQ_CREATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_4C_CREATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERMGR_4C_UPDATE"/>
+
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDERENTRY_LIST_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="BUSINESSORDER_LIST_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDER_LIST_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDER_ADD_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDER_DELIVER_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDER_EXPORT_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="VIRTUALORDER_LIST_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="VIRTUALORDER_EXPORT_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDER_COMMENT_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDER_COMMENTSAVE_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDER_COMMENTBATCH_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="RETURN_LIST_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="RETURN_EXPORT_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="TICKET_LIST_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="TICKET_VALIDATOR"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="COMMUNITY_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="ORDER_STATISTICS_VIEW"/>
+
+    <!--订单管理菜单-->
+    <SecurityPermission description="订单管理" name="订单管理" permissionId="ORDERMGR_VIEW" parentPermissionId="-1" menuType="A"/>
+    <SecurityPermission description="订单录入" name="订单录入" permissionId="ORDERENTRY_LIST_VIEW" parentPermissionId="ORDERMGR_VIEW"/>
+
+    <SecurityPermission description="商家订单列表" name="商家订单" permissionId="BUSINESSORDER_LIST_VIEW" parentPermissionId="ORDERMGR_VIEW" menuType="A"/>
+
+    <SecurityPermission description="订单列表" name="订单列表" permissionId="ORDER_LIST_VIEW" parentPermissionId="ORDERMGR_VIEW"/>
+    <SecurityPermission description="订单增加" name="订单增加" permissionId="ORDER_ADD_VIEW" parentPermissionId="ORDER_LIST_VIEW"/>
+    <SecurityPermission description="订单发货" name="订单发货" permissionId="ORDER_DELIVER_VIEW" parentPermissionId="BUSINESSORDER_LIST_VIEW" menuType="A"/>
+    <SecurityPermission description="订单导出" name="订单导出" permissionId="ORDER_EXPORT_VIEW" parentPermissionId="BUSINESSORDER_LIST_VIEW" menuType="A"/>
+
+    <SecurityPermission description="虚拟订单列表" name="虚拟订单" permissionId="VIRTUALORDER_LIST_VIEW" parentPermissionId="ORDERMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="虚拟订单导出" name="虚拟订单导出" permissionId="VIRTUALORDER_EXPORT_VIEW" parentPermissionId="VIRTUALORDER_LIST_VIEW" menuType="P"/>
+
+    <SecurityPermission description="商品评论" name="商品评论" permissionId="ORDER_COMMENT_VIEW" parentPermissionId="ORDERMGR_VIEW" />
+    <SecurityPermission description="商品评论保存" name="商品评论保存" permissionId="ORDER_COMMENTSAVE_VIEW" parentPermissionId="ORDER_COMMENT_VIEW" />
+    <SecurityPermission description="商品评论批量操作" name="商品评论批量操作" permissionId="ORDER_COMMENTBATCH_VIEW" parentPermissionId="ORDER_COMMENT_VIEW" />
+
+    <SecurityPermission description="退货单列表" name="退货单列表" permissionId="RETURN_LIST_VIEW" parentPermissionId="ORDERMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="退货单导出" name="退货单导出" permissionId="RETURN_EXPORT_VIEW" parentPermissionId="RETURN_LIST_VIEW" menuType="A"/>
+
+    <SecurityPermission description="退款单列表" name="退款单列表" permissionId="REFUND_LIST_VIEW" parentPermissionId="ORDERMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="退款单导出" name="退款单导出" permissionId="REFUND_EXPORT_VIEW" parentPermissionId="REFUND_LIST_VIEW" menuType="A"/>
+
+    <SecurityPermission description="验证码查询" name="验证码查询" permissionId="TICKET_LIST_VIEW" parentPermissionId="ORDERMGR_VIEW"/>
+    <SecurityPermission description="验证码核销" name="验证码核销" permissionId="TICKET_VALIDATOR" parentPermissionId="ORDERMGR_VIEW"/>
+
+    <SecurityPermission description="社区报表" name="社区报表" permissionId="COMMUNITY_VIEW" parentPermissionId="ORDERMGR_VIEW"/>
+
+    <SecurityPermission description="订单统计" name="订单统计" permissionId="ORDER_STATISTICS_VIEW" parentPermissionId="ORDERMGR_VIEW" />
+
+</entity-engine-xml>

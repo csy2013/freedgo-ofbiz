@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>yabiz商城接口</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="kaide-userLoginOrRegister" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="userLoginOrRegister">
+        <description>登录或注册接口</description>
+        <attribute name="phone" type="String" mode="IN" />
+        <attribute name="mall_id" type="String" mode="IN"/>
+        <attribute name="sex" type="String" mode="IN"/>
+        <attribute name="head_img_url" type="String" mode="IN"/>
+        <attribute name="nick_name" type="String" mode="IN" allow-html="any"/>
+        <attribute name="unionid" type="String" mode="IN"/>
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+    <service name="kaide-userAddress" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="userAddress">
+        <description>会员收货地址</description>
+        <attribute name="token" type="String" mode="IN" />
+        <attribute name="member_id" type="String" mode="IN"/>
+        <attribute name="AddressType" type="String" mode="IN"/>
+        <attribute name="Address1" type="String" mode="IN"/>
+        <attribute name="Address2" type="String" mode="IN"/>
+        <attribute name="Address3" type="String" mode="IN"/>
+        <attribute name="Address4" type="String" mode="IN"/>
+        <attribute name="State" type="String" mode="IN"/>
+        <attribute name="StateValue" type="String" mode="IN"/>
+        <attribute name="City" type="String" mode="IN"/>
+        <attribute name="CityCode" type="String" mode="IN"/>
+        <attribute name="District" type="String" mode="IN"/>
+        <attribute name="DistrictCode" type="String" mode="IN"/>
+        <attribute name="SubDistrict" type="String" mode="IN"/>
+        <attribute name="SubDistrictCode" type="String" mode="IN"/>
+        <attribute name="PostalCode" type="String" mode="IN"/>
+        <attribute name="CountryCode" type="String" mode="IN"/>
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+    <service name="kaide-getMemberIdByUnionId" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="getMemberIdByUnionId">
+        <description>根据unionId获取用户</description>
+        <attribute name="unionid" type="String" mode="IN" />
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+    <service name="kaide-userInfo" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="getUserInfo">
+        <description>获取用户基本信息</description>
+        <attribute name="token" type="String" mode="IN" />
+        <attribute name="mall_id" type="String" mode="IN"/>
+        <attribute name="member_id" type="String" mode="IN"/>
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+
+    <!--E-com_08传订单交易信息-->
+    <service name="kaide-sendOrderInfo" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="sendOrderInfoKd08">
+        <description>E-com_08传订单交易信息</description>
+        <attribute name="token" type="String" mode="IN" />
+        <attribute name="member_id" type="String" mode="IN"/>
+        <attribute name="mall_id" type="String" mode="IN"/>
+        <attribute name="amount" type="String" mode="IN"/>
+        <attribute name="storeCode" type="String" mode="IN"/>
+        <attribute name="receiptNo" type="String" mode="IN"/>
+        <!--<attribute name="locationId" type="String" mode="IN"/>-->
+        <!--<attribute name="result" type="java.lang.String" mode="OUT"/>-->
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+
+    <!--E-com_03通过unionID获取token和memberID-->
+    <service name="kaide-getTokenAndMemberIdByUnionId" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="getTokenAndMemberIdByUnionIdKd03">
+        <description>E-com_03通过unionID获取token和memberID</description>
+        <attribute name="unionid" type="String" mode="IN" />
+        <!--<attribute name="result" type="java.lang.String" mode="OUT"/>-->
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+
+    <!--十、	E-com_15扣减积分API-->
+    <service name="kaide-consumeIntegral" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="consumeIntegral">
+        <description>E-com_15扣减积分API</description>
+        <attribute name="token" type="String" mode="IN" />
+        <attribute name="member_id" type="String" mode="IN"/>
+        <attribute name="mall_id" type="String" mode="IN"/>
+        <attribute name="integral" type="String" mode="IN"/>
+        <attribute name="description" type="String" mode="IN"/>
+        <attribute name="merchant_id" type="String" mode="IN"/>
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+    <!--十、	根据用户经纬度获取用户mall-->
+    <service name="kaide-getMallByLan" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="getMallByLngLat">
+        <description>根据用户经纬度获取用户mall</description>
+        <attribute name="lng" type="String" mode="IN"/>
+        <attribute name="lat" type="String" mode="IN"/>
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+    <service name="kaide-userAddScore" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="addUserScore">
+        <description>添加积分</description>
+        <attribute name="member_id" type="String" mode="IN"/>
+        <attribute name="locationCode" type="String" mode="IN"/>
+        <attribute name="integralCode" type="String" mode="IN"/>
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+    <service name="kaide-userGetScore" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="getUserScore">
+        <description>查询积分</description>
+        <attribute name="token" type="String" mode="IN"/>
+        <attribute name="member_id" type="String" mode="IN"/>
+        <attribute name="mall_id" type="String" mode="IN"/>
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>
+
+
+   <!-- <service name="kaide-userInfo" engine="java" location="com.yuaoq.yabiz.mobile.services.kdmall.KdMallServices" invoke="getUserInfo">
+        <description>查询积分</description>
+        <attribute name="token" type="String" mode="IN"/>
+        <attribute name="member_id" type="String" mode="IN"/>
+        <attribute name="mall_id" type="String" mode="IN"/>
+        <attribute name="result" type="java.lang.String" mode="OUT"/>
+    </service>-->
+
+</services>

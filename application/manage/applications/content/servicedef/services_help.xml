@@ -1,0 +1,139 @@
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	you under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+	<description>Content Component Content Services</description>
+	<vendor>OFBiz</vendor>
+
+
+	<!-- 帮助分类 strat -->
+	<!--帮助分类：查询数据sservice-->
+	<service name="getHelpCategoryDataService" engine="java" location="com.qihua.ofbiz.help.HelpCategoryServices" invoke="findCategory" auth="true">
+		<!-- begin 查询字段 -->
+		<attribute name="categoryName" type="String" mode="IN" optional="true"/>
+		<!-- end 查询字段 -->
+		<attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+		<attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+		<attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+		<attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+		<attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+		<attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+		<attribute name="recordsList" type="java.util.List" mode="OUT"/>
+		<attribute name="totalSize" type="Integer" mode="OUT"/>
+	</service>
+
+
+	<!--帮助分类：保存新增修改sservice-->
+	<service name="editHelpCategoryService" engine="java" location="com.qihua.ofbiz.help.HelpCategoryServices" invoke="saveCategory" auth="true">
+		<attribute name="helpCategoryId" type="String" mode="IN" optional="true"/>
+		<attribute name="categoryName" type="String" mode="IN" optional="true"/>
+		<attribute name="imgUrl" type="String" mode="IN" optional="true"/>
+		<attribute name="isShow" type="String" mode="IN" optional="true"/>
+		<attribute name="sequenceNum" type="String" mode="IN" optional="true"/>
+		<attribute name="showChannel" type="String" mode="IN" optional="true" />
+		<!-- <attribute name="result" type="Map" mode="OUT" optional="true"/> -->
+		<attribute name="isF" type="String" mode="OUT" optional="true"/>
+	</service>
+
+	<!--帮助分类：删除sservice-->
+	<service name="deleteHelpCategoryService" engine="java" location="com.qihua.ofbiz.help.HelpCategoryServices" invoke="delteCategory" auth="true">
+		<attribute name="hcIds" type="String" mode="IN" optional="true"/>
+		<attribute name="result" type="Map" mode="OUT" optional="true"/>
+	</service>
+
+	<!--帮助分类：查询分类实体-->
+	<service name="findHelpCategoryService" engine="java" location="com.qihua.ofbiz.help.HelpCategoryServices" invoke="getCategoryOne" auth="true">
+		<attribute name="helpCategoryId" type="String" mode="IN" optional="true"/>
+		<attribute name="helpCategory" type="Map" mode="OUT" optional="true"/>
+	</service>
+	<!-- 帮助分类 end -->
+
+	<!-- ********************************************************************************************************************************************* -->
+
+	<!-- 帮助信息service strat -->
+	<!--帮助信息：查询数据sservice-->
+	<service name="getHelpInfoDataService" engine="java" location="com.qihua.ofbiz.help.HelpInfoServices" invoke="findHelpInfoData" auth="true">
+		<attribute name="helpTitle" type="String" mode="IN" optional="true"/>
+		<!-- end 查询字段 -->
+		<attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+		<attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+		<attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+		<attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+		<attribute name="recordsList" type="java.util.List" mode="OUT"/>
+		<attribute name="totalSize" type="Integer" mode="OUT"/>
+	</service>
+
+
+	<!--帮助信息：保存新增修改sservice-->
+	<service name="editHelpInfoService" engine="java" location="com.qihua.ofbiz.help.HelpInfoServices" invoke="editSaveHelpInfo" auth="true">
+		<attribute name="helpCategoryId" type="String" mode="IN" optional="true"/>
+		<attribute name="helpInfoId" type="String" mode="IN" optional="true"/>
+		<attribute name="helpIcon" type="String" mode="IN" optional="true"/>
+		<attribute name="isShow" type="String" mode="IN" optional="true"/>
+		<attribute name="sequenceNum" type="String" mode="IN" optional="true"/>
+		<attribute name="showChannel" type="String" mode="IN" optional="true" />
+		<attribute name="helpTitle" type="String" mode="IN" optional="true" />
+		<attribute name="helpAuthor" type="String" mode="IN" optional="true" />
+		<attribute name="helpContent" type="String" mode="IN" optional="true" allow-html="any" />
+	</service>
+
+	<!--帮助信息：删除sservice-->
+	<service name="deleteHelpInfoService" engine="java" location="com.qihua.ofbiz.help.HelpInfoServices" invoke="deleteHelpInfo" auth="true">
+		<attribute name="hIds" type="String" mode="IN" optional="true"/>
+		<attribute name="result" type="Map" mode="OUT" optional="true"/>
+	</service>
+
+	<!--帮助信息：查询实体-->
+	<service name="findHelpInfoService" engine="java" location="com.qihua.ofbiz.help.HelpInfoServices" invoke="findHelpInfoOne" auth="true">
+		<attribute name="helpInfoId" type="String" mode="IN" optional="true"/>
+		<attribute name="helpInfoVO" type="Map" mode="OUT" optional="true"/>
+	</service>
+	<!--帮助信息service end -->
+
+
+    <!-- 服务支持Service strat -->
+    <!--服务支持：查询数据sservice-->
+    <service name="getServiceSupportDataService" engine="java" location="com.qihua.ofbiz.help.ServiceSupportServices" invoke="findServiceSupportData" auth="true">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <!-- end 查询字段 -->
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!--服务支持：保存新增修改sservice-->
+    <service name="editServiceSupportService" engine="java" location="com.qihua.ofbiz.help.ServiceSupportServices" invoke="editSaveServiceSupport" auth="true">
+        <attribute name="serviceSupportId" type="String" mode="IN" optional="true"/>
+        <attribute name="serviceSupportName" type="String" mode="IN" optional="true"/>
+        <attribute name="imgUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="helpInfoId" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <!--服务支持：删除sservice-->
+    <service name="deleteServiceSupportService" engine="java" location="com.qihua.ofbiz.help.ServiceSupportServices" invoke="deleteServiceSupport" auth="true">
+        <attribute name="ssIds" type="String" mode="IN" optional="true"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+
+    <!--服务支持：查询实体-->
+    <service name="findServiceSupportService" engine="java" location="com.qihua.ofbiz.help.ServiceSupportServices" invoke="findServiceSupportOne" auth="true">
+        <attribute name="serviceSupportId" type="String" mode="IN" optional="true"/>
+        <attribute name="serviceSupportVO" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <!--服务支持service end -->
+
+</services>

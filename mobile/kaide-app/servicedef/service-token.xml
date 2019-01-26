@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>mobile product Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="partyTokenLogin" engine="java" location="com.yuaoq.yabiz.mobile.services.TokenService" invoke="partyTokeLogin">
+        <description>根据用户token，member获取用户基本信息，登录操作</description>
+        <attribute name="token" type="String" mode="IN" optional="false"/>
+        <attribute name="memberId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+</services>

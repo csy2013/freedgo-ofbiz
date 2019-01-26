@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <!--     Party Manager security
+        <SecurityPermission description="View operations in the Party Manager." permissionId="PARTYMGR_VIEW"/>
+        <SecurityPermission description="Create operations in the Party Manager." permissionId="PARTYMGR_CREATE"/>
+        <SecurityPermission description="Update operations in the Party Manager." permissionId="PARTYMGR_UPDATE"/>
+        <SecurityPermission description="Delete operations in the Party Manager." permissionId="PARTYMGR_DELETE"/>
+        <SecurityPermission description="ALL operations in the Party Manager." permissionId="PARTYMGR_ADMIN"/>
+        <SecurityPermission description="Create notes in the Party Manager." permissionId="PARTYMGR_NOTE"/>
+        <SecurityPermission description="Update party status in the Party Manager." permissionId="PARTYMGR_STS_UPDATE"/>
+        <SecurityPermission description="Update PartyGroup or Person detail information." permissionId="PARTYMGR_GRP_UPDATE"/>
+        <SecurityPermission description="Create party relationships in the Party Manager." permissionId="PARTYMGR_REL_CREATE"/>
+        <SecurityPermission description="Update party relationships in the Party Manager." permissionId="PARTYMGR_REL_UPDATE"/>
+        <SecurityPermission description="Delete party relationships in the Party Manager." permissionId="PARTYMGR_REL_DELETE"/>
+        <SecurityPermission description="Create party roles in the Party Manager." permissionId="PARTYMGR_ROLE_CREATE"/>
+        <SecurityPermission description="Delete party roles in the Party Manager." permissionId="PARTYMGR_ROLE_DELETE"/>
+        <SecurityPermission description="Create party contact mechs in the Party Manager." permissionId="PARTYMGR_PCM_CREATE"/>
+        <SecurityPermission description="Update party contact mechs in the Party Manager." permissionId="PARTYMGR_PCM_UPDATE"/>
+        <SecurityPermission description="Delete party contact mechs in the Party Manager." permissionId="PARTYMGR_PCM_DELETE"/>
+        <SecurityPermission description="Create party to data source relations." permissionId="PARTYMGR_SRC_CREATE"/>
+        <SecurityPermission description="Create party quals in the Party Manager." permissionId="PARTYMGR_QAL_CREATE"/>
+        <SecurityPermission description="Update party quals in the Party Manager." permissionId="PARTYMGR_QAL_UPDATE"/>
+        <SecurityPermission description="Delete party quals in the Party Manager." permissionId="PARTYMGR_QAL_DELETE"/>
+        <SecurityPermission description="Create communication event, any from/to party." permissionId="PARTYMGR_CME_CREATE"/>
+        <SecurityPermission description="Update communication event, any from/to party." permissionId="PARTYMGR_CME_UPDATE"/>
+        <SecurityPermission description="Delete communication event, any from/to party." permissionId="PARTYMGR_CME_DELETE"/>
+        <SecurityPermission description="Can create Email communication events for logged-in user." permissionId="PARTYMGR_CME-EMAIL_CREATE"/>
+        <SecurityPermission description="Can update Email communication events for logged-in user." permissionId="PARTYMGR_CME-EMAIL_UPDATE"/>
+        <SecurityPermission description="Can delete Email communication events for logged-in user." permissionId="PARTYMGR_CME-EMAIL_DELETE"/>
+        <SecurityPermission description="Can create Internal note communication event for logged-in user." permissionId="PARTYMGR_CME-NOTE_CREATE"/>
+
+        <SecurityGroup description="Party Admin group, has all party permissions." groupId="PARTYADMIN"/>
+        <SecurityGroupPermission groupId="PARTYADMIN" permissionId="PARTYMGR_ADMIN"/>
+        <SecurityGroupPermission groupId="PARTYADMIN" permissionId="OFBTOOLS_VIEW"/>
+    -->
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="PARTYMGR_ADMIN"/>
+    <!--
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_DELETE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_NOTE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_VIEW"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_STS_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_GRP_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_REL_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_REL_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_ROLE_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_ROLE_DELETE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_PCM_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_PCM_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_PCM_DELETE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_SRC_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_CME_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_CME_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="PARTYMGR_CME_DELETE"/>
+
+    <SecurityGroupPermission groupId="VIEWADMIN" permissionId="PARTYMGR_VIEW"/>
+    <SecurityGroupPermission groupId="VIEWADMIN" permissionId="PARTYMGR_NOTE"/>
+    <SecurityGroupPermission groupId="BIZADMIN" permissionId="PARTYMGR_ADMIN"/>
+
+    Security Management security
+    <SecurityPermission description="View operations in the Security Management Screens." permissionId="SECURITY_VIEW"/>
+    <SecurityPermission description="Create operations in the Security Management Screens." permissionId="SECURITY_CREATE"/>
+    <SecurityPermission description="Update operations in the Security Management Screens." permissionId="SECURITY_UPDATE"/>
+    <SecurityPermission description="Delete operations in the Security Management Screens." permissionId="SECURITY_DELETE"/>
+    <SecurityPermission description="ALL operations in the Security Management Screens." permissionId="SECURITY_ADMIN"/>
+    -->
+
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SECURITY_ADMIN"/>
+    <!--
+ <SecurityGroupPermission groupId="FLEXADMIN" permissionId="SECURITY_CREATE"/>
+ <SecurityGroupPermission groupId="FLEXADMIN" permissionId="SECURITY_DELETE"/>
+ <SecurityGroupPermission groupId="FLEXADMIN" permissionId="SECURITY_UPDATE"/>
+ <SecurityGroupPermission groupId="FLEXADMIN" permissionId="SECURITY_VIEW"/>
+ <SecurityGroupPermission groupId="VIEWADMIN" permissionId="SECURITY_VIEW"/>
+
+ <SecurityGroup description="Security Admin group, has all permissions to modify security settings in party manager." groupId="SECURITYADMIN"/>
+ <SecurityGroupPermission groupId="SECURITYADMIN" permissionId="SECURITY_ADMIN"/>
+    -->
+    <!--商家管理菜单-->
+    <SecurityPermission description="商家管理" name="商家管理" permissionId="BUSINESSMGR_VIEW" parentPermissionId="-1" menuType="A"/>
+    <!--商家列表-->
+    <SecurityPermission description="商家查看" name="商家查看" permissionId="BUSINESSMGR_LIST_VIEW" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="商家编辑" name="商家编辑" permissionId="BUSINESSMGR_LIST_UPDATE" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="商家审核" name="商家审核" permissionId="BUSINESSMGR_LIST_AUDIT" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+    <!--商家新增-->
+    <SecurityPermission description="商家新增" name="商家新增" permissionId="BUSINESSMGR_CREATE" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+    <!--商家删除-->
+    <SecurityPermission description="商家删除" name="商家删除" permissionId="BUSINESSMGR_DELETE" parentPermissionId="BUSINESSMGR_VIEW"/>
+    <!--商家导入-->
+    <SecurityPermission description="商家导入" name="商家导入" permissionId="BUSINESSMGR_IMPORT" parentPermissionId="BUSINESSMGR_VIEW"/>
+
+    <!-- 商家品牌 -->
+    <SecurityPermission description="商家品牌" name="商家品牌" permissionId="BUSINESSMGR_BRAND" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!-- 品牌自定义授权申请 -->
+    <SecurityPermission description="品牌自定义授权申请" name="品牌自定义授权申请" permissionId="BUSINESSMGR_BRAND_CREATE" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!-- 品牌授权 -->
+    <SecurityPermission description="品牌授权" name="品牌授权" permissionId="BUSINESSMGR_BRAND_AUDIT" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!--商家 品牌列表-->
+    <SecurityPermission description="品牌列表" name="品牌列表" permissionId="BUSINESSMGR_BRAND_LIST_VIEW" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!--商家端 删除品牌 -->
+    <SecurityPermission description="删除品牌" name="删除品牌" permissionId="BUSINESSMGR_BRAND_DELETE" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!-- 品牌审核 -->
+    <SecurityPermission description="品牌审核" name="品牌审核" permissionId="BUSINESSMGR_BRAND_REVIEW" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!-- 待审核品牌 -->
+    <SecurityPermission description="查看待审核品牌" name="查看待审核品牌" permissionId="PARTY_BUSINESS_BRAND_VIEW" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!-- 审核待审核的品牌 -->
+    <SecurityPermission description="审核待审核品牌" name="审核待审核品牌" permissionId="PARTY_BUSINESS_BRAND_REVIEW" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!-- 删除待审核的品牌 -->
+    <SecurityPermission description="删除待审核品牌" name="删除待审核品牌" permissionId="PARTY_BUSINESS_BRAND_DELETE" parentPermissionId="BUSINESSMGR_VIEW" menuType="P"/>
+
+    <!-- 商家角色权限 -->
+    <SecurityGroup groupId="SUPPLIER"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_VIEW"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_LIST"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_LIST_VIEW"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_LIST_UPDATE"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_LIST_AUDIT"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_CREATE"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_DELETE"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_IMPORT"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_BRAND"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_BRAND_CREATE"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_BRAND_AUDIT"/>
+    <SecurityGroupPermission groupId="SUPPLIER" permissionId="BUSINESSMGR_BRAND_LIST_VIEW"/>
+
+    <!--会员管理-->
+    <SecurityPermission description="会员管理" name="会员管理" permissionId="PARTYMGR_VIEW" parentPermissionId="-1" sequenceId="60" menuType="P"/>
+    <!-- 会员列表 -->
+    <SecurityPermission description="会员列表" name="会员列表" permissionId="PARTYMGR_LIST" parentPermissionId="PARTYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="查看" name="查看" permissionId="PARTYMGR_LIST_VIEW" parentPermissionId="PARTYMGR_LIST" menuType="P"/>
+    <SecurityPermission description="新增" name="新增" permissionId="PARTYMGR_LIST_CREATE" parentPermissionId="PARTYMGR_LIST" menuType="P"/>
+    <SecurityPermission description="修改" name="修改" permissionId="PARTYMGR_LIST_UPDATE" parentPermissionId="PARTYMGR_LIST" menuType="P"/>
+    <SecurityPermission description="余额明细" name="余额明细" permissionId="PARTYMGR_AMOUNT_VIEW" parentPermissionId="PARTYMGR_LIST" menuType="P"/>
+    <SecurityPermission description="余额调整" name="余额调整" permissionId="PARTYMGR_AMOUNT_UPDATE" parentPermissionId="PARTYMGR_LIST" menuType="P"/>
+
+    <!--会员等级规则-->
+    <SecurityPermission description="会员等级规则" name="会员等级规则" permissionId="PARTY_LEVEL" parentPermissionId="PARTYMGR_VIEW"/>
+    <SecurityPermission description="会员等级查看" name="会员等级查看" permissionId="PARTY_LEVEL_VIEW" parentPermissionId="PARTY_LEVEL"/>
+    <SecurityPermission description="会员等级新增" name="会员等级新增" permissionId="PARTY_LEVEL_CREATE" parentPermissionId="PARTY_LEVEL"/>
+    <!-- 消费积分规则-->
+    <SecurityPermission description="消费积分" name="消费积分" permissionId="PARTY_CONSUME" parentPermissionId="PARTYMGR_VIEW"/>
+    <SecurityPermission description="消费积分查看" name="消费积分查看" permissionId="PARTY_CONSUME_VIEW" parentPermissionId="PARTY_CONSUME"/>
+    <SecurityPermission description="消费积分新增" name="消费积分新增" permissionId="PARTY_CONSUME_CREATE" parentPermissionId="PARTY_CONSUME"/>
+    <SecurityPermission description="消费积分修改" name="消费积分修改" permissionId="PARTY_CONSUME_UPDATE" parentPermissionId="PARTY_CONSUME"/>
+    <!-- 积分使用设置 -->
+    <SecurityPermission description="积分使用" name="积分使用" permissionId="PARTY_INTEGRAL" parentPermissionId="PARTYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="积分使用查看" name="积分使用查看" permissionId="PARTY_INTEGRAL_VIEW" parentPermissionId="PARTY_INTEGRAL" menuType="P"/>
+    <SecurityPermission description="积分使用修改" name="积分使用修改" permissionId="PARTY_INTEGRAL_UPDATE" parentPermissionId="PARTY_INTEGRAL" menuType="P"/>
+    <!-- 会员消费查询 add by gss   2016/4/1 -->
+    <SecurityPermission description="会员消费" name="会员消费" permissionId="PARTY_CONSUMPTION" parentPermissionId="PARTYMGR_VIEW" menuType="P" />
+    <SecurityPermission description="会员消费查看" name="会员消费查看" permissionId="PARTY_CONSUMPTION_VIEW" parentPermissionId="PARTY_CONSUMPTION" menuType="P" />
+
+	<!-- 积分赠送规则 add by ct   2018/5/11 -->
+    <SecurityPermission description="积分赠送" name="积分赠送" permissionId="PARTY_INTEGRALGIFT" parentPermissionId="PARTYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="积分赠送查看" name="积分赠送查看" permissionId="PARTY_INTEGRALGIFT_VIEW" parentPermissionId="PARTY_INTEGRALGIFT" menuType="P"/>
+    <SecurityPermission description="积分赠送新增" name="积分赠送新增" permissionId="PARTY_INTEGRALGIFT_CREATE" parentPermissionId="PARTY_INTEGRALGIFT" menuType="P"/>
+	
+</entity-engine-xml>

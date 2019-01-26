@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<excel>
+   <entity name="库存信息" code="inventory" >
+		<column name="商品编号" code="product_id" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="商品编号不能为空!"></rule>
+				<rule name="max_length" message="商品编号长度不能超过20位!"></rule>
+				<rule name="not_exist" message="商品编号不存在!"></rule>
+			</rules>
+		</column>
+		
+		<column name="仓库编号" code="facility_id" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="仓库编号不允许为空!"></rule>
+				<rule name="max_length" message="仓库编号长度不能超过20位!"></rule>
+				<rule name="not_exist" message="仓库编号不存在!"></rule>
+			</rules>				
+		</column>
+		
+	   <column name="可用数量" code="available" type="String" maxlength="10">
+	   	  	<rules> 
+				<rule name="nullable" message="可用数量不允许为空!"></rule>
+				<rule name="int_check" message="可用数量必须为整数!"></rule>
+				<rule name="max_length" message="可用数量长度不能超过10位!"></rule>
+			</rules>	
+	   </column>	
+   </entity>
+</excel>

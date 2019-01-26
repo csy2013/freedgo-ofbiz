@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>mobile product Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+
+    <service name="createSecKillOrder" engine="java" validate="true" auth="true"
+             location="com.yuaoq.yabiz.mobile.services.OrderService"    invoke="createSecKillOrder">
+
+    </service>
+    <service name="createTogetherOrder" engine="java" validate="true" auth="true"
+             location="com.yuaoq.yabiz.mobile.services.OrderService"    invoke="createTogetherOrder">
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="productActivityID" type="String" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+    </service>
+    <service name="createGiftOrder" engine="java" validate="true" auth="true"
+             location="com.yuaoq.yabiz.mobile.services.OrderService"    invoke="createGiftOrder">
+    </service>
+
+    <!--向凯德发送订单信息-->
+    <service name="autoOrder2KdInfo" engine="java"
+             location="com.yuaoq.yabiz.mobile.services.OrderService" invoke="sendOrderInfo2Kd">
+        <description>Send Order infomation To kd</description>
+        <attribute name="result" type="String" mode="OUT" optional="true"/>
+        <attribute name="msg" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <service name="processPaymentCallback" engine="java" location="com.yuaoq.yabiz.mobile.services.OrderService" invoke="processPaymentCallback">
+        <description>支付成功后处理订单</description>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="transactionId" type="String" mode="IN"/>
+        <attribute name="status" type="String" mode="IN"/>
+        <attribute name="discount" type="Integer" mode="IN"/>
+        <attribute name="totalFee" type="Integer" mode="IN"/>
+        <attribute name="chargeId" type="String" mode="IN"/>
+    </service>
+
+    <service name="applyReturn" engine="java" location="com.yuaoq.yabiz.mobile.services.OrderService" invoke="applyReturn">
+        <description>退换申请</description>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="productIds" type="String" mode="IN"/>
+        <attribute name="quantitys" type="String" mode="IN"/>
+        <attribute name="enumId" type="String" mode="IN"/>
+        <attribute name="returnReason" type="String" mode="IN"/>
+        <attribute name="applyMoney" type="java.math.BigDecimal" mode="IN"/>
+        <attribute name="contentIds" type="String" mode="IN"/>
+    </service>
+
+    <service name="getReturnList" engine="java" location="com.yuaoq.yabiz.mobile.services.OrderService" invoke="getReturnList">
+        <description>退换申请列表</description>
+         <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="returnList" type="java.util.List" mode="OUT"/>
+        <attribute name="max" type="Integer" mode="OUT"/>
+    </service>
+
+    <service name="cancelOrder" engine="java" location="org.ofbiz.order.order.OrderServices" invoke="cancelOrder">
+        <description>取消订单</description>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="operateReason" type="String" mode="IN"/>
+    </service>
+
+    <service name="togetherOrderAutoComplete" engine="java" location="com.yuaoq.yabiz.mobile.services.OrderService" invoke="togetherOrderAutoComplete">
+        <description>拼团自动完成</description>
+    </service>
+    <service name="promoCodeTask" engine="java" location="com.yuaoq.yabiz.mobile.services.CouponService" invoke="promoCodeTask">
+        <description>代金券通知</description>
+    </service>
+
+    <service name="sendScore2Kd" engine="java" location="com.yuaoq.yabiz.mobile.services.OrderService" invoke="sendScore2Kd">
+        <description>订单满足条件发送积分事件</description>
+    </service>
+</services>

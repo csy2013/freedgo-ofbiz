@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Party Component Services For App</description>
+    <vendor>OFBiz</vendor>
+    <version>1.0</version>
+
+    <service name="createPartySettleAmount" default-entity-name="PartySettleAmount" engine="simple"
+             location="component://party/script/org/ofbiz/party/party/PartySettleAmountServices.xml" invoke="createPartySettleAmount" auth="true">
+        <description>Create an ProductCategory</description>
+
+        <auto-attributes include="pk" mode="INOUT" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+
+    </service>
+    <service name="updatePartySettleAmount" default-entity-name="PartySettleAmount" engine="simple"
+             location="component://party/script/org/ofbiz/party/party/PartySettleAmountServices.xml" invoke="updatePartySettleAmount" auth="true">
+        <description>Create an ProductCategory</description>
+
+        <auto-attributes include="pk" mode="INOUT" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+
+    </service>
+
+     
+    <service name="DeletePartySettleAmount" engine="java" location="org.ofbiz.product.brand.PartySettleAmountServices" default-entity-name="PartySettleAmount" invoke="deletePartySettleAmount" auth="true">
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+ 
+
+</services>

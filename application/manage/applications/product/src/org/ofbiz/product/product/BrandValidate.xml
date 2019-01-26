@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<excel>
+   <entity name="品牌信息" code="inventory" >
+		<column name="品牌名称" code="brand_name" type="String" maxlength="30">
+			<rules> 
+				<rule name="nullable" message="品牌名称不能为空!"></rule>
+				<rule name="max_length" message="品牌名称长度不能超过30位!"></rule>
+				<rule name="name_check" message="品牌名称不能与已有的品牌重名!"></rule>
+			</rules>
+		</column>
+		
+		<column name="品牌别名" code="brand_name_alias" type="String" maxlength="30">
+			<rules> 
+				<rule name="max_length" message="品牌别名长度不能超过30位!"></rule>
+			</rules>				
+		</column>
+		
+	   <column name="是否启用(是/否)" code="is_used" type="String" maxlength="10">
+	   	  	<rules> 
+				<rule name="nullable" message="是否启用不允许为空!"></rule>
+				<rule name="value_check" message="只允许：是、否!"></rule>
+			</rules>	
+	   </column>	
+   </entity>
+</excel>

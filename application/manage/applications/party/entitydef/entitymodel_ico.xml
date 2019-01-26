@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>ICO 会员相关</title>
+    <description>None</description>
+    <version>1.0</version>
+    <!--会员等级-->
+    <entity entity-name="PartyLevel" package-name="org.ofbiz.party.level">
+        <field name="partyId" type="id-ne"></field>
+        <field name="levelId" type="id-ne"></field>
+        <field name="levelName" type="name"></field>
+        <field name="startDate" type="date-time"></field>
+        <prim-key field="partyId"></prim-key>
+        <relation type="many" rel-entity-name="PartyLevelHis">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+    <!--会员等级历史-->
+    <entity entity-name="PartyLevelHis" package-name="org.ofbiz.party.level">
+        <field name="partyId" type="id-ne"></field>
+        <field name="levelId" type="id-ne"></field>
+        <field name="levelName" type="name"></field>
+        <field name="startDate" type="date-time"></field>
+        <field name="endDate" type="date-time"></field>
+        <prim-key field="partyId"></prim-key>
+        <prim-key field="startDate"></prim-key>
+    </entity>
+    <!--会员等级类型-->
+    <entity entity-name="PartyLevelType" package-name="org.ofbiz.party.level">
+        <field name="levelId" type="id-ne"></field>
+        <field name="levelName" type="name"></field>
+        <field name="levelCode" type="name"></field>
+        <!-- begin add by gss 2016-1-20 -->
+        <field name="levelExperience" type="numeric"></field><!-- 成长值 -->
+        <field name="levelDiscount" type="currency-amount"></field><!-- 会员折扣 -->
+        <field name="levelDescrption" type="name"></field><!-- 会员等级描述 -->
+        <field name="partyType" type="name"></field><!-- 会员等级类型 -->
+        <!-- end add by gss 2016-1-20 -->
+        <prim-key field="levelId"></prim-key>
+    </entity>
+    <!--社区-->
+    <entity entity-name="Community" package-name="org.ofbiz.party.community">
+        <field name="communityId" type="id-ne"></field>
+        <!-- 社区ID -->
+        <field name="code" type="name"></field>
+        <!-- 社区code -->
+        <field name="name" type="name"></field>
+        <!-- 社区名称 -->
+        <field name="provincesId" type="id-ne"></field>
+        <!-- 省份 -->
+        <field name="cityId" type="id-ne"></field>
+        <!-- 城市 -->
+        <field name="parentGeoId" type="id-ne"></field>
+        <!-- 弘阳同步城市 -->
+        <prim-key field="communityId"></prim-key>
+        <relation type="one" rel-entity-name="Geo" fk-name="PID_GEO">
+            <key-map field-name="provincesId" rel-field-name="geoId"/>
+        </relation>
+        <relation type="one" rel-entity-name="Geo" fk-name="CID_GEO">
+            <key-map field-name="cityId" rel-field-name="geoId"/>
+        </relation>
+    </entity>
+    <!-- 会员社区表 -->
+    <entity entity-name="PartyCommunity" package-name="org.ofbiz.party.community">
+        <field name="partyId" type="id-ne"></field>
+        <field name="communityId" type="id-ne"></field>
+        <prim-key field="partyId"></prim-key>
+        <prim-key field="communityId"></prim-key>
+    </entity>
+    <!--积分-->
+    <entity entity-name="PartyScore" package-name="org.ofbiz.party.score">
+        <field name="partyId" type="id-ne"></field>
+        <!-- 会员编码 -->
+        <field name="scoreValue" type="numeric"></field>
+        <!-- 会员积分值 -->
+        <prim-key field="partyId"></prim-key>
+        <relation type="one" fk-name="FK_PS_PY" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+
+    <!--会员账户-->
+    <entity entity-name="PartyAccount" package-name="org.ofbiz.party.account">
+        <field name="partyId" type="id-ne"></field>
+        <!-- 会员编码 -->
+        <field name="amount" type="currency-precise"></field>
+        <!-- 账户金额 -->
+        <field name="createDate" type="date-time"></field>
+        <!-- 创建时间 -->
+        <prim-key field="partyId"></prim-key>
+        <relation type="one" fk-name="ap_acct_fk" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+
+    <!--会员账户明细-->
+    <entity entity-name="PartyAccountDetail" package-name="org.ofbiz.party.account">
+
+        <field name="detailId" type="id-ne"></field>
+        <!-- 明细ID -->
+        <field name="partyId" type="id-ne"></field>
+        <!-- 会员编码 -->
+        <field name="amount" type="currency-precise"></field>
+        <!-- 变动值 -->
+        <field name="createDate" type="date-time"></field>
+        <!-- 操作时间 -->
+        <field name="description" type="comment"></field>
+        <!-- 修改说明  发生流水动作 -->
+        <field name="operator" type="long-varchar"></field>
+        <!-- 修改人 -->
+        <field name="resultType" type="id-ne"></field>
+        <!--发生流水结果，对应键值为  收益IN   支出OUT-->
+        <field name="orderId" type="name"></field>
+        <!--发生流水的订单流水号-->
+        <prim-key field="detailId"></prim-key>
+    </entity>
+
+    <!--充值记录-->
+    <entity entity-name="RechargeDetail" package-name="org.ofbiz.party.account">
+        <field name="rechargeDetailId" type="id-ne"></field><!-- 明细ID -->
+        <field name="partyId" type="id-ne"></field><!-- 会员编码 -->
+        <field name="originalAmount" type="currency-precise"></field><!-- 充值面额 -->
+        <field name="actualAmount" type="currency-precise"></field><!-- 实际充值金额 -->
+        <field name="paymentMethodTypeId" type="id-ne"></field><!-- 支付类型 -->
+        <field name="statusId" type="id-ne"></field><!-- 状态 -->
+        <field name="tradeNo" type="name"></field><!-- 流水号 -->
+        <prim-key field="rechargeDetailId"></prim-key>
+    </entity>
+
+    <!-- 消费积分规则begin by gss 2016-1-18 -->
+    <entity entity-name="PartyIntegral" package-name="org.ofbiz.party.partyIntegral"
+            title="PartyIntegral">
+        <field name="partyIntegralId" type="id-ne"></field><!--消费积分规则Id-->
+        <field name="levelId" type="id-ne"></field><!--会员等级类型Id-->
+        <field name="integralValue" type="numeric"></field><!--每积一分消费金额-->
+        <field name="productCategoryId" type="id-ne"></field><!--商品分类-->
+        <field name="productId" type="id-ne"></field><!--商品编码-->
+        <field name="partyIntegralType" type="id-ne"></field><!--积分分类编码-->
+        <prim-key field="partyIntegralId"/>
+        <relation type="one" title="partyIntegralType" rel-entity-name="Enumeration">
+            <key-map field-name="partyIntegralType" rel-field-name="enumId"/>
+        </relation>
+        <relation type="one" title="partyIntegralType"
+                  rel-entity-name="ProductCategory">
+            <key-map field-name="productCategoryId" rel-field-name="productCategoryId"/>
+        </relation>
+        <relation type="one" title="partyIntegralTypeId" rel-entity-name="PartyLevelType">
+            <key-map field-name="levelId" rel-field-name="levelId"/>
+        </relation>
+    </entity>
+    <!--消费积分规则 end by gss 2016-1-18	 -->
+
+    <!-- 积分赠送设置begin by ct 2018-5-11 -->
+    <entity entity-name="OrderIntegralRule" package-name="org.ofbiz.party.OrderIntegralRule"
+            title="OrderIntegralRule">
+        <!--积分赠送规则Id-->
+        <field name="partyIntegralGiftId" type="id-ne"></field>
+        <!-- 订单满额赠送是否开启-->
+        <field name="isFullOpen" type="indicator"></field>
+        <!--订单满送的金额-->
+        <field  name="orderMoney" type="currency-precise"></field>
+        <!--指定商品开关-->
+        <field name="isAssignOpen" type="indicator"></field>
+        <!--1启用 0关闭-->
+        <field name="status" type="indicator"></field>
+        <!--开始时间-->
+        <field name="startTime" type="date-time"></field>
+        <!--结束时间-->
+        <field name="endTime" type="date-time"></field>
+
+        <prim-key field="partyIntegralGiftId"/>
+    </entity>
+    <!--积分赠送设置 end by ct 2018-5-11	 -->
+
+
+    <!-- 积分赠送详细begin by ct 2018-5-11 -->
+    <entity entity-name="OrderIntegralRuleProd" package-name="org.ofbiz.party.OrderIntegralRuleProd"
+            title="OrderIntegralRuleProd">
+        <field name="integralRuleProdId" type="id-ne"></field>
+        <!--积分赠送规则产品Id-->
+        <field name="partyGiftProdId" type="id-ne"></field>
+        <!--积分赠送规则Id-->
+        <field name="partyIntegralGiftId" type="id-ne"></field>
+        <!--积分code-->
+        <field name="integralCodeNo" type="name"></field>
+        <prim-key field="integralRuleProdId"/>
+    </entity>
+    <!--积分赠送详细 end by ct 2018-5-11	 -->
+
+    <!-- 商家表 add by qianjin 2016.01.26 -->
+    <entity entity-name="PartyBusiness" package-name="org.ofbiz.party.partyBusiness">
+        <field name="partyId" type="id-ne"></field>
+        <field name="businessName" type="name"></field>
+        <field name="description" type="very-long"></field>
+        <field name="logoImg" type="name"></field>
+        <field name="province" type="name"></field>
+        <field name="city" type="name"></field>
+        <field name="county" type="id-ne"></field>
+        <field name="address" type="description"></field>
+        <field name="tel" type="name"></field>
+        <field name="legalPersonName" type="name"></field>
+        <field name="idCard" type="name"></field>
+        <field name="businessLicense" type="name"></field>
+        <field name="idCardProsImg" type="id-ne"></field>
+        <field name="idCardConsImg" type="id-ne"></field>
+        <!--合同附件-->
+        <field name="contractDoc" type="id-ne"></field>
+        <!--相关资质（酒水）-->
+        <field name="qualifImg" type="id-ne"></field>
+        <field name="businessLicenseImg" type="id-ne"></field>
+        <!--新增 by nf 20180323 start-->
+        <field name="companyName" type="name"></field><!--公司名称-->
+        <field name="companyCreateDate" type="date-time"></field>
+        <field name="businessEndDate" type="date-time"></field>
+        <field name="leageName" type="name"></field><!--法人姓名-->
+        <field name="leageTel" type="id-ne"></field><!--法人电话-->
+        <field name="leageEmail" type="name"></field><!--电子邮箱-->
+        <field name="leageCardNo" type="name"></field><!--身份证号-->
+        <field name="leageImgContentId" type="id-ne"></field><!--身份证电子版-->
+        <field name="socialCardNo" type="name"></field><!--统一社会信用代码-->
+        <field name="busiImgContentId" type="id-ne"></field><!--营业执照-->
+        <field name="busiProvince" type="id-ne"></field><!--营业执照所在省-->
+        <field name="busiCity" type="id-ne"></field><!--营业执照所在市-->
+        <field name="busiCounty" type="id-ne"></field><!--营业执照所在区-->
+        <field name="busiAddress" type="very-long"></field><!--营业执照所在地-->
+        <field name="bankAcountName" type="name"></field><!--银行开户名-->
+        <field name="bankAccount" type="name"></field><!--公司银行账号-->
+        <field name="bankBranchName" type="name"></field><!--开户支行名称-->
+        <field name="bankBranchAcount" type="name"></field><!--开户行支行联行号-->
+        <field name="branchProvince" type="id-ne"></field><!--开户行支行所在省-->
+        <field name="branchCity" type="id-ne"></field><!--开户行支行所在市-->
+        <field name="branchCounty" type="name"></field><!--开户行支行所在区-->
+
+        <!--新增 by nf 20180323 end-->
+        <!-- 审核状态 0：待审核 1：已通过  2：已拒绝 -->
+        <field name="auditStatus" type="indicator"></field>
+        <field name="businessType" type="id-ne"></field>
+
+        <prim-key field="partyId"/>
+        <relation type="one" fk-name="FK_PB_Party" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+
+    </entity>
+
+    <entity entity-name="PartyProductCategory" package-name="org.ofbiz.party.partyBusiness">
+        <field name="partyId" type="id-ne"></field>
+        <field name="categoryName" type="id-ne"></field>
+        <field name="productCategoryId" type="id-ne"/>
+        <field name="parentCategoryId" type="id-ne"/>
+        <prim-key field="partyId"/>
+        <prim-key field="productCategoryId"/>
+    </entity>
+
+    <!-- 商家申请审核表 add by qianjin 2016.01.26 -->
+    <entity entity-name="PartyBusinessAudit" package-name="org.ofbiz.party.partyBusinessAudit">
+        <field name="partyBusinessAuditId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="auditContent" type="description"></field>
+        <!-- 审核状态 0：待审核 1：已通过  2：已拒绝 -->
+        <field name="auditStatus" type="indicator"></field>
+        <prim-key field="partyBusinessAuditId"/>
+        <relation type="one" fk-name="PBA_PB" rel-entity-name="PartyBusiness">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+
+
+    <!-- 商家结算设置表 add by changsy 2018.03.16 -->
+    <entity entity-name="PartySettleSetting" package-name="org.ofbiz.party.partyBusinessAudit">
+        <field name="settingId" type="id-ne"/>
+        <field name="partyBusinessAuditId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="settingType" type="name"><description>PARTY_SETTLE_TYPE_T ,PARTY_SETTLE_TYPE_MONTH(T+1或者月结)</description></field>
+        <field name="commission" type="currency-amount"><description>佣金</description></field>
+        <!-- 审核状态 0：待审核 1：已通过  2：已拒绝 -->
+        <field name="daysNum" type="numeric"><description>结算日期或者T+的数</description></field>
+        <field name="createDate" type="date-time"/>
+        <field name="statusId" type="indicator"/>
+        <prim-key field="settingId"/>
+        <relation type="one" fk-name="PBA_PB" rel-entity-name="PartyBusiness">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+
+
+    <entity entity-name="PartyPunishment" package-name="org.ofbiz.party.setting">
+        <field name="punishmentId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="reason" type="very-long-varchar"/>
+        <field name="amount" type="currency-amount"></field>
+        <field name="ruleType" type="description"/>
+        <field name="createDate" type="date-time"/>
+        <prim-key field="punishmentId"/>
+    </entity>
+    <!-- 商家和品牌关联表 add by qianjin 2016.01.26 -->
+    <entity entity-name="PartyBusinessBrand" package-name="org.ofbiz.party.partyBusinessBrand">
+        <field name="partyBusinessBrandId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="productBrandId" type="id-ne"></field>
+        <!-- 审核状态 0：待审核 1：已通过  2：已拒绝 -->
+        <field name="auditStatus" type="indicator"></field>
+        <field name="auditMessage" type="very-long-varchar"></field>
+        <!--是否被删除  Y 是  N否-->
+        <field name="isDel" type="indicator"></field>
+        <!--店铺id-->
+       <!-- <field name="productStoreId" type="id-ne"></field>-->
+        <!--该品牌是否当前商户自定义品牌-->
+        <field name="isOwner" type="indicator"></field>
+        <prim-key field="partyBusinessBrandId"/>
+
+        <!--<field name="logoContentId" type="id-ne"/>
+        <field name="certificateContentId" type="id-ne"/>-->
+
+
+    </entity>
+
+    <!-- 积分使用设置begin by gss 2016-1-26 -->
+    <entity entity-name="PartyIntegralSet" package-name="org.ofbiz.party.partyIntegralSet"
+            title="PartyIntegral">
+        <field name="partyIntegralSetId" type="id-ne"></field><!--积分使用规则Id-->
+        <field name="integralValue" type="numeric"></field><!-- 兑换一块钱需要消耗的积分值 -->
+        <prim-key field="partyIntegralSetId"/>
+    </entity>
+    <!--积分使用设置 end by gss 2016-1-26	 -->
+
+    <!-- 积分操作记录begin add by qianjin 2016.03.09 -->
+    <entity entity-name="PartyIntegralHistory" package-name="org.ofbiz.party.partyIntegralHistory">
+        <field name="partyIntegralHistoryId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="integralValue" type="numeric"></field>
+        <field name="getWay" type="description"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="partyIntegralHistoryId"/>
+    </entity>
+    <!-- 积分操作记录begin add by qianjin 2016.03.09 -->
+
+    <!--会员消息-->
+    <entity entity-name="PartyMessage" package-name="org.ofbiz.party.message">
+        <field name="partyMessageId" type="id-ne"></field>
+        <field name="partyId" type="id"></field><!-- 会员编码 -->
+        <field name="messageType" type="id"></field><!--消息类型 system：系统消息 activity：活动消息 interact：互动消息-->
+        <field name="isView" type="indicator"></field><!--是否查看 Y/N-->
+        <field name="messageContent" type="description"></field><!--消息内容-->
+        <field name="linkType" type="id"></field><!--链接类型 product：商品 activity：活动 order：订单-->
+        <field name="linkId" type="id"></field><!--链接对象ID-->
+        <prim-key field="partyMessageId"/>
+        <relation type="one" fk-name="PM_PARTY" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+
+    <!--会员浏览历史-->
+    <entity entity-name="PartyBrowseHistory" package-name="org.ofbiz.party.partyBrowseHistory">
+        <field name="partyBrowseHistoryId" type="id-ne"></field>
+        <field name="partyId" type="id"></field><!-- 会员编码 -->
+        <field name="productId" type="id"></field><!--商品ID-->
+        <prim-key field="partyBrowseHistoryId"/>
+        <relation type="one" fk-name="PBH_PARTY" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+        <relation type="one" fk-name="PBH_PRODUCT" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+    </entity>
+
+
+    <!--会员升级详细信息表-->
+    <entity entity-name="PartyLevelInfo" package-name="org.ofbiz.party.level">
+        <field name="partyId" type="id-ne"></field>
+        <!--当前成长值-->
+        <field name="nowGrowthValue" type="numeric"></field>
+        <!--升级成长值-->
+        <field name="needGrowthValue" type="numeric"></field>
+        <!--购买次数-->
+        <field name="buyNum" type="numeric"></field>
+        <!--升级购买次数-->
+        <field name="levelBuyNum" type="numeric"></field>
+        <prim-key field="partyId"></prim-key>
+        <relation type="one" fk-name="PBH_PARTYS" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+
+
+    <!-- 积分流水数begin add by gss 2017.04.14 -->
+    <entity entity-name="PartyScoreHistory" package-name="org.ofbiz.party.partyScoreHistory">
+        <field name="partyScoreHistoryId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <!-- 变动积分-->
+        <field name="scoreValue" type="numeric"></field>
+        <!--发生流水后剩余积分-->
+        <field name="residualScore" type="numeric"></field>
+        <!--发生流水订单号-->
+        <field name="orderId" type="name"></field>
+        <!--流水类型  OUT/IN -->
+        <field name="getWay" type="description"></field>
+        <!--发生流水动作-->
+        <field name="description" type="description"></field>
+        <!--积分入账日期-->
+        <field name="createDate" type="date-time"></field>
+        <prim-key field="partyScoreHistoryId"/>
+    </entity>
+    <!-- 积分流水end add by gss 2017.04.14 -->
+
+    <!--积分分享记录-->
+    <entity entity-name="PartyScoreShare" package-name="org.ofbiz.party.partyScoreShare">
+        <field name="partyScoreShareId" type="id-ne"></field>
+        <!--分享人-->
+        <field name="sharePartyId" type="id-ne"></field>
+        <!--分享时间-->
+        <field name="shareTime" type="date-time"></field>
+        <!-- 分享积分-->
+        <field name="scoreValue" type="numeric"></field>
+        <!--领取人-->
+        <field name="getPartyId" type="id-ne"></field>
+        <!--领取时间-->
+        <field name="getTime" type="date-time"></field>
+        <prim-key field="partyScoreShareId"/>
+    </entity>
+
+
+    <!-- 积分流水end add by gss 2017.04.25 -->
+
+    <!--会员成长值变动历史表-->
+    <entity entity-name="PartyGrowthHis" package-name="org.ofbiz.party.level.his">
+        <field name="partyGrowthHisId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <!--成长值-->
+        <field name="growthValue" type="numeric"></field>
+        <!--成长值描述-->
+        <field name="description" type="very-long"></field>
+        <prim-key field="partyGrowthHisId"/>
+    </entity>
+
+    <!--微信参数  Add By AlexYao-->
+    <entity entity-name="WeixinAccessToken" package-name="org.ofbiz.party.weixin">
+        <field name="id" type="id-ne"/>
+        <field name="accessToken" type="very-long-varchar"></field>
+        <field name="expiresIn" type="numeric"/>
+        <field name="errcode" type="numeric"/>
+        <field name="errmsg" type="description"/>
+        <field name="jsapiTicket" type="description"/>
+        <prim-key field="id"/>
+
+    </entity>
+
+    <entity entity-name="WeixinAccessTokenHis" package-name="org.ofbiz.party.weixin">
+        <field name="id" type="id-ne"/>
+        <field name="accessToken" type="very-long-varchar"></field>
+        <field name="expiresIn" type="numeric"/>
+        <field name="errcode" type="numeric"/>
+        <field name="errmsg" type="description"/>
+        <field name="jsapiTicket" type="description"/>
+        <prim-key field="id"/>
+    </entity>
+
+    <!--"imageurl";"displayname"; "name"; "nickname"; "openid"; "authtypeid"; "gender"; "province"; "city"; "borthday";-->
+    <entity entity-name="OauthUser" package-name="org.ofbiz.party.party">
+        <field name="authTypeId" type="id">
+            <description>qq,facebook,googleplus,weixin</description>
+        </field>
+        <field name="name" type="name"/>
+        <field name="displayName" type="name"/>
+        <field name="nickName" type="name"/>
+        <field name="openId" type="long-varchar"/>
+        <field name="gender" type="indicator">
+            <description>1:男 0:女</description>
+        </field>
+        <field name="imageUrl" type="url"/>
+        <field name="province" type="name"/>
+        <field name="city" type="name"/>
+        <field name="birthday" type="long-varchar"/>
+        <field name="partyId" type="id-ne"/>
+
+        <prim-key field="authTypeId"/>
+        <prim-key field="openId"/>
+        <relation type="one" fk-name="oauth_party" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+        <index name="OAUTH_REL_PARTY">
+            <index-field name="partyId"/>
+        </index>
+    </entity>
+
+    <entity entity-name="PartyFavoriteProduct" package-name="org.ofbiz.party.party">
+        <field name="partyId" type="id-ne"/>
+        <field name="productId" type="id-ne"/>
+        <field name="fromDate" type="date-time"/>
+        <field name="thruDate" type="date-time"/>
+        <prim-key field="partyId"/>
+        <prim-key field="productId"/>
+        <prim-key field="fromDate"/>
+        <relation type="one" fk-name="FK_PFP_PY" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+        <relation type="one" fk-name="FK_PFP_PT" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="PartySettleAmount"
+            package-name="org.ofbiz.party.party"
+            title="Party Attribute Entity">
+        <field name="settleId" type="id-ne"/>
+        <field name="partyId" type="id-ne"></field>
+        <field name="amount" type="fixed-point"></field>
+        <field name="createDate" type="date-time"></field>
+        <field name="remark" type="very-long-varchar"></field>
+        <prim-key field="settleId"/>
+        <relation type="one" fk-name="PARTY_SETTLE_A" rel-entity-name="Party">
+            <key-map field-name="partyId"/>
+        </relation>
+    </entity>
+
+    <!--会员标签-->
+    <entity entity-name="PartyLabel" package-name="org.ofbiz.party.party">
+        <field name="partyLabelId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="label" type="id-ne"></field>
+        <prim-key field="partyLabelId"></prim-key>
+    </entity>
+
+</entitymodel>

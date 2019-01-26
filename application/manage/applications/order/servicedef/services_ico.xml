@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Order Services</description>
+    <vendor>ICO</vendor>
+    <version>1.0</version>
+    <!--&lt;!&ndash; begin add by Wangcy 个人中心 at 2016.01.13 &ndash;&gt;-->
+    <!--<service name="userCenter" engine="simple"-->
+    <!--location="component://order/script/com/qihua/ofbiz/order/OrderSimpleMethods_ico.xml"-->
+    <!--invoke="userCenter"-->
+    <!--auth="false">-->
+    <!--<description>find order num by userLoginId</description>-->
+    <!--<attribute name="userLoginId" type="String" mode="IN"/>-->
+    <!--<attribute name="communityId[]" type="List" mode="IN"/>-->
+    <!--<attribute name="token" type="String" mode="IN"/>-->
+    <!--<attribute name="page" type="String" mode="IN"/>-->
+    <!--<attribute name="resultData" type="Map" mode="OUT"/>-->
+    <!--<attribute name="USERNAME" type="String" mode="OUT" optional="true"/>-->
+    <!--<attribute name="PASSWORD" type="String" mode="OUT" optional="true"/>-->
+    <!--</service>-->
+    <!--&lt;!&ndash; end add by Wangcy 个人中心 at 2016.01.13 &ndash;&gt;-->
+
+    <!-- begin add by Wangcy 用户订单信息 at 2016.01.11 -->
+    <!--<service name="userOrderTypeNum" engine="java" location="org.ofbiz.order.order.OrderServices" invoke="userOrderTypeNum"-->
+    <!--auth="false">-->
+    <!--<description>find order num by userLoginId</description>-->
+    <!--<attribute name="userLoginId" type="String" mode="IN"/>-->
+    <!--<attribute name="communityId[]" type="List" mode="IN"/>-->
+    <!--<attribute name="token" type="String" mode="IN"/>-->
+    <!--<attribute name="resultData" type="Map" mode="OUT"/>-->
+    <!--<attribute name="USERNAME" type="String" mode="OUT" optional="true"/>-->
+    <!--<attribute name="PASSWORD" type="String" mode="OUT" optional="true"/>-->
+    <!--</service>-->
+    <!-- end add by Wangcy 用户订单信息 at 2016.01.11 -->
+
+    <!-- begin add by Wangcy 获取用户各个订单状态下的数量 -->
+    <service name="userOrderNum" engine="java" location="org.ofbiz.order.order.OrderServices" invoke="userOrderNum">
+        <attribute name="userLoginId" type="String" mode="INOUT"/>
+        <attribute name="notUsedNum" type="Long" mode="OUT"/>
+        <attribute name="notReceivedNum" type="Long" mode="OUT"/>
+        <attribute name="notReviewedNum" type="Long" mode="OUT"/>
+    </service>
+    <!--&lt;!&ndash; begin add by Wangcy 首页信息 at 2016.01.11 &ndash;&gt;-->
+    <!--<service name="shopMain" engine="java" location="org.ofbiz.order.order.OrderServices"-->
+    <!--invoke="shopMain"-->
+    <!--auth="false">-->
+    <!--<description>shop main</description>-->
+    <!--<attribute name="userLoginId" type="String" mode="IN"/>-->
+    <!--<attribute name="communityId" type="String" mode="IN"/>-->
+    <!--<attribute name="token" type="String" mode="IN"/>-->
+    <!--<attribute name="page" type="String" mode="IN"/>-->
+    <!--<attribute name="resultData" type="Map" mode="OUT"/>-->
+    <!--<attribute name="USERNAME" type="String" mode="OUT" optional="true"/>-->
+    <!--<attribute name="PASSWORD" type="String" mode="OUT" optional="true"/>-->
+    <!--</service>-->
+    <!-- end add by Wangcy 首页信息 at 2016.01.11 -->
+
+    <!-- begin add by Wangcy 订单列表 at 2016.01.11 -->
+    <service name="userOrderList" engine="simple" transaction-timeout="300"
+             location="component://order/script/com/qihua/ofbiz/order/OrderSimpleMethods_ico.xml"
+             invoke="userOrderList"
+             auth="false">
+        <description>find order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询状态，0：全部；1：待使用；2：待收货；3：待评价；4：售后/退款 -->
+        <attribute name="type" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add by Wangcy 订单列表 at 2016.01.11 -->
+
+    <!-- begin add Wcy 全部订单查询 at 2016.01.12 -->
+    <service name="findAllOrderList" engine="java" location="org.ofbiz.order.order.OrderServices" invoke="findAllOrderList" auth="false">
+        <description>find order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add Wcy 全部订单查询 at 2016.01.12 -->
+
+    <!-- begin add Wcy 虚拟商品，再筛选未使用券 at 2016.01.12 -->
+    <service name="findUnUsedVirtualList" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="findUnUsedVirtualList" auth="false">
+        <description>find unused virtual order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add Wcy 虚拟商品，再筛选未使用券 at 2016.01.12 -->
+
+    <!-- begin add Wcy 待收货订单查询 at 2016.01.12 -->
+    <service name="findDealGoodsList" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="findDealGoodsList" auth="false">
+        <description>find unused virtual order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add Wcy 待收货订单查询 at 2016.01.12 -->
+
+    <!-- begin add Wcy 售后/退款订单查询 at 2016.01.12 -->
+    <service name="findAfterSalesList" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="findAfterSalesList" auth="false">
+        <description>find after sales order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add Wcy 售后/退款订单查询 at 2016.01.12 -->
+
+    <!-- begin add Wcy 待评价订单查询 at 2016.01.12 -->
+    <service name="findUnReviewList" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="findUnReviewList" auth="false">
+        <description>find un review order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add Wcy 待评价订单查询 at 2016.01.12 -->
+
+    <!-- begin add Wcy 确认收货 at 2016.01.13 -->
+    <service name="changeOrderStatusValuate" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="changeOrderStatusValuate" auth="false">
+        <description>change OrderStatus is ORDER_WAITEVALUATE</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="resultData" type="Boolean" mode="OUT"/>
+        <!--<attribute name="info" type="String" mode="OUT"/>-->
+    </service>
+    <!-- end add Wcy 确认收货 at 2016.01.13 -->
+
+    <!-- begin add by Wcy 订单详情 -->
+    <service name="orderDetail" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="orderDetail" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="orderStatusId" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 申请退款/退货（实物）Add By AlexYao 2016/01/25 -->
+    <service name="physicalRefund" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="physicalRefund" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="orderId" type="String" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="refundType" type="String" mode="IN" optional="false"/>
+        <attribute name="refundMoney" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="refundReason" type="String" mode="IN" optional="false"/>
+        <attribute name="enumId" type="String" mode="IN" optional="false"/>
+        <attribute name="contentIds" type="String" mode="IN" optional="true"/>
+        <attribute name="resultData" type="Boolean" mode="OUT"/>
+        <attribute name="returnId" type="String" mode="OUT"/>
+    </service>
+
+    <!-- 实物退款/退货详情 Add By AlexYao 2016/01/25 -->
+    <service name="physicalRefundDetail" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="physicalRefundDetail" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="orderId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 申请退款（虚拟）Add By AlexYao 2016/01/26 -->
+    <service name="virtualRefund" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="virtualRefund" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="orderId" type="String" mode="IN" optional="false"/>
+        <attribute name="ticketIds" type="String" mode="IN" optional="false"/>
+        <attribute name="refundReason" type="String" mode="IN" optional="false"/>
+        <attribute name="refundMoney" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Boolean" mode="OUT"/>
+    </service>
+
+    <!-- 虚拟退款详情 Add By AlexYao 2016/01/26 -->
+    <service name="virtualRefundDetail" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="virtualRefundDetail" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="orderId" type="String" mode="IN" optional="false"/>
+        <attribute name="ticketId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <service name="refundLog" engine="java" location="org.ofbiz.order.order.OrderServices" invoke="refundLog">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="returnId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- yabiz商城券 Add By AlexYao 2016/01/26 -->
+    <service name="rLifeTicket" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="rLifeTicket" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="orderId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 查看物流 Add By AlexYao 2016/01/26 -->
+    <service name="viewLogistics" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="viewLogistics" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="orderId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 获取抢购数据 Add By AlexYao 2016/01/27 -->
+    <service name="orderProduct" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="orderProduct" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+        <attribute name="activityId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!--begin 增加验证码核销 by changsy at 2016.2.1-->
+
+    <service name="dealTicketValidate" engine="java" location="org.ofbiz.order.ticket.TicketService"
+             invoke="dealTicketValidate" auth="true">
+        <description>deal ticket</description>
+        <attribute name="ticketNo" type="String" mode="IN" optional="true"/>
+        <attribute name="ticketNos" type="String" mode="IN" optional="true"/>
+        <attribute name="ticketList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="ticket" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="dealResult" type="String" mode="OUT" optional="true"/>
+        <attribute name="dealAllResult" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="ticketList" engine="java" location="org.ofbiz.order.ticket.TicketService"
+             invoke="queryTicket" auth="true">
+        <description>find ticket list</description>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="ticketNo" type="String" mode="INOUT" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="partyName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="userName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="productName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="orderId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="mobile" type="String" mode="INOUT" optional="true"/>
+        <attribute name="status" type="String" mode="INOUT" optional="true"/>
+        <attribute name="partyBusinessId" type="String" mode="IN" optional="true"/>
+        <attribute name="isPartyBusiness" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="ticketList" type="java.util.List" mode="OUT"/>
+        <attribute name="ticketListSize" type="Integer" mode="OUT"/>
+
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+    </service>
+
+    <!--end 增加验证码核销 by changsy at 2016.2.1-->
+
+    <!-- 取消订单 Add By AlexYao 2016/02/01 -->
+    <service name="autoCancelOrder" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="autoCancelOrder" auth="false">
+        <description>cancel order by orderId</description>
+        <attribute name="orderId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Boolean" mode="OUT"/>
+    </service>
+
+    <!-- 订单规则 自动取消定时任务   begin by gss 2016-1-27-->
+    <service name="autoOrderItems" engine="java"
+             location="org.ofbiz.order.order.OrderRuleServices" invoke="cancelFlaggedSalesOrders">
+        <description>Batch service which automatically cancels sales order and/or sales order items.
+            Sales orders : These will be cancelled if the order status equals CREATED and it has been
+            either 30 days or ProductStore.daysCancelNoPay since the order was created. A value of 0 for
+            ProductStore.daysCancelNoPay means do not auto-cancel.
+            Sales order items : This is only for orders on the APPROVED status. Items will be cancelled if the
+            item is flagged with an autoCancelDate and does not have a dontCancelDate and dontCancelUserLogin
+            associated with it, and it is past the autoCancelDate.
+        </description>
+        <!-- this service has no parameters IN or OUT -->
+    </service>
+
+    <!-- begin add AlexYao 商家信息 at 2016.02.29 -->
+    <service name="businessData" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="businessData" auth="false">
+        <description>business info</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add AlexYao 待发货 at 2016.02.29 -->
+
+    <!-- begin add AlexYao 验证yabiz商城券 at 2016.02.29 -->
+    <service name="checkTicket" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="checkTicket" auth="false">
+        <description>check ticket</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="ticketNo" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add AlexYao 待发货 at 2016.02.29 -->
+
+    <!-- begin add by AlexYao 商家订单列表 at 2016.02.27 -->
+    <service name="busOrderList" engine="simple" transaction-timeout="300"
+             location="component://order/script/com/qihua/ofbiz/order/OrderSimpleMethods_ico.xml"
+             invoke="busOrderList"
+             auth="false">
+        <description>find order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询状态，0：待发货；1：待收货；2：已完成；3：售后/退款 -->
+        <attribute name="type" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add by AlexYao 商家订单列表 at 2016.02.27 -->
+
+    <!-- begin add AlexYao 待发货 at 2016.02.27 -->
+    <service name="busNotShippedOrder" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="busNotShippedOrder" auth="false">
+        <description>find NotShipped order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="orderStatus" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add AlexYao 待发货 at 2016.02.27 -->
+
+    <!-- begin add AlexYao 待收货 at 2016.02.27 -->
+    <service name="busNotReceivedOrder" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="busNotShippedOrder" auth="false">
+        <description>find NotReceived order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="orderStatus" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add AlexYao 待收货 at 2016.02.27 -->
+
+    <!-- begin add AlexYao 已完成 at 2016.02.27 -->
+    <service name="busCompletedOrder" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="busCompletedOrder" auth="false">
+        <description>find Completed order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add AlexYao 已完成 at 2016.02.27 -->
+
+    <!-- begin add AlexYao 售后/退款订单查询 at 2016.02.27 -->
+    <service name="busRefundedOrder" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="busRefundedOrder" auth="false">
+        <description>find Refunded order list by userLoginId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add AlexYao 售后/退款订单查询 at2016.02.27 -->
+
+    <!-- begin add AlexYao 验证是否发起退款 at 2016.02.29 -->
+    <service name="deliveryProduct" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="deliveryProduct" auth="false">
+        <description>check is not refunded order</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="resultData" type="Boolean" mode="OUT"/>
+    </service>
+    <!-- end add AlexYao 验证是否发起退款 at 2016.02.29 -->
+
+    <!-- begin add by AlexYao 商家订单详情 at 2016.02.29 -->
+    <service name="busOrderDetail" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="busOrderDetail" auth="false">
+        <description>order detail by orderId</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="orderStatusId" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- begin add by AlexYao 商家申请 at 2016.02.29-->
+    <service name="businessApply" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="businessApply" auth="false">
+        <description>business Apply</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="businessName" type="String" mode="IN"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="province" type="String" mode="IN"/>
+        <attribute name="city" type="String" mode="IN"/>
+        <attribute name="county" type="String" mode="IN"/>
+        <attribute name="address" type="String" mode="IN"/>
+        <attribute name="legalPersonName" type="String" mode="IN"/>
+        <attribute name="tel" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add by AlexYao 商家申请 at 2016.02.29-->
+
+    <!-- begin add by AlexYao 物流公司 at 2016.03.01-->
+    <service name="businessCompany" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="businessCompany" auth="false">
+        <description>business Company</description>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add by AlexYao 物流公司 at 2016.03.01-->
+
+    <!-- begin add by AlexYao 订单发货 at 2016.03.01-->
+    <service name="deliveryOrder" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="deliveryOrder" auth="false">
+        <description>delivery Order</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="deliveryCompany" type="String" mode="IN"/>
+        <attribute name="logisticsNumber" type="String" mode="IN"/>
+        <attribute name="resultData" type="Boolean" mode="OUT"/>
+    </service>
+    <!-- end add by AlexYao 订单发货 at 2016.03.01-->
+
+    <!-- begin add by AlexYao 已验证列表 at 2016.03.01-->
+    <service name="validatedData" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="validatedData" auth="false">
+        <description>validated Data</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <!-- 查询起始值 -->
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <!-- 查询记录数 -->
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add by AlexYao 已验证列表 at 2016.03.01-->
+
+    <!-- begin add by AlexYao 已验证详情 at 2016.03.01-->
+    <service name="validatedDetailData" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="validatedDetailData" auth="false">
+        <description>validated Data</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="date" type="String" mode="IN"/>
+        <attribute name="resultData" type="java.util.ArrayList" mode="OUT"/>
+    </service>
+    <!-- end add by AlexYao 已验证详情 at 2016.03.01-->
+
+    <!--&lt;!&ndash; begin add by AlexYao 增加积分 at 2016.03.08&ndash;&gt;-->
+    <!--<service name="addCostomerScore" engine="java" location="org.ofbiz.order.order.OrderServices"-->
+    <!--invoke="addCostomerScore" auth="false">-->
+    <!--<description>cancel order by orderId</description>-->
+    <!--<attribute name="orderId" type="String" mode="IN" optional="false"/>-->
+    <!--<attribute name="maxAmount" type="BigDecimal" mode="IN" optional="false"/>-->
+    <!--<attribute name="resultData" type="Boolean" mode="OUT"/>-->
+    <!--</service>-->
+    <!--&lt;!&ndash; end add by AlexYao 增加积分 at 2016.03.08&ndash;&gt;-->
+
+    <!-- 实物订单的积分保存方法	add by qianjin 2016.03.09-->
+    <service name="savePhysicalOrderIntegral" engine="java" location="org.ofbiz.order.order.OrderIntegral"
+             invoke="savePhysicalOrderIntegral" auth="false">
+        <description>savePhysicalOrderIntegral</description>
+        <attribute name="orderIdList" type="List" mode="IN" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 虚拟订单的积分保存方法	add by qianjin 2016.03.09-->
+    <service name="saveVirtualOrderIntegral" engine="java" location="org.ofbiz.order.order.OrderIntegral"
+             invoke="saveVirtualOrderIntegral" auth="false">
+        <description>saveVirtualOrderIntegral</description>
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        <attribute name="ticketList" type="List" mode="IN" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 修改订单退货状态，订单确认收货后的几天后，更改退货状态为否 add by qianjin 2016.03.10 -->
+    <service name="updateOrderReturn" engine="java" location="org.ofbiz.order.order.OrderRuleServices"
+             invoke="updateOrderReturn" auth="false">
+    </service>
+
+    <!-- 订单规则 退单自动确认收货时间  待收货 to 待退款  begin by gss 2016.7.11 -->
+    <service name="confirmReturnOrder" engine="java"
+             location="org.ofbiz.order.order.OrderRuleServices" invoke="confirmReturnOrder">
+    </service>
+    <!-- 订单规则 退单自动取消时间  待发货 to 拒绝  begin by gss 2016.7.11-->
+    <service name="cancelReturnOrder" engine="java"
+             location="org.ofbiz.order.order.OrderRuleServices" invoke="cancelReturnOrder">
+    </service>
+    <!-- 订单规则 退单自动审核时间  待审核 to 待发货  begin by gss 2016-7-11-->
+    <service name="auditReturnOrder" engine="java"
+             location="org.ofbiz.order.order.OrderRuleServices" invoke="auditReturnOrder">
+    </service>
+    <!-- 订单规则 自动评价时间  待评价 to 已完成  begin by gss 2016.7.11-->
+    <service name="confirmEvaluateOrder" engine="java"
+             location="org.ofbiz.order.order.OrderRuleServices" invoke="confirmEvaluateOrder">
+    </service>
+
+    <!-- 订单规则 自动取消订单 待支付to已取消  begin by gss 2016.7.11-->
+    <service name="cancelOrdinaryOrder" engine="java"
+             location="org.ofbiz.order.order.OrderRuleServices" invoke="cancelOrdinaryOrder">
+    </service>
+
+    <!-- 订单规则 自动确认收货时间  待收货 to 待评价  begin by gss 2016.7.11-->
+    <service name="confirmWaitOrder" engine="java"
+             location="org.ofbiz.order.order.OrderRuleServices" invoke="confirmWaitOrder">
+    </service>
+
+    <!-- 取消订单 Add By AlexYao 2016/02/01 -->
+    <service name="autoCancelOrder" engine="java" location="org.ofbiz.order.order.OrderServices"
+             invoke="autoCancelOrder" auth="false">
+        <description>cancel order by orderId</description>
+        <attribute name="orderId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Boolean" mode="OUT"/>
+    </service>
+
+    <!-- 微信退款接口服务 by gss-->
+    <service name="refundWeixin" engine="java"
+             location="org.ofbiz.accounting.thirdparty.weixin.WeixinEvents" invoke="refundWeixin">
+        <description>refundWeixin</description>
+        <attribute name="returnId" type="String" mode="IN"/>
+        <attribute name="refundfee" type="String" mode="IN"/>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="status" type="Boolean" mode="OUT" optional="true"/>
+        <attribute name="msg" type="String" mode="OUT" optional="true"/>
+        <attribute name="refundId" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!-- Order View Services -->
+    <service name="queryCustOrderedSummaryInfo" engine="simple"
+             location="component://order/script/org/ofbiz/order/order/OrderServices.xml" invoke="queryCustOrderedSummaryInfo">
+        <description>Get Ordered Summary Information</description>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeId" type="String" mode="IN" optional="true"/> <!-- defaults to PLACING_CUSTOMER -->
+        <attribute name="orderTypeId" type="String" mode="IN" optional="true"/> <!-- defaults to SALES_ORDER -->
+        <attribute name="totalOrders" type="Long" mode="OUT" optional="false"/>
+        <attribute name="totalGrandAmount" type="BigDecimal" mode="OUT" optional="false"/>
+        <attribute name="totalSubRemainingAmount" type="BigDecimal" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="cancelOrder" engine="org.ofbiz.order.order.OrderServices" invoke="cancelOrder">
+        <description>订单取消</description>
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="operateReason" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="pingRefundRequest" engine="java" location="com.yuaoq.yabiz.mobile.services.PingService" invoke="pingRefundRequest" auth="true">
+        <attribute name="orderId" type="String" mode="IN"/>
+        <attribute name="chargeId" type="String" mode="IN"/>
+        <attribute name="amount" type="String" mode="IN"/>
+        <attribute name="returnHeader" type="org.ofbiz.entity.GenericValue" mode="IN"/>
+    </service>
+</services>

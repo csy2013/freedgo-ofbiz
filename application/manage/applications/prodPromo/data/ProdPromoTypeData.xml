@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+
+    <EnumerationType description="活动配送方式" enumTypeId="ACTY_SHIPMENT_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="自提" enumCode="OWN" enumId="SHIPMENT_OWN" sequenceId="01" enumTypeId="ACTY_SHIPMENT_TYPE"/>
+    <Enumeration description="配送" enumCode="SHIPMENT" enumId="SHIPMENT_SHIPMENT" sequenceId="02" enumTypeId="ACTY_SHIPMENT_TYPE"/>
+
+
+    <EnumerationType description="活动审批状态" enumTypeId="ACTY_AUDIT_STUATS" hasTable="N" parentTypeId=""/>
+    <Enumeration description="待审批" enumCode="INIT" enumId="ACTY_AUDIT_INIT" sequenceId="01" enumTypeId="ACTY_AUDIT_STUATS"/>
+    <Enumeration description="审批通过" enumCode="PASS" enumId="ACTY_AUDIT_PASS" sequenceId="02" enumTypeId="ACTY_AUDIT_STUATS"/>
+    <Enumeration description="审批不通过" enumCode="NOPASS" enumId="ACTY_AUDIT_NOPASS" sequenceId="03" enumTypeId="ACTY_AUDIT_STUATS"/>
+    <Enumeration description="待发布" enumCode="PUBLISHING" enumId="ACTY_AUDIT_PUBING" sequenceId="03" enumTypeId="ACTY_AUDIT_STUATS"/>
+    <Enumeration description="未开始" enumCode="UNBEGIN" enumId="ACTY_AUDIT_UNBEGIN" sequenceId="03" enumTypeId="ACTY_AUDIT_STUATS"/>
+    <Enumeration description="进行中" enumCode="DOING" enumId="ACTY_AUDIT_DOING" sequenceId="03" enumTypeId="ACTY_AUDIT_STUATS"/>
+    <Enumeration description="已结束" enumCode="END" enumId="ACTY_AUDIT_END" sequenceId="03" enumTypeId="ACTY_AUDIT_STUATS"/>
+    <Enumeration description="已下架" enumCode="OFF" enumId="ACTY_AUDIT_OFF" sequenceId="03" enumTypeId="ACTY_AUDIT_STUATS"/>
+
+    <EnumerationType description="活动类型" enumTypeId="ACTY_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="团购" enumCode="GROUPORDER" enumId="GROUP_ORDER" sequenceId="01" enumTypeId="ACTY_TYPE"/>
+    <Enumeration description="秒杀" enumCode="SECKILL" enumId="SEC_KILL" sequenceId="02" enumTypeId="ACTY_TYPE"/>
+
+    <EnumerationType description="活动支付条件" enumTypeId="ACTY_PAY_TYPE" hasTable="N" parentTypeId=""/>。、
+    <Enumeration description="定金" enumCode="PARTPAY" enumId="PART_PAY" sequenceId="01" enumTypeId="ACTY_PAY_TYPE"/>
+    <Enumeration description="全款" enumCode="FULLPAY" enumId="FULL_PAY" sequenceId="02" enumTypeId="ACTY_PAY_TYPE"/>
+
+
+    <Enumeration description="Total Amount of Group Order" enumCode="GROUP_ORDER_TOTAL" enumId="PPIP_GRPODR_TOTAL" sequenceId="18" enumTypeId="PROD_PROMO_IN_PARAM"/>
+    <Enumeration description="指定价" enumCode="PROD_ASSIGN" enumId="PROMO_PROD_ASGPC" sequenceId="12" enumTypeId="PROD_PROMO_ACTION"/>
+    <Enumeration description="销售时间区间" enumCode="SALE_TIME_BTW" enumId="SALE_TIME_BTW" sequenceId="19" enumTypeId="PROD_PROMO_IN_PARAM"/>
+    <Enumeration description="Free Shipping" enumCode="FREE_SHIPPING" enumId="PROMO_FREE_SHIPPING" sequenceId="02" enumTypeId="PROD_PROMO_ACTION"/>
+
+    <EnumerationType description="促销类型" enumTypeId="PRO_PROMO_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="每满减" enumCode="PROMO_PRE_REDUCE" enumId="PROMO_PRE_REDUCE" sequenceId="01" enumTypeId="PRO_PROMO_TYPE"/>
+    <Enumeration description="满减" enumCode="PROMO_REDUCE" enumId="PROMO_REDUCE" sequenceId="02" enumTypeId="PRO_PROMO_TYPE"/>
+
+    <!-- 折扣类型 -->
+    <EnumerationType description="折扣类型" enumTypeId="PROMO_DISCOUNT" hasTable="N" parentTypeId=""/>
+    <Enumeration description="按金额" enumCode="PPIP_ORDER_TOTAL" enumId="PPIP_DISCOUNT_TOTAL" sequenceId="01" enumTypeId="PROMO_DISCOUNT" />
+    <Enumeration description="按商品件数" enumCode="PPIP_PRODUCT_QUANT" enumId="PPIP_DISCOUNT_QUANT" sequenceId="02" enumTypeId="PROMO_DISCOUNT" />
+
+    <!-- 直降类型 -->
+    <EnumerationType description="直降类型" enumTypeId="PROMO_SPE_PRICE" hasTable="N" parentTypeId=""/>
+
+    <EnumerationType description="促销产品类型" enumTypeId="PRO_PROMO_PRT_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="全部产品参与" enumCode="PRO_PROMO_PRT_ALL" enumId="PROMO_PRT_ALL" sequenceId="01" enumTypeId="PRO_PROMO_PRT_TYPE"/>
+    <Enumeration description="部分产品参与" enumCode="PRO_PROMO_PRT_PART_IN" enumId="PROMO_PRT_PART_IN" sequenceId="02" enumTypeId="PRO_PROMO_PRT_TYPE"/>
+    <Enumeration description="部分产品不参与" enumCode="PRO_PROMO_PRT_PART_EX" enumId="PROMO_PRT_PART_EX" sequenceId="02" enumTypeId="PRO_PROMO_PRT_TYPE"/>
+    <!--每满减-->
+    <Enumeration description="" enumCode="PROMO_PRO_PER_AMDISC" enumId="PROMO_PRO_PER_AMDISC" sequenceId="01" enumTypeId="PROD_PROMO_ACTION"/>
+    <!--满减-->
+    <Enumeration description="X Product for Y Discount" enumCode="PROD_AMDISC" enumId="PROMO_PROD_AMDISC" sequenceId="04" enumTypeId="PROD_PROMO_ACTION"/>
+
+    <Enumeration description="Party LEVEL" enumCode="PARTY_LEVEL" enumId="PPIP_PARTY_LEVEL" sequenceId="20" enumTypeId="PROD_PROMO_IN_PARAM"/>
+
+
+    <!--优惠劵类型-->
+    <EnumerationType description="优惠劵类型" enumTypeId="PRO_COUPON_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="满减类型" enumCode="COUPON_TYPE_REDUCE" enumId="COUPON_TYPE_REDUCE" sequenceId="01" enumTypeId="PRO_COUPON_TYPE"/>
+    <Enumeration description="现金抵用" enumCode="COUPON_TYPE_CASH" enumId="COUPON_TYPE_CASH" sequenceId="02" enumTypeId="PRO_COUPON_TYPE"/>
+    <!--·发放方式：直接领取和积分兑换-->
+    <EnumerationType description="优惠劵发放方式" enumTypeId="COUPON_PUBLISH_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="直接领取" enumCode="COUPON_PRDE_DIR" enumId="COUPON_PRDE_DIR" sequenceId="01" enumTypeId="COUPON_PUBLISH_TYPE"/>
+    <!--<Enumeration description="积分兑换" enumCode="COUPON_PRDE_SCORE" enumId="COUPON_PRDE_SCORE" sequenceId="02" enumTypeId="COUPON_PUBLISH_TYPE"/>-->
+    <Enumeration description="现金购买" enumCode="COUPON_PRDE_MONEY" enumId="COUPON_PRDE_MONEY" sequenceId="02" enumTypeId="COUPON_PUBLISH_TYPE"/>
+
+    <!--优惠券范围:通用类型、单品优惠、分类优惠、品牌优惠-->
+    <EnumerationType description="优惠券优惠范围" enumTypeId="COUPON_RANGE_TYPE" hasTable="N" parentTypeId=""/>
+    <Enumeration description="通用类型" enumCode="COUPON_RANGE_COMM" enumId="COUPON_RANGE_COMM" sequenceId="01" enumTypeId="COUPON_RANGE_TYPE"/>
+    <Enumeration description="单品优惠" enumCode="COUPON_RANGE_SINGLE" enumId="COUPON_RANGE_SINGLE" sequenceId="02" enumTypeId="COUPON_RANGE_TYPE"/>
+    <Enumeration description="分类优惠" enumCode="COUPON_TYPE_CATE" enumId="COUPON_TYPE_CATE" sequenceId="03" enumTypeId="COUPON_RANGE_TYPE"/>
+    <Enumeration description="品牌优惠" enumCode="COUPON_TYPE_BRAND" enumId="COUPON_TYPE_BRAND" sequenceId="04" enumTypeId="COUPON_RANGE_TYPE"/>
+
+    <!-- 优惠劵代码状态 ，有效，失效，已领取,已使用-->
+    <EnumerationType description="优惠劵代码状态" enumTypeId="COUPON_CODE_STATUS" hasTable="N" parentTypeId=""/>
+    <Enumeration description="有效" enumCode="COUPON_CODE_ENABLE" enumId="COUPON_CODE_ENABLE" sequenceId="01" enumTypeId="COUPON_CODE_STATUS"/>
+    <Enumeration description="失效" enumCode="COUPON_CODE_DISABLE" enumId="COUPON_CODE_DISABLE" sequenceId="02" enumTypeId="COUPON_CODE_STATUS"/>
+    <Enumeration description="已领取" enumCode="COUPON_CODE_GET" enumId="COUPON_CODE_GET" sequenceId="03" enumTypeId="COUPON_CODE_STATUS"/>
+    <Enumeration description="已使用" enumCode="COUPON_CODE_USED" enumId="COUPON_CODE_USED" sequenceId="04" enumTypeId="COUPON_CODE_STATUS"/>
+
+    <!--满赠促销类型-->
+    <!--<EnumerationType description="满赠促销类型" enumTypeId="PROMO_GIFT_PARAM" hasTable="N" parentTypeId=""/>
+    <Enumeration description="元" enumCode="PPIP_ORDER_TOTAL" enumId="PPIP_GIFT_TOTAL" sequenceId="01" enumTypeId="PROMO_GIFT_PARAM"/>
+    <Enumeration description="件" enumCode="PPIP_PRODUCT_QUANT" enumId="PPIP_GIFT_QUANT" sequenceId="02" enumTypeId="PROMO_GIFT_PARAM"/>-->
+
+    <!-- 包邮促销类型 -->
+    <EnumerationType description="包邮促销类型" enumTypeId="PROMO_FREE_SHIPPING" hasTable="N" parentTypeId=""/>
+    <Enumeration description="元" enumCode="PPIP_ORDER_TOTAL" enumId="PPIP_SHIPPING_TOTAL" sequenceId="01" enumTypeId="PROMO_FREE_SHIPPING"/>
+    <Enumeration description="件" enumCode="PPIP_PRODUCT_QUANT" enumId="PPIP_SHIPPING_QUANT" sequenceId="02" enumTypeId="PROMO_FREE_SHIPPING"/>
+
+    <!--会员首次促销类型-->
+    <EnumerationType description="会员首次促销类型" enumTypeId="PROMO_NEWCUST_PARAM" hasTable="N" parentTypeId=""/>
+    <Enumeration description="优惠价格" enumCode="PROMO_ORDER_AMOUNT" enumId="PPIP_NEWCUST_AMOUNT" sequenceId="01" enumTypeId="PROMO_NEWCUST_PARAM"/>
+    <Enumeration description="赠送商品" enumCode="PROMO_GWP" enumId="PPIP_NEWCUST_GWP" sequenceId="02" enumTypeId="PROMO_NEWCUST_PARAM"/>
+    <Enumeration description="免运费" enumCode="PROMO_FREE_SHIPPING" enumId="PPIP_NEWCUST_FREESHP" sequenceId="03" enumTypeId="PROMO_NEWCUST_PARAM"/>
+
+</entity-engine-xml>

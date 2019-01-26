@@ -1,0 +1,55 @@
+{
+  "resultData": {
+    "storeCarts": [
+      {
+        "shoppingCartItems": [
+          {
+            "quantity": 1.000000,
+            "itemSeqId": "00001",
+            "name": "小黄鸭B DUCK 萌萌杯可爱吸管杯750ml",
+            "description": "ProductItem",
+            "displayPrice": 25.000,
+            "mediumImageUrl": "https://ecomfile.capitaland.com.cn/images/products/11727/additional1/medium.jpeg",
+            "isChoose": "Y",
+            "itemSubTotal": 22.000000000,
+            "productTypeId": "FINISHED_GOOD",
+            "isBondedGoods": "N",
+            "integralDeductionType": "2",
+            "integralDeductionUpper": 20.000000,
+            "isPromo": "Y",
+            "scorePrice": 5.000000000,
+            "scoreValue": 500,
+            "productId": "11727"
+          }
+        ],
+        "productStoreId": "10000",
+        "productStoreName": "凯德店铺",
+        "innerStoreId": "10000",
+        "storeOrderAdjustments": [
+          {
+            "orderItemSeqId": "00001",
+            "amount": -3.000,
+            "correspondingProductId": "11727",
+            "comments": "PROMO_SPE_PRICE",
+            "productPromoActionSeqId": "01",
+            "orderAdjustmentTypeId": "PROMOTION_ADJUSTMENT",
+            "productPromoRuleId": "01",
+            "description": "cool爽盛夏，清凉大放价",
+            "productStoreId": "10000",
+            "productPromoId": "10252"
+          }
+        ]
+      }
+    ],
+    "shoppingCart": {
+      "orderPromoTotal": -3.000,
+      "orderShippingTotal": 0.00,
+      "displaySubTotal": 22.000000000,
+      "displayGrandTotal": 22.000000000,
+      "orderSubTotal": 25.00,
+      "totalQuantity": 1.000000
+    },
+    "retCode": 1,
+    "message": "查询购物车成功"
+  }
+}

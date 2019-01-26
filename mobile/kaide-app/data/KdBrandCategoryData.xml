@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <ProductBrandCategory productBrandId="10337" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10337" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10338" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10339" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10281" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10340" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10341" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10062" productCategoryId="10179"/>
+    <ProductBrandCategory productBrandId="10342" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10343" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10344" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10345" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10345" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10346" productCategoryId="10168"/>
+    <ProductBrandCategory productBrandId="10347" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10345" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10348" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10349" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10350" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10351" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10352" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10353" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10354" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10355" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10356" productCategoryId="10168"/>
+    <ProductBrandCategory productBrandId="10228" productCategoryId="10170"/>
+    <ProductBrandCategory productBrandId="10357" productCategoryId="10170"/>
+    <ProductBrandCategory productBrandId="10357" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10357" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10235" productCategoryId="10170"/>
+    <ProductBrandCategory productBrandId="10358" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10228" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10359" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10359" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10360" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10361" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10362" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10363" productCategoryId="10297"/>
+    <ProductBrandCategory productBrandId="10364" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10362" productCategoryId="10298"/>
+    <ProductBrandCategory productBrandId="10365" productCategoryId="10163"/>
+    <ProductBrandCategory productBrandId="10366" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10366" productCategoryId="10163"/>
+    <ProductBrandCategory productBrandId="10367" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10368" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10005" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10369" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10349" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10350" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10370" productCategoryId="10297"/>
+    <ProductBrandCategory productBrandId="10370" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10371" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10372" productCategoryId="10168"/>
+    <ProductBrandCategory productBrandId="10371" productCategoryId="10297"/>
+    <ProductBrandCategory productBrandId="10371" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10373" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10374" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10368" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10375" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10076" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10231" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10376" productCategoryId="10297"/>
+    <ProductBrandCategory productBrandId="10377" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10378" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10379" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10354" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10002" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10380" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10002" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10381" productCategoryId="10297"/>
+    <ProductBrandCategory productBrandId="10382" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10383" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10383" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10068" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10088" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10068" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10384" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10385" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10386" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10387" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10388" productCategoryId="10298"/>
+    <ProductBrandCategory productBrandId="10389" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10261" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10243" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10243" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10076" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10390" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10391" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10388" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10392" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10055" productCategoryId="10298"/>
+    <ProductBrandCategory productBrandId="10393" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10394" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10076" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10062" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10232" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10057" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10072" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10379" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10395" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10396" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10397" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10350" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10367" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10367" productCategoryId="10297"/>
+    <ProductBrandCategory productBrandId="10398" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10372" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10372" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10399" productCategoryId="10243"/>
+    <ProductBrandCategory productBrandId="10399" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10400" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10401" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10402" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10062" productCategoryId="10301"/>
+    <ProductBrandCategory productBrandId="10072" productCategoryId="10301"/>
+    <ProductBrandCategory productBrandId="10403" productCategoryId="10168"/>
+    <ProductBrandCategory productBrandId="10111" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10003" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10231" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10087" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10068" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10088" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10062" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10057" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10111" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10003" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10231" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10082" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10087" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10072" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10073" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10074" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10065" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10404" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10068" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10088" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10055" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10379" productCategoryId="10302"/>
+    <ProductBrandCategory productBrandId="10062" productCategoryId="10303"/>
+    <ProductBrandCategory productBrandId="10404" productCategoryId="10303"/>
+    <ProductBrandCategory productBrandId="10080" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10068" productCategoryId="10303"/>
+    <ProductBrandCategory productBrandId="10403" productCategoryId="10304"/>
+    <ProductBrandCategory productBrandId="10055" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10088" productCategoryId="10303"/>
+    <ProductBrandCategory productBrandId="10073" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10055" productCategoryId="10303"/>
+    <ProductBrandCategory productBrandId="10072" productCategoryId="10303"/>
+    <ProductBrandCategory productBrandId="10085" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10379" productCategoryId="10303"/>
+    <ProductBrandCategory productBrandId="10350" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10065" productCategoryId="10299"/>
+    <ProductBrandCategory productBrandId="10376" productCategoryId="10305"/>
+    <ProductBrandCategory productBrandId="10376" productCategoryId="10306"/>
+    <ProductBrandCategory productBrandId="10403" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10398" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10398" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10405" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10406" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10407" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10405" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10024" productCategoryId="10298"/>
+    <ProductBrandCategory productBrandId="10408" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10331" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10410" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10408" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10110" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10411" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10411" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10020" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10412" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10020" productCategoryId="10170"/>
+    <ProductBrandCategory productBrandId="10293" productCategoryId="10170"/>
+    <ProductBrandCategory productBrandId="10413" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10057" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10414" productCategoryId="10297"/>
+    <ProductBrandCategory productBrandId="10415" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10416" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10417" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10418" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10419" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10420" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10421" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10422" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10423" productCategoryId="10219"/>
+    <ProductBrandCategory productBrandId="10387" productCategoryId="10162"/>
+    <ProductBrandCategory productBrandId="10062" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10408" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10424" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10425" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10063" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10426" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10427" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10428" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10126" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10126" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10429" productCategoryId="10297"/>
+    <ProductBrandCategory productBrandId="10430" productCategoryId="10169"/>
+    <ProductBrandCategory productBrandId="10089" productCategoryId="10296"/>
+    <ProductBrandCategory productBrandId="10431" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10432" productCategoryId="10165"/>
+    <ProductBrandCategory productBrandId="10402" productCategoryId="10177"/>
+    <ProductBrandCategory productBrandId="10376" productCategoryId="10178"/>
+    <ProductBrandCategory productBrandId="10433" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10072" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10434" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10141" productCategoryId="10170"/>
+    <ProductBrandCategory productBrandId="10247" productCategoryId="10167"/>
+    <ProductBrandCategory productBrandId="10057" productCategoryId="10160"/>
+    <ProductBrandCategory productBrandId="10282" productCategoryId="10167"/>
+
+</entity-engine-xml>

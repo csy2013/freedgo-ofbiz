@@ -1,0 +1,1154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <include location="component://commonext/webapp/WEB-INF/controller.xml"/>
+    <description>Catalog Module Site Configuration File</description>
+    
+    <handler name="service-multi" type="request" class="org.ofbiz.webapp.event.ServiceMultiEventHandler"/>
+    <handler name="groovy" type="request" class="org.ofbiz.webapp.event.GroovyEventHandler"/>
+
+    <firstvisit></firstvisit>
+    <!-- Events to run on every request before security (chains exempt) -->
+    <!--
+    <preprocessor>
+    </preprocessor>
+    -->
+    <!-- Events to run on every request after all other processing (chains exempt) -->
+    <!--
+    <postprocessor>
+        <event name="test" type="java" path="org.ofbiz.webapp.event.TestEvent" invoke="test"/>
+    </postprocessor>
+    -->
+
+    <!-- Request Mappings -->
+    <request-map uri="main">
+        <security https="true" auth="true"/>
+        <response name="success" type="request" value="findGroupOrder"></response>
+    </request-map>
+
+    <!--begin 活动：团购、秒杀-->
+    <request-map uri="findGroupOrder">
+        <security https="true" auth="true"/>
+        <!--<event type="service" invoke="findUser"/>-->
+        <response name="success" type="view" value="groupOrderList"/>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+    <!--<request-map uri="findSecKill">-->
+        <!--<security https="true" auth="true"/>-->
+        <!--&lt;!&ndash;<event type="service" invoke="findUser"/>&ndash;&gt;-->
+        <!--<response name="success" type="view" value="groupOrderList"/>-->
+        <!--<response name="error" type="view" value="error"/>-->
+
+    <!--</request-map>-->
+    <request-map uri="addGroupOrder">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addGroupOrder"></response>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+
+    <request-map uri="saveGroupOrder">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addGroupOrder"></event>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="view" value="error"></response>
+    </request-map>
+
+    <request-map uri="editGroupOrder">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editGroupOrder"></response>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+
+    <request-map uri="updateGroupOrder">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateGroupOrder"></event>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    <request-map uri="LookupProduct">
+        <security auth="true" https="true"/>
+        <response name="success" type="view" value="LookupProduct"/>
+    </request-map>
+    <request-map uri="productActivityDetail">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="productActivityDetail"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    <request-map uri="deleteGroupOrder">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="deleteGroupOrder"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    <request-map uri="shutDownActivity">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="shutDownActivity"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    <request-map uri="auditGroupOrder">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="auditGroupOrder"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    <!--秒杀-->
+    <request-map uri="findSecKill">
+        <security https="true" auth="true"/>
+        <!--<event type="service" invoke="findUser"/>-->
+        <response name="success" type="view" value="secKillList"/>
+        <response name="error" type="view" value="error"/>
+
+    </request-map>
+    <request-map uri="addSecKill">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addSecKill"></response>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+
+    <request-map uri="saveSecKill">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addSecKill"></event>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="view" value="error"></response>
+    </request-map>
+
+    <request-map uri="editSecKill">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editSecKill"></response>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+
+    <request-map uri="updateSecKill">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateSecKill"></event>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="view" value="error"></response>
+    </request-map>
+
+    <request-map uri="deleteSecKill">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="deleteSecKill"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    <!--end 团购、秒杀-->
+    <!-- 促销弹出框页面（单选） add by qianjin 2016/01/20 start -->
+    <request-map uri="PromoListModalPage">
+    	<security https="true" auth="true"/>
+        <response name="success" type="view" value="PromoListModalPage"/>
+    </request-map>
+    
+    <!-- 促销弹出框页面（多选） add by qianjin 2016/01/20 start -->
+    <request-map uri="PromoListMultiModalPage">
+    	<security https="true" auth="true"/>
+        <response name="success" type="view" value="PromoListMultiModalPage"/>
+    </request-map>
+    
+    <request-map uri="PromoListForJson">
+    	<security https="true" auth="true"/>
+    	<event type="service" path="" invoke="getPromoListForModal"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- add by qianjin 2016/01/20 end -->
+    
+    <!-- Add by zhajh 20160322 秒杀销售结束时间的验证  Begin -->
+    <request-map uri="chkActivityDateForKill">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="chkActivityDateForKill"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    <!-- Add by zhajh 20160322 秒杀销售结束时间的验证  End -->
+
+
+
+    <!--Add by zhajh at 20180507 秒杀修改结束时间 Begin -->
+    <!--编辑秒杀商品结束时间-->
+    <request-map uri="editEndDateSecKill">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="editEndDateSecKill"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--秒杀商品查看驳回原因-->
+    <request-map uri="findProductSkAuditMessage">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findProductSkAuditMessage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--Add by zhajh  at 20180507 秒杀修改结束时间 End -->
+    <!--end 团购、秒杀-->
+    
+    <!-- 收藏人员查询弹出框begin add by qianjin 2016.01.26  -->
+    <request-map uri="collectionPartyListModalPage">
+    	<security https="true" auth="true"/>
+        <response name="success" type="view" value="collectionPartyListModalPage"/>
+    </request-map>
+    
+    <request-map uri="collectionPartyListForJson">
+    	<security https="true" auth="true"/>
+    	<event type="service" path="" invoke="findPartyInfo"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- 收藏人员查询弹出框end add by qianjin 2016.01.26 -->
+
+    <!-- add by Wcy 获取团购数据 at 2016.01.26 -->
+    <request-map uri="getPromoForWap">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getPromoForWap"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by Wcy 获取抢购数据 at 2016.01.26 -->
+    <request-map uri="getSecKillForWap">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getSecKillForWap"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by Wcy 抢购/团购详情 at 2016.01.26 -->
+    <request-map uri="getActivityDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getActivityDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by Wcy 收藏请求 at 2016.01.26 -->
+    <request-map uri="saveCollect">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="saveCollect"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by Wcy 我的收藏 at 2016.01.28 -->
+    <request-map uri="myCollect">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="myCollect"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by Wcy 删除收藏  at 2016.01.28-->
+    <request-map uri="removeMyCollect">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="removeMyCollect"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 活动管理页面 add by qianjin at 2016.02.15 -->
+    <request-map uri="activityMgrPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="activityMgrPage"/>
+    </request-map>
+    
+    <!-- 活动管理列表(Json格式) add by qianjin at 2016.02.15 -->
+    <request-map uri="getActivityMgrListForJson">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getActivityMgrList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 活动管理新增页面 add by qianjin at 2016.02.15 -->
+    <request-map uri="activityMgrAddPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="activityMgrAddPage"/>
+    </request-map>
+    
+    <!-- 活动管理新增(Json格式) add by qianjin at 2016.02.16 -->
+    <request-map uri="activityMgrAddForJson">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="activityMgrAdd"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="checkActiveCodeExist">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="checkActiveCodeExist"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 活动管理修改页面	add by qianjin 2016.02.18 -->
+    <request-map uri="activityMgrEditPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="activityMgrEditPage"/>
+    </request-map>
+    
+    <!-- 根据ID查询活动管理	add by qianjin 2016.02.18 -->
+    <request-map uri="getActivityMgrById">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getActivityMgrById"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 活动管理修改 add by qianjin at 2016.02.18 -->
+    <request-map uri="activityMgrEdit">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="activityMgrEdit"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 专题活动列表页面 add by qianjin at 2016.02.22 -->
+    <request-map uri="TopicActivityListPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="topicActivityListPage"/>
+    </request-map>
+    
+    <!-- 专题活动列表(Json格式) add by qianjin at 2016.02.22 -->
+    <request-map uri="GetTopicActivityList">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getTopicActivityList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 根据专题活动ID修改启用状态 add by qianjin 2016.02.22 -->
+    <request-map uri="EditIsUseByProTopicActivityId">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="editIsUseByProTopicActivityId"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 专题活动新增页面 add by qianjin at 2016.02.22 -->
+    <request-map uri="TopicActivityAddPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="topicActivityAddPage"/>
+    </request-map>
+    
+    <!-- 活动管理弹出框页面（单选） add by qianjin at 2016.02.22 -->
+    <request-map uri="ProActivityMgrListModalPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="proActivityMgrListModalPage"/>
+    </request-map>
+    
+    <!-- 专题活动新增 add by qianjin 2016.02.23 -->
+    <request-map uri="TopicActivityAdd">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="topicActivityAdd"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 专题活动编辑 add by qianjin 2016.02.23 -->
+    <request-map uri="TopicActivityEditPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="topicActivityEditPage"/>
+    </request-map>
+    
+    <!-- 根据ID获取专题活动信息	add by qianjin 2016.02.23 -->
+    <request-map uri="getTopicActivityById">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getTopicActivityById"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 专题活动修改	add by qianjin 2016.02.23 -->
+    <request-map uri="TopicActivityEdit">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="topicActivityEdit"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 活动管理删除 add by qianjin at 2016.02.18 -->
+    <request-map uri="activityMgrDel">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="activityMgrDel"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 根据ID删除专题活动,可批量删除 add by qianjin 2016.02.23 -->
+    <request-map uri="TopicActivityDel">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="topicActivityDel"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 活动收藏页面 add by qianjin at 2016.02.25 -->
+    <request-map uri="ActivityCollectionListPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="activityCollectionListPage"/>
+    </request-map>
+    
+    <!-- 活动收藏列表(Json格式) add by qianjin at 2016.02.25 -->
+    <request-map uri="GetActivityCollectionList">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="findActCollection"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 首页专题活动详情 add  by gss  2016-3-2 -->
+    <request-map uri="getActivityTopicDetail">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getActivityTopicDetail"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 获取专题活动模版1详情接口 add  by gss  2016-3-2 -->
+    <request-map uri="getProductTopicTitle">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getProductTopicTitle"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 热门搜索 add by gss  2016-3-2 -->
+    <request-map uri="getHotSearch">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getHotSearch"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="updateGroupOrderPrice">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateGroupOrderPrice"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end of view mappings -->
+    <!-- 满减新增 add by GSS 2016/04/14 start -->
+    <request-map uri="addPromoReduce">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addPromoReduce"/>
+    </request-map>
+
+    <request-map uri="editPromoReduce">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editPromoReduce"/>
+    </request-map>
+
+
+
+
+    <request-map uri="addPromoReduces">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addPromoReduce"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--满赠新增 add by nf 2018/03/05 start -->
+    <request-map uri="addPromoGift">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addPromoGift"/>
+    </request-map>
+    <request-map uri="editPromoGift">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editPromoGift"/>
+    </request-map>
+
+    <request-map uri="updatePromoGiftService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePromoGiftService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="addPromoGiftService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addPromoGiftService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="productPromoGiftDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="productPromoGiftDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--会员首次促销-->
+    <!--会员首次促销新增页面-->
+    <request-map uri="addPromoNewCust">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addPromoNewCust"/>
+    </request-map>
+
+    <!--查找首次促销信息回显到页面findPromoNewCustService-->
+    <request-map uri="findPromoNewCustService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findPromoNewCustService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <!--会员首次促销列表-->
+    <request-map uri="findPromoNewCust">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findPromoNewCust"/>
+    </request-map>
+    <request-map uri="addPromoNewCustService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addPromoNewCustService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <request-map uri="addDiscounts">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addDiscount"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="addPackages">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addPackage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="addStraightDowns">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addStraightDown"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="updatePromoReduce">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePromoReduce"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="updateDiscounts">
+        <event type="service" invoke="updateDiscount"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="updateStraightDowns">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateStraightDown"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="updatePackages">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePackage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="findPrice">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findPrice"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="productPromoDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="productPromoDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 折扣 列表页面 查看 -->
+    <request-map uri="productPromoDiscountDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="productPromoDiscountDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 直降列表页面 查看-->
+    <request-map uri="productPromoStraightDownDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="productPromoStraightDownDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <request-map uri="auditPromoPromo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="auditPromoPromo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="batchAuditPromoReduce">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="batchAuditPromoReduce"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="findAuditMessage">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findAuditMessage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="endPromoReduce">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="endProductPromo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="deleteProductPromo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteProductPromo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+
+    <!-- 优惠券 add by GSS 2016/04/14 start -->
+    <request-map uri="addCoupon">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addCoupon"/>
+    </request-map>
+    <request-map uri="editCoupon">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editCoupon"/>
+    </request-map>
+    <request-map uri="findCoupon">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findCoupon"/>
+    </request-map>
+    <!-- 优惠券列表 -->
+    <request-map uri="findCouponCode">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findCouponCode"/>
+    </request-map>
+    <request-map uri="add_Coupon">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addCoupon"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--修改团购结束时间-->
+    <request-map uri="editTogetherEndDate">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="editTogetherEndDate"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="editCouponEndTime">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="editCouponEndTime"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 直降列表 add by changchen 2018.03.02-->
+    <request-map uri="findStraightDown">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findStraightDown"/>
+    </request-map>
+
+    <!-- 直降新增 add by changchen 2018.03.02-->
+    <request-map uri="addStraightDown">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addStraightDown"/>
+    </request-map>
+
+    <!-- 直降编辑 -->
+    <request-map uri="editStraightDown">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editStraightDown"/>
+    </request-map>
+
+    <!-- 折扣列表 add by changchen 2018.03.02-->
+    <request-map uri="findDiscount">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findDiscount"/>
+    </request-map>
+
+    <!-- 折扣新增 add by changchen 2018.03.02-->
+    <request-map uri="addDiscount">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addDiscount"/>
+    </request-map>
+
+    <!-- 折扣编辑 -->
+    <request-map uri="editDiscount">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editDiscount"/>
+    </request-map>
+
+    <!-- 包邮新增 -->
+    <request-map uri="addPackage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addPackage"/>
+    </request-map>
+
+    <!-- 包邮列表 -->
+    <request-map uri="findPackage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findPackage"/>
+    </request-map>
+
+    <!-- 包邮编辑 -->
+    <request-map uri="editPackage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editPackage"/>
+    </request-map>
+
+    <request-map uri="goodsImport">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductServices" invoke="goodsImport" />
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="update_Coupon">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateCoupon"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="productCouponDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="productCouponDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--删除优惠券活动-->
+    <request-map uri="deleteCoupon">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteCoupon"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="auditCoupon">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="auditCoupon"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="findCouponAuditMessage">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findCouponAuditMessage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="endCoupon">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="endCoupon"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="batchAuditPromoCoupon">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="batchAuditPromoCoupon"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="batchAuditPromoCoupon">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="batchAuditPromoCoupon"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="findCoupons">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findCoupons"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 优惠券列表 2016.05.16 -->
+    <request-map uri="findCouponCodeJson">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getCouponCodeDetail"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 支付后领取   2016.05.16 -->
+    <request-map uri="checkAfterPayNum">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="checkAfterPayNum"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 满减列表 add by GSS 2016/04/14 start -->
+    <request-map uri="findPromoReduce">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findPromoReduce"/>
+    </request-map>
+
+    <!-- 满赠列表页面 add by nf 2018.03.05  start -->
+    <request-map uri="findPromoGift">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findPromoGift"/>
+    </request-map>
+
+
+    <!--Add by zhajh at 20180313 商品组合 Begin-->
+    <!--商品列表-->
+    <request-map uri="findProductGrouping">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findProductGrouping"/>
+    </request-map>
+    <!--添加商品-->
+    <request-map uri="addProductGrouping">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addProductGrouping"/>
+    </request-map>
+
+    <request-map uri="updateProductGroupingService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateProductGroupingService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--查看组合商品-->
+    <request-map uri="productGroupingDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="productGroupingDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--删除组合商品-->
+    <request-map uri="deleteProductGroupingByIds">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteProductGroupingByIds"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <!--组合商品审核-->
+    <request-map uri="auditProductGrouping">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="auditProductGrouping"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--组合商品查看驳回原因-->
+    <request-map uri="findProductGroupingAuditMessage">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findProductGroupingAuditMessage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--编辑组合商品结束时间-->
+    <request-map uri="editEndDatePromoProductGrouping">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="editEndDatePromoProductGrouping"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--组合商品的更新页面-->
+    <request-map uri="editProductGrouping">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editProductGrouping"/>
+    </request-map>
+
+    <!--组合商品批量审核处理-->
+    <request-map uri="batchAuditProductGrouping">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="batchAuditProductGrouping"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--根据组合商品编码取得组合商品信息-->
+    <request-map uri="getProductGroupingProductIdsById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getProductGroupingProductIdsById"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--Add by zhajh at 20180313 商品组合 End-->
+
+
+    <!--Add by zhajh at 20180319 秒杀 Start -->
+    <!--编辑秒杀信息-->
+    <request-map uri="updateSecKillService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateSecKillService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--查看秒杀商品-->
+    <request-map uri="productSkDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="productSkDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--Add by zhajh at 20180319 秒杀 End -->
+
+
+    <!-- 优惠券弹出框页面（多选） add by zhajh 2018/04/02 Begin -->
+    <request-map uri="PromoCouponListMultiModalPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="PromoCouponListMultiModalPage"/>
+    </request-map>
+    <request-map uri="PromoCouponListForJson">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getPromoCouponListForModal"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- 优惠券弹出框页面（多选） add by zhajh 2018/04/02 End -->
+
+
+    <!--根据优惠劵编码取得 优惠劵信息 -->
+    <request-map uri="getPromoCouponListByIds">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getPromoCouponListByIds"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 红包设置的编辑处理-->
+    <request-map uri="updatePromoRedPacketSettingService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePromoRedPacketSettingService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--红包设置的查看处理-->
+    <request-map uri="promoRedPacketDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="promoRedPacketDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <!-- 问题设置的编辑处理-->
+    <request-map uri="updateQuestionSettingService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateQuestionSettingService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--问题设置的查看处理-->
+    <request-map uri="questionSettingDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="questionSettingDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--校验同一件商品只能参加直降、秒杀、拼团其中一种促销活动，之前如果参加过就不能参加了。-->
+    <request-map uri="checkGoodIsUsed">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="checkGoodIsUsed"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 品牌弹出框页面（多选） add by zhajh 2018/04/12 Begin -->
+    <request-map uri="BrandListMultiModalPage">
+        <security https="true" auth="false"/>
+        <response name="success" type="view" value="BrandListMultiModalPage"/>
+    </request-map>
+    <request-map uri="BrandListForJson">
+        <security https="true" auth="false"/>
+        <event type="service" path="" invoke="getBrandListForModal"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- 品牌弹出框页面（多选） add by zhajh 2018/04/12 End -->
+
+
+    <!--根据品牌编码取得 品牌信息 -->
+    <request-map uri="getBrandListByIds">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getBrandListByIds"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <!-- 店铺弹出框页面（多选） add by zhajh 2018/04/12 Begin -->
+    <request-map uri="StoreListMultiModalPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="StoreListMultiModalPage"/>
+    </request-map>
+    <request-map uri="StoreListForJson">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getStoreListForModal"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- 店铺弹出框页面（多选） add by zhajh 2018/04/12 End -->
+
+
+    <!--根据店铺编码取得 店铺信息 -->
+    <request-map uri="getStoreListByIds">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getStoreListByIds"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <request-map uri="auditLogPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="auditLogPage"></response>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+
+    <request-map uri="getAuditLog">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getAuditLog"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="findProductIdsByPromoId">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findProductIdsByPromoId"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="findProductIdsByActivityId">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findProductIdsByActivityId"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--<request-map uri="checkEndDate">
+        <event type="service" invoke="checkEndDate"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>-->
+
+    <view-map name="auditLogPage" type="screen" page="component://prodPromo/widget/prodPromo/CommonScreens.xml#auditLogPage"/>
+
+    <!--begin 团购、秒杀-->
+    <view-map name="groupOrderList" type="screen" page="component://prodPromo/widget/prodPromo/CommonScreens.xml#groupOrderList"/>
+    <view-map name="editGroupOrder" type="screen" page="component://prodPromo/widget/prodPromo/CommonScreens.xml#editGroupOrder"/>
+    <view-map name="addGroupOrder" type="screen" page="component://prodPromo/widget/prodPromo/CommonScreens.xml#addGroupOrder"/>
+    <view-map name="LookupProduct" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#LookupProduct"/>
+
+    <!--秒杀-->
+    <view-map name="secKillList" type="screen" page="component://prodPromo/widget/prodPromo/CommonScreens.xml#secKillList"/>
+    <view-map name="editSecKill" type="screen" page="component://prodPromo/widget/prodPromo/CommonScreens.xml#editSecKill"/>
+    <view-map name="addSecKill" type="screen" page="component://prodPromo/widget/prodPromo/CommonScreens.xml#addSecKill"/>
+
+    <!--end 团购、秒杀-->
+    
+    <!-- 跳转促销弹出框页面(单选) add by qianjin 2016/01/20 -->
+    <view-map name="PromoListModalPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#PromoListModalPage"/>
+    <!-- 跳转促销弹出框页面(多选) add by qianjin 2016/01/20 -->
+    <view-map name="PromoListMultiModalPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#PromoListMultiModalPage"/>
+    <!-- 跳转收藏人员弹出框页面 add by qianjin 2016.01.26 -->
+    <view-map name="collectionPartyListModalPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#collectionPartyListModalPage"/>
+    <!--  add by gss 活动收藏 -->
+     
+    <!-- 跳转活动管理列表页面 add by qianjin 2016.02.15 -->
+    <view-map name="activityMgrPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#activityMgrPage"/>
+    <!-- 跳转活动管理新增页面 add by qianjin 2016.02.15 -->
+    <view-map name="activityMgrAddPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#activityMgrAddPage"/>
+    
+    <!-- 专题活动列表页面 add by qianjin 2016.02.22 -->
+    <view-map name="topicActivityListPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#TopicActivityListPage"/>
+    <!-- 专题活动新增页面 add by qianjin 2016.02.22 -->
+    <view-map name="topicActivityAddPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#TopicActivityAddPage"/>
+    <!-- 专题活动编辑页面 add by qianjin 2016.02.23 -->
+    <view-map name="topicActivityEditPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#TopicActivityEditPage"/>
+    <!-- 活动管理弹出框页面（单选） add by qianjin 2016.02.22 -->
+    <view-map name="proActivityMgrListModalPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#ProActivityMgrListModalPage"/>
+    <!-- 活动收藏列表页面 add by qianjin 2016.02.25 -->
+    <view-map name="activityCollectionListPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#activityCollectionListPage"/>
+    <!-- 满减列表页面 add by nf 2018/03/14 -->y
+    <view-map name="findPromoReduce" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findPromoReduce"/>
+    <!--满减新增页面 add by nf 2018/03/14 -->
+    <view-map name="addPromoReduce" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#addPromoReduce"/>
+    <!--满减编辑页面add by nf 2018/03/14 -->
+    <view-map name="editPromoReduce" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#editPromoReduce"/>
+    <!--满赠列表页面 add by nf 2018.03.05 -->
+    <view-map name="findPromoGift" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findPromoGift"/>
+    <!--满赠新增页面 add by nf 2018.03.05 -->
+    <view-map name="addPromoGift" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#addPromoGift"/>
+    <!--满赠编辑页面 add by nf 2018.03.14 -->
+    <view-map name="editPromoGift" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#editPromoGift"/>
+    <!--会员首次促销新增页面-->
+    <view-map name="addPromoNewCust" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#addPromoNewCust"/>
+    <!--会员首次促销列表页面findPromoNewCust-->
+    <view-map name="findPromoNewCust" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findPromoNewCust"/>
+    <!--满减编辑页面 add by GSS 2016.04.15 -->
+    <!--优惠券列表 add by GSS 2016.05.10 -->
+    <view-map name="findCoupon" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findCoupon"/>
+    <!--优惠券新增 add by GSS 2016.05.10 -->
+    <view-map name="addCoupon" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#addCoupon"/>
+    <!--优惠券编辑 add by GSS 2016.05.10 -->
+    <view-map name="editCoupon" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#editCoupon"/>
+    <!--优惠券领取列表 add by GSS 2016.05.10 -->
+    <view-map name="findCouponCode" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findCouponCode"/>
+
+    <!--直降列表 add by changchen 2018.03.02 -->
+    <view-map name="findStraightDown" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findStraightDown"/>
+
+    <!--直降新增 add by changchen 2018.03.02 -->
+    <view-map name="addStraightDown" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#addStraightDown"/>
+
+    <!-- 直降编辑 -->
+    <view-map name="editStraightDown" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#editStraightDown"/>
+
+    <!--折扣列表 add by changchen 2018.03.02 -->
+    <view-map name="findDiscount" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findDiscount"/>
+
+    <!--折扣新增 add by changchen 2018.03.02 -->
+    <view-map name="addDiscount" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#addDiscount"/>
+
+    <!-- 折扣编辑 -->
+    <view-map name="editDiscount" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#editDiscount"/>
+
+    <!-- 包邮新增 -->
+    <view-map name="addPackage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#addPackage"/>
+
+    <!-- 包邮列表 -->
+    <view-map name="findPackage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findPackage"/>
+
+    <!-- 包邮编辑 -->
+    <view-map name="editPackage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#editPackage"/>
+
+
+    <!-- Add by zhajh at 20180313 商品组合 Begin -->
+    <view-map name="findProductGrouping" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#findProductGrouping"/>
+    <view-map name="addProductGrouping" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#addProductGrouping"/>
+    <view-map name="editProductGrouping" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#editProductGrouping"/>
+    <!-- Add by zhajh at 20180313 商品组合 End -->
+
+
+    <!-- 跳转优惠券弹出框页面(多选) add by zhajh 2018/04/02 -->
+    <view-map name="PromoCouponListMultiModalPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#PromoCouponListMultiModalPage"/>
+
+    <!-- 跳转品牌弹出框页面(多选) add by zhajh 2018/04/12 -->
+    <view-map name="BrandListMultiModalPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#BrandListMultiModalPage"/>
+
+
+    <!-- 跳转店铺弹出框页面(多选) add by zhajh 2018/04/12 -->
+    <view-map name="StoreListMultiModalPage" type="screen" page="component://prodPromo/widget/prodPromo/LookupScreens.xml#StoreListMultiModalPage"/>
+
+</site-conf>

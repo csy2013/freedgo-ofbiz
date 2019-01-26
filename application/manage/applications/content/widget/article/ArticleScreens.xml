@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+
+ <!--文章分类列表 begin by  gss 2015-12-25-->
+	<screen name="articleType">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle" />
+				<set field="headerItem" value="websites" />
+				<property-map resource="ContentUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="labelTitleProperty" value="PageTitleFindWebSite" />
+				<entity-condition entity-name="ArticleType" list="articleTypeList">
+                <condition-expr field-name="typeLevel" value="Level1"/> 
+                </entity-condition>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>${uiLabelMap.articleManage}</label>
+								<label style="sub-title">${uiLabelMap.articleType}</label>
+							</column>
+							<column style="breadcrumb">
+							    <label text="${uiLabelMap.contentManage}" style="breadcrumb"></label>
+								<link text="${uiLabelMap.articleManage}" style="breadcrumb" />
+								<link target="articleType" text="${uiLabelMap.articleType}"
+									style="breadcrumb active" />
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<!-- 是否有查询权限 -->
+						<condition>
+                                <if-has-permission permission="CONTENT_ARTICLETYPE" action="_VIEW" />
+                        </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://content/webapp/content/article/articleType.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+                                <label style="h3" text="需要查看文章分类的权限"/>
+                            </fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--文章分类列表 end by gss 2015-12-25 -->
+	
+ <!--文章列表 begin by  gss 2015-12-25-->
+	<screen name="articleList">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle" />
+				<!-- <set field="headerItem" value="websites" />  -->
+				<property-map resource="ContentUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="labelTitleProperty" value="PageTitleFindWebSite" />
+				<entity-condition entity-name="TagType" list="tagTypeList">
+                </entity-condition>
+                <service service-name="findArticle"></service>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>${uiLabelMap.articleManage}</label>
+								<label style="sub-title">${uiLabelMap.articleList}</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.contentManage}" style="breadcrumb"></label>
+								<link text="${uiLabelMap.articleManage}" style="breadcrumb" />
+								<link target="articleList" text="${uiLabelMap.articleList}"
+									style="breadcrumb active" />
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<!-- 是否有查询权限 -->
+						<condition>
+                                <if-has-permission permission="CONTENT_ARTICLELIST" action="_VIEW" />
+                        </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://content/webapp/content/article/articleList.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+                                <label style="h3" text="需要查看文章列表的权限"/>
+                            </fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--文章列表 end by gss 2015-12-25 -->
+	
+ <!--待审核列表 begin by  gss 2015-12-25-->
+	<screen name="articleApproval">
+		<section>
+			<actions>
+				 <set field="titleProperty" value="ContentManageTitle" />
+				<!--<set field="headerItem" value="websites" /> -->
+				<property-map resource="ContentUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="labelTitleProperty" value="PageTitleFindWebSite" />
+				<service service-name="findArticle">
+				<field-map field-name="articleStatus" value="1"/>
+				</service>
+				<entity-condition entity-name="TagType" list="tagTypeList">
+                </entity-condition>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>${uiLabelMap.articleManage}</label>
+								<label style="sub-title">${uiLabelMap.articleApproval}</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.contentManage}" style="breadcrumb"></label>
+								<link text="${uiLabelMap.articleManage}" style="breadcrumb" />
+								<link target="articleApproval" text="${uiLabelMap.articleApproval}"
+									style="breadcrumb active" />
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<!-- 是否有查询权限 -->
+						<condition>
+                                <if-has-permission permission="CONTENT_ARTICLEAPPROVAL" action="_VIEW" />
+                        </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://content/webapp/content/article/articleApproval.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+                                <label style="h3" text="需要待审核列表查看的权限"/>
+                            </fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--待审核列表 end by gss 2015-12-25 -->
+	
+ <!--文章新建 begin by  gss 2015-12-25-->
+	<screen name="articleAdd">
+		<section>
+			<actions>
+				 <set field="titleProperty" value="ContentManageTitle" />
+				<!--
+				<set field="headerItem" value="websites" /> -->
+				<property-map resource="ContentUiLabels" map-name="uiLabelMap" global="true"/>
+				<set field="labelTitleProperty" value="PageTitleFindWebSite" />
+                <service service-name="getArticleTag"></service>
+                <service service-name="getArticleById">
+                <field-map field-name="articleId" from-field="parameters.articleId"/>
+                </service> 
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>${uiLabelMap.articleManage}</label>
+								<label style="sub-title">${uiLabelMap.articleAdd}</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.contentManage}" style="breadcrumb"></label>
+								<link text="${uiLabelMap.articleManage}" style="breadcrumb" />
+								<link target="articleAdd" text="${uiLabelMap.articleAdd}"
+									style="breadcrumb active" />
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<!-- 是否有查询权限 -->
+						<condition>
+                                <if-has-permission permission="CONTENT_ARTICLELIST" action="_VIEW" />
+                        </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://content/webapp/content/article/articleAdd.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+                                <label style="h3" text="需要文章新增的权限"/>
+                            </fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--文章新建 end by gss 2015-12-25 -->
+	
+	<!-- 文章弹出框页面 start add by qianjin 2016/01/14-->
+	<screen name="ArticleListModalPage">
+		<section>
+			<actions>
+				<property-map resource="ContentUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="WorkEffortUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+			</actions>
+			<widgets>
+				<platform-specific>
+					<html>
+						<html-template
+							location="component://content/webapp/content/article/articleListForModal.ftl" />
+					</html>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 文章弹出框页面 end add by qianjin 2016/01/14 -->
+</screens>

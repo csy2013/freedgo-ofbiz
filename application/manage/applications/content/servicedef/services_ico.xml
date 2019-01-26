@@ -1,0 +1,2000 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.
+  -->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Content Component WebSite Services</description>
+    <vendor>OFBiz</vendor>
+
+
+    <!-- 文章服务 -->
+
+    <!-- begin by gss 2015-12-28 创建文章分类-->
+    <service name="createArticleType" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="createArticleType">
+        <description>create Article</description>
+        <attribute type="String" mode="IN" name="description" optional="true"/>
+        <attribute type="String" mode="IN" name="typeLevel" optional="true"/>
+        <attribute type="String" mode="IN" name="parentTypeId" optional="true"/>
+        <attribute type="Boolean" mode="OUT" name="success" optional="true"/>
+    </service>
+    <!-- end by gss 2015-12-28 创建文章分类 -->
+
+    <!-- begin by gss 2015-12-28 修改文章分类名称 -->
+    <service name="updateArticleType" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="updateArticleType">
+        <description>update articleTypename</description>
+        <attribute type="String" mode="IN" name="articleTypeId" optional="true"/>
+        <attribute type="String" mode="IN" name="description" optional="true"/>
+    </service>
+    <!-- end by gss 2015-12-28 修改文章分类名称 -->
+
+    <!--  end by gss 2016-1-5 删除文章分类查询该分类下是否有文章信息-->
+    <service name="getArticleTypeById" engine="java"
+             location="com.qihua.ofbiz.article.ArticleServices"
+             invoke="getArticleTypeById"
+             auth="false">
+        <attribute name="deleteId" type="String" mode="IN" optional="true"/>
+        <attribute name="thisarticle" type="Integer" mode="OUT"/>
+        <attribute name="article" type="Integer" mode="OUT"/>
+    </service>
+    <!-- end by gss 2016-1-5 删除文章分类查询该分类下是否有文章信息 -->
+
+    <!-- begin by gss 2015-12-28 删除文章分类 -->
+    <service name="delArticleType" default-entity-name="WebSite" engine="java" auth="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="delArticleType">
+        <description>remove ArticleType</description>
+        <attribute type="String" mode="INOUT" name="deleteId" optional="true"/>
+        <attribute type="Boolean" mode="OUT" name="status" optional="true"/>
+    </service>
+    <!-- end by gss 2015-12-28 删除文章分类 -->
+
+    <!-- begin by gss 2015-12-28 创建文章-->
+    <service name="createArticle" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="createArticle">
+        <description>create Article</description>
+        <attribute type="String" mode="IN" name="articleTitle" optional="true"/>
+        <attribute type="String" mode="IN" name="tag" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+        <attribute type="String" mode="IN" name="articleLink" optional="true"/>
+        <attribute type="String" mode="IN" name="articleAuthor" optional="true"/>
+        <attribute type="String" mode="IN" name="articleTypeId" optional="true"/>
+        <attribute type="String" mode="IN" name="articleKeyword" optional="true"/>
+        <attribute type="String" mode="IN" name="articleStatus" optional="true"/>
+        <attribute type="String" mode="IN" name="productStoreId" optional="true"/>
+        <attribute type="String" mode="IN" name="productIds" optional="true"/>
+        <attribute type="String" mode="IN" name="articleCentent" optional="true" allow-html="any"/>
+    </service>
+    <!-- end by gss 2015-12-28 创建文章 -->
+
+    <service name="createTextContent" engine="group" auth="true">
+        <description>Creates a Text Document DataResource and Content Records</description>
+        <!-- uses createContent internally; additonal permission(s) not necessary -->
+        <group>
+            <invoke name="createDataText" result-to-context="true"/>
+            <invoke name="createContent" result-to-context="true"/>
+        </group>
+    </service>
+
+    <!-- begin by gss 2016/1/4 根据文章标题 ，分类，状态查询 -->
+    <service name="findArticle" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="findArticle">
+        <description>Find Article</description>
+        <attribute type="String" mode="INOUT" name="articleTitle" optional="true"/>
+        <attribute type="String" mode="INOUT" name="articleTypeId" optional="true"/>
+        <attribute type="String" mode="INOUT" name="articleStatus" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="articleList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="totalSize" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="articleListSize" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="description" type="String" mode="OUT" optional="true"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+    </service>
+    <!-- begin by gss 2016/1/4 根据文章标题 ，分类，状态查询 -->
+
+    <!-- begin by gss 2016/1/4 删除文章文章 -->
+    <service name="deleteArticle" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="deleteArticle">
+        <description>Find Article</description>
+        <attribute type="String" mode="IN" name="deleteId" optional="true"/>
+        <attribute type="Boolean" mode="OUT" name="status" optional="true"/>
+    </service>
+    <!-- begin by gss 2016/1/4 删除文章 -->
+
+    <!-- begin by gss 2016/1/4 根据ID查询文章-->
+    <service name="findArticleByID" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="findArticleById">
+        <description>Find Article byId</description>
+        <attribute type="String" mode="IN" name="article_ids" optional="true"/>
+        <attribute name="articleList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <!-- begin by gss 2016/1/4 根据ID查询文章-->
+
+    <!-- begin by gss 2016/1/4 审核文章-->
+    <service name="approvalArticle" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="approvalArticle">
+        <description>Find Article byId</description>
+        <attribute type="String" mode="IN" name="articleId" optional="true"/>
+        <attribute type="String" mode="IN" name="articleOpinion" optional="true"/>
+        <attribute type="String" mode="IN" name="articleStatus" optional="true"/>
+    </service>
+    <!-- begin by gss 2016/1/4 审核文章-->
+
+    <!-- begin by gss 2016/1/4 批量审核文章-->
+    <service name="batchArticle" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="batchArticle">
+        <description>Find Article byId</description>
+        <attribute type="String" mode="IN" name="obj" optional="false"/>
+        <attribute type="String" mode="IN" name="articleStatus" optional="false"/>
+    </service>
+    <!-- begin by gss 2016/1/4 批量审核文章-->
+
+    <!-- begin by gss 2016/1/4 根据ID查询文章详情-->
+    <service name="getArticleById" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="getArticleById">
+        <description>Find Article byId</description>
+        <attribute type="String" mode="IN" name="articleId" optional="true"/>
+        <attribute type="String" mode="OUT" name="articleKeyword" optional="true"/>
+        <attribute type="String" mode="OUT" name="articleTypeName" optional="true"/>
+        <attribute type="java.util.List" mode="OUT" name="typeIds" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="article" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="articleContentImg" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="articleContents" optional="true"/>
+    </service>
+    <!-- begin by gss 2016/1/4 根据ID查询文章详情-->
+
+    <!-- begin by gss 2016-1-7 编辑文章-->
+    <service name="editArticle" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="editArticle">
+        <description>Edit Article</description>
+        <attribute type="String" mode="IN" name="articleId" optional="true"/>
+        <attribute type="String" mode="IN" name="articleTitle" optional="true"/>
+        <attribute type="String" mode="IN" name="tag" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+        <attribute type="String" mode="IN" name="articleLink" optional="true"/>
+        <attribute type="String" mode="IN" name="articleAuthor" optional="true"/>
+        <attribute type="String" mode="IN" name="articleTypeId" optional="true"/>
+        <attribute type="String" mode="IN" name="articleKeyword" optional="true"/>
+        <attribute type="String" mode="IN" name="articleStatus" optional="false"/>
+        <attribute type="String" mode="IN" name="productIds" optional="true"/>
+        <attribute type="String" mode="IN" name="articleCentent" optional="true" allow-html="any"/>
+    </service>
+    <!-- begin by gss 2016-1-7 编辑文章-->
+
+    <!-- begin by gss 2016-1-8 文章分类列表-->
+    <service name="getArticleTypeList" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="getArticleType">
+        <description>Find ArticleType</description>
+        <attribute name="articleTypeList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <!-- end by gss 2016-1-8文章分类列表 -->
+
+    <!-- begin by gss 2016-1-7 文章全部分类列表-->
+    <service name="getAllArticleType" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="getAllType">
+        <description>Find all ArticleType</description>
+        <attribute name="articleTypeList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 获取文章信息 -->
+    <service name="getArticleDetail" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="getArticleDetail">
+        <attribute type="String" mode="IN" name="articleId" optional="true"/>
+
+        <attribute type="String" mode="OUT" name="articleTypeName" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="article" optional="true"/>
+        <attribute type="java.util.List" mode="OUT" name="articleTagList" optional="true"/>
+        <attribute type="String" mode="OUT" name="articleKeyword" optional="true"/>
+        <attribute type="String" mode="OUT" name="articleContentImg" optional="true"/>
+        <attribute type="String" mode="OUT" name="articleContents" optional="true"/>
+    </service>
+    <!-- end by gss 2016-1-7 文章全部分类列表 -->
+
+
+
+    <!--根据文章编码查看文章商品信息-->
+    <service name="getArticleProduct" engine="java" location="com.qihua.ofbiz.article.ArticleServices" invoke="getArticleProduct" auth="false">
+        <attribute name="articleId" type="String" mode="IN"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <!-- 标签服务 -->
+
+    <!-- begin by gss 2015/12/21 修改标签分类名称 -->
+    <service name="updateTagtypeName" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.tag.TagServices" invoke="updateTagtypeName">
+        <description>update tagTypename</description>
+        <attribute type="String" mode="IN" name="tagTypeName" optional="true"/>
+        <attribute type="String" mode="IN" name="tagTypeId" optional="true"/>
+    </service>
+    <!-- end by gss 2015/12/21 修改标签分类名称 -->
+
+    <!-- begin by gss 2015/12/21 修改标签分类名称 -->
+    <service name="createTag" engine="java" auth="false" export="true"
+             location="com.qihua.ofbiz.tag.TagServices" invoke="createTag">
+        <description>update tagTypename</description>
+        <attribute type="String" mode="INOUT" name="tagName" optional="true"/>
+        <attribute type="String" mode="IN" name="tagTypeId" optional="true"/>
+        <attribute type="String" mode="IN" name="tagRemark" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+        <!-- 是否删除 -->
+        <attribute type="String" mode="IN" name="isDel" optional="true"/>
+        <attribute name="tagId" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- end by gss 2015/12/21 修改标签分类名称 -->
+
+    <!-- begin by gss 2015/12/25 根据标签分类和名称查询 -->
+    <service name="findTagList" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.tag.TagServices" invoke="findTagList">
+        <description>Find Tag</description>
+        <attribute type="String" mode="INOUT" name="tagTypeId" optional="true"/>
+        <attribute type="String" mode="INOUT" name="tagName" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="tagList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="tagListSize" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="paramList" type="String" mode="OUT" optional="true"/>
+        <attribute type="String" mode="OUT" name="tagTypeName" optional="true"/>
+    </service>
+    <!-- end by gss 2015/12/25 根据标签分类和名称查询 -->
+
+    <!-- begin by gss 2015/12/25 标签分类列表-->
+    <service name="getTagTypeList" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.tag.TagServices" invoke="getTagTypeList">
+        <description>Find TagType</description>
+        <attribute name="tagTypeList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <!-- end by gss 2015/12/25 标签分类列表 -->
+
+    <!-- begin by gss 2016-1-7 标签全部分类列表-->
+    <service name="getAllTagType" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.tag.TagServices" invoke="getAllTagType">
+        <description>Find TagType</description>
+        <attribute name="tagTypeList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <!-- end by gss 2016-1-7 标签全部分类列表 -->
+
+
+    <!-- begin by gss 2016/1/7 删除标签 -->
+    <service name="deleteTag" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.tag.TagServices" invoke="deleteTag">
+        <description>deleted Tag</description>
+        <attribute type="String" mode="IN" name="deleteId" optional="true"/>
+    </service>
+    <!-- begin by gss 2016/1/7 删除标签 -->
+
+    <!-- begin by gss 2016/1/7 查询标签信息 -->
+    <service name="queryTag" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.tag.TagServices" invoke="queryTag">
+        <description>deleted Tag</description>
+        <attribute type="String" mode="IN" name="tagId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="tag" optional="true"/>
+        <attribute type="String" mode="OUT" name="img" optional="true"/>
+        <attribute type="String" mode="OUT" name="treeName" optional="true"/>
+    </service>
+    <!-- begin by gss 2016/1/7 查询标签信息  -->
+
+    <!-- begin by gss 2016/1/7 更新标签信息 -->
+    <service name="updateTag" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.tag.TagServices" invoke="updateTag">
+        <description>deleted Tag</description>
+        <attribute type="String" mode="IN" name="tagName" optional="true"/>
+        <attribute type="String" mode="IN" name="tagId" optional="true"/>
+        <attribute type="String" mode="IN" name="tagTypeId" optional="true"/>
+        <attribute type="String" mode="IN" name="tagRemark" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+    </service>
+    <!-- begin by gss 2016/1/7 更新标签信息  -->
+
+    <!-- banner列表查询 add by qianjin 2016/01/13 -->
+    <service name="bannerList" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="getBannerList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="webSiteName" type="String" mode="IN" optional="true"/>
+        <attribute name="geoId" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="bannerList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- banner修改是否启用状态 add by qianjin 2016/01/14 -->
+    <service name="editBannerIsUse" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="editBannerIsUse"
+             auth="false">
+        <attribute name="bannerId" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- add by Wcy 获取banner图片及地址 at 2016.01.19 -->
+    <service name="getBanner" engine="java"
+             location="org.ofbiz.content.content.ContentServices"
+             invoke="getBanner"
+             auth="false">
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+        <attribute name="banner" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- add by Wcy 获取banner根据社区编号 at 2016.01.20 -->
+    <service name="getBannersByCondition" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="getBannersByCondition"
+             auth="false">
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+        <attribute name="bannerList" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- add by Wcy 获取banner中isAllCommunity为0且是启用 at 2016.01.20 -->
+    <service name="getIsAllCommuityBanner" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="getIsAllCommuityBanner"
+             auth="false">
+        <attribute name="bannerList" type="List" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!-- banner新增 add by qianjin 2016/01/21 -->
+    <service name="bannerAdd" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="bannerAdd"
+             auth="false">
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="secondLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="IN" optional="true"/>
+        <attribute name="geo" type="String" mode="IN" optional="true"/>
+        <attribute name="applyScope" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN" optional="true"/>
+    </service>
+
+    <!-- banner修改数据初始化 add by qianjin 2016/01/22 -->
+    <service name="bannerEditInit" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="bannerEditInit"
+             auth="false">
+        <attribute name="bannerId" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="contentId" type="String" mode="OUT" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="OUT" optional="true"/>
+        <attribute name="secondLinkType" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkId" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkName" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="OUT" optional="true"/>
+        <attribute name="isUse" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="webSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="OUT" optional="true"/>
+        <attribute name="geo" type="String" mode="OUT" optional="true"/>
+        <attribute name="applyScope" type="String" mode="OUT" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="OUT" optional="true"/>
+        <attribute name="thruDate" type="Timestamp" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!-- banner修改 add by qianjin 2016/01/22 -->
+    <service name="bannerEdit" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="bannerEdit"
+             auth="false">
+        <attribute name="bannerId" type="String" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="secondLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="IN" optional="true"/>
+        <attribute name="geo" type="String" mode="IN" optional="true"/>
+        <attribute name="applyScope" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN" optional="true"/>
+    </service>
+
+    <!-- banner删除 add by qianjin 2016/01/22 -->
+    <service name="bannerDel" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="bannerDel"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- Excel导入 add by qianjin 2016/01/29 -->
+    <service name="excelImport" engine="java"
+             location="com.qihua.ofbiz.excel.ExcelImport"
+             invoke="excelImport" auth="false" transaction-timeout="480000">
+        <attribute name="request" type="javax.servlet.http.HttpServletRequest" mode="IN"/>
+        <attribute name="xmlUrl" type="String" mode="IN"/>
+        <attribute name="validateCellData" type="String" mode="IN" optional="true"/>
+        <attribute name="isCarModel" type="String" mode="IN" optional="true"/>
+        <attribute name="msg" type="String" mode="OUT"/>
+        <attribute name="listDatas" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- Excel单元格校验通用方法 add by qianjin 2016/01/29 -->
+    <service name="validateCell" engine="java"
+             location="com.qihua.ofbiz.excel.ValidateCell"
+             invoke="validateCellData" auth="false">
+        <attribute name="curRow" type="Integer" mode="IN"/>
+        <attribute name="curCol" type="Integer" mode="IN"/>
+        <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/>
+        <attribute name="entityName" type="String" mode="IN"/>
+        <attribute name="headName" type="String" mode="IN"/>
+        <attribute name="curColType" type="String" mode="IN"/>
+        <attribute name="curColCode" type="String" mode="IN"/>
+        <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/>
+        <attribute name="curColMaxlength" type="String" mode="IN"/>
+        <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/>
+        <attribute name="errorString" type="String" mode="OUT"/>
+    </service>
+
+    <!-- Add By AlexYao 2016/01/31 二维码-->
+    <service name="uploadQRCode" engine="java"
+             location="org.ofbiz.content.content.ContentServices" invoke="uploadQRCode">
+        <description>Upload Additional View Images For Product</description>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!-- Add by zhajh at 20160214 更新热门搜索  Begin-->
+    <service name="updateHotSearchIcoPro" engine="java"
+             location="org.ofbiz.content.content.ContentServices" invoke="updateHotSearchIcoPro">
+        <attribute name="contentHotSearchId" type="String" mode="IN" optional="true"/>
+        <attribute name="hotSearchKeyName" type="String" mode="IN" optional="true"/>
+        <attribute name="webSiteId" type="List" mode="IN" optional="true"/>
+        <attribute name="sequenceNum" type="String" mode="IN" optional="true"/>
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+        <attribute name="operateType" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSiteId" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllCommunityId" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="webSiteNameForFind" type="String" mode="IN" optional="true"/>
+        <attribute name="communityNameForFind" type="String" mode="IN" optional="true"/>
+        <attribute name="webSiteIdForUpdate" type="String" mode="IN" optional="true"/>
+        <attribute name="communityIdForUpdate" type="String" mode="IN" optional="true"/>
+        <attribute name="curViewIndex" type="Integer" mode="OUT" optional="true"/>
+
+    </service>
+    <!-- Add by zhajh at 20160214 End -->
+
+    <!-- Add by zhajh at 2016/02/15  热门搜索查询 Begin -->
+    <service name="findHotSearchIcoPro" engine="java"
+             location="org.ofbiz.content.content.ContentServices" invoke="findHotSearchIcoPro">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="webSiteName" type="String" mode="IN" optional="true"/>
+        <attribute name="communityName" type="String" mode="IN" optional="true"/>
+
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="hotSearchList" type="List" mode="OUT" optional="false"/>
+        <attribute name="hotSearchListSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- Add by zhajh at 2016/02/15 热门搜索查询 End -->
+
+    <!-- Add By gss 2016/02/15 文章标签-->
+    <service name="getArticleTag" engine="java"
+             location="com.qihua.ofbiz.article.ArticleServices" invoke="getArticleTag">
+        <attribute name="articleTagList" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- Add by zhajh at 2016/02/15  上下移动热门搜索 Begin -->
+    <service name="moveHotSearch" default-entity-name="ContentHotSearch" engine="java" auth="true"
+             location="org.ofbiz.content.content.ContentServices" invoke="moveHotSearch">
+        <description>Move a ContentHotSearch</description>
+        <attribute name="contentHotSearchId" type="String" mode="IN" optional="true"/>
+        <attribute name="nextContentHotSearchId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="webSiteName" type="String" mode="IN" optional="true"/>
+        <attribute name="communityName" type="String" mode="IN" optional="true"/>
+        <attribute name="curViewIndex" type="Integer" mode="OUT" optional="true"/>
+    </service>
+    <!-- Add by zhajh at 2016/02/15  上下移动热门搜索 End -->
+
+
+    <!-- 公告列表查询 add by AlexYao 2016/04/06 -->
+    <service name="noticeList" engine="java"
+             location="com.qihua.ofbiz.notice.NoticeServices"
+             invoke="getNoticeList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="noticeTitle" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="noticeList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 公告修改是否启用状态 add by AlexYao 2016/04/06 -->
+    <service name="editNoticeIsUse" engine="java"
+             location="com.qihua.ofbiz.notice.NoticeServices"
+             invoke="editNoticeIsUse"
+             auth="false">
+        <attribute name="noticeId" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 公告新增 add by AlexYao 2016/04/06 -->
+    <service name="noticeAdd" engine="java"
+             location="com.qihua.ofbiz.notice.NoticeServices"
+             invoke="noticeAdd"
+             auth="false">
+        <attribute name="noticeTitle" type="String" mode="IN" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="secondLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="IN" optional="true"/>
+        <attribute name="geo" type="String" mode="IN" optional="true"/>
+        <attribute name="noticeTag" type="String" mode="IN" optional="true"/>
+        <attribute name="applyScope" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <service name="findAreaTree" engine="java" location="com.qihua.ofbiz.notice.NoticeServices" invoke="findAreaTree"
+             auth="false">
+        <attribute name="areaTree" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 公告修改数据初始化 add by AlexYao 2016/04/06 -->
+    <service name="noticeEditInit" engine="java"
+             location="com.qihua.ofbiz.notice.NoticeServices"
+             invoke="noticeEditInit"
+             auth="false">
+        <attribute name="noticeId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="noticeTitle" type="String" mode="OUT" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="OUT" optional="true"/>
+        <attribute name="secondLinkType" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkId" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkName" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="OUT" optional="true"/>
+        <attribute name="isUse" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="webSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="OUT" optional="true"/>
+        <attribute name="geo" type="String" mode="OUT" optional="true"/>
+        <attribute name="noticeTag" type="String" mode="OUT" optional="true"/>
+        <attribute name="applyScope" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 公告修改 add by AlexYao 2016/04/06 -->
+    <service name="noticeEdit" engine="java"
+             location="com.qihua.ofbiz.notice.NoticeServices"
+             invoke="noticeEdit"
+             auth="false">
+        <attribute name="noticeId" type="String" mode="IN" optional="true"/>
+        <attribute name="noticeTitle" type="String" mode="IN" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="secondLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="IN" optional="true"/>
+        <attribute name="geo" type="String" mode="IN" optional="true"/>
+        <attribute name="noticeTag" type="String" mode="IN" optional="true"/>
+        <attribute name="applyScope" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 公告删除 add by AlexYao 2016/04/06 -->
+    <service name="noticeDel" engine="java"
+             location="com.qihua.ofbiz.notice.NoticeServices"
+             invoke="noticeDel"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!--图片分组列表查询 add by qianjin 2016.04.05-->
+    <service name="getImgGroupList" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="getImgGroupList" auth="true">
+        <attribute name="imgGroupList" type="List" mode="OUT"/>
+    </service>
+
+    <!--图片分组新增 add by qianjin 2016.04.06-->
+    <service name="addImgGroup" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="addImgGroup" auth="true">
+        <attribute name="imgGroupName" type="String" mode="INOUT"/>
+        <attribute name="imgGroupId" type="String" mode="OUT"/>
+    </service>
+
+    <!--图片分组修改 add by qianjin 2016.04.06-->
+    <service name="editImgGroup" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="editImgGroup" auth="true">
+        <attribute name="imgGroupId" type="String" mode="INOUT"/>
+        <attribute name="imgGroupName" type="String" mode="INOUT"/>
+    </service>
+
+    <!--图片分组删除 add by qianjin 2016.04.06-->
+    <service name="delImgGroup" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="delImgGroup" auth="true">
+        <attribute name="imgGroupId" type="String" mode="INOUT"/>
+    </service>
+
+    <!--根据图片分组ID查询图片记录 add by qianjin 2016.04.06-->
+    <service name="getImgListByImgGroupId" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="getImgListByImgGroupId" auth="true">
+        <attribute name="imgGroupId" type="String" mode="IN"/>
+        <attribute name="imgList" type="List" mode="OUT"/>
+    </service>
+
+    <!-- 热门搜索列表查询 add by qianjin 2016.05.09 -->
+    <service name="getHotSearchList" engine="java"
+             location="com.qihua.ofbiz.hotsearch.HotSearchServices"
+             invoke="getHotSearchList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="webSiteName" type="String" mode="IN" optional="true"/>
+        <attribute name="hotSearchKeyName" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="geoId" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 热门搜索新增 add by qianjin 2016.05.09 -->
+    <service name="addHotSearch" engine="java"
+             location="com.qihua.ofbiz.hotsearch.HotSearchServices"
+             invoke="addHotSearch"
+             auth="false">
+        <attribute name="hotSearchKeyName" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="isAllGeo" type="String" mode="IN" optional="true"/>
+        <attribute name="geo" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 根据ID查询热门搜索信息	add by qianjin 2016.05.09 -->
+    <service name="getHotSearchById" engine="java"
+             location="com.qihua.ofbiz.hotsearch.HotSearchServices"
+             invoke="getHotSearchById"
+             auth="false">
+        <attribute name="hotSearchId" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="hotSearchKeyName" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="OUT" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="webSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="OUT" optional="true"/>
+        <attribute name="geo" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 热门搜索修改 add by qianjin 2016.05.09 -->
+    <service name="editHotSearch" engine="java"
+             location="com.qihua.ofbiz.hotsearch.HotSearchServices"
+             invoke="editHotSearch"
+             auth="false">
+        <attribute name="hotSearchId" type="String" mode="IN" optional="true"/>
+        <attribute name="hotSearchKeyName" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="geo" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 热门搜索删除 add by qianjin 2016.05.09 -->
+    <service name="delHotSearch" engine="java"
+             location="com.qihua.ofbiz.hotsearch.HotSearchServices"
+             invoke="delHotSearch"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!--获取所有未分组图片 add by qianjin 2016.06.15-->
+    <service name="getImgListNotInGroup" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="getImgListNotInGroup" auth="true">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+        <attribute name="isInner" type="String" mode="IN"/>
+        <attribute name="ownerPartyId" type="String" mode="IN"/>
+    </service>
+
+    <!--根据图片分组ID查询图片记录 add by qianjin 2016.04.06-->
+    <service name="getImgsByGroupId" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="getImgsByGroupId" auth="true">
+        <attribute name="groupId" type="String" mode="IN"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="isInner" type="String" mode="IN"/>
+        <attribute name="ownerPartyId" type="String" mode="IN"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!--图片移动分组 add by qianjin 2016.06.18-->
+    <service name="changeGroup" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="changeGroup" auth="true">
+        <attribute name="groupId" type="String" mode="IN"/>
+        <attribute name="ids" type="String" mode="IN"/>
+    </service>
+
+    <!--新增图片并保存到分组 add by qianjin 2016.06.21-->
+    <service name="addImgToGroup" engine="java" location="com.qihua.ofbiz.content.images.ImagesService"
+             invoke="addImgToGroup" auth="true">
+        <attribute name="groupId" type="String" mode="IN"/>
+        <attribute name="contentId" type="String" mode="IN"/>
+    </service>
+
+    <!--图片删除操作 add by qianjin 2016.06.21-->
+    <service name="delImgs" engine="java" location="com.qihua.ofbiz.content.images.ImagesService" invoke="delImgs"
+             auth="true">
+        <attribute name="ids" type="String" mode="IN"/>
+    </service>
+
+    <!--楼层列表  Add By AlexYao-->
+    <service name="findFloors" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="findFloors"
+             auth="true">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="floorList" type="java.util.List" mode="OUT"/>
+        <attribute name="floorListSize" type="Integer" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--新增楼层  Add By AlexYao-->
+    <service name="addFloor" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="addFloor" auth="true">
+        <attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
+        <attribute name="floorName" type="String" mode="IN" optional="false"/>
+        <attribute name="imgUrl" type="String" mode="IN" optional="false"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="webSiteIds" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="false"/>
+        <attribute name="floorId" type="String" mode="OUT" optional="true"/>
+        <attribute name="error" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--编辑楼层 Add By AlexYao-->
+    <service name="editFloor" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="editFloor"
+             auth="true">
+        <attribute name="floorId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="floorName" type="String" mode="IN" optional="true"/>
+        <attribute name="imgUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="true"/>
+        <attribute name="webSiteIds" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="error" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--删除楼层 Add By AlexYao-->
+    <service name="removeFloor" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="removeFloor"
+             auth="true">
+        <attribute name="floorIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层详情 Add By AlexYao-->
+    <service name="floorDetail" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="floorDetail"
+             auth="true">
+        <attribute name="floorId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productCategoryId" type="String" mode="OUT" optional="false"/>
+        <attribute name="floorName" type="String" mode="OUT" optional="false"/>
+        <attribute name="imgUrl" type="String" mode="OUT" optional="false"/>
+        <attribute name="isEnabled" type="String" mode="OUT" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="false"/>
+        <attribute name="webSiteIds" type="String" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层标签列表  Add By AlexYao-->
+    <service name="findFloorLabels" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="findFloorLabels" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="floorLabelList" type="java.util.List" mode="OUT"/>
+        <attribute name="floorLabelListSize" type="Integer" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--新增楼层标签  Add By AlexYao-->
+    <service name="addFloorLabel" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="addFloorLabel"
+             auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="floorLabelName" type="String" mode="IN" optional="false"/>
+        <attribute name="showBanner" type="String" mode="IN" optional="false"/>
+        <attribute name="showBrand" type="String" mode="IN" optional="false"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="floorLabelId" type="String" mode="OUT" optional="false"/>
+    </service>
+    <!--编辑楼层标签 Add By AlexYao-->
+    <service name="editFloorLabel" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="editFloorLabel"
+             auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="floorLabelId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="floorLabelName" type="String" mode="IN" optional="true"/>
+        <attribute name="showBanner" type="String" mode="IN" optional="true"/>
+        <attribute name="showBrand" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="true"/>
+    </service>
+    <!--删除楼层标签 Add By AlexYao-->
+    <service name="removeFloorLabel" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="removeFloorLabel" auth="true">
+        <attribute name="floorLabelIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层标签详情 Add By AlexYao-->
+    <service name="floorLabelDetail" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="floorLabelDetail" auth="true">
+        <attribute name="floorLabelId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="floorId" type="String" mode="OUT" optional="false"/>
+        <attribute name="floorLabelName" type="String" mode="OUT" optional="false"/>
+        <attribute name="showBanner" type="String" mode="OUT" optional="false"/>
+        <attribute name="showBrand" type="String" mode="OUT" optional="false"/>
+        <attribute name="isEnabled" type="String" mode="OUT" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层标签商品列表  Add By AlexYao-->
+    <service name="findFloorLabelProducts" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="findFloorLabelProducts" auth="true">
+        <attribute name="floorLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="floorLabelProductList" type="java.util.List" mode="OUT"/>
+        <attribute name="floorLabelProductListSize" type="Integer" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--新增楼层标签商品  Add By AlexYao-->
+    <service name="addFloorLabelProduct" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="addFloorLabelProduct" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="floorLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="floorLabelProductId" type="String" mode="OUT" optional="true"/>
+        <attribute name="error" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--编辑楼层标签商品 Add By AlexYao-->
+    <service name="editFloorLabelProduct" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="editFloorLabelProduct" auth="true">
+        <attribute name="floorLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="floorLabelProductId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+    <!--删除楼层标签商品 Add By AlexYao-->
+    <service name="removeFloorLabelProduct" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="removeFloorLabelProduct" auth="true">
+        <attribute name="floorLabelProductIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层标签商品详情 Add By AlexYao-->
+    <service name="floorLabelProductDetail" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="floorLabelProductDetail" auth="true">
+        <attribute name="floorLabelProductId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productId" type="String" mode="OUT" optional="false"/>
+        <attribute name="productName" type="String" mode="OUT" optional="false"/>
+        <attribute name="imgUrl" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层标签品牌列表  Add By AlexYao-->
+    <service name="findFloorLabelBrands" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="findFloorLabelBrands" auth="true">
+        <attribute name="floorLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="floorLabelBrandList" type="java.util.List" mode="OUT"/>
+        <attribute name="floorLabelBrandListSize" type="Integer" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--新增楼层标签品牌  Add By AlexYao-->
+    <service name="addFloorLabelBrand" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="addFloorLabelBrand" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="floorLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="productBrandId" type="String" mode="IN" optional="false"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="floorLabelBrandId" type="String" mode="OUT" optional="true"/>
+        <attribute name="error" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--编辑楼层标签品牌 Add By AlexYao-->
+    <service name="editFloorLabelBrand" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="editFloorLabelBrand" auth="true">
+        <attribute name="floorLabelId" type="String" mode="IN" optional="true"/>
+        <attribute name="floorLabelBrandId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productBrandId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="true"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+    <!--删除楼层标签品牌 Add By AlexYao-->
+    <service name="removeFloorLabelBrand" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="removeFloorLabelBrand" auth="true">
+        <attribute name="floorLabelBrandIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层标签品牌详情 Add By AlexYao-->
+    <service name="floorLabelBrandDetail" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="floorLabelBrandDetail" auth="true">
+        <attribute name="floorLabelBrandId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productBrandId" type="String" mode="OUT" optional="false"/>
+        <attribute name="linkUrl" type="String" mode="OUT" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="OUT" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层标签广告列表  Add By AlexYao-->
+    <service name="findFloorLabelBanners" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="findFloorLabelBanners" auth="true">
+        <attribute name="floorLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="floorLabelBannerList" type="java.util.List" mode="OUT"/>
+        <attribute name="floorLabelBannerListSize" type="Integer" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--新增楼层标签广告  Add By AlexYao-->
+    <service name="addFloorLabelBanner" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="addFloorLabelBanner" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="floorLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="bannerName" type="String" mode="IN" optional="false"/>
+        <attribute name="imgUrl" type="String" mode="IN" optional="false"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="false"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="false"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="floorLabelBannerId" type="String" mode="OUT" optional="true"/>
+        <attribute name="error" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--编辑楼层标签广告 Add By AlexYao-->
+    <service name="editFloorLabelBanner" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="editFloorLabelBanner" auth="true">
+        <attribute name="floorLabelId" type="String" mode="IN" optional="true"/>
+        <attribute name="floorLabelBannerId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="bannerName" type="String" mode="IN" optional="true"/>
+        <attribute name="imgUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="false"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="false"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+    <!--删除楼层标签广告 Add By AlexYao-->
+    <service name="removeFloorLabelBanner" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="removeFloorLabelBanner" auth="true">
+        <attribute name="floorLabelBannerIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层标签广告详情 Add By AlexYao-->
+    <service name="floorLabelBannerDetail" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="floorLabelBannerDetail" auth="true">
+        <attribute name="floorLabelBannerId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="bannerName" type="String" mode="OUT" optional="false"/>
+        <attribute name="imgUrl" type="String" mode="OUT" optional="false"/>
+        <attribute name="linkUrl" type="String" mode="OUT" optional="false"/>
+        <attribute name="firstLinkType" type="String" mode="OUT" optional="false"/>
+        <attribute name="linkId" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkName" type="String" mode="OUT" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="OUT" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="false"/>
+        <attribute name="description" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--楼层商品列表  Add By AlexYao-->
+    <service name="findFloorProducts" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="findFloorProducts" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="floorProductList" type="java.util.List" mode="OUT"/>
+        <attribute name="floorProductListSize" type="Integer" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--新增楼层商品  Add By AlexYao-->
+    <service name="addFloorProduct" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="addFloorProduct" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="floorProductId" type="String" mode="OUT" optional="true"/>
+        <attribute name="error" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--编辑楼层商品 Add By AlexYao-->
+    <service name="editFloorProduct" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="editFloorProduct" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="floorProductId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+    <!--删除楼层商品 Add By AlexYao-->
+    <service name="removeFloorProduct" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="removeFloorProduct" auth="true">
+        <attribute name="floorProductIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层商品详情 Add By AlexYao-->
+    <service name="floorProductDetail" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="floorProductDetail" auth="true">
+        <attribute name="floorProductId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productId" type="String" mode="OUT" optional="false"/>
+        <attribute name="productName" type="String" mode="OUT" optional="false"/>
+        <attribute name="imgUrl" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层品牌列表  Add By AlexYao-->
+    <service name="findFloorBrands" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="findFloorBrands" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="floorBrandList" type="java.util.List" mode="OUT"/>
+        <attribute name="floorBrandListSize" type="Integer" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--新增楼层品牌  Add By AlexYao-->
+    <service name="addFloorBrand" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="addFloorBrand"
+             auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="productBrandId" type="String" mode="IN" optional="false"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="floorBrandId" type="String" mode="OUT" optional="true"/>
+        <attribute name="error" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--编辑楼层品牌 Add By AlexYao-->
+    <service name="editFloorBrand" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="editFloorBrand"
+             auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="true"/>
+        <attribute name="floorBrandId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productBrandId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="true"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+    <!--删除楼层品牌 Add By AlexYao-->
+    <service name="removeFloorBrand" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="removeFloorBrand" auth="true">
+        <attribute name="floorBrandIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层品牌详情 Add By AlexYao-->
+    <service name="floorBrandDetail" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="floorBrandDetail" auth="true">
+        <attribute name="floorBrandId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productBrandId" type="String" mode="OUT" optional="false"/>
+        <attribute name="linkUrl" type="String" mode="OUT" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="OUT" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层广告列表  Add By AlexYao-->
+    <service name="findFloorBanners" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="findFloorBanners" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="floorBannerList" type="java.util.List" mode="OUT"/>
+        <attribute name="floorBannerListSize" type="Integer" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--新增楼层广告  Add By AlexYao-->
+    <service name="addFloorBanner" engine="java" location="com.qihua.ofbiz.floor.FloorServices" invoke="addFloorBanner"
+             auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="false"/>
+        <attribute name="bannerName" type="String" mode="IN" optional="false"/>
+        <attribute name="imgUrl" type="String" mode="IN" optional="false"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="false"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="false"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="floorBannerId" type="String" mode="OUT" optional="true"/>
+        <attribute name="error" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--编辑楼层广告 Add By AlexYao-->
+    <service name="editFloorBanner" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="editFloorBanner" auth="true">
+        <attribute name="floorId" type="String" mode="IN" optional="true"/>
+        <attribute name="floorBannerId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="bannerName" type="String" mode="IN" optional="true"/>
+        <attribute name="imgUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+    <!--删除楼层广告 Add By AlexYao-->
+    <service name="removeFloorBanner" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="removeFloorBanner" auth="true">
+        <attribute name="floorBannerIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+    <!--楼层广告详情 Add By AlexYao-->
+    <service name="floorBannerDetail" engine="java" location="com.qihua.ofbiz.floor.FloorServices"
+             invoke="floorBannerDetail" auth="true">
+        <attribute name="floorBannerId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="bannerName" type="String" mode="OUT" optional="false"/>
+        <attribute name="imgUrl" type="String" mode="OUT" optional="false"/>
+        <attribute name="linkUrl" type="String" mode="OUT" optional="false"/>
+        <attribute name="firstLinkType" type="String" mode="OUT" optional="false"/>
+        <attribute name="linkId" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkName" type="String" mode="OUT" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="OUT" optional="false"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="false"/>
+        <attribute name="description" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- begin by gss 2017/03/23 创建店铺 -->
+    <service name="createStore" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.store.StoreServices" invoke="createStore">
+        <description>create ProductStore</description>
+        <attribute type="String" mode="IN" name="storeName" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+        <attribute type="String" mode="IN" name="inventoryFacilityId" optional="true"/>
+        <attribute type="String" mode="IN" name="stateProvinceGeoId" optional="true"/>
+        <attribute type="String" mode="IN" name="cityGeoId" optional="true"/>
+        <attribute type="String" mode="IN" name="countyGeoId" optional="true"/>
+        <attribute type="String" mode="IN" name="address" optional="true"/>
+        <attribute type="Long" mode="IN" name="businessTime" optional="true"/>
+        <attribute type="String" mode="IN" name="contacts" optional="true"/>
+        <attribute type="String" mode="IN" name="telephone" optional="true"/>
+        <attribute type="String" mode="IN" name="remark" optional="true"/>
+    </service>
+    <!-- end by gss 2017/03/23 创建店铺 -->
+
+    <!-- begin by gss 2017/03/23 创建店铺 -->
+    <service name="updateStore" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.store.StoreServices" invoke="updateStore">
+        <description>create ProductStore</description>
+        <attribute type="String" mode="IN" name="productStoreId" optional="true"/>
+        <attribute type="String" mode="IN" name="storeName" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+        <attribute type="String" mode="IN" name="inventoryFacilityId" optional="true"/>
+        <attribute type="String" mode="IN" name="stateProvinceGeoId" optional="true"/>
+        <attribute type="String" mode="IN" name="cityGeoId" optional="true"/>
+        <attribute type="String" mode="IN" name="countyGeoId" optional="true"/>
+        <attribute type="String" mode="IN" name="address" optional="true"/>
+        <attribute type="Long" mode="IN" name="businessTime" optional="true"/>
+        <attribute type="String" mode="IN" name="contacts" optional="true"/>
+        <attribute type="String" mode="IN" name="telephone" optional="true"/>
+        <attribute type="String" mode="IN" name="remark" optional="true"/>
+    </service>
+    <!-- end by gss 2017/03/23 创建店铺 -->
+
+    <!-- start by gss 2017/03/23 店铺查询 -->
+    <service name="findStoreList" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.store.StoreServices" invoke="findStoreList">
+        <description>Find ProdcutStore</description>
+        <attribute type="String" mode="INOUT" name="storeName" optional="true"/>
+        <attribute type="String" mode="INOUT" name="productStoreId" optional="true"/>
+        <attribute type="String" mode="INOUT" name="address" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="storeList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="storeListSize" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="paramList" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- end by gss 2017/03/23 店铺查询 -->
+
+
+    <!-- begin by gss 2017/03/23 查询店铺信息 -->
+    <service name="queryStore" engine="java" auth="true" export="true"
+             location="com.qihua.ofbiz.store.StoreServices" invoke="queryStore">
+        <description>query Store</description>
+        <attribute type="String" mode="IN" name="productStoreId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="store" optional="true"/>
+    </service>
+    <!-- end by gss 2017/03/23 查询店铺信息 -->
+
+    <!--APP 推送-->
+    <service name="findAppPushList" engine="java" auth="true" export="true"
+             location="org.ofbiz.content.content.ContentServices" invoke="findAppPushList">
+        <description>Find APP PUSH</description>
+        <attribute type="String" mode="INOUT" name="appPushId" optional="true"/>
+        <attribute type="String" mode="INOUT" name="messageName" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="appPushList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="appPushListSize" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="paramList" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!-- Add by zhajh 2017/08/23 创建APP PUSH begin -->
+    <service name="addAddPush" engine="java" auth="true" export="true"
+             location="org.ofbiz.content.content.ContentServices" invoke="addAddPush">
+        <description>create App Push</description>
+        <attribute type="String" mode="IN" name="messageName" optional="true"/>
+        <attribute type="String" mode="IN" name="messageTemplate" optional="true"/>
+        <attribute type="String" mode="IN" name="messageContent" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true"/>
+        <attribute type="String" mode="IN" name="linkType" optional="true"/>
+        <attribute type="String" mode="IN" name="linkUrl" optional="true"/>
+        <attribute type="String" mode="IN" name="linkId" optional="true"/>
+        <attribute type="String" mode="IN" name="linkName" optional="true"/>
+        <attribute type="String" mode="IN" name="messageType" optional="true"/>
+    </service>
+    <!-- Add by zhajh 2017/08/23 创建APP PUSH End -->
+
+    <!-- Add by zhajh 2017/08/23 修改APP PUSH begin -->
+    <service name="editAddPush" engine="java" auth="true" export="true"
+             location="org.ofbiz.content.content.ContentServices" invoke="editAddPush">
+        <description>create AppPush</description>
+        <attribute type="String" mode="IN" name="appPushId" optional="false"/>
+        <attribute type="String" mode="IN" name="messageName" optional="true"/>
+        <attribute type="String" mode="IN" name="messageTemplate" optional="true"/>
+        <attribute type="String" mode="IN" name="messageContent" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true"/>
+        <attribute type="String" mode="IN" name="linkType" optional="true"/>
+        <attribute type="String" mode="IN" name="linkUrl" optional="true"/>
+        <attribute type="String" mode="IN" name="linkId" optional="true"/>
+        <attribute type="String" mode="IN" name="linkName" optional="true"/>
+        <attribute type="String" mode="IN" name="messageType" optional="true"/>
+    </service>
+    <!-- Add by zhajh 2017/08/23 修改APP PUSH End -->
+
+
+    <!-- 新增礼品 -->
+    <service name="addPromoGiftProduct" engine="java" location="com.qihua.ofbiz.gift.PromoGiftServices" invoke="addPromoGiftProduct" auth="true">
+        <attribute name="promoGiftId" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productTypeName" type="String" mode="IN" optional="true"/>
+        <attribute name="isTop" type="String" mode="IN" optional="true"/>
+        <attribute name="retCode" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="message" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 删除礼品 状态修改成0即可 -->
+    <service name="deletePromoGiftProduct" engine="java" location="com.qihua.ofbiz.gift.PromoGiftServices" invoke="deletePromoGiftProduct" auth="true">
+        <attribute name="promoGiftIds" type="String" mode="IN" optional="true"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 礼品页面列表展示 -->
+    <service name="findPromoGiftProduct" engine="java" location="com.qihua.ofbiz.gift.PromoGiftServices" invoke="findPromoGiftProduct" auth="true">
+        <!-- begin 查询字段 -->
+        <attribute name="giftName" type="String" mode="IN" optional="true"/>
+        <!-- end 查询字段 -->
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 修改礼品前查找礼品 -->
+    <service name="editPromoGiftProduct" engine="java" location="com.qihua.ofbiz.gift.PromoGiftServices" invoke="editPromoGiftProduct" auth="true">
+        <attribute name="promoGiftId" type="String" mode="IN" optional="true"/>
+        <attribute name="promoGift" type="Map" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 修改礼品保存 -->
+    <service name="savePromoGiftProduct" engine="java" location="com.qihua.ofbiz.gift.PromoGiftServices" invoke="savePromoGiftProduct" auth="true">
+        <attribute name="promoGiftId" type="String" mode="IN" optional="true"/>
+        <attribute name="giftName" type="String" mode="IN" optional="true"/>
+        <attribute name="giftType" type="String" mode="IN" optional="true"/>
+        <attribute name="isTop" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!--删除App 推送-->
+    <service name="delAddPush" engine="java" location="org.ofbiz.content.content.ContentServices" invoke="delAddPush"
+             auth="true">
+        <attribute name="appPushIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Integer" mode="OUT" optional="false"/>
+    </service>
+
+
+    <!-- 查询App 推送信息 -->
+    <service name="queryAppPush" engine="java" auth="true" export="true"
+             location="org.ofbiz.content.content.ContentServices" invoke="queryAppPush">
+        <description>query Store</description>
+        <attribute type="String" mode="IN" name="appPushId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="appPush" optional="true"/>
+    </service>
+
+    <!-- 查询消息模板信息 -->
+    <service name="queryMessageTemplateInfo" engine="java" auth="true" export="true"
+             location="org.ofbiz.content.content.ContentServices" invoke="queryMessageTemplateInfo">
+        <description>query Store</description>
+        <attribute type="String" mode="IN" name="messageTemplateId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="messageTemplate" optional="true"/>
+    </service>
+
+    <!-- 推送App 信息内容 -->
+    <service name="pushAppConentById" engine="java" auth="true" export="true"
+             location="org.ofbiz.content.content.ContentServices" invoke="pushAppConentById">
+        <description>Push Times</description>
+        <attribute type="String" mode="IN" name="appPushId" optional="true"/>
+        <attribute type="Long" mode="OUT" name="pushTimes" optional="true"/>
+    </service>
+    <service name="updateNavigation" engine="java"
+             location="org.ofbiz.content.content.ContentServices" invoke="updateNavigation">
+        <description>Create Content Alternative URL</description>
+        <attribute name="id" mode="INOUT" type="String" optional="true"></attribute>
+        <attribute name="parentId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="navigationGroupId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="navigationName" mode="INOUT" type="String" optional="true"></attribute>
+        <attribute name="productCategory" mode="INOUT" type="String" optional="true"></attribute>
+        <attribute name="contentId" mode="INOUT" type="String" optional="true"></attribute>
+        <attribute name="isEnabled" mode="INOUT" type="String" optional="true"></attribute>
+        <attribute name="zIndex" mode="IN" type="Integer" optional="true"></attribute>
+        <attribute name="flag" mode="OUT" type="String" optional="false"></attribute>
+    </service>
+
+    <service name="navigationMove" engine="java"
+             location="org.ofbiz.content.content.ContentServices" invoke="navigationMove">
+        <description>Create Content Alternative URL</description>
+        <attribute name="id" mode="INOUT" type="String" optional="true"></attribute>
+        <attribute name="moveId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="navigationGroupId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="zIndex" mode="IN" type="Integer" optional="true"></attribute>
+        <attribute name="flag" mode="OUT" type="String" optional="false"></attribute>
+    </service>
+
+    <service name="delNavigation" engine="java"
+             location="org.ofbiz.content.content.ContentServices" invoke="delNavigation">
+        <description>Create Content Alternative URL</description>
+        <attribute name="id" mode="INOUT" type="String" optional="true"></attribute>
+        <attribute name="zIndex" mode="IN" type="Integer" optional="true"></attribute>
+        <attribute name="flag" mode="OUT" type="String" optional="false"></attribute>
+    </service>
+
+    <service name="navigationBannerEditInit" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="navigationBannerEditInit"
+             auth="false">
+        <attribute name="navigationId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="contentId" type="String" mode="OUT" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="OUT" optional="true"/>
+        <attribute name="secondLinkType" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkId" type="String" mode="OUT" optional="true"/>
+        <attribute name="linkName" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="OUT" optional="true"/>
+        <attribute name="isUse" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="webSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="OUT" optional="true"/>
+        <attribute name="geo" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="navigationBannerEdit" engine="java"
+             location="com.qihua.ofbiz.banner.BannerServices"
+             invoke="navigationBannerEdit"
+             auth="false">
+        <attribute name="navigationId" type="String" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="secondLinkType" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllGeo" type="String" mode="IN" optional="true"/>
+        <attribute name="geo" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!--获取模板集合json-->
+    <service name="getIndexTemplateListJson" engine="java"
+             location="com.qihua.ofbiz.home.IndexTemplateServices"
+             invoke="getIndexTemplateListJson" auth="false">
+        <description>获取模板集合json</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="templateName" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <service name="indexTemplateAdd" engine="java"
+             location="com.qihua.ofbiz.home.IndexTemplateServices"
+             invoke="indexTemplateAdd" auth="false">
+        <attribute name="templateName" type="String" mode="IN" />
+        <attribute name="isUsed" type="String" mode="IN" />
+    </service>
+    <!--修改首页模版是否启用-->
+    <service name="editTemplateStatus" engine="java"
+             location="com.qihua.ofbiz.home.IndexTemplateServices"
+             invoke="editTemplateStatus" auth="false">
+        <attribute name="templateId" type="String" mode="IN" />
+        <attribute name="isUsed" type="String" mode="IN" />
+    </service>
+
+    <!--删除一个模板-->
+    <service name="deleteTemplate" engine="java"
+             location="com.qihua.ofbiz.home.IndexTemplateServices"
+             invoke="deleteTemplate" auth="false">
+        <attribute name="templateId" type="String" mode="IN" />
+    </service>
+
+
+    <service name="getTempleteContent" engine="java"
+             location="com.qihua.ofbiz.home.IndexTemplateServices"
+             invoke="getTempleteContent" auth="false">
+        <attribute name="templateId" type="String" mode="IN" />
+        <attribute name="recordList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="saveTemplateContent" engine="java"
+             location="com.qihua.ofbiz.home.IndexTemplateServices"
+             invoke="saveTemplateContent" auth="false">
+        <attribute name="recordList" type="String" mode="IN"/>
+    </service>
+
+
+    <!-- add by zhajh at 2018/04/10 首页设置列表查询  Begin-->
+    <service name="firstPageSettingList" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="getFirstPageSettingList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="firstPageType" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="firstPageList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+
+    <!-- 首页配置新增-->
+    <service name="firstPageSettingAdd" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="firstPageSettingAdd"
+             auth="false">
+        <attribute name="firstPageType" type="String" mode="IN" optional="true"/>
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+
+    <!-- 首页配置修改数据初始化 -->
+    <service name="firstPageSettingEditInit" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="firstPageSettingEditInit"
+             auth="false">
+        <attribute name="firstPageSettingId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="sequence" type="String" mode="OUT" optional="true"/>
+        <attribute name="firstPageType" type="String" mode="OUT" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="OUT" optional="true"/>
+        <attribute name="id" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!-- 首页配置序号的修改 -->
+    <service name="firstPageSettingEditSequence" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="firstPageSettingEditSequence"
+             auth="false">
+        <attribute name="firstPageSettingId" type="String" mode="IN" optional="true"/>
+        <attribute name="sequence" type="String" mode="IN" optional="true"/>
+        <attribute name="firstPageType" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="id" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 首页配置信息的删除 -->
+    <service name="firstPageSettingDel" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="firstPageSettingDel"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+
+
+    <!--推荐商品-->
+    <!--推荐商品首页设置列表查询-->
+    <service name="prodRecommendList" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="getProdRecommendList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="firstPageList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 推荐商品首页配置新增-->
+    <service name="prodRecommendAdd" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="prodRecommendAdd"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 推荐商品首页配置修改数据初始化 -->
+    <service name="prodRecommendEditInit" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="prodRecommendEditInit"
+             auth="false">
+        <attribute name="recommendId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="OUT" optional="true"/>
+        <attribute name="productId" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="webSite" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 推荐商品首页配置的修改 -->
+    <service name="prodRecommendEdit" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="prodRecommendEdit"
+             auth="false">
+        <attribute name="recommendId" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 推荐商品首页配置信息的删除 -->
+    <service name="prodRecommendDel" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="prodRecommendDel"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+    <!--热门品牌-->
+    <!--热门品牌首页设置列表查询-->
+    <service name="brandRecommendList" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="getBrandRecommendList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="firstPageList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 热门品牌首页配置新增-->
+    <service name="brandRecommendAdd" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="brandRecommendAdd"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 热门品牌首页配置修改数据初始化 -->
+    <service name="brandRecommendEditInit" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="brandRecommendEditInit"
+             auth="false">
+        <attribute name="recommendId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="OUT" optional="true"/>
+        <attribute name="brandId" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="webSite" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 热门品牌首页配置序号的修改 -->
+    <service name="brandRecommendEdit" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="brandRecommendEdit"
+             auth="false">
+        <attribute name="recommendId" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 热门品牌首页配置信息的删除 -->
+    <service name="brandRecommendDel" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="brandRecommendDel"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!--热门店铺-->
+
+    <!--热门店铺首页设置列表查询-->
+    <service name="storeRecommendList" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="getStoreRecommendList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="storeName" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="firstPageList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 热门店铺首页配置新增-->
+    <service name="storeRecommendAdd" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="storeRecommendAdd"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 热门店铺首页配置修改数据初始化 -->
+    <service name="storeRecommendEditInit" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="storeRecommendEditInit"
+             auth="false">
+        <attribute name="recommendId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="OUT" optional="true"/>
+        <attribute name="storeId" type="String" mode="OUT" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="OUT" optional="true"/>
+        <attribute name="webSite" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 热门店铺首页配置序号的修改 -->
+    <service name="storeRecommendEdit" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="storeRecommendEdit"
+             auth="false">
+        <attribute name="recommendId" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 热门店铺首页配置信息的删除 -->
+    <service name="storeRecommendDel" engine="java"
+             location="com.qihua.ofbiz.firstpage.FirstPageSettingServices"
+             invoke="storeRecommendDel"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+    <!-- add by zhajh at 2018/04/10 首页设置列表查询 End -->
+
+    <!-- Add by zhajh at 20180413 题库管理 Begin-->
+
+    <!--题库管理列表查询-->
+    <service name="questionBankList" engine="java"
+             location="com.qihua.ofbiz.question.QuestionBankServices"
+             invoke="getQuestionBankList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="question" type="String" mode="IN" optional="true"/>
+        <attribute name="questionId" type="String" mode="IN" optional="true"/>
+        <attribute name="questionType" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="questionBankList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 题库管理新增-->
+    <service name="questionBankAdd" engine="java"
+             location="com.qihua.ofbiz.question.QuestionBankServices"
+             invoke="questionBankAdd"
+             auth="false">
+        <attribute name="question" type="String" mode="IN" optional="true"/>
+        <attribute name="questionType" type="String" mode="IN" optional="true"/>
+        <attribute name="answerInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="answerResult" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 题库管理修改数据初始化 -->
+    <service name="questionBankEditInit" engine="java"
+             location="com.qihua.ofbiz.question.QuestionBankServices"
+             invoke="questionBankEditInit"
+             auth="false">
+        <attribute name="questionId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="question" type="String" mode="OUT" optional="true"/>
+        <attribute name="answerResult" type="String" mode="OUT" optional="true"/>
+        <attribute name="questionType" type="String" mode="OUT" optional="true"/>
+        <attribute name="answerList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 题库管理的修改 -->
+    <service name="questionBankEdit" engine="java"
+             location="com.qihua.ofbiz.question.QuestionBankServices"
+             invoke="questionBankEdit"
+             auth="false">
+        <attribute name="questionId" type="String" mode="IN" optional="true"/>
+        <attribute name="question" type="String" mode="IN" optional="true"/>
+        <attribute name="questionType" type="String" mode="IN" optional="true"/>
+        <attribute name="answerInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="answerResult" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 题库管理信息的删除 -->
+    <service name="questionBankDel" engine="java"
+             location="com.qihua.ofbiz.question.QuestionBankServices"
+             invoke="questionBankDel"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+    <!-- 题库Excel单元格校验通用方法 -->
+    <service name="questionValidateCell" engine="java"
+             location="com.qihua.ofbiz.question.QuestionValidateCell"
+             invoke="validateCellData" auth="false">
+        <attribute name="curRow" type="Integer" mode="IN"/>
+        <attribute name="curCol" type="Integer" mode="IN" />
+        <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/>
+        <attribute name="entityName" type="String" mode="IN"/>
+        <attribute name="headName" type="String" mode="IN"/>
+        <attribute name="curColType" type="String" mode="IN"/>
+        <attribute name="curColCode" type="String" mode="IN"/>
+        <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/>
+        <attribute name="curColMaxlength" type="String" mode="IN"/>
+        <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/>
+        <attribute name="errorString" type="String" mode="OUT"/>
+    </service>
+    <!-- Add by zhajh at 20180413 题库管理 End-->
+
+    <!-- Add by zhajh at 20180423 赠送列表 Begin-->
+    <!--赠送列表查询-->
+    <service name="givePresentList" engine="java"
+             location="com.qihua.ofbiz.give.GivePresentServices"
+             invoke="getGivePresentList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="sender" type="String" mode="IN" optional="true"/>
+        <attribute name="startDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="endDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="givePresentList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 根据订单编码取得订单信息 -->
+    <service name="getOrderInfoById" engine="java"
+             location="com.qihua.ofbiz.give.GivePresentServices"
+             invoke="getOrderInfoById"
+             auth="false">
+        <attribute name="orderId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="question" type="String" mode="OUT" optional="true"/>
+        <attribute name="answerResult" type="String" mode="OUT" optional="true"/>
+        <attribute name="questionType" type="String" mode="OUT" optional="true"/>
+        <attribute name="answerList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <!-- Add by zhajh at 20180423 赠送列表 End-->
+
+</services>

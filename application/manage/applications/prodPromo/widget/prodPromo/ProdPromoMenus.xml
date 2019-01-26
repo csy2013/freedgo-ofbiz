@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-menu.xsd">
+    <menu name="ProdPromoAppBar" title="${uiLabelMap.ProdPromo}" >
+        <menu-item name="promoReduce" title="满减">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_REDUCE" action="_VIEW"/>
+                </condition>
+            <menu-item name="addPromoReduce" title="满减新增">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_REDUCE" action="_ADD"/>
+                </condition>
+                <link target="addPromoReduce"/>
+            </menu-item>
+            <menu-item name="findPromoReduce" title="满减列表">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_REDUCE" action="_LIST"/>
+                </condition>
+                <link target="findPromoReduce"/>
+            </menu-item>
+        </menu-item>
+        <menu-item name="promoGift" title="满赠">
+            <condition>
+                <if-has-permission permission="PRODPROMO_GIFT" action="_VIEW"/>
+            </condition>
+            <menu-item name="addPromoGift" title="满赠新增">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_GIFT" action="_ADD"/>
+                </condition>
+                <link target="addPromoGift"/>
+            </menu-item>
+            <menu-item name="findPromoGift" title="满赠列表">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_GIFT" action="_LIST"/>
+                </condition>
+                <link target="findPromoGift"/>
+            </menu-item>
+        </menu-item>
+        <!--组合商品管理-->
+        <menu-item name="productGroup" title="商品组合">
+            <condition>
+                <if-has-permission permission="PRODUCT_GROUP" action="_VIEW"/>
+            </condition>
+            <menu-item name="addProductGrouping" title="商品组合新增">
+                <condition>
+                    <if-has-permission permission="PRODUCT_GROUP" action="_ADD"/>
+                </condition>
+                <link target="addProductGrouping"/>
+            </menu-item>
+            <menu-item name="findProductGrouping" title="商品组合列表">
+                <condition>
+                    <if-has-permission permission="PRODUCT_GROUP" action="_LIST"/>
+                </condition>
+
+                <link target="findProductGrouping"/>
+            </menu-item>
+        </menu-item>
+        <!--代金券管理-->
+        <menu-item name="couponManage" title="代金券管理">
+            <condition>
+                <if-has-permission permission="PRODPROMO_COUPON" action="_VIEW"/>
+            </condition>
+            <menu-item name="addCoupon" title="代金券新增">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_COUPON" action="_ADD"/>
+                </condition>
+                <link target="addCoupon"/>
+            </menu-item>
+            <menu-item name="couponList" title="代金券列表">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_COUPON" action="_LIST"/>
+                </condition>
+                <link target="findCoupon"/>
+            </menu-item>
+        </menu-item>
+        <!--会员首次促销-->
+        <menu-item name="promoNewCust" title="会员首次促销">
+            <condition>
+                <if-has-permission permission="PRODPROMO_NEWCUST" action="_VIEW"/>
+            </condition>
+            <menu-item name="addPromoNewCust" title="首次促销管理">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_NEWCUST" action="_ADD"/>
+                </condition>
+                <link target="addPromoNewCust"/>
+            </menu-item>
+            <!--<menu-item name="promoNewCustList" title="首次促销列表">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_NEWCUST" action="_LIST"/>
+                </condition>
+                <link target="findPromoNewCust"/>
+            </menu-item>-->
+        </menu-item>
+
+        <!-- 包邮 -->
+        <!--<menu-item name="promoPackage" title="包邮">-->
+            <!--<menu-item name="addPackage" title="包邮新增">-->
+                <!--<link target="addPackage"/>-->
+            <!--</menu-item>-->
+            <!--<menu-item name="findaddPackage" title="包邮列表">-->
+                <!--<link target="findPackage"/>-->
+            <!--</menu-item>-->
+        <!--</menu-item>-->
+
+        <!-- 根据需求进行修改 -->
+        <menu-item name="exceptionPage" title="拼团">
+            <condition>
+                <if-has-permission permission="PRODPROMO_GROUPORDER" action="_VIEW"/>
+            </condition>
+            <menu-item name="addGroupOrder" title="拼团新增">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_GROUPORDER" action="_ADD"/>
+                </condition>
+                <link target="addGroupOrder"/>
+            </menu-item>
+            <menu-item name="findGroupOrder" title="拼团列表">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_GROUPORDER" action="_LIST"/>
+                </condition>
+                <link target="findGroupOrder"/>
+            </menu-item>
+        </menu-item>
+        <menu-item name="secondKill" title="秒杀">
+            <condition>
+                <if-has-permission permission="PRODPROMO_SECKILL" action="_VIEW"/>
+            </condition>
+            <menu-item name="addSecKill" title="秒杀新增">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_SECKILL" action="_ADD"/>
+                </condition>
+                <link target="addSecKill"/>
+            </menu-item>
+            <menu-item name="findSecKill" title="秒杀列表">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_SECKILL" action="_LIST"/>
+                </condition>
+                <link target="findSecKill"/>
+            </menu-item>
+        </menu-item>
+        <!-- 直降功能左侧菜单 -->
+        <menu-item name="straightDown" title="直降">
+            <condition>
+                <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_VIEW"/>
+            </condition>
+            <menu-item name="addStraightDown" title="直降新增">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_ADD"/>
+                </condition>
+                <link target="addStraightDown"/>
+            </menu-item>
+            <menu-item name="findStraightDown" title="直降列表">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_LIST"/>
+                </condition>
+                <link target="findStraightDown"/>
+            </menu-item>
+        </menu-item>
+        <!--折扣功能左侧菜单-->
+        <menu-item name="discount" title="折扣">
+            <condition>
+                <if-has-permission permission="PRODPROMO_DISCOUNT" action="_VIEW"/>
+            </condition>
+            <menu-item name="addDiscount" title="折扣新增">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_DISCOUNT" action="_ADD"/>
+                </condition>
+                <link target="addDiscount"/>
+            </menu-item>
+            <menu-item name="findDiscount" title="折扣列表">
+                <condition>
+                    <if-has-permission permission="PRODPROMO_DISCOUNT" action="_LIST"/>
+                </condition>
+                <link target="findDiscount"/>
+            </menu-item>
+        </menu-item>
+
+
+
+      <!--  <menu-item name="scoreMall" title="积分商城">
+            <menu-item name="scoreMallCategory" title="商城分类">
+                <link target="main"/>
+            </menu-item>
+            <menu-item name="scoreMallList" title="商品列表">
+                <link target="main"/>
+            </menu-item>
+        </menu-item>-->
+        <!-- add by gss 2015-1-21 -->
+        <menu-item name="activityCollection" title="活动收藏">
+               <condition>
+                <if-has-permission permission="PRODPROMO_COLLECTION" action="_VIEW"/>
+               </condition>   
+                <link target="ActivityCollectionListPage"/>
+        </menu-item>
+        
+    </menu>
+</menus>

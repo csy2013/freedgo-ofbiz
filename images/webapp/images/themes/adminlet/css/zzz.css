@@ -1,0 +1,134 @@
+@charset "utf-8";
+.clearfix:after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.clearfix{
+    zoom:1;
+}
+ul{
+    list-style: none;
+}
+.classification{
+    padding: 10px 0px 8px 10px;
+    border-bottom: 1px solid #ddd;
+}
+.xl_main_classfy{
+    margin-top: 10px;
+    padding: 10px 15px;
+}
+.xl_item{
+    float: left;
+    width: 30%;
+    height:350px ;
+    border: 1px solid #ddd;
+    margin: 0 15px;
+   position: relative;
+}
+.xl_p1{
+    text-align: center;
+    color: #007bb6;
+}
+.xl_first{
+    width: 100%;
+    height: 35px;
+}
+.xl_ul1{
+    overflow: auto;
+    position: absolute;
+    top:75px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-left: 0px;
+}
+.xl_ul1>li{
+    text-align: left;
+    font-size: 16px;
+    padding: 8px 0px;
+    text-indent: 3px;
+    cursor: pointer;
+    margin-left:10px;
+    
+}
+.xl_ul1>li:hover{
+    background: #f4f4f4;
+}
+.xl_first_search{
+    position: relative;
+}
+.xl_search_icon{
+    position: absolute;
+    top:10px;
+    right: 16px;
+    font-size: 16px;
+    color: #999999;
+    cursor: pointer;
+}
+.xl_del_btn{
+    float: right;
+    margin-right: 10px;
+    display: none;
+}
+.xl_active{
+    background:#f4f4f4;
+    width:95%;
+    margin-left:10px;
+    
+}
+.product_name{
+    display: inline-block;
+}
+.s_req{
+    color: #f00;
+}
+.table_b_c>thead>tr>th,.table_b_c>tbody>tr>td{
+    border-color:#ccc; 
+}
+.table_b_c>thead>tr>th{
+    text-align: center;
+}
+.table-bordered>thead>tr>th, .table-bordered>thead>tr>td{
+    border-bottom-width:1px;
+}
+.table-bordered{
+    border-color:#ccc; 
+}
+.add_sx{
+ margin-bottom: 15px;   
+}
+.fc_td{text-align: center;}
+.sx_xx{
+    width: 100px;
+    display: inline-block;
+    margin-right: 5px;
+    position: relative;
+
+}
+.sx_xx input{
+    width: 100%;
+    padding-right: 18px;
+}
+.sx_xx i{
+    font-style: normal;
+    font-size: 16px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    display: inline-block;
+    width: 15px;
+    cursor: pointer;
+    height: 20px;
+    line-height: 20px;
+    margin-top: -12px;
+    font-weight: bold;
+    display: none;
+}
+.Dragigng_frame{
+    display: none;
+}
+i.js-x_i_new{
+	display:block;
+}
+.table.table-bordered.table_b_c.js-table_1 td{ text-align:left;}

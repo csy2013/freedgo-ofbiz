@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-menu.xsd">
+    <menu name="SystemMgrAppBar" title="${uiLabelMap.SystemManage}">
+
+
+        <!-- 异常页面  add by gss-->
+        <!--<menu-item name="exceptionPage" title="${uiLabelMap.ExceptionPage}">-->
+            <!--<condition>-->
+                <!--<if-has-permission permission="EXCEPTIONPAGE" action="_VIEW"/>-->
+            <!--</condition>-->
+            <!--<link target="exceptionPage"/>-->
+        <!--</menu-item>-->
+        <!-- 异常页面  add by gss-->
+
+        <!--渠道管理-->
+        <menu-item name="PARTYCHANNEL" title="渠道管理">
+            <condition>
+                <if-has-permission permission="CHANNEL_MANAGE" action="_VIEW"/>
+            </condition>
+            <link target=""/>
+            <menu-item name="partyChannelAdd" title="渠道新增">
+                <condition>
+                    <if-has-permission permission="CHANNEL_MANAGE" action="_CREATE"/>
+                </condition>
+                <link target="partyChannelAdd"/>
+            </menu-item>
+            <menu-item name="partyChannelList" title="渠道列表">
+                <condition>
+                    <if-has-permission permission="CHANNEL_MANAGE" action="_VIEW"/>
+                </condition>
+                <link target="partyChannelList"/>
+            </menu-item>
+        </menu-item>
+
+        <menu-item name="ruleSet" title="${uiLabelMap.ruleSet}">
+            <condition>
+                <if-has-permission permission="RULE_MANAGE" action="_VIEW"/>
+            </condition>
+            <link target="ruleSet"/>
+            <!-- 号段设置  add by gss-->
+            <!--<menu-item name="SegmentNumber" title="号段配置">-->
+                <!--<condition>-->
+                    <!--<if-has-permission permission="SEGMENT_NUMBER" action="_VIEW"/>-->
+                <!--</condition>-->
+                <!--<link target="SegmentNumber"/>-->
+            <!--</menu-item>-->
+            <!-- 号段设置 add by gss-->
+            <!-- 订单设置  add by gss-->
+            <menu-item name="OrderSet" title="订单设置">
+                <condition>
+                    <if-has-permission permission="ORDER_SET" action="_VIEW"/>
+                </condition>
+                <link target="OrderRule"/>
+            </menu-item>
+            <!-- 订单设置 add by gss-->
+
+            <!-- 字段表设置  add by gss-->
+            <menu-item name="FieldTableSet" title="字段表设置">
+                <condition>
+                    <if-has-permission permission="FIELD_TABLESET" action="_VIEW"/>
+                </condition>
+                <link target="FieldTableSet"/>
+            </menu-item>
+            <!-- 字段表设置 add by gss-->
+
+            <!--审核开关设置 add by hm 2018-5-12-->
+            <menu-item name="ProductRulesSet" title="商品审核设置">
+                <condition>
+                    <if-has-permission permission="PRODUCT_RULESSET" action="_VIEW"/>
+                </condition>
+                <link target="ProductRulesSet"/>
+            </menu-item>
+            <!--审核开关设置 add by hm 2018-5-12-->
+
+            <!-- 积分Code设置  add by zhajh-->
+            <menu-item name="IntegralCodeSetting" title="积分Code配置">
+                <condition>
+                    <if-has-permission permission="INTEGRAL_CODE" action="_VIEW"/>
+                </condition>
+                <link target="IntegralCodeSetting"/>
+            </menu-item>
+            <!-- 积分Code设置 add by zhajh-->
+        </menu-item>
+
+        <!-- 支付方式  add by gss-->
+        <!--<menu-item name="PaymentType" title="支付方式">-->
+            <!--<condition>-->
+                <!--<if-has-permission permission="PAYMENT_TYPE" action="_VIEW"/>-->
+            <!--</condition>-->
+            <!--<link target="PaymentType"/>-->
+        <!--</menu-item>-->
+        <!-- 支付方式  add by gss-->
+
+        <!-- <menu-item name="goodsFavore" title="${uiLabelMap.GoodsFavore}">
+             <link target="roleList"/>
+         </menu-item>-->
+
+        <menu-item name="interfaceManage" title="${uiLabelMap.InterfaceManage}">
+            <condition>
+                <if-has-permission permission="INTERFANCE_MANAGE" action="_VIEW"/>
+            </condition>
+            <link target="interfaceManage"/>
+            <menu-item name="paymentInterface" title="${uiLabelMap.PaymentInterface}">
+                <condition>
+                    <if-has-permission permission="PAYMENT_INTERFANCE" action="_VIEW"/>
+                </condition>
+                <link target="PayMentInterface"/>
+            </menu-item>
+            <menu-item name="userLoginInterface" title="${uiLabelMap.UserLongInterface}">
+                <link target="FindProductPriceRules"/>
+            </menu-item>
+            <menu-item name="smsInterface" title="${uiLabelMap.SmsInterface}">
+                <link target="FindProductStore"/>
+            </menu-item>
+            <menu-item name="shipmentInterface" title="${uiLabelMap.ShipmentInterface}">
+                <link target="editKeywordThesaurus"/>
+            </menu-item>
+        </menu-item>
+
+        <menu-item name="DISTRIBUTION" title="配送管理">
+            <condition>
+                <if-has-permission permission="DISTRIBUTION" action="_VIEW"/>
+            </condition>
+            <link target=""/>
+            <!-- <menu-item name="paymentInterface12" title="配送方式">
+                 <link target="main"/>
+             </menu-item>-->
+            <!--<menu-item name="shipping" title="${uiLabelMap.ProductShipping}"><link target="ListShipmentMethods"/></menu-item>-->
+            <!-- <menu-item name="userLoginInterface14" title="自提点列表">
+                <link target="main"/>
+            </menu-item>-->
+            <menu-item name="logisticsCompany" title="物流公司列表">
+                <link target="logisticsCompany"/>
+            </menu-item>
+            <!--<menu-item name="logisticsDocuments" title="物流单据列表">-->
+                <!--<link target="logisticsDocuments"/>-->
+            <!--</menu-item>-->
+            <!--<menu-item name="addLogisticsDocuments" title="物流单据设置">-->
+                <!--<link target="addLogisticsDocuments"/>-->
+            <!--</menu-item>-->
+            <menu-item name="logisticsTemple" title="运费模板设置">
+                <link target="logisticsTemple"/>
+            </menu-item>
+            <menu-item name="addLogisticsTemple" title="新增运费模板">
+                <link target="addLogisticsTemple"/>
+            </menu-item>
+        </menu-item>
+
+        <!-- 地区管理  add by gss-->
+        <menu-item name="RegionalManage" title="地区管理">
+            <condition>
+                <if-has-permission permission="GEO" action="_VIEW"/>
+            </condition>
+            <link target="RegionalManage"/>
+        </menu-item>
+        <!-- 消息模板页面 -->
+        <menu-item name="messageTemplate" title="消息模板管理">
+            <condition>
+                <if-has-permission permission="SYSTEM_MESSAGE" action="_VIEW"/>
+            </condition>
+            <link target="messageTemplateList"/>
+        </menu-item>
+        <!-- 地区管理  add by gss-->
+
+        <menu-item name="roleManage" title="${uiLabelMap.RoleManage}">
+            <condition>
+                <if-has-permission permission="SYSTEMMGR_ROLE" action="_VIEW"/>
+            </condition>
+            <link target="userList"/>
+            <menu-item name="systemerManage" title="${uiLabelMap.SystemerManage}">
+                <condition>
+                    <if-has-permission permission="SYSTEMMGR_USER" action="_VIEW"/>
+                </condition>
+                <link target="userList"/>
+            </menu-item>
+            <menu-item name="roleMgr" title="${uiLabelMap.roleMgr}">
+                <condition>
+                    <if-has-permission permission="SYSTEMMGR_GROUP" action="_VIEW"/>
+                </condition>
+                <link target="roleList"/>
+            </menu-item>
+        </menu-item>
+
+
+
+    </menu>
+</menus>

@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- begin add by Wcy 会员列表 at 2016.01.06 -->
+    <screen name="findmember">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">会员列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="会员管理" style="breadcrumb"/>
+                                <link target="" text="会员列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PARTYMGR_LIST" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://party/webapp/membermgr/member/findmember.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要会员查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by Wcy 会员列表 at 2016.01.06 -->
+
+    <!-- begin add by Wcy 会员明细 at 2016.01.07 -->
+    <screen name="memberDetail">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <script location="component://party/webapp/membermgr/WEB-INF/actions/MemberDetail.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">会员详情</label>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PARTYMGR_LIST" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://party/webapp/membermgr/member/memberDetail.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要会员查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by Wcy 会员明细 at 2016.01.07 -->
+
+
+    <!--消费积分规则 begin by  gss 2016-1-16-->
+    <screen name="consumeIntegralSet">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <entity-condition entity-name="PartyLevelType" list="partyLevelList">
+                </entity-condition>
+                <entity-condition entity-name="PartyIntegral" list="normalList">
+                    <condition-expr field-name="partyIntegralType" value="NORMAL"/>
+                </entity-condition>
+                <entity-condition entity-name="PartyIntegral" list="specialList">
+                    <condition-expr field-name="partyIntegralType" value="SPECIALCATEGORY"/>
+                </entity-condition>
+                <entity-condition entity-name="PartyIntegral" list="specialProList">
+                    <condition-expr field-name="partyIntegralType" value="SPECIALPRODUCT"/>
+                </entity-condition>
+                <entity-condition entity-name="PartyIntegral" list="nonCategoryList">
+                    <condition-expr field-name="partyIntegralType" value="NONCATEGORY"/>
+                </entity-condition>
+                <entity-condition entity-name="PartyIntegral" list="nonProductList">
+                    <condition-expr field-name="partyIntegralType" value="NONPRODUCT"/>
+                </entity-condition>
+                <service service-name="findPartyLevel"></service>
+                <service service-name="getAllLevelType"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator"
+                                  location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑用法 begin -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">消费积分设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link text="会员管理" style="breadcrumb"/>
+                                <link text="消费积分设置" style="breadcrumb" target="consumeIntegralSet"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <!-- 面包屑用法 end -->
+                    <decorator-section name="body">
+                        <section>
+                            <!-- 是否有查询权限-->
+                            <condition>
+                                <if-has-permission permission="PARTY_CONSUME" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template
+                                                location="component://party/webapp/membermgr/member/consumeIntegralSet.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看消费积分的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--消费积分设置 end by gss 2015-12-24 -->
+
+    <!--会员等级规则设置 begin by  gss 2016-1-20-->
+    <screen name="partyLevelTypeSet">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <entity-condition entity-name="PartyLevelType" list="levelList">
+                    <order-by field-name="levelCode"/>
+                    <condition-expr field-name="partyType" value="MEMBER"/>
+                </entity-condition>
+                <entity-condition entity-name="PartyLevelType" list="companylevelList">
+                    <order-by field-name="levelCode"/>
+                    <condition-expr field-name="partyType" value="COMPANY"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator"
+                                  location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑用法 begin -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">会员等级规则</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link text="会员管理" style="breadcrumb"/>
+                                <link text="会员等级规则" style="breadcrumb" target="partyLevelTypeSet"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <!-- 面包屑用法 end -->
+                    <decorator-section name="body">
+                        <section>
+                            <!-- 是否有查询权限 -->
+                            <!-- <condition>
+                                    <if-has-permission permission="PARTY_LEVEL" action="_VIEW" />
+                            </condition> -->
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template
+                                                location="component://party/webapp/membermgr/member/partyLevelTypeSet.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看会员等级的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--会员等级规则设置 begin by  gss 2016-1-20-->
+
+    <!--会员等级规则设置 begin by  gss 2016-1-20-->
+    <screen name="partyCompanyLevelTypeSet">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <entity-condition entity-name="PartyLevelType" list="companylevelList">
+                    <order-by field-name="levelCode"/>
+                    <condition-expr field-name="partyType" value="COMPANY"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator"
+                                  location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑用法 begin -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">会员等级规则</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link text="会员管理" style="breadcrumb"/>
+                                <link text="会员等级规则" style="breadcrumb" target="partyLevelTypeSet"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <!-- 面包屑用法 end -->
+                    <decorator-section name="body">
+                        <section>
+                            <!-- 是否有查询权限 -->
+                            <!-- <condition>
+                                    <if-has-permission permission="PARTY_LEVEL" action="_VIEW" />
+                            </condition> -->
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template
+                                                location="component://party/webapp/membermgr/member/partyCompanyLevelTypeSet.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看会员等级的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--会员等级规则设置 begin by  gss 2016-1-20-->
+
+
+    <!--积分使用设置 begin by  gss 2016-1-26-->
+    <screen name="partyIntegralSet">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <entity-condition entity-name="PartyIntegralSet" list="partyIntegralSetList">
+                    <condition-expr field-name="partyIntegralSetId" value="PARTY_INTEGRAL_SET"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator"
+                                  location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑用法 begin -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">积分使用规则</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link text="会员管理" style="breadcrumb"/>
+                                <link text="积分使用规则" style="breadcrumb" target="partyIntegralSet"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <!-- 面包屑用法 end -->
+                    <decorator-section name="body">
+                        <section>
+                            <!-- 是否有查询权限 -->
+                            <condition>
+                                <if-has-permission permission="PARTY_INTEGRAL" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template
+                                                location="component://party/webapp/membermgr/member/partyIntegralSet.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看积分使用的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--积分使用设置 begin by  gss 2016-1-26-->
+
+
+    <!-- 人员弹出框页面 begin qianjin 2016.02.02 -->
+    <screen name="personListModalPage">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <!--<property-map resource="WorkEffortUiLabels" map-name="uiLabelMap" global="true"/>-->
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template
+                                location="component://party/webapp/membermgr/member/PartyListModalPage.ftl"/>
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 人员弹出框页面 end qianjin 2016.02.02 -->
+    <screen name="personListModalPage1">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <!--<property-map resource="WorkEffortUiLabels" map-name="uiLabelMap" global="true"/>-->
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template
+                                location="component://party/webapp/membermgr/member/PartyListModalPage1.ftl"/>
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+
+    <!--会员消费查询 begin by  gss 2016-3-30-->
+    <screen name="partyConsumption">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <service service-name="findPartyConsumption"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator"
+                                  location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑用法 begin -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">会员消费查询</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link text="会员管理" style="breadcrumb"/>
+                                <link text="会员消费查询" style="breadcrumb" target="partyConsumption"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <!-- 面包屑用法 end -->
+                    <decorator-section name="body">
+                        <section>
+                            <!-- 是否有查询权限 -->
+                            <condition>
+                                <if-has-permission permission="PARTY_CONSUMPTION" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template
+                                                location="component://party/webapp/membermgr/member/partyConsumption.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看会员消费查询的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--会员消费查询 begin by  gss 2016-3-30-->
+
+    <!--会员主数据管理 begin by  gss 2016-3-30-->
+    <screen name="partyMasterManage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <entity-condition entity-name="PartyLevelType" list="levelList">
+                    <order-by field-name="levelCode"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator"
+                                  location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑用法 begin -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">会员列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link text="会员管理" style="breadcrumb"/>
+                                <link text="会员主数据管理" style="breadcrumb" target="partyMasterManage"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <!-- 面包屑用法 end -->
+                    <decorator-section name="body">
+                        <section>
+                            <!-- 是否有查询权限 -->
+                            <condition>
+                                <if-has-permission permission="PARTYMGR_LIST" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template
+                                                location="component://party/webapp/membermgr/member/find_member.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看会员消费查询的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--会员主数据管理 end  by  gss 2016-4-5-->
+
+    <!--会员主数据管理 begin by  gss 2016-3-30-->
+    <screen name="memberAdd">
+        <section>
+            <!--  <actions>
+            <service service-name="findPartyConsumption"></service>
+            </actions> -->
+            <actions>
+                <script location="component://party/webapp/membermgr/WEB-INF/actions/MemberAdd.groovy"/>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <!--地区选择参数-->
+                <set field="dependentForm" value="MemberAddressForm"/>
+                <set field="requestName" value="getAssociatedStateList"/>
+                <set field="responseName" value="stateList"/>
+                <set field="dependentKeyName" value="geoId"/>
+                <set field="descName" value="geoName"/>
+                <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/>
+                <set field="selectedDependentOption1" from-field="mechMap.postalAddress.cityGeoId" default-value="_none_"/>
+                <set field="selectedDependentOption2" from-field="mechMap.postalAddress.countyGeoId" default-value="_none_"/>
+
+                <!--根据国家选择省-->
+                <set field="paramKey" value="countryGeoId"/>
+                <set field="mainId" value="countryGeoId"/>
+                <set field="dependentId" value="stateProvinceGeoId"/>
+
+                <!--根据省选择市-->
+                <set field="paramKey1" value="countryGeoId"/>
+                <set field="mainId1" value="stateProvinceGeoId"/>
+                <set field="dependentId1" value="cityGeoId"/>
+
+
+                <!--根据市选择区县-->
+                <set field="paramKey2" value="countryGeoId"/>
+                <set field="mainId2" value="cityGeoId"/>
+                <set field="dependentId2" value="countyGeoId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator"
+                                  location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑用法 begin -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">会员新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link text="会员管理" style="breadcrumb"/>
+                                <link text="会员新增" style="breadcrumb" target="memberAdd"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <!-- 面包屑用法 end -->
+                    <decorator-section name="body">
+                        <section>
+                            <!-- 是否有新增权限 -->
+                            <condition>
+                                <if-has-permission permission="PARTYMGR_LIST" action="_CREATE"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://common/webcommon/includes/setGeoDependentDropdownValuesJs.ftl"/>
+                                        <html-template location="component://party/webapp/membermgr/member/memberAdd.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看会员的新增权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--会员主数据管理 end by  gss 2016-4-5-->
+
+    <!-- begin add by Gss 会员主数据管理会员明细 2016-4-6-->
+    <screen name="member_Details">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <script location="component://party/webapp/membermgr/WEB-INF/actions/MemberDetail.groovy"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员管理</label>
+                                <label style="sub-title">会员详情</label>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PARTYMGR_LIST" action="_VIEW"/>
+                            </condition>
+                            <widgets>
+
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://common/webcommon/includes/setGeoDependentDropdownValuesJs.ftl"/>
+                                        <html-template location="component://party/webapp/membermgr/member/member_Detail.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要会员的查看权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by Gss 会员主数据管理 会员明细 2016-4-6-->
+
+    <!-- begin add by Gss 会员主数据管理会员编辑 2016-4-7-->
+    <screen name="memberEdit">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <script location="component://party/webapp/membermgr/WEB-INF/actions/MemberEdit.groovy"/>
+                <!--地区选择参数-->
+                <set field="dependentForm" value="MemberAddressForm"/>
+                <set field="requestName" value="getAssociatedStateList"/>
+                <set field="responseName" value="stateList"/>
+                <set field="dependentKeyName" value="geoId"/>
+                <set field="descName" value="geoName"/>
+                <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/>
+                <set field="selectedDependentOption1" from-field="mechMap.postalAddress.cityGeoId" default-value="_none_"/>
+                <set field="selectedDependentOption2" from-field="mechMap.postalAddress.countyGeoId" default-value="_none_"/>
+
+                <!--根据国家选择省-->
+                <set field="paramKey" value="countryGeoId"/>
+                <set field="mainId" value="countryGeoId"/>
+                <set field="dependentId" value="stateProvinceGeoId"/>
+
+                <!--根据省选择市-->
+                <set field="paramKey1" value="countryGeoId"/>
+                <set field="mainId1" value="stateProvinceGeoId"/>
+                <set field="dependentId1" value="cityGeoId"/>
+
+                <!--根据市选择区县-->
+                <set field="paramKey2" value="countryGeoId"/>
+                <set field="mainId2" value="cityGeoId"/>
+                <set field="dependentId2" value="countyGeoId"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员主数据管理</label>
+                                <label style="sub-title">会员编辑</label>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PARTYMGR_LIST" action="_UPDATE"/>
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://common/webcommon/includes/setGeoDependentDropdownValuesJs.ftl"/>
+                                        <html-template location="component://party/webapp/membermgr/member/memberEdit.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要会员的修改权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by Gss 会员主数据管理 会员明细 2016-4-6-->
+
+    <!-- begin add by Gss 会员主数据 优惠券 2016-4-6-->
+    <screen name="productPromoCodeParty">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <service service-name="findProductPromoCodeParty" auto-field-map="parameters"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员主数据管理</label>
+                                <label style="sub-title">会员详情</label>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <!-- <condition>
+                                <if-has-permission permission="PARTYMGR_LIST" action="_VIEW" />
+                            </condition> -->
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://party/webapp/membermgr/member/productPromoCodeParty.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要会员查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by Gss 会员主数据管理 会员明细 2016-4-6-->
+
+    <!-- begin add by Gss 会员主数据 定制果汁 2016-4-6-->
+    <screen name="CustomJuice">
+        <section>
+            <actions>
+                <set field="titleProperty" value="MemberManageTitle"/>
+                <service service-name="findCustomJuice" auto-field-map="parameters"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员主数据管理</label>
+                                <label style="sub-title">会员详情</label>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <!-- <condition>
+                                <if-has-permission permission="PARTYMGR_LIST" action="_VIEW" />
+                            </condition> -->
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://party/webapp/membermgr/member/customJuice.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要会员查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by Gss 会员主数据 定制果汁 2016-4-6-->
+	
+	<!--积分赠送规则 begin by  ct 2018-5-11-->
+	<screen name="findIntegralGiftes">
+		<section>
+			<actions>
+				<service service-name="findIntegralGiftes" auto-field-map="true"></service>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+								  location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>会员管理</label>
+								<label style="sub-title">积分赠送规则</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link  text="会员管理" style="breadcrumb" />
+								<link text="积分赠送规则" style="breadcrumb" target="findIntegralGiftes"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+							<!-- 是否有查询权限 -->
+							<condition>
+								<if-has-permission permission="PARTY_INTEGRALGIFT" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+												location="component://party/webapp/membermgr/member/partyIntegralGift.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看积分赠送的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--积分赠送规则 end by  ct 2018-5-11-->
+
+	<!--积分赠送规则 begin by  ct 2018-5-11-->
+	<screen name="findIntegralGiftes">
+		<section>
+			<actions>
+				<service service-name="findIntegralGiftes" auto-field-map="true"></service>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+								  location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>会员管理</label>
+								<label style="sub-title">积分赠送规则</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link  text="会员管理" style="breadcrumb" />
+								<link text="积分赠送规则" style="breadcrumb" target="findIntegralGiftes"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+							<!-- 是否有查询权限 -->
+							<condition>
+								<if-has-permission permission="PARTY_INTEGRALGIFT" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+												location="component://party/webapp/membermgr/member/partyIntegralGift.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看积分赠送的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--积分赠送规则 end by  ct 2018-5-11-->
+	
+</screens>

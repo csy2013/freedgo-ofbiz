@@ -1,0 +1,9 @@
+<AppSetting>
+    <appId>wx9c96a289f88424af</appId>
+    <secret>ad8650d53d8d44fea2d81c7812792bb8</secret>
+    <token>kaide_token</token>
+    <aesKey>3OHOPSlDDmbQ26ztP9Nw794BHTgoGavI7sn9UpnQPvk</aesKey>
+    <!-- 可以指定自己的tokenHolderClass，继承与com.riversoft.weixin.common.AccessTokenHolder
+    <tokenHolderClass>com.abc.Abc</tokenHolderClass>
+    -->
+</AppSetting>

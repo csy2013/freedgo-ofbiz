@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.0.v20100531 Build &lt;2.6.0.v20100609-1613></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[importPackage(Packages.javolution.util)
+            importPackage(Packages.org.ofbiz.base.util)
+            importPackage(Packages.org.ofbiz.entity.util)
+            importPackage(Packages.org.ofbiz.entity.condition)
+            importPackage(Packages.org.ofbiz.order.ticket)
+		module = "new_report_2.rptdesign";]]></method>
+    <property name="iconFile">/templates/first_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+
+    <parameters>
+        <scalar-parameter name="ids" id="158">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+
+
+    <data-sources>
+        <script-data-source name="OFBIZ" id="8"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="ProductData" id="247">
+            <list-property name="resultSetHints">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">businessName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">mobile</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                     <structure>
+                        <property name="position">4</property>
+                        <property name="name">orderId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">productName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">ticketNo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                     <structure>
+                        <property name="position">7</property>
+                        <property name="name">saleStartTime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">ticketStatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+            </list-property>
+             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">businessName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">businessName</text-property>
+                    <text-property name="heading">businessName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">mobile</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">mobile</text-property>
+                    <text-property name="heading">mobile</text-property>
+                </structure>
+
+                <structure>
+                    <property name="columnName">orderId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">orderId</text-property>
+                    <text-property name="heading">orderId</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">productName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">productName</text-property>
+                    <text-property name="heading">productName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ticketNo</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ticketNo</text-property>
+                    <text-property name="heading">ticketNo</text-property>
+                </structure>
+
+                <structure>
+                    <property name="columnName">ticketStatus</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ticketStatus</text-property>
+                    <text-property name="heading">ticketStatus</text-property>
+                </structure>
+
+
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                     <structure>
+                        <property name="position">1</property>
+                        <property name="name">businessName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">mobile</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                     <structure>
+                        <property name="position">4</property>
+                        <property name="name">orderId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">productName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">ticketNo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                     <structure>
+                        <property name="position">7</property>
+                        <property name="name">ticketStatus</property>
+                        <property name="dataType">string</property>
+                    </structure>
+
+                </list-property>
+            </structure>
+            <property name="dataSource">OFBIZ</property>
+            <method name="open"><![CDATA[
+
+            ids="";
+            if (params["ids"].value) {
+			    ids = params["ids"].value;
+			}
+            ticketList=null;
+
+		    try {
+		         ticketList = TicketService.listTickets(delegator,ids);
+                } catch (e) {
+ 			     Debug.logError(e, module);
+			}
+
+
+            totalRow = 0;
+			countOfRow = 0;
+			if (ticketList) {
+			    totalRow = ticketList.size();
+			}
+
+			]]></method>
+
+            <method name="fetch"><![CDATA[if (countOfRow > totalRow - 1) return false;
+
+                ticket = ticketList.get(countOfRow);
+                Debug.logError( "test ticket lsit: =================================================1   " + ticket, module);
+
+              businessName=ticket.get("businessName");
+                Debug.logError( "test ticket lsit: =================================================2   " + businessName, module);
+
+
+				name1=ticket.get("name");
+				  Debug.logError( "test ticket lsit: =================================================3   " + name1, module);
+
+
+				mobile = ticket.get("mobile")==null?"":ticket.get("mobile");
+  Debug.logError( "test ticket lsit: =================================================4   " + mobile, module);
+
+
+				orderId=ticket.get("orderId");
+				  Debug.logError( "test ticket lsit: =================================================*********************   " + orderId, module);
+
+
+				productName=ticket.get("productName");
+				  Debug.logError( "test ticket lsit: =================================================*********************   " + productName, module);
+
+
+				ticketNo = ticket.get("ticketNo");
+
+				ticketStatus=ticket.get("ticketStatus");
+				if (ticketStatus =='notUsed') ticketStatus = '未使用';
+                if (ticketStatus =='hasUsed') ticketStatus = '已使用';
+                 if (ticketStatus =='notAudited') ticketStatus = '未审批';
+                  if (ticketStatus =='notRefunded') ticketStatus = '待退款';
+                   if (ticketStatus =='hasRefuned') ticketStatus = '已退款';
+                    if (ticketStatus =='rejectApplication') ticketStatus = '审批拒绝';
+                     if (ticketStatus =='expired') ticketStatus = '已过期';
+
+
+                row["businessName"] = businessName;
+	            row["name"] = name1;
+	            row["mobile"] = mobile;
+
+	            row["orderId"] = orderId;
+	            row["productName"] = productName;
+	            row["ticketNo"] = ticketNo;
+
+	            row["ticketStatus"] = ticketStatus;
+	            countOfRow ++;
+			    return true;]]></method>
+             </script-data-set>
+
+    </data-sets>
+    <styles>
+        <style name="report" id="110">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="245">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-large</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">验证码数据</text-property>
+        </label>
+        <table id="163">
+
+            <property name="width">100%</property>
+            <property name="dataSet">ProductData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">businessName</property>
+                    <text-property name="displayName">businessName</text-property>
+                    <expression name="expression" >dataSetRow["businessName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+
+                <structure>
+                    <property name="name">name</property>
+                    <text-property name="displayName">name</text-property>
+                    <expression name="expression" >dataSetRow["name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+
+                <structure>
+                    <property name="name">mobile</property>
+                    <text-property name="displayName">mobile</text-property>
+                    <expression name="expression" >dataSetRow["mobile"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">orderId</property>
+                    <text-property name="displayName">orderId</text-property>
+                    <expression name="expression" >dataSetRow["orderId"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">productName</property>
+                    <text-property name="displayName">productName</text-property>
+                    <expression name="expression" >dataSetRow["productName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+
+
+                 <structure>
+                    <property name="name">ticketNo</property>
+                    <text-property name="displayName">ticketNo</text-property>
+                    <expression name="expression" >dataSetRow["ticketNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+
+                <structure>
+                    <property name="name">ticketStatus</property>
+                    <text-property name="displayName">ticketStatus</text-property>
+                    <expression name="expression" >dataSetRow["ticketStatus"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+
+
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+
+            <column id="287"/>
+            <column id="288"/>
+            <column id="289"/>
+
+            <header>
+                  <row id="164">
+                    <cell id="153">
+                        <label id="176">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">商家名称</text-property>
+                        </label>
+                    </cell>
+                    <cell id="154">
+                        <label id="177">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">用户名</text-property>
+                        </label>
+                    </cell>
+                    <cell id="155">
+                        <label id="178">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">手机号码</text-property>
+                        </label>
+                    </cell>
+
+                    <cell id="156">
+                        <label id="179">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">订单号</text-property>
+                        </label>
+                    </cell>
+                    <cell id="157">
+                        <label id="180">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">商品名称</text-property>
+                        </label>
+                    </cell>
+                    <cell id="158">
+                        <label id="181">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">验证码</text-property>
+                        </label>
+                    </cell>
+                    <cell id="159">
+                        <label id="182">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">状态</text-property>
+                        </label>
+                    </cell>
+
+
+                </row>
+            </header>
+            <detail>
+                <row id="173">
+                  <cell id="144">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="269">
+                            <property name="resultSetColumn">businessName</property>
+                        </data>
+                    </cell>
+                    <cell id="276">
+                        <data id="373">
+                            <property name="resultSetColumn">name</property>
+                        </data>
+                    </cell>
+
+                    <cell id="277">
+                        <data id="374">
+                            <property name="resultSetColumn">mobile</property>
+                        </data>
+                    </cell>
+                    <cell id="278">
+                        <data id="375">
+                            <property name="resultSetColumn">orderId</property>
+                        </data>
+                    </cell>
+                     <cell id="279">
+                        <data id="376">
+                            <property name="resultSetColumn">productName</property>
+                        </data>
+                    </cell>
+
+                    <cell id="280">
+                        <data id="377">
+                            <property name="resultSetColumn">ticketNo</property>
+                        </data>
+                    </cell>
+                    <cell id="281">
+                        <data id="378">
+                            <property name="resultSetColumn">ticketStatus</property>
+                        </data>
+                    </cell>
+
+
+                </row>
+            </detail>
+            <footer>
+                <row id="182">
+                   <cell id="183"/>
+                    <cell id="184"/>
+                    <cell id="185"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

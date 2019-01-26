@@ -1,0 +1,1298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Facility Services</description>
+    <vendor>OFBiz</vendor>
+    <version>1.0</version>
+
+    <!-- 仓库列表查询 -->
+    <service name="findFacility" engine="java"
+             location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="getFacilityList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="facilityName" type="String" mode="IN" optional="true"/>
+        <attribute name="facilityId" type="String" mode="IN" optional="true"/>
+        <attribute name="facilityInnerCode" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="facilityList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 仓库删除 -->
+    <service name="deleteFacility" engine="java"
+             location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="deleteFacility"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 仓库新增 -->
+    <service name="addFacility" engine="java"
+             location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="addFacility"
+             auth="false">
+        <attribute name="facilityName" type="String" mode="IN" optional="false"/>
+        <attribute name="facilityId" type="String" mode="IN" optional="false"/>
+        <attribute name="facilityInnerCode" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="capacity" type="BigDecimal" mode="IN" optional="true" default-value="0"/>
+        <attribute name="facilityCoverageArea" type="String" mode="IN" optional="false"/>
+    </service>
+
+    <!-- 仓库修改 -->
+    <service name="editFacility" engine="java"
+             location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="editFacility"
+             auth="false">
+        <attribute name="facilityId" type="String" mode="IN" optional="false"/>
+        <attribute name="facilityName"  type="String" mode="IN" optional="false"/>
+        <attribute name="facilityInnerCode" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="capacity" type="BigDecimal" mode="IN" optional="true" default-value="0"/>
+        <attribute name="facilityCoverageArea" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 根据仓库ID获取产品数量 -->
+    <service name="getProductByFacilityId" engine="java"
+             location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="getProductByFacilityId"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+        <attribute name="productCount" type="Long" mode="OUT"/>
+    </service>
+
+    <!-- 根据ID获取仓库信息 -->
+    <service name="getFacilityById" engine="java"
+             location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="getFacilityById"
+             auth="false">
+        <attribute name="facilityId" type="String" mode="IN" optional="true"/>
+        <attribute name="paramMap" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 获取地区列表数据 -->
+    <service name="goAddPage" engine="java"
+             location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="goAddPage"
+             auth="false">
+        <attribute name="facilityId" type="String" mode="OUT"/>
+        <attribute name="geoList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <!-- 获取地区列表数据 -->
+    <service name="getGeoList" engine="java"
+             location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="getGeoList"
+             auth="false">
+        <attribute name="geoList" type="java.util.List" mode="OUT"/>
+    </service>
+
+
+    <!-- 库存列表查询 -->
+    <service name="getInventoryList" engine="java"
+             location="com.qihua.ofbiz.facility.InventoryServices"
+             invoke="getInventoryList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="facilityId" type="String" mode="IN" optional="false"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="inventoryList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+        <attribute name="facilityId" type="String" mode="OUT"/>
+    </service>
+
+    <!-- 预警库存列表查询 -->
+    <service name="getWarningInventoryList" engine="java"
+             location="com.qihua.ofbiz.facility.InventoryServices"
+             invoke="getWarningInventoryList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="facilityId" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="inventoryList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 库存修改时加载初始化数据 -->
+    <service name="goInventoryEdit" engine="java"
+             location="com.qihua.ofbiz.facility.InventoryServices"
+             invoke="goInventoryEdit"
+             auth="false">
+        <attribute name="inventoryItemId" type="String" mode="IN"/>
+        <attribute name="inventoryList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <!-- 库存修改 -->
+    <service name="editInventory" engine="java"
+             location="com.qihua.ofbiz.facility.InventoryServices"
+             invoke="editInventory"
+             auth="false">
+        <attribute name="inventoryItemId" type="String" mode="IN"/>
+        <attribute name="available" type="String" mode="IN"/>
+    </service>
+
+    <!-- 库存新增 -->
+    <service name="addInventory" engine="java"
+             location="com.qihua.ofbiz.facility.InventoryServices"
+             invoke="addInventory"
+             auth="false">
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="facilityId" type="String" mode="IN"/>
+        <attribute name="available" type="String" mode="IN"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="IN"/>
+    </service>
+
+    <!-- 库存Excel单元格校验通用方法 -->
+    <service name="inventoryValidateCell" engine="java"
+             location="com.qihua.ofbiz.facility.InventoryValidateCell"
+             invoke="validateCellData" auth="false">
+        <attribute name="curRow" type="Integer" mode="IN"/>
+        <attribute name="curCol" type="Integer" mode="IN" />
+        <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/>
+        <attribute name="entityName" type="String" mode="IN"/>
+        <attribute name="headName" type="String" mode="IN"/>
+        <attribute name="curColType" type="String" mode="IN"/>
+        <attribute name="curColCode" type="String" mode="IN"/>
+        <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/>
+        <attribute name="curColMaxlength" type="String" mode="IN"/>
+        <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/>
+        <attribute name="errorString" type="String" mode="OUT"/>
+    </service>
+
+
+    <!-- Excel单元格校验通用方法 -->
+    <service name="validateCell" engine="java"
+             location="com.qihua.ofbiz.excel.ValidateCell"
+             invoke="validateCellData" auth="false">
+        <attribute name="curRow" type="Integer" mode="IN"/>
+        <attribute name="curCol" type="Integer" mode="IN" />
+        <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/>
+        <attribute name="entityName" type="String" mode="IN"/>
+        <attribute name="headName" type="String" mode="IN"/>
+        <attribute name="curColType" type="String" mode="IN"/>
+        <attribute name="curColCode" type="String" mode="IN"/>
+        <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/>
+        <attribute name="curColMaxlength" type="String" mode="IN"/>
+        <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/>
+        <attribute name="errorString" type="String" mode="OUT"/>
+    </service>
+
+
+    <!-- 查询商品列表，弹出框使用   add by qianjin 2016/01/19 -->
+    <service name="getProductListForModal" engine="java"
+             location="org.ofbiz.product.product.ProductServices"
+             invoke="getProductListForModal"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="productPriceStart" type="String" mode="IN" optional="true" />
+		<attribute name="productPriceEnd" type="String" mode="IN" optional="true" />
+        <attribute name="productStoreId" type="String" mode="IN" optional="true" />
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+
+    <service name="getProductWithoutVirtualListForModal" engine="java"
+             location="org.ofbiz.product.product.ProductServices"
+             invoke="getProductWithoutVirtualListForModal"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="productPriceStart" type="String" mode="IN" optional="true" />
+        <attribute name="productPriceEnd" type="String" mode="IN" optional="true" />
+        <attribute name="productStoreId" type="String" mode="IN" optional="true" />
+        <attribute name="productStoreId" type="String" mode="IN" optional="true" />
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <service name="getUnUsedProductListForModal" engine="java"
+             location="org.ofbiz.product.product.ProductServices"
+             invoke="getUnUsedProductListForModal"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="productPriceStart" type="String" mode="IN" optional="true" />
+        <attribute name="productPriceEnd" type="String" mode="IN" optional="true" />
+        <attribute name="productStoreId" type="String" mode="IN" optional="true" />
+        <attribute name="startDate" type="String" mode="IN" optional="true"/>
+        <attribute name="endDate" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 查询直降商品弹出使用  -->
+    <!--<service name="getProductListForModal" engine="java"
+             location="org.ofbiz.product.product.ProductServices"
+             invoke="getProductListForModal"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="productPriceStart" type="String" mode="IN" optional="true" />
+        <attribute name="productPriceEnd" type="String" mode="IN" optional="true" />
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>-->
+
+
+    <!-- 获取二级和三级分类 add by Wcy at 2016.01.26 -->
+    <service name="getProductCategory" engine="java" location="org.ofbiz.product.product.ProductServices" invoke="getProductCategory" auth="false">
+        <attribute name="resultData" type="List" mode="OUT"/>
+    </service>
+
+    <!-- 获取分类列表根据等级和父编号 add by Wcy at 2016.01.26 -->
+    <service name="getProductCategoryByLeveId" engine="java" location="org.ofbiz.product.product.ProductServices" invoke="getProductCategoryByLeveId" auth="false">
+        <!-- <attribute name="level" type="String" mode="IN"/> -->
+        <attribute name="id" type="String" mode="IN" optional="true"/>
+        <attribute name="categoryList" type="List" mode="OUT"/>
+    </service>
+
+    <!-- 获取评价列表 add by Wcy -->
+    <service name="findProductReview" engine="java" location="org.ofbiz.product.product.ProductServices"
+             invoke="findProductReview" auth="false">
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/>
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="String" mode="IN" optional="true"/>
+        <attribute name="viewSize" type="String" mode="IN" optional="true"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 查询首页 add by Wcy -->
+    <service name="mainIndex" engine="java" location="org.ofbiz.product.product.ProductServices"
+             invoke="mainIndex" auth="false">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="communityId" type="List" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- 查询分类 add by Wcy -->
+    <service name="getClassify" engine="java" location="org.ofbiz.product.product.ProductServices"
+             invoke="getClassify" auth="false">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="resultData" type="List" mode="OUT"/>
+    </service>
+
+
+
+    <!-- begin add Gss 半成品列表数据 at 2016.04.18 -->
+    <service name="findSemiProduct" engine="java" location="org.ofbiz.product.product.ProductServices" invoke="findSemiProduct" auth="true">
+        <description>General SemiProduct  Find Service, Used in the findSemiProduct page in the SemiProduct, etc</description>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="productTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="INOUT" optional="true"/>
+        <attribute name="sortType" type="String" mode="INOUT" optional="true"/>
+        <!-- begin 查询字段 -->
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="isUsed" type="String" mode="IN" optional="true"/>
+        <attribute name="isFull" type="String" mode="IN" optional="true"/>
+        <!-- end 查询字段 -->
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+     <!-- begin add Gss 半成品列表数据 at 2016.04.18 -->
+    
+    <!-- 更新半成品启用状态 add by Wcy -->
+    <service name="updateSemiIsUse" engine="java" location="org.ofbiz.product.product.ProductServices"
+             invoke="updateSemiIsUse" auth="false">
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="isUsed" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <!-- 查询半成品  add by  gss begin 2016-4-20 -->
+   <service name="findSemibyId" engine="java"  auth="true" export="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="findSemibyId">
+        <description>Finds productId(s) corresponding to a product reference, productId or a GoodIdentification idValue</description>
+        <attribute type="String" mode="IN" name="productId" optional="false"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="product" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="productSemiAssoc" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="proNutrientComposition" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="ProductPrice" optional="true"/>
+        <attribute type="List" mode="OUT" name="productLabelLists" optional="true"/>
+        <attribute type="Map" mode="OUT" name="capacity_map" optional="true"/>
+        <attribute type="List" mode="OUT" name="productFacility" optional="true"/>
+    </service>
+    <!-- 查询半成品  add by  gss end 2016-4-20 -->
+   <!-- 编辑半成品  add by  gss begin 2016-4-20 -->
+   <service name="updateProSemi" engine="java"  auth="true" export="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="updateProSemi">
+        <description>Finds productId(s) corresponding to a product reference, productId or a GoodIdentification idValue</description>
+        <attribute type="String" mode="IN" name="productId" optional="true"/>
+        <attribute type="String" mode="IN" name="productName" optional="true"/>
+        <attribute type="String" mode="IN" name="viscosity" optional="true"/>
+        <attribute type="String" mode="IN" name="fruitJuiceType" optional="true"/>
+        <attribute type="String" mode="IN" name="productPrice" optional="true"/>
+        <attribute type="String" mode="IN" name="percentageLimit" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+        <attribute type="String" mode="IN" name="isUsed" optional="true"/>
+        <attribute type="String" mode="IN" name="perQuantity" optional="true"/>
+        <attribute type="String" mode="IN" name="density" optional="true"/>
+        <attribute type="List" mode="IN" name="productLabelId" optional="true"/>
+        <attribute type="String" mode="IN" name="pcDetails" optional="true"/>
+        
+        <attribute type="String" mode="IN" name="energy" optional="true"/>
+        <attribute type="String" mode="IN" name="water" optional="true"/>
+        <attribute type="String" mode="IN" name="protein" optional="true"/>
+        <attribute type="String" mode="IN" name="fat" optional="true"/>
+        <attribute type="String" mode="IN" name="dietFiber" optional="true"/>
+        <attribute type="String" mode="IN" name="cho" optional="true"/>
+        <attribute type="String" mode="IN" name="vitA" optional="true"/>
+        <attribute type="String" mode="IN" name="vitB1" optional="true"/>
+        <attribute type="String" mode="IN" name="vitB2" optional="true"/>
+        <attribute type="String" mode="IN" name="vitC" optional="true"/>
+        <attribute type="String" mode="IN" name="vitE" optional="true"/>
+        <attribute type="String" mode="IN" name="nicotinicAcid" optional="true"/>
+        <attribute type="String" mode="IN" name="na" optional="true"/>
+        <attribute type="String" mode="IN" name="ca" optional="true"/>
+        <attribute type="String" mode="IN" name="fe" optional="true"/>
+        
+    </service>
+    <!-- 编辑半成品  add by  gss end 2016-4-20 -->
+    
+    <!-- 营养成分列表 add by qianjin at 2016.04.18-->
+    <service name="getProductNutrientCompositionList" engine="java"
+             location="org.ofbiz.product.product.nutrientcomposition.ProductNutrientCompositionServices"
+             invoke="getProductNutrientCompositionList" auth="false">
+        <description>getProductNutrientCompositionList</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 根据商品ID获取营养成分信息 add by qianjin at 2016.04.18-->
+    <service name="getProductNutrientCompositionById" engine="java"
+             location="org.ofbiz.product.product.nutrientcomposition.ProductNutrientCompositionServices"
+             invoke="getProductNutrientCompositionById" auth="false">
+        <description>getProductNutrientCompositionById</description>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="pnc" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+
+    <!-- 修改营养成分信息 add by qianjin at 2016.04.18-->
+    <service name="updateProductNutrientCompositionById" engine="java"
+             location="org.ofbiz.product.product.nutrientcomposition.ProductNutrientCompositionServices"
+             invoke="updateProductNutrientCompositionById" auth="false">
+        <description>updateProductNutrientCompositionById</description>
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="energy" type="String" mode="IN" optional="true"/>
+        <attribute name="water" type="String" mode="IN" optional="true"/>
+        <attribute name="protein" type="String" mode="IN" optional="true"/>
+        <attribute name="fat" type="String" mode="IN" optional="true"/>
+        <attribute name="dietFiber" type="String" mode="IN" optional="true"/>
+        <attribute name="cho" type="String" mode="IN" optional="true"/>
+        <attribute name="vitA" type="String" mode="IN" optional="true"/>
+        <attribute name="vitB1" type="String" mode="IN" optional="true"/>
+        <attribute name="vitB2" type="String" mode="IN" optional="true"/>
+        <attribute name="vitC" type="String" mode="IN" optional="true"/>
+        <attribute name="vitE" type="String" mode="IN" optional="true"/>
+        <attribute name="nicotinicAcid" type="String" mode="IN" optional="true"/>
+        <attribute name="na" type="String" mode="IN" optional="true"/>
+        <attribute name="ca" type="String" mode="IN" optional="true"/>
+        <attribute name="fe" type="String" mode="IN" optional="true"/>
+        <attribute name="nutritiveEffect" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!--begin 商品标签  Add By AlexYao 2016-4-18-->
+    <service name="productLabelJson" engine="java"  auth="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="productLabelJson">
+        <description></description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="labelName" type="String" mode="IN" optional="true"/>
+        <attribute name="labelType" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    <service name="addProductLabel" engine="java"  auth="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="addProductLabel">
+        <description></description>
+        <attribute name="labelType" type="String" mode="IN" optional="false"/>
+        <attribute name="labelName" type="String" mode="IN" optional="false"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="remarks" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <service name="editProductLabel" engine="java"  auth="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="editProductLabel">
+        <description></description>
+        <attribute name="productLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="labelType" type="String" mode="IN" optional="false"/>
+        <attribute name="labelName" type="String" mode="IN" optional="false"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="remarks" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <service name="deleteProductLabel" engine="java"  auth="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="deleteProductLabel">
+        <description></description>
+        <attribute name="productLabelIds" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <service name="productLabelDetail" engine="java"  auth="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="productLabelDetail">
+        <description></description>
+        <attribute name="productLabelId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="labelType" type="String" mode="OUT" optional="true"/>
+        <attribute name="labelName" type="String" mode="OUT" optional="true"/>
+        <attribute name="contentId" type="String" mode="OUT" optional="true"/>
+        <attribute name="remarks" type="String" mode="OUT" optional="true"/>
+        <attribute name="isUse" type="String" mode="OUT" optional="true"/>
+    </service>
+    <service name="editLabelIsUse" engine="java"  auth="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="editLabelIsUse">
+        <description></description>
+        <attribute name="productLabelId" type="String" mode="IN" optional="false"/>
+        <attribute name="isUse" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <!--end 商品标签 Add by AlexYao 2016-4-18-->
+    
+    <!-- 新增营养成分信息 add by qianjin at 2016.04.19-->
+    <service name="addProductNutrientComposition" engine="java" 
+			 location="org.ofbiz.product.product.nutrientcomposition.ProductNutrientCompositionServices"
+             invoke="addProductNutrientComposition" auth="false">
+        <description>addProductNutrientComposition</description>
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="energy" type="String" mode="IN" optional="true"/>
+        <attribute name="water" type="String" mode="IN" optional="true"/>
+        <attribute name="protein" type="String" mode="IN" optional="true"/>
+        <attribute name="fat" type="String" mode="IN" optional="true"/>
+        <attribute name="dietFiber" type="String" mode="IN" optional="true"/>
+        <attribute name="cho" type="String" mode="IN" optional="true"/>
+        <attribute name="vitA" type="String" mode="IN" optional="true"/>
+        <attribute name="vitB1" type="String" mode="IN" optional="true"/>
+        <attribute name="vitB2" type="String" mode="IN" optional="true"/>
+        <attribute name="vitC" type="String" mode="IN" optional="true"/>
+        <attribute name="vitE" type="String" mode="IN" optional="true"/>
+        <attribute name="nicotinicAcid" type="String" mode="IN" optional="true"/>
+        <attribute name="na" type="String" mode="IN" optional="true"/>
+        <attribute name="ca" type="String" mode="IN" optional="true"/>
+        <attribute name="fe" type="String" mode="IN" optional="true"/>
+        <attribute name="nutritiveEffect" type="String" mode="IN" optional="true"/> 
+    </service>
+    
+    <!-- 营养成分Excel校验 add by qianjin at 2016.04.18 -->
+    <service name="productNutrientCompositionValidateCell" engine="java"
+             location="org.ofbiz.product.product.nutrientcomposition.ProductNutrientCompositionValidateCell" 
+             invoke="validateCellData" auth="false">
+             <attribute name="curRow" type="Integer" mode="IN"/> 
+             <attribute name="curCol" type="Integer" mode="IN" /> 
+             <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/> 
+             <attribute name="entityName" type="String" mode="IN"/> 
+             <attribute name="headName" type="String" mode="IN"/> 
+             <attribute name="curColType" type="String" mode="IN"/> 
+             <attribute name="curColCode" type="String" mode="IN"/> 
+             <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/> 
+             <attribute name="curColMaxlength" type="String" mode="IN"/> 
+             <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/> 
+             <attribute name="errorString" type="String" mode="OUT"/> 
+    </service>
+    
+    <!-- begin add Gss 半成品列表数据 at 2016.04.18 -->
+    <service name="find_ProductGood" engine="java" location="org.ofbiz.product.product.ProductServices" invoke="find_ProductGood" auth="true">
+        <description>General SemiProduct  Find Service, Used in the findSemiProduct page in the SemiProduct, etc</description>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="INOUT" optional="true"/>
+        <attribute name="sortType" type="String" mode="INOUT" optional="true"/>
+        <!-- begin 查询字段 -->
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="isOnline" type="String" mode="IN" optional="true"/>
+        <attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="isFull" type="String" mode="IN" optional="true"/>
+        <!-- end 查询字段 -->
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+     <!-- begin add Gss 半成品列表数据 at 2016.04.18 -->
+    
+    <!-- Add by Gss at 2016/04/22  商品审核查询 Begin -->
+    <service name="find_ProductForVerifyIco" engine="java"
+            location="org.ofbiz.product.product.ProductServices" invoke="find_ProductForVerifyIco">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="productForVerifyList" type="List" mode="OUT" optional="false"/>
+        <attribute name="productForVerifyListSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- Add  by Gss at 2016/04/22  商品审核查询 End -->
+     
+     <!-- Add by Gss at 20160113 更新商品处理  Begin-->
+    <service name="update_ProductIcoPro" engine="java"
+            location="org.ofbiz.product.product.ProductServices" invoke="update_ProductIcoPro">
+        <attribute name="productId" type="String" mode="INOUT" optional="true"/>
+		<attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+		<attribute name="productName" type="String" mode="IN" optional="true"/>
+		<attribute name="productSubheadName" type="String" mode="IN" optional="true"/>
+		<attribute name="startTime" type="Timestamp" mode="IN" optional="true"/>
+		<attribute name="endTime" type="Timestamp" mode="IN" optional="true"/>
+		<attribute name="viscosity" type="String" mode="IN" optional="true"/>
+		<attribute name="viscosity1" type="String" mode="IN" optional="true"/>
+		<attribute name="viscosity2" type="String" mode="IN" optional="true"/>
+		
+		<attribute name="volume" type="String" mode="IN" optional="true"/>
+		<attribute name="weight" type="String" mode="IN" optional="true"/>
+		<attribute name="mobileDetails" type="String" mode="IN" optional="true" allow-html="any"/>
+		
+		<attribute name="productLabels" type="String" mode="IN" optional="true"/>
+		<attribute name="salePrice" type="String" mode="IN" optional="true"/>
+		<attribute name="marketPrice" type="String" mode="IN" optional="true"/>
+		<attribute name="costPrice" type="String" mode="IN" optional="true"/>
+		<attribute name="barcode" type="String" mode="IN" optional="true"/>
+		
+		<attribute name="productAttrInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productContentInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productAssocInfos" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="operateType" type="String" mode="IN" optional="true"/>
+        <attribute name="mainProductId" type="String" mode="IN" optional="true"/>
+        <attribute name="featureProductName" type="String" mode="IN" optional="true"/>
+        <attribute name="featureProductId" type="String" mode="IN" optional="true"/>
+        <attribute name="productFeatureGoodsDelIds" type="String" mode="IN" optional="true"/>
+   </service>
+   <!-- Add by Gss at 2016013 End -->
+   
+    <!-- Add by Gss at 20160428 同步商品新增  Begin-->
+    <service name="createProductForSap" engine="java"
+            location="sap.MaterielSynService" invoke="createProductForSap">
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+		<attribute name="primaryProductCategoryId" type="String" mode="IN" optional="true"/>
+		<attribute name="productName" type="String" mode="IN" optional="true"/>
+		<attribute name="type" type="String" mode="IN" optional="true"/>
+		<attribute name="prodWeightUom" type="String" mode="IN" optional="true"/>
+		<attribute name="density" type="String" mode="IN" optional="true"/>
+		<attribute name="idDel" type="String" mode="IN" optional="true"/>
+   </service>
+   <!-- Add by Gss at 2016013 End -->
+   
+    <!-- Add by Gss at 20160428 同步物料数据  Begin-->
+    <service name="materielSynForSap" engine="java"
+            location="sap.MaterielSynService" invoke="materielSynForSap">
+      <attribute name="productType" type="String" mode="IN" optional="true"/> 
+   </service>
+   <!-- Add by Gss at 2016013 End -->
+    
+    <!-- 商品定价列表 add by qianjin at 2016.04.19-->
+    <service name="getProductCustomPriceList" engine="java"
+             location="org.ofbiz.product.product.customprice.ProductCustomPriceServices"
+             invoke="getProductCustomPriceList" auth="false">
+        <description>getProductCustomPriceList</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="collocationName" type="String" mode="IN" optional="true"/>
+        <attribute name="totalNum" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    
+    <!-- 修改商品定价 add by qianjin at 2016.04.19-->
+    <service name="updateProductCustomPriceById" engine="java"
+             location="org.ofbiz.product.product.customprice.ProductCustomPriceServices"
+             invoke="updateProductCustomPriceById" auth="false">
+        <description>updateProductCustomPriceById</description>
+        <attribute name="productCustomPriceId" type="String" mode="IN"/>
+        <attribute name="referenceQuotation" type="String" mode="IN" optional="true"/>
+        <attribute name="foreignQuotation" type="String" mode="IN"/>
+    </service>
+    
+    <!-- 新增商品定价 add by qianjin at 2016.04.19-->
+    <service name="addProductCustomPrice" engine="java" 
+			 location="org.ofbiz.product.product.customprice.ProductCustomPriceServices"
+             invoke="addProductCustomPrice" auth="false">
+        <description>addProductCustomPrice</description>
+        <attribute name="collocationName" type="String" mode="IN"/>
+        <attribute name="typeA" type="String" mode="IN" optional="true"/>
+        <attribute name="typeB" type="String" mode="IN" optional="true"/>
+        <attribute name="typeC" type="String" mode="IN" optional="true"/>
+        <attribute name="typeD" type="String" mode="IN" optional="true"/>
+        <attribute name="referenceQuotation" type="String" mode="IN" optional="true"/>
+        <attribute name="foreignQuotation" type="String" mode="IN"/>
+        
+        <attribute name="isUpdate" type="Boolean" mode="OUT"/>
+    </service>
+    
+    <!-- 商品定价Excel校验 add by qianjin at 2016.04.18 -->
+    <service name="productCustomPriceValidateCell" engine="java"
+             location="org.ofbiz.product.product.customprice.ProductCustomPriceValidateCell" 
+             invoke="validateCellData" auth="false">
+             <attribute name="curRow" type="Integer" mode="IN"/> 
+             <attribute name="curCol" type="Integer" mode="IN" /> 
+             <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/> 
+             <attribute name="entityName" type="String" mode="IN"/> 
+             <attribute name="headName" type="String" mode="IN"/> 
+             <attribute name="curColType" type="String" mode="IN"/> 
+             <attribute name="curColCode" type="String" mode="IN"/> 
+             <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/> 
+             <attribute name="curColMaxlength" type="String" mode="IN"/> 
+             <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/> 
+             <attribute name="errorString" type="String" mode="OUT"/> 
+    </service>
+    
+    <!-- 根据仓库ID获取仓库产能明细 add by qianjin 2016.04.21 -->
+    <service name="getCapacityByFacilityId" engine="java" 
+			 location="com.qihua.ofbiz.facility.FacilityServices"
+             invoke="getCapacityByFacilityId" auth="false">
+        <description>getCapacityByFacilityId</description>
+        <attribute name="facilityId" type="String" mode="IN"/>
+        <attribute name="capacitys" type="Map" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 库存检核 add by qian 2016.04.25 -->
+    <service name="validateInventory" engine="java" 
+			 location="com.qihua.ofbiz.facility.InventoryServices"
+             invoke="validateInventory" auth="false">
+        <description>validateInventory</description>
+        <attribute name="paramList" type="List" mode="IN"/>
+        
+        <attribute name="validateFlag" type="Boolean" mode="OUT"/>
+        <attribute name="msg" type="String" mode="OUT"/>
+    </service>
+    
+
+    
+    <!-- 查询订单信息 add by qianjin 2016.05.03 -->
+    <service name="getOrderItemByOrderIdAndSeqId" engine="java" 
+			 location="com.qihua.ofbiz.facility.LabelServices"
+             invoke="getOrderItemByOrderIdAndSeqId" auth="false">
+        <description>getOrderItemByOrderIdAndSeqId</description>
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        <attribute name="orderItemSeqId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="orderMap" type="Map" mode="OUT" optional="false"/>
+        <attribute name="deliveryMap" type="Map" mode="OUT" optional="false"/>
+    </service>
+    
+    <!-- 添加标签打印配置 add by qianjin 2016.05.04 -->
+    <service name="addLabelSet" engine="java" 
+			 location="com.qihua.ofbiz.facility.LabelServices"
+             invoke="addLabelSet" auth="false">
+        <description>addLabelSet</description>
+        <attribute name="labelPrintSetId" type="String" mode="IN" optional="true"/>
+        <attribute name="headInfo" type="String" mode="IN" optional="true"/>
+        <attribute name="htmlContent" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="nutrients" type="String" mode="IN" optional="true"/>
+
+        <attribute name="orderMap" type="Map" mode="OUT" optional="true"/>
+        <attribute name="deliveryMap" type="Map" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 查询标签设定信息 add by qianjin 2016.05.04 -->
+    <service name="getLabelPrintSet" engine="java" 
+			 location="com.qihua.ofbiz.facility.LabelServices"
+             invoke="getLabelPrintSet" auth="false">
+        <description>getLabelPrintSet</description>
+        <attribute name="labelPrintSet" type="GenericValue" mode="OUT" optional="true"/>
+        <attribute name="labelPrintSetAssocList" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    
+    <!-- 订单入库 add by qianjin 2016.05.07-->
+    <service name="orderItemStorage" engine="java" location="com.qihua.ofbiz.facility.LabelServices"
+             invoke="orderItemStorage" auth="false">
+        <description>orderItemStorage</description>
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        <attribute name="orderItemSeqId" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <!-- 根据订单号查询快递单 add by qianjin 2016.05.07-->
+    <service name="getExpressOrderByOrderId" engine="java" location="com.qihua.ofbiz.facility.LabelServices"
+             invoke="getExpressOrderByOrderId" auth="false">
+        <description>getExpressOrderByOrderId</description>
+        <attribute name="orderId" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="expressOrderInfo" type="Map" mode="OUT" optional="true"/>
+    </service>
+    
+
+
+    <service name="findProductBy_Id" engine="java"  auth="true" export="true"
+             location="org.ofbiz.product.product.ProductServices" invoke="findProductById">
+        <description>Finds productId(s) corresponding to a product reference, productId or a GoodIdentification idValue</description>
+        <attribute type="String" mode="IN" name="idToFind" optional="false"/>
+        <attribute type="String" mode="IN" name="goodIdentificationTypeId" optional="true"/>
+        <attribute type="String" mode="IN" name="searchProductFirst" optional="true"/>
+        <attribute type="String" mode="IN" name="searchAllId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="product" optional="true"/>
+        <attribute type="List" mode="OUT" name="productsList" optional="true"/>
+    </service>
+    
+    
+    <!-- 查询评价标签列表 add by qianjin 2016.06.06 -->
+    <service name="getReviewLabelList" engine="java"
+             location="com.qihua.ofbiz.review.ReviewServices"
+             invoke="getReviewLabelList"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="name" type="String" mode="IN" optional="true"/>
+        <attribute name="reviewLabelId" type="String" mode="IN" optional="true"/>
+        <attribute name="star" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    
+    <!-- 新增评价标签 add by qianjin 2016.06.06 -->
+    <service name="addReviewLabel" engine="java"
+             location="com.qihua.ofbiz.review.ReviewServices"
+             invoke="addReviewLabel"
+             auth="false">
+        <attribute name="reviewLabelId" type="String" mode="IN" optional="true"/>
+        <attribute name="name" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="star" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <!-- 修改评价标签 add by qianjin 2016.06.06 -->
+    <service name="editReviewLabel" engine="java"
+             location="com.qihua.ofbiz.review.ReviewServices"
+             invoke="editReviewLabel"
+             auth="false">
+        <attribute name="reviewLabelId" type="String" mode="IN" optional="true"/>
+        <attribute name="name" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="star" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <!-- 获取标签评价表新的主键ID add by qianjin 2016.06.06 -->
+    <service name="getReviewLabelNextSeqId" engine="java"
+             location="com.qihua.ofbiz.review.ReviewServices"
+             invoke="getReviewLabelNextSeqId"
+             auth="false">
+        <attribute name="nextSeqId" type="String" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 根据ID获取评价标签ID add by qianjin 2016.06.06 -->
+    <service name="getReviewLabelById" engine="java"
+             location="com.qihua.ofbiz.review.ReviewServices"
+             invoke="getReviewLabelById"
+             auth="false">
+        <attribute name="reviewLabelId" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="record" type="GenericValue" mode="OUT" optional="true"/>
+        <attribute name="treeName" type="String" mode="OUT" optional="false"/>
+    </service>
+    
+    <!-- 修改评价标签启用状态 add by qianjin 2016.06.06 -->
+    <service name="editReviewLabelIsUse" engine="java"
+             location="com.qihua.ofbiz.review.ReviewServices"
+             invoke="editReviewLabelIsUse"
+             auth="false">
+        <attribute name="reviewLabelId" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+    </service>
+    
+    <!-- 根据ID删除评价标签,可批量删除 add by qianjin 2016.06.06 -->
+    <service name="delReviewLabel" engine="java"
+             location="com.qihua.ofbiz.review.ReviewServices"
+             invoke="delReviewLabel"
+             auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+    <!-- end by gss 2017/3/29 商品分类列表 -->
+    <!-- Add by zhajh at 20160108 Begin -->
+    <!--add by zhajh at 20160109 产品服务上传图片用 begin-->
+    <service name="addProductCategoryPicUpload" default-entity-name="ProductContent" engine="java"
+             location="org.ofbiz.product.imagemanagement.ImageManagementServices" invoke="addProductCategoryPicUpload" auth="true">
+        <implements service="uploadFileInterface"/>
+        <auto-attributes include="pk" mode="IN" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute mode="INOUT" name="contentId" optional="true" type="String"/>
+        <attribute mode="INOUT" name="dataResourceId" optional="true" type="String"/>
+        <attribute mode="OUT" name="contentFrameId" optional="true" type="String"/>
+        <attribute mode="OUT" name="dataResourceFrameId" optional="true" type="String"/>
+        <attribute mode="INOUT" name="productPrizeIdlist" optional="true" type="String"/>
+        <attribute mode="INOUT" name="localList" optional="true" type="String"/>
+
+        <override name="productContentTypeId" optional="false"/>
+        <override name="productId" optional="false"/>
+    </service>
+    <!--add by zhajh at 20160109 产品服务上传图片用 end-->
+
+    <!-- Add by zhajh at 20160109 更新商品分类  Begin-->
+    <service name="updateProductCategoryIcoPro" engine="java"
+             location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="updateProductCategoryIcoPro">
+        <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="categoryName" type="String" mode="IN" optional="true"/>
+        <attribute name="primaryParentCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceNum" type="String" mode="IN" optional="true"/>
+        <attribute name="isHasExtendAttr" type="String" mode="IN" optional="true"/>
+        <attribute name="operateType" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryLevel" type="String" mode="IN" optional="true"/>
+        <attribute name="extendAttrInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+
+        <attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productContentTypeId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="categoryFeatureTypeId" type="java.util.List" mode="IN" optional="true"/>
+        <override name="productCategoryTypeId"  type="String" mode="IN" optional="true"/>
+
+
+    </service>
+    <!-- Add by zhajh at 20160108 End -->
+
+
+
+
+
+    <!-- Add by zhajh at 20160109 更新商品品牌  Begin-->
+    <service name="addProductBrand" engine="java"
+             location="org.ofbiz.product.product.ProductServices" invoke="addProductBrand">
+        <attribute name="productBrandId" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="brandNameAlias" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryIds" type="String" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="operateType" type="String" mode="IN" optional="true"/>
+
+        <attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productContentTypeId" type="String" mode="IN" optional="true"/>
+
+    </service>
+    <!-- Add by zhajh at 20160108 End -->
+
+
+    <!-- Add by zhajh at 20160109 更新商品品牌  Begin-->
+    <service name="updateProductBrandIcoPro" engine="java"
+             location="org.ofbiz.product.product.ProductServices" invoke="updateProductBrandIcoPro">
+        <attribute name="productBrandId" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="brandNameAlias" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryIds" type="String" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="operateType" type="String" mode="IN" optional="true"/>
+
+        <attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productContentTypeId" type="String" mode="IN" optional="true"/>
+
+    </service>
+    <!-- Add by zhajh at 20160108 End -->
+
+    <!-- add by cc 2018.03.22 -->
+    <!-- 商家品牌列表查询 -->
+    <service name="getBusinessBrandList" engine="java"
+             location="org.ofbiz.product.product.ProductBrandServices"
+             invoke="getBusinessBrandList" auth="false">
+        <description>getBusinessBrandList</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="auditStatus" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 品牌Excel单元格校验通用方法 -->
+    <service name="brandValidateCell" engine="java"
+             location="org.ofbiz.product.product.BrandValidateCell"
+             invoke="validateCellData" auth="false">
+        <attribute name="curRow" type="Integer" mode="IN"/>
+        <attribute name="curCol" type="Integer" mode="IN" />
+        <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/>
+        <attribute name="entityName" type="String" mode="IN"/>
+        <attribute name="headName" type="String" mode="IN"/>
+        <attribute name="curColType" type="String" mode="IN"/>
+        <attribute name="curColCode" type="String" mode="IN"/>
+        <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/>
+        <attribute name="curColMaxlength" type="String" mode="IN"/>
+        <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/>
+        <attribute name="errorString" type="String" mode="OUT"/>
+    </service>
+
+    <!-- add by Wcy 订单图片上传  at 2016.01.13-->
+    <!--<service name="uploadImgsForProductReview" engine="java"-->
+    <!--location="org.ofbiz.product.product.ProductServices" invoke="uploadImgsForProductReview" auth="false">-->
+    <!--<attribute name="productReviewId" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="orientation1" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="orientation2" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="orientation3" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="uploadedFile1" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="_uploadedFile1_fileName" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="_uploadedFile1_contentType" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="uploadedFile2" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="_uploadedFile2_fileName" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="_uploadedFile2_contentType" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="uploadedFile3" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="_uploadedFile3_fileName" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="_uploadedFile3_contentType" type="String" mode="IN" optional="true"/>-->
+    <!--<attribute name="status" type="Boolean" mode="OUT" optional="true"/>-->
+    <!--</service>-->
+
+    <!-- Add by zhajh at 20160113 更新商品处理  Begin-->
+    <service name="updateProductIcoPro" engine="java"
+             location="org.ofbiz.product.product.ProductServices" invoke="updateProductIcoPro">
+        <attribute name="productId" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="productTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="productSubheadName" type="String" mode="IN" optional="true"/>
+        <attribute name="isOnline" type="String" mode="IN" optional="true"/>
+
+        <!-- <attribute name="introductionDate" type="String" mode="IN" optional="true"/>
+        <attribute name="salesDiscontinuationDate" type="String" mode="IN" optional="true"/>
+ -->		<attribute name="startTime" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="endTime" type="Timestamp" mode="IN" optional="true"/>
+
+        <attribute name="businessPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="brandId" type="String" mode="IN" optional="true"/>
+        <attribute name="volume" type="String" mode="IN" optional="true"/>
+        <attribute name="weight" type="String" mode="IN" optional="true"/>
+        <attribute name="isUsedFeature" type="String" mode="IN" optional="true"/>
+        <attribute name="seoKeyword" type="String" mode="IN" optional="true"/>
+        <attribute name="pcDetails" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="mobileDetails" type="String" mode="IN" optional="true" allow-html="any"/>
+
+        <attribute name="productTags" type="String" mode="IN" optional="true"/>
+        <attribute name="salePrice" type="String" mode="IN" optional="true"/>
+        <attribute name="marketPrice" type="String" mode="IN" optional="true"/>
+        <attribute name="costPrice" type="String" mode="IN" optional="true"/>
+
+        <attribute name="productAttrInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productParameterInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productFacilityInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productFeatureInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productContentInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productAssocInfos" type="String" mode="IN" optional="true"/>
+
+        <attribute name="operateType" type="String" mode="IN" optional="true"/>
+        <attribute name="mainProductId" type="String" mode="IN" optional="true"/>
+        <attribute name="featureProductName" type="String" mode="IN" optional="true"/>
+        <attribute name="featureProductId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="productFeatureGoodsDelIds" type="String" mode="IN" optional="true"/>
+        <!--Add by zhajh at 20180305 yabiz相关内容 Begin-->
+        <attribute name="isRecommendHomePage" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportService" type="String" mode="IN" optional="true"/>
+        <attribute name="supportServiceType" type="String" mode="IN" optional="true"/>
+        <attribute name="integralDeductionType" type="String" mode="IN" optional="true"/>
+        <attribute name="integralDeductionUpper" type="String" mode="IN" optional="true"/>
+        <attribute name="purchaseLimitationQuantity" type="String" mode="IN" optional="true"/>
+        <attribute name="isListShow" type="String" mode="IN" optional="true"/>
+        <attribute name="voucherAmount" type="String" mode="IN" optional="true"/>
+        <attribute name="useLimit" type="String" mode="IN" optional="true"/>
+        <attribute name="useStartTime" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="useEndTime" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="isBondedGoods" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="isInner" type="String" mode="IN" optional="true"/>
+        <attribute name="platformClassId" type="String" mode="IN" optional="true"/>
+        <attribute name="providerId" type="String" mode="IN" optional="true"/>
+
+        <!--Add by zhajh at 20180305 yabiz相关内容 End-->
+
+    </service>
+    <!-- Add by zhajh at 2016013 End -->
+
+
+    <!-- Add by zhajh at 20160113 更新特征商品处理  Begin-->
+    <service name="updateProductFeatureGoodsIcoPro" engine="java"
+             location="org.ofbiz.product.product.ProductServices" invoke="updateProductFeatureGoodsIcoPro">
+        <attribute name="productIdMain" type="String" mode="IN" optional="true"/>
+        <attribute name="productTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="productNameMain" type="String" mode="IN" optional="true"/>
+        <attribute name="productSubheadName" type="String" mode="IN" optional="true"/>
+        <attribute name="isOnline" type="String" mode="IN" optional="true"/>
+
+        <!-- <attribute name="introductionDate" type="String" mode="IN" optional="true"/>
+        <attribute name="salesDiscontinuationDate" type="String" mode="IN" optional="true"/>
+ -->    <attribute name="startTime" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="endTime" type="Timestamp" mode="IN" optional="true"/>
+
+        <attribute name="businessPartyId" type="String" mode="IN" optional="true"/>
+        <attribute name="brandId" type="String" mode="IN" optional="true"/>
+        <attribute name="volumeMain" type="String" mode="IN" optional="true"/>
+        <attribute name="weightMain" type="String" mode="IN" optional="true"/>
+        <attribute name="isUsedFeature" type="String" mode="IN" optional="true"/>
+        <attribute name="seoKeyword" type="String" mode="IN" optional="true"/>
+        <attribute name="pcDetails" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="mobileDetails" type="String" mode="IN" optional="true" allow-html="any"/>
+
+        <attribute name="productTags" type="String" mode="IN" optional="true"/>
+        <attribute name="salePriceMain" type="String" mode="IN" optional="true"/>
+        <attribute name="marketPriceMain" type="String" mode="IN" optional="true"/>
+        <attribute name="costPriceMain" type="String" mode="IN" optional="true"/>
+
+        <attribute name="productAttrInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productParameterInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productFacilityInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productFeatureInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productContentInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productAssocInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="productFeatureGoodsDelIds" type="String" mode="IN" optional="true"/>
+
+        <attribute name="productFeatureGoodsInfos" type="String" mode="IN" optional="true"/>
+
+        <!--Add by zhajh at 20180305 yabiz相关内容 Begin-->
+        <attribute name="isRecommendHomePage" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportService" type="String" mode="IN" optional="true"/>
+        <attribute name="supportServiceType" type="String" mode="IN" optional="true"/>
+        <attribute name="integralDeductionType" type="String" mode="IN" optional="true"/>
+        <attribute name="integralDeductionUpper" type="String" mode="IN" optional="true"/>
+        <attribute name="purchaseLimitationQuantity" type="String" mode="IN" optional="true"/>
+        <attribute name="isListShow" type="String" mode="IN" optional="true"/>
+        <attribute name="voucherAmount" type="String" mode="IN" optional="true"/>
+        <attribute name="useLimit" type="String" mode="IN" optional="true"/>
+        <attribute name="useStartTime" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="useEndTime" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="isBondedGoods" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="isInner" type="String" mode="IN" optional="true"/>
+        <attribute name="platformClassId" type="String" mode="IN" optional="true"/>
+        <attribute name="providerId" type="String" mode="IN" optional="true"/>
+        <!--Add by zhajh at 20180305 yabiz相关内容 End-->
+
+        <attribute name="operateType" type="String" mode="IN" optional="true"/>
+
+    </service>
+    <!-- Add by zhajh at 2016013 End -->
+    <!-- Add by zhajh at 2016013 商品Excel单元格校验通用方法 Begin -->
+    <!-- 商品Excel单元格校验通用方法 -->
+    <service name="goodValidateCell" engine="java" location="org.ofbiz.product.product.GoodValidateCell" invoke="validateCellData" auth="false">
+        <attribute name="curRow" type="Integer" mode="IN"/>
+        <attribute name="curCol" type="Integer" mode="IN" />
+        <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/>
+        <attribute name="entityName" type="String" mode="IN"/>
+        <attribute name="headName" type="String" mode="IN"/>
+        <attribute name="curColType" type="String" mode="IN"/>
+        <attribute name="curColCode" type="String" mode="IN"/>
+        <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/>
+        <attribute name="curColMaxlength" type="String" mode="IN"/>
+        <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/>
+        <attribute name="errorString" type="String" mode="OUT"/>
+    </service>
+    <!-- Add by zhajh at 2016013 商品Excel单元格校验通用方法 End -->
+
+    <!-- Add by zhajh at 20160225 取消失效的准备商品实体 Begin -->
+    <service name="autoCancelPrepareProductEntity" engine="java" location="org.ofbiz.product.product.ProductServices" invoke="autoCancelPrepareProductEntity" auth="false">
+        <description>cancel product by productId</description>
+        <attribute name="productId" type="String" mode="IN" optional="false"/>
+        <attribute name="resultData" type="Boolean" mode="OUT"/>
+    </service>
+    <!-- Add by zhajh at 20160225 取消失效的准备商品实体 End -->
+
+
+    <service name="updateProductCategory" default-entity-name="ProductCategory" engine="java"
+             location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="updateProductCategory" auth="true">
+        <description>Update an ProductCategory</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <attribute name="categoryFeatureTypeId" type="String" mode="IN" optional="true"/>
+        <override name="productCategoryTypeId" optional="false"/>
+    </service>
+
+
+
+    <!-- Add by zhajh at 20180705 商品缓存处理  Begin-->
+    <service name="productInfoRedisPro" engine="java"
+             location="org.ofbiz.product.product.ProductServices" invoke="productInfoRedisPro">
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <attribute name="isDel" type="String" mode="IN" optional="true"/>
+        <attribute name="msg" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- Add by zhajh at 20180705 商品缓存处理 End -->
+
+    <service name="getVariantProductsInfo" engine="java" location="com.yuaoq.yabiz.product.service.ProductFeatureServices" invoke="getVariantProductsInfo">
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="allFeatures" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="variantFeatureNames" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="variantFeatureIds" type="java.util.Map" mode="OUT" optional="true"/>
+        <attribute name="variantProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="featureTypes" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="updateProductPrice" default-entity-name="ProductPrice" engine="java"
+             location="com.yuaoq.yabiz.product.service.ProductPriceServices" invoke="updateProductPrice" auth="true">
+        <description>Update an ProductPrice</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true">
+            <exclude field-name="priceWithoutTax"/>
+            <exclude field-name="priceWithTax"/>
+            <exclude field-name="taxAmount"/>
+            <exclude field-name="createdDate"/>
+            <exclude field-name="createdByUserLogin"/>
+            <exclude field-name="lastModifiedDate"/>
+            <exclude field-name="lastModifiedByUserLogin"/>
+        </auto-attributes>
+        <!--<attribute name="oldPrice" type="BigDecimal" mode="OUT" optional="false"/>-->
+        <override name="price" optional="false"/>
+        <override name="fromDate" optional="true"/>
+    </service>
+</services>

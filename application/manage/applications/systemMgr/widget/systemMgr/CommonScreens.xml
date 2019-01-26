@@ -1,0 +1,1179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+    <screen name="main-decorator">
+        <section>
+            <actions>
+                <!-- base/top/specific map first, then more common map added for shared labels -->
+                <property-map resource="SystemMgrUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="layoutSettings.companyName" from-field="uiLabelMap.SystemMgrCompanyName" global="true"/>
+                <!--<set field="layoutSettings.companySubtitle" from-field="uiLabelMap." global="true"/>-->
+
+                <set field="activeApp" value="systemMgr" global="true"/>
+                <set field="applicationMenuName" value="SystemMgrAppBar" global="true"/>
+                <set field="applicationMenuLocation" value="component://systemMgr/widget/systemMgr/SystemMgrMenus.xml" global="true"/>
+                <set field="applicationTitle" value="${uiLabelMap.SystemManage}" global="true"/>
+            </actions>
+            <widgets>
+                <include-screen name="ApplicationDecorator" location="component://commonext/widget/CommonScreens.xml"/>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="managerList">
+        <section>
+            <actions>
+                <service service-name="findManager" auto-field-map="parameters"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label text="${uiLabelMap.systemMgr}"></label>
+                                <label style="sub-title" text="${uiLabelMap.SystemerManage}（共${userListSize}条）"></label>
+                            </column>
+                            <column style="breadcrumb">
+                                <link target="main" text="${uiLabelMap.systemMgr}" style="breadcrumb"/>
+                                <link text="${uiLabelMap.RoleManage}" style="breadcrumb"/>
+                                <link target="userList" text="${uiLabelMap.SystemerManage}" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="SYSTEMMGR_USER" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/managerList.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看管理员的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="roleList">
+        <section>
+            <actions>
+                <service service-name="findRoles" auto-field-map="parameters" />
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label text="${uiLabelMap.RoleManage}"></label>
+                                <label style="sub-title" text="${uiLabelMap.roleMgr}（共${roleListSize}条）"></label>
+                            </column>
+                            <column style="breadcrumb">
+                                <link target="main" text="${uiLabelMap.systemMgr}" style="breadcrumb"/>
+                                <link text="${uiLabelMap.RoleManage}" style="breadcrumb"/>
+                                <link target="roleList" text="${uiLabelMap.roleMgr}" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="SYSTEMMGR_GROUP" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/roleList.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看角色的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+     <!--异常页面 begin by gss 2015-1-9-->
+	<screen name="exceptionPage">
+		<section>
+			<actions>
+		    <entity-condition entity-name="ExceptionPage" list="exceptionPageList">
+            </entity-condition>
+		    </actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>${uiLabelMap.systemMgr}</label>
+								<label style="sub-title">异常页面</label>
+							</column>
+							<column style="breadcrumb">
+							    <label text="系统管理" style="breadcrumb"></label>
+								<link text="异常页面" style="breadcrumb" target="exceptionPage"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						   <condition>
+                                <if-has-permission permission="SYSTEMMGR_GROUP" action="_VIEW" />
+                           </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://systemMgr/webapp/systemMgr/exceptionPage.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3">需要查看异常页面的权限
+								</label>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--异常页面 end by gss 2015-1-9 -->
+
+	<!--号段设置 begin by  gss 2016-1-11-->
+	<screen name="SegmentNumber">
+		<section>
+			<actions>
+				<service service-name="findSegmentNoList"></service>
+		    </actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>规则设置</label>
+								<label style="sub-title">号段设置</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="系统管理" style="breadcrumb"></label>
+								<link text="规则设置" style="breadcrumb"/>
+								<link text="号段设置" style="breadcrumb" target="SegmentNumber"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<condition>
+                                <if-has-permission permission="SEGMENT_NUMBER" action="_VIEW" />
+                         </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://systemMgr/webapp/systemMgr/segmentNumber.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3">需要查看号段设置页面的权限
+								</label>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--号段设置 end by gss 2016-1-11 -->
+
+	<!--支付接口设置 begin by  gss 2016-1-11-->
+	<screen name="PayMentInterface">
+		<section>
+			<actions>
+			<entity-condition entity-name="PaymentGatewayAliPay"  list="AliPayList">
+            <condition-expr field-name="paymentGatewayConfigId" value="ALIPAY"/>
+            </entity-condition>
+			<entity-condition entity-name="PaymentGatewayAliPay"  list="unionPayList">
+            <condition-expr field-name="paymentGatewayConfigId" value="UNIONPAY"/>
+            </entity-condition>
+			<entity-condition entity-name="PaymentGatewayWeixinPay"  list="WeixinPayList">
+            <condition-expr field-name="paymentGatewayConfigId" value="WEIXINPAY"/>
+            </entity-condition>
+		    </actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>接口管理</label>
+								<label style="sub-title">支付接口设置</label>
+							</column>
+							<column style="breadcrumb">
+							    <label text="系统管理" style="breadcrumb"></label>
+								<link  text="接口管理" style="breadcrumb" />
+								<link text="支付接口" style="breadcrumb" target="PayMentInterface"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<condition>
+                                <if-has-permission permission="PAYMENT_INTERFANCE" action="_VIEW" />
+                         </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://systemMgr/webapp/systemMgr/payMentInterface.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3">需要查看支付接口设置页面的权限
+								</label>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--支付接口设置 end by  gss 2016-1-11-->
+
+	<!--字段表设置 begin by  gss 2016-1-11-->
+	<screen name="FieldTableSet">
+		<section>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>规则设置</label>
+								<label style="sub-title">字段表设置</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="规则设置" style="breadcrumb" />
+								<link target="" text="字段表设置" style="breadcrumb" />
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<condition>
+                                <if-has-permission permission="FIELD_TABLESET" action="_VIEW" />
+                         </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://systemMgr/webapp/systemMgr/fieldTableSet.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3">需要查看字段表设置页面的权限
+								</label>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--字段表设置 end by  gss 2016-1-11-->
+
+	<!--支付方式 begin by  gss 2016-1-11-->
+	<screen name="PaymentType">
+		<section>
+			<actions>
+			<entity-condition entity-name="PaymentGatewayConfigType" list="typeList">
+            </entity-condition>
+				<property-map resource="ContentUiLabels" map-name="uiLabelMap" global="true"/>
+		    </actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>系统管理</label>
+								<label style="sub-title">支付方式</label>
+							</column>
+							<column style="breadcrumb">
+							    <label text="系统管理" style="breadcrumb"></label>
+								<link text="支付方式" style="breadcrumb" target="PaymentType"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<!-- 是否有查询权限 -->
+						<condition>
+                                <if-has-permission permission="PAYMENT_TYPE" action="_VIEW" />
+                        </condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://systemMgr/webapp/systemMgr/paymentType.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+                                <label style="h3" text="需要查看支付方式的权限"/>
+                            </fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--支付方式 end by gss 2015-12-24 -->
+
+	<!--订单规则 begin by  gss 2016-1-11-->
+	<screen name="OrderRule">
+		<section>
+			<actions>
+			<entity-condition entity-name="OrderRule" list="orderRuleList">
+            </entity-condition>
+				<property-map resource="ContentUiLabels" map-name="uiLabelMap" global="true"/>
+		    </actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+					location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>规则设置</label>
+								<label style="sub-title">订单规则</label>
+							</column>
+							<column style="breadcrumb">
+								<link target="" text="系统管理" style="breadcrumb" />
+								<link text="订单规则" style="breadcrumb" target="OrderRule"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+						<!-- 是否有查询权限 -->
+						<!-- <condition>
+                                <if-has-permission permission="ORDER_SET" action="_VIEW" />
+                        </condition> -->
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+											location="component://systemMgr/webapp/systemMgr/orderRule.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+                                <label style="h3" text="需要查看订单设置的权限"/>
+                            </fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--订单规则 end by gss 2016-1-12 -->
+
+    <screen name="editSystemUserLogin">
+        <section>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template location="component://systemMgr/webapp/systemMgr/editSystemUserLogin.ftl"/>
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+
+
+    <!-- 地区管理   begin  add by gss 2016 4.11 -->
+    <screen name="RegionalManage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="SystemMgrManageTitle"/>
+                <set field="headerItem" value="productbrandtype"/>
+                <set field="tabButtonItem" value="productBrandType"/>
+                <set field="labelTitleProperty" value="ProductBrandType"/>
+                <!--<service service-name="findProductBrands" auto-field-map="parameters"/>-->
+                <!-- <service service-name="findProductBrandType" auto-field-map="parameters"/> -->
+                <entity-condition list="defaultAddressList" entity-name="DefaultAddress">
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>系统管理</label>
+                                <label style="sub-title">地区管理</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <!--  <link target="/" text="${uiLabelMap.CommonFirst}" style="breadcrumb"/>
+                                 <link text="商品配置" style="breadcrumb"/>
+                                 <link target="ProductBrandType" text="商品分类" style="breadcrumb active"/> -->
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"/>
+                                <link target="RegionalManage" text="系统管理" style="breadcrumb"/>
+                                <link target="" text="地区管理" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <!-- body内容 -->
+                    <decorator-section name="body">
+                        <!--   <platform-specific>
+                                <html><html-template location="component://product/webapp/catalog/productgoods/findProductBrandTypes.ftl"/></html>
+                            </platform-specific> -->
+
+                        <section>
+                            <condition>
+                                <if-has-permission permission="GEO" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html><html-template location="component://systemMgr/webapp/systemMgr/findRegional.ftl"/></html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要商品分类的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 地区管理   end  add by gss 2016 4.11 -->
+
+    <!-- begin add by AlexYao 物流公司 at 2016.04.11 -->
+    <screen name="logisticsCompany">
+        <section>
+            <actions>
+                <set field="titleProperty" value="SystemMgrManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>配送管理</label>
+                                <label style="sub-title">物流公司设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="配送管理" style="breadcrumb"/>
+                                <link target="" text="物流公司设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="LOGISTICS_COMPANY" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/logisticsCompany.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看物流公司的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 物流公司 at 2016.04.11 -->
+
+    <!-- begin add by AlexYao 物流模板 at 2016.04.12 -->
+    <screen name="logisticsTemple">
+        <section>
+            <actions>
+                <set field="titleProperty" value="SystemMgrManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>配送管理</label>
+                                <label style="sub-title">物流模板设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="配送管理" style="breadcrumb"/>
+                                <link target="" text="物流模板设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="LOGISTICS_TEMPLE" action="_VIEW" />
+                            </condition>
+                            <actions>
+                                <script location="component://systemMgr/webapp/systemMgr/WEB-INF/actions/logistics/logisticsTemple.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/logisticsTemple.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看物流模板的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 物流模板 at 2016.04.12 -->
+
+    <!-- begin add by AlexYao 新增物流模板 at 2016.04.12 -->
+    <screen name="addLogisticsTemple">
+        <section>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>配送管理</label>
+                                <label style="sub-title">物流模板设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="配送管理" style="breadcrumb"/>
+                                <link target="" text="物流模板设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="LOGISTICS_TEMPLE" action="_CREATE" />
+                            </condition>
+                            <actions>
+                                <script location="component://systemMgr/webapp/systemMgr/WEB-INF/actions/logistics/addLogisticsTemple.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/addLogisticsTemple.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要新增物流模板的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 新增物流模板 at 2016.04.12 -->
+
+    <!-- begin add by AlexYao 编辑物流模板 at 2016.04.13 -->
+    <screen name="editLogisticsTemple">
+        <section>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>配送管理</label>
+                                <label style="sub-title">物流模板设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="配送管理" style="breadcrumb"/>
+                                <link target="" text="物流模板设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="LOGISTICS_TEMPLE" action="_UPDATE" />
+                            </condition>
+                            <actions>
+                                <script location="component://systemMgr/webapp/systemMgr/WEB-INF/actions/logistics/editLogisticsTemple.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/editLogisticsTemple.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要修改物流模板的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 编辑物流模板 at 2016.04.13 -->
+
+    <!-- begin add by AlexYao 物流单据 at 2016.04.14 -->
+    <screen name="logisticsDocuments">
+        <section>
+            <actions>
+                <set field="titleProperty" value="SystemMgrManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>配送管理</label>
+                                <label style="sub-title">物流单据设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="配送管理" style="breadcrumb"/>
+                                <link target="" text="物流单据设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="LOGISTICS_DOCUMENTS" action="_VIEW" />
+                            </condition>
+                            <actions>
+                                <script location="component://systemMgr/webapp/systemMgr/WEB-INF/actions/logistics/logisticsDocuments.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/logisticsDocuments.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看物流单据的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 物流单据 at 2016.04.14 -->
+
+    <!-- begin add by AlexYao 新增物流单据 at 2016.04.14 -->
+    <screen name="addLogisticsDocuments">
+        <section>
+            <actions>
+                <set field="titleProperty" value="SystemMgrManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>配送管理</label>
+                                <label style="sub-title">物流单据设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="配送管理" style="breadcrumb"/>
+                                <link target="" text="物流单据设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="LOGISTICS_DOCUMENTS" action="_CREATE" />
+                            </condition>
+                            <actions>
+                                <script location="component://systemMgr/webapp/systemMgr/WEB-INF/actions/logistics/addLogisticsDocuments.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/addLogisticsDocuments.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要新增物流单据的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 新增物流单据 at 2016.04.14 -->
+
+    <!-- begin add by AlexYao 编辑物流单据 at 2016.04.15 -->
+    <screen name="editLogisticsDocuments">
+        <section>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>配送管理</label>
+                                <label style="sub-title">物流单据设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="配送管理" style="breadcrumb"/>
+                                <link target="" text="物流单据设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="LOGISTICS_DOCUMENTS" action="_UPDATE" />
+                            </condition>
+                            <actions>
+                                <script location="component://systemMgr/webapp/systemMgr/WEB-INF/actions/logistics/editLogisticsDocuments.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/editLogisticsDocuments.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要修改物流单据的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 编辑物流单据 at 2016.04.15 -->
+
+    <!-- start 消息模板管理 -->
+    <screen name="messageTemplateList">
+        <section>
+            <actions>
+                <set field="titleProperty" value="SystemMgrManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>系统管理</label>
+                                <label style="sub-title">消息模板管理</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <label text="系统管理" style="breadcrumb"></label>
+                                <link target="messageTemplateList" text="消息模板列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="SYSTEM_MESSAGE" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/message/MessageTemplateList.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要消息查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="addMessage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="SystemMgrManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>系统管理</label>
+                                <label style="sub-title">消息管理</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <label text="系统管理" style="breadcrumb"></label>
+                                <link target="messageTemplateList" text="添加消息" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="SYSTEM_MESSAGE" action="_CREATE" />
+                            </condition>
+                            <actions>
+                                <set field="operateType" value="create"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/message/AddMessageTemplate.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要消息添加的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="editMessage">
+        <section>
+            <!--<condition>
+                    <if-has-permission permission="SYSTEM_MESSAGE" action="_UPDATE" />
+                </condition>-->
+            <actions>
+                <set field="titleProperty" value="SystemMgrManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>系统管理</label>
+                                <label style="sub-title">消息编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <label text="系统管理" style="breadcrumb"></label>
+                                <link target="messageTemplateList" text="添加消息" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="SYSTEM_MESSAGE" action="_UPDATE" />
+                            </condition>
+                            <actions>
+                                <set field="operateType" value="update"/>
+                                <script location="component://systemMgr/webapp/systemMgr/WEB-INF/actions/message/editMessageTemplate.groovy"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://systemMgr/webapp/systemMgr/message/EditMessageTemplate.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要消息修改的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end 消息模板管理 -->
+
+
+	<screen name="partyChannelAdd">
+		<section>
+			<actions>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>渠道管理</label>
+								<label style="sub-title">渠道新增</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<label text="渠道管理" style="breadcrumb"></label>
+								<link target="partyChannelAdd" text="渠道新增" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="CHANNEL_MANAGE" action="_CREATE" />
+							</condition>
+							<actions>
+							</actions>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://systemMgr/webapp/systemMgr/partychannel/addPartyChannel.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要渠道新增的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+	<!--渠道列表页面 -->
+	<screen name="partyChannelList">
+		<section>
+			<actions>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>渠道管理</label>
+								<label style="sub-title">渠道列表</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="渠道管理" style="breadcrumb"/>
+								<link target="" text="渠道列表" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="CHANNEL_MANAGE" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://systemMgr/webapp/systemMgr/partychannel/partyChannelList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要渠道查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+
+	<screen name="channelEditPage">
+		<section>
+			<actions>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>渠道管理</label>
+								<label style="sub-title">渠道编辑</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<label text="渠道管理" style="breadcrumb"></label>
+								<link target="partyChannelAdd" text="渠道编辑" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="CHANNEL_MANAGE" action="_UPDATE" />
+							</condition>
+							<actions>
+							</actions>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://systemMgr/webapp/systemMgr/partychannel/updatePartyChannel.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要渠道编辑的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+
+	<!--积分Code设置 begin by  zhajh 2018-4-28-->
+	<screen name="integralCodeSetting">
+		<section>
+			<actions>
+				<service service-name="findIntegralCodeList"></service>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>规则设置</label>
+								<label style="sub-title">积分Code设置</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="系统管理" style="breadcrumb"></label>
+								<link text="规则设置" style="breadcrumb"/>
+								<link text="积分Code设置" style="breadcrumb" target="IntegralCodeSetting"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="INTEGRAL_CODE" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+												location="component://systemMgr/webapp/systemMgr/integralCodeSetting.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3">需要查看号段设置页面的权限
+								</label>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--积分Code设置 end by zhajh 2018-4-28 -->
+
+
+	<!--审核开关设置 begin by  hm 2018-5-12-->
+	<screen name="ProductRulesSet">
+		<section>
+			<actions>
+				<service service-name="findProductRulesSet" auto-field-map="true"></service>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator"
+								  location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑用法 begin -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>规则设置</label>
+								<label style="sub-title">审核开关设置</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="系统管理" style="breadcrumb"></label>
+								<link text="规则设置" style="breadcrumb"/>
+								<link text="审核开关设置" style="breadcrumb" target="ProductRulesSet"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- 面包屑用法 end -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="PRODUCT_RULESSET" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template
+												location="component://systemMgr/webapp/systemMgr/productRulesSet.ftl" />
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看审核开关设置的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--审核开关设置 end by hm 2018-5-12 -->
+
+
+</screens>

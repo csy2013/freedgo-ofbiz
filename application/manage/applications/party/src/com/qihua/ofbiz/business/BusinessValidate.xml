@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<excel>
+   <entity name="商家信息" code="business" >
+		<column name="商家名称" code="business_name" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="商家名称不能为空!"></rule>
+				<rule name="max_length" message="商家名称长度不能超过20位!"></rule>
+			</rules>
+		</column>
+		
+		<column name="会员编码" code="party_id" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="会员编码不允许为空!"></rule>
+				<rule name="max_length" message="会员编码长度不能超过20位!"></rule>
+				<rule name="not_exist" message="会员编码不存在!"></rule>
+			</rules>				
+		</column>
+		
+		<column name="省" code="province" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="省不允许为空!"></rule>
+				<rule name="max_length" message="省长度不能超过20位!"></rule>
+				<rule name="not_exist" message="省不存在!"></rule>
+			</rules>				
+		</column>
+		
+		<column name="市" code="city" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="市不允许为空!"></rule>
+				<rule name="max_length" message="市长度不能超过20位!"></rule>
+				<rule name="not_exist" message="市不存在!"></rule>
+			</rules>				
+		</column>
+		
+		<column name="区" code="county" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="区不允许为空!"></rule>
+				<rule name="max_length" message="区长度不能超过20位!"></rule>
+				<rule name="not_exist" message="区不存在!"></rule>
+			</rules>				
+		</column>
+		
+		<column name="详细地址" code="address" type="String" maxlength="100">
+			<rules> 
+				<rule name="nullable" message="详细地址不允许为空!"></rule>
+				<rule name="max_length" message="详细地址长度不能超过100位!"></rule>
+			</rules>				
+		</column>
+		
+		<column name="联系电话" code="tel" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="联系电话不允许为空!"></rule>
+				<rule name="max_length" message="联系电话长度不能超过20位!"></rule>
+				<rule name="tel_validate" message="联系电话格式错误!"></rule>
+			</rules>				
+		</column>
+		
+		<column name="法人姓名" code="legal_person_name" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="法人姓名不允许为空!"></rule>
+				<rule name="max_length" message="法人姓名长度不能超过20位!"></rule>
+			</rules>				
+		</column>
+		
+		<column name="是否启用" code="is_use" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="是否启用不允许为空!"></rule>
+				<rule name="max_length" message="是否启用长度不能超过20位!"></rule>
+				<rule name="value_check" message="是否启用必须为[是]或[否]!"></rule>
+			</rules>				
+		</column>
+		<column name="商家类型" code="business_type" type="String" maxlength="20">
+			<rules> 
+				<rule name="nullable" message="商家类型不允许为空!"></rule>
+				<rule name="max_length" message="商家类型长度不能超过20位!"></rule>
+				<rule name="not_exist" message="商家类型不存在!"></rule>
+			</rules>				
+		</column>
+   </entity>
+</excel>

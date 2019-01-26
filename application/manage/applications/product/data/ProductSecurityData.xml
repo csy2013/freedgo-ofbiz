@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <!-- Catalog Manager security -->
+    <SecurityPermission name="商品查看" parentPermissionId="CATALOG_ADMIN" description="商品查看" permissionId="CATALOG_VIEW"/>
+    <SecurityPermission name="商品创建" parentPermissionId="CATALOG_ADMIN" description="商品创建" permissionId="CATALOG_CREATE"/>
+    <SecurityPermission name="商品修改" parentPermissionId="CATALOG_ADMIN" description="商品修改" permissionId="CATALOG_UPDATE"/>
+    <SecurityPermission name="商品删除" parentPermissionId="CATALOG_ADMIN" description="商品删除" permissionId="CATALOG_DELETE"/>
+    <SecurityPermission name="商品管理" parentPermissionId="0" description="商品管理" permissionId="CATALOG_ADMIN"/>
+    <SecurityPermission name="有限商品创建" parentPermissionId="CATALOG_ADMIN" description="有限商品创建" permissionId="CATALOG_ROLE_CREATE"/>
+    <SecurityPermission name="有限商品修改" parentPermissionId="CATALOG_ADMIN" description="有限商品修改" permissionId="CATALOG_ROLE_UPDATE"/>
+    <SecurityPermission name="有限商品删除" parentPermissionId="CATALOG_ADMIN" description="有限商品删除" permissionId="CATALOG_ROLE_DELETE"/>
+    <SecurityPermission name="商品价格维护" parentPermissionId="CATALOG_ADMIN" description="商品价格维护" permissionId="CATALOG_PRICE_MAINT"/>
+    <SecurityPermission name="View Allow管理" parentPermissionId="CATALOG_ADMIN" description="View Allow管理" permissionId="CATALOG_VIEW_ALLOW"/>
+    <SecurityPermission name="Purchase Allow管理" parentPermissionId="CATALOG_ADMIN" description="Purchase Allow管理" permissionId="CATALOG_PURCHASE_ALLOW"/>
+
+    <!--<SecurityGroup description="Limited Catalog Admin group, has limited catalog permissions." groupId="CATALOGADMIN_LTD"/>
+    <SecurityGroupPermission groupId="CATALOGADMIN_LTD" permissionId="CATALOG_VIEW"/>
+    <SecurityGroupPermission groupId="CATALOGADMIN_LTD" permissionId="CATALOG_ROLE_CREATE"/>
+    <SecurityGroupPermission groupId="CATALOGADMIN_LTD" permissionId="CATALOG_ROLE_UPDATE"/>
+    <SecurityGroupPermission groupId="CATALOGADMIN_LTD" permissionId="CATALOG_ROLE_DELETE"/>
+    <SecurityGroupPermission groupId="CATALOGADMIN_LTD" permissionId="OFBTOOLS_VIEW"/>
+
+    <SecurityGroup description="Catalog Admin group, has all catalog permissions." groupId="CATALOGADMIN"/>
+    <SecurityGroupPermission groupId="CATALOGADMIN" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission groupId="CATALOGADMIN" permissionId="CATALOG_PRICE_MAINT"/>
+    <SecurityGroupPermission groupId="CATALOGADMIN" permissionId="OFBTOOLS_VIEW"/>
+    &lt;!&ndash; NOTE DEJ20070810 where did this come from? has duplicate ID of that above: <SecurityGroup description="Catalog Admin View and Purchase Allow Products" groupId="CATALOGADMIN"/> &ndash;&gt;
+
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_VIEW_ALLOW"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_PURCHASE_ALLOW"/>
+    -->
+
+
+
+    <!--
+       <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_CREATE"/>
+       <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_DELETE"/>
+       <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_UPDATE"/>
+       <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_VIEW"/>
+       <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_PRICE_MAINT"/>
+       <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_VIEW_ALLOW"/>
+       <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CATALOG_PURCHASE_ALLOW"/>
+
+       <SecurityGroupPermission groupId="VIEWADMIN" permissionId="CATALOG_VIEW"/>
+       <SecurityGroupPermission groupId="BIZADMIN" permissionId="CATALOG_ADMIN"/>
+       <SecurityGroupPermission groupId="BIZADMIN" permissionId="CATALOG_PRICE_MAINT"/>-->
+
+    <!-- Shipping Rate security -->
+    <SecurityPermission name="送货方式查看" parentPermissionId="SHIPRATE_ADMIN" description="送货方式查看" permissionId="SHIPRATE_VIEW"/>
+    <SecurityPermission name="送货方式创建" parentPermissionId="SHIPRATE_ADMIN" description="送货方式创建" permissionId="SHIPRATE_CREATE"/>
+    <SecurityPermission name="送货方式删除" parentPermissionId="SHIPRATE_ADMIN" description="送货方式删除" permissionId="SHIPRATE_DELETE"/>
+    <SecurityPermission name="送货方式管理" parentPermissionId="CATALOG_ADMIN" description="送货方式管理" permissionId="SHIPRATE_ADMIN"/>
+
+    <!--<SecurityGroupPermission groupId="FLEXADMIN" permissionId="SHIPRATE_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="SHIPRATE_DELETE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="SHIPRATE_VIEW"/>
+    <SecurityGroupPermission groupId="VIEWADMIN" permissionId="SHIPRATE_VIEW"/>
+    <SecurityGroupPermission groupId="BIZADMIN" permissionId="SHIPRATE_ADMIN"/>-->
+
+    <!-- Facility Manager security -->
+    <SecurityPermission name="仓存查看" parentPermissionId="FACILITY_ADMIN" description="仓存查看" permissionId="FACILITY_VIEW"/>
+    <SecurityPermission name="仓存创建" parentPermissionId="FACILITY_ADMIN" description="仓存创建" permissionId="FACILITY_CREATE"/>
+    <SecurityPermission name="仓存修改" parentPermissionId="FACILITY_ADMIN" description="仓存修改" permissionId="FACILITY_UPDATE"/>
+    <SecurityPermission name="仓存删除" parentPermissionId="FACILITY_ADMIN" description="仓存删除" permissionId="FACILITY_DELETE"/>
+    <SecurityPermission name="仓存管理" parentPermissionId="0" description="仓存管理" permissionId="FACILITY_ADMIN"/>
+    <SecurityPermission name="有限仓存查看" parentPermissionId="FACILITY_ADMIN" description="有限仓存查看" permissionId="FACILITY_ROLE_VIEW"/>
+    <SecurityPermission name="有限仓存修改" parentPermissionId="CATALOG_ADMIN" description="有限仓存修改" permissionId="FACILITY_ROLE_UPDATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="FACILITY_ADMIN"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="FACILITY_CREATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="FACILITY_DELETE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="FACILITY_UPDATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="FACILITY_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="FACILITY_ROLE_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="FACILITY_ROLE_UPDATE"/>
+
+    <!-- Image Management security -->
+    <!--<SecurityGroup description="Image Management Admin." groupId="IMAGEADMIN"/>-->
+    <SecurityPermission name="图片管理" parentPermissionId="CATALOG_ADMIN" description="图片管理" permissionId="IMAGE_MANAGEMENT_ADMIN"/>
+   <!-- <SecurityGroupPermission groupId="IMAGEADMIN" permissionId="IMAGE_MANAGEMENT_ADMIN"/>
+    <SecurityGroupPermission groupId="IMAGEADMIN" permissionId="IMAGE_MANAGEMENT_APPROVE"/>
+    <SecurityGroupPermission groupId="IMAGEADMIN" permissionId="IMAGE_MANAGEMENT_UPLOAD"/>-->
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="IMAGE_MANAGEMENT_ADMIN"/>
+
+    <!--<SecurityGroup description="Image Management Approve" groupId="IMAGEAPPROVE"/>-->
+    <SecurityPermission name="图片审批" parentPermissionId="IMAGE_MANAGEMENT_ADMIN" description="图片审批" permissionId="IMAGE_MANAGEMENT_APPROVE"/>
+    <!--<SecurityGroupPermission groupId="IMAGEAPPROVE" permissionId="IMAGE_MANAGEMENT_APPROVE"/>-->
+
+    <!--<SecurityGroup description="Image Management Upload." groupId="IMAGEUPLOAD"/>-->
+    <SecurityPermission name="图片上传" parentPermissionId="IMAGE_MANAGEMENT_ADMIN" description="图片上传" permissionId="IMAGE_MANAGEMENT_UPLOAD"/>
+    <!--<SecurityGroupPermission groupId="IMAGEUPLOAD" permissionId="IMAGE_MANAGEMENT_UPLOAD"/>-->
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="IMAGE_MANAGEMENT_APPROVE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="IMAGE_MANAGEMENT_UPLOAD"/>
+
+
+    <!--仓库管理菜单-->
+    <SecurityPermission description="仓库管理" name="仓库管理" permissionId="FACILITYMGR_VIEW" parentPermissionId="-1" menuType="A"/>
+    <!--仓库列表-->
+    <SecurityPermission description="仓库查看" name="仓库查看" permissionId="FACILITYMGR_LIST_VIEW" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="仓库编辑" name="仓库编辑" permissionId="FACILITYMGR_LIST_UPDATE" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="库存修改" name="库存修改" permissionId="INVENTORY_LIST_UPDATE" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="仓库新增" name="仓库新增" permissionId="FACILITYMGR_LIST_CREATE" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="仓库删除" name="仓库删除" permissionId="FACILITYMGR_LIST_DEL" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <!--库存导入-->
+    <SecurityPermission description="库存导入" name="库存导入" permissionId="FACILITYMGR_IMPORT_VIEW" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <!--预警货品 -->
+    <SecurityPermission description="预警货品" name="预警货品" permissionId="FACILITYMGR_WARNING_VIEW" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <!--出库管理 -->
+    <SecurityPermission description="出库管理" name="出库管理" permissionId="FACILITYMGR_OUT_VIEW" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="商品出库" name="商品出库" permissionId="FACILITYMGR_OUT_DELIVERY" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="打印物流单" name="打印物流单" permissionId="FACILITYMGR_OUT_PRINT" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="修改运单号" name="修改运单号" permissionId="FACILITYMGR_OUT_UPDATE" parentPermissionId="FACILITYMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="装箱查看" name="装箱查看" permissionId="FACILITYMGR_PACKING_LIST_VIEW" parentPermissionId="FACILITYMGR_OUT_VIEW" menuType="A"/>
+    <SecurityPermission description="出库查看" name="出库查看" permissionId="FACILITYMGR_OUT_LIST_VIEW" parentPermissionId="FACILITYMGR_OUT_VIEW" menuType="A"/>
+    <!--标签打印 -->
+    <SecurityPermission description="标签打印" name="标签打印" permissionId="FACILITYMGR_LABELPRINT" parentPermissionId="FACILITYMGR_VIEW"/>
+    <SecurityPermission description="标签打印查看" name="标签打印查看" permissionId="FACILITYMGR_LABELPRINT_VIEW" parentPermissionId="FACILITYMGR_LABELPRINT"/>
+    <SecurityPermission description="标签打印编辑" name="标签打印编辑" permissionId="FACILITYMGR_LABELPRINT_UPDATE" parentPermissionId="FACILITYMGR_LABELPRINT"/>
+
+    <!--商品管理管理菜单-->
+    <SecurityPermission description="商品管理" name="商品管理" permissionId="PRODUCTGOODMGR_VIEW" parentPermissionId="-1" menuType="A"/>
+    <!--添加商品-->
+    <SecurityPermission description="添加商品" name="添加商品" permissionId="PRODUCTGOODMGR_CREATE_VIEW" parentPermissionId="PRODUCTGOODMGR_VIEW" menuType="A"/>
+    <!--商品查询-->
+    <SecurityPermission description="商品列表" name="商品列表" permissionId="PRODUCTGOODMGR_LIST_VIEW" parentPermissionId="PRODUCTGOODMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="商品导出" name="商品导出" permissionId="PRODUCTGOODMGR_LIST_EXPORT" parentPermissionId="PRODUCTGOODMGR_LIST_VIEW" menuType="A"/>
+    <SecurityPermission description="商品编辑" name="商品编辑" permissionId="PRODUCTGOODMGR_LIST_UPDATE" parentPermissionId="PRODUCTGOODMGR_LIST_VIEW" menuType="A"/>
+    <SecurityPermission description="商品删除" name="商品删除" permissionId="PRODUCTGOODMGR_LIST_DEL" parentPermissionId="PRODUCTGOODMGR_LIST_VIEW" menuType="A"/>
+    <SecurityPermission description="批量上架" name="批量上架" permissionId="PRODUCTGOODMGR_BATCH_ONLINE" parentPermissionId="PRODUCTGOODMGR_LIST_VIEW" menuType="A"/>
+    <SecurityPermission description="批量下架" name="批量下架" permissionId="PRODUCTGOODMGR_BATCH_OFFLINE" parentPermissionId="PRODUCTGOODMGR_LIST_VIEW" menuType="A"/>
+    <!--商品审核 -->
+    <SecurityPermission description="商品审核" name="商品审核" permissionId="PRODUCTGOODMGR_VERIFY_VIEW" parentPermissionId="PRODUCTGOODMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="审核通过" name="审核通过" permissionId="PRODUCTGOODMGR_VERIFY_PASS" parentPermissionId="PRODUCTGOODMGR_VERIFY_VIEW" menuType="P"/>
+    <SecurityPermission description="审核不通过" name="审核不通过" permissionId="PRODUCTGOODMGR_VERIFY_NOPASS" parentPermissionId="PRODUCTGOODMGR_VERIFY_VIEW"menuType="P"/>
+    <!--商品导入 -->
+    <SecurityPermission description="商品导入" name="商品导入" permissionId="PRODUCTGOODMGR_IMPORT_VIEW" parentPermissionId="PRODUCTGOODMGR_VIEW" menuType="A"/>
+    <!--商品配置 -->
+    <SecurityPermission description="商品配置" name="商品配置" permissionId="PRODUCTGOODMGR_SET_VIEW" parentPermissionId="PRODUCTGOODMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="商品分类" name="商品分类" permissionId="PRODUCTGOODMGR_TYPE_VIEW" parentPermissionId="PRODUCTGOODMGR_SET_VIEW" menuType="A"/>
+    <SecurityPermission description="商品分类添加" name="商品分类添加" permissionId="PRODUCTGOODMGR_TYPE_CREATE" parentPermissionId="PRODUCTGOODMGR_SET_VIEW" menuType="A"/>
+    <SecurityPermission description="商品分类编辑" name="商品分类编辑" permissionId="PRODUCTGOODMGR_TYPE_UPDATE" parentPermissionId="PRODUCTGOODMGR_SET_VIEW" menuType="A"/>
+    <SecurityPermission description="商品分类删除" name="商品分类删除" permissionId="PRODUCTGOODMGR_TYPE_DEL" parentPermissionId="PRODUCTGOODMGR_SET_VIEW" menuType="A"/>
+    <SecurityPermission description="商品特征" name="商品特征" permissionId="PRODUCTGOODMGR_FEATURE_VIEW" parentPermissionId="PRODUCTGOODMGR_SET_VIEW" menuType="A"/>
+    <SecurityPermission description="商品特征添加" name="商品特征添加" permissionId="PRODUCTGOODMGR_FEATURE_CREATE" parentPermissionId="PRODUCTGOODMGR_FEATURE_VIEW" menuType="A"/>
+    <SecurityPermission description="商品特征编辑" name="商品特征编辑" permissionId="PRODUCTGOODMGR_FEATURE_UPDATE" parentPermissionId="PRODUCTGOODMGR_FEATURE_VIEW" menuType="A"/>
+    <SecurityPermission description="商品特征删除" name="商品特征删除" permissionId="PRODUCTGOODMGR_FEATURE_DEL" parentPermissionId="PRODUCTGOODMGR_FEATURE_VIEW" menuType="A"/>
+    <SecurityPermission description="商品品牌" name="商品品牌" permissionId="PRODUCTGOODMGR_BRAND_VIEW" parentPermissionId="PRODUCTGOODMGR_SET_VIEW" menuType="P"/>
+    <SecurityPermission description="商品品牌添加" name="商品品牌添加" permissionId="PRODUCTGOODMGR_BRAND_CREATE" parentPermissionId="PRODUCTGOODMGR_BRAND_VIEW" menuType="P"/>
+    <SecurityPermission description="商品品牌编辑" name="商品品牌编辑" permissionId="PRODUCTGOODMGR_BRAND_UPDATE" parentPermissionId="PRODUCTGOODMGR_BRAND_VIEW" menuType="P"/>
+    <SecurityPermission description="商品品牌删除" name="商品品牌删除" permissionId="PRODUCTGOODMGR_BRAND_DEL" parentPermissionId="PRODUCTGOODMGR_BRAND_VIEW" menuType="P"/>
+    <SecurityPermission description="商品品牌导入" name="商品品牌导入" permissionId="PRODUCTGOODMGR_BRAND_IMP" parentPermissionId="PRODUCTGOODMGR_BRAND_VIEW" menuType="P"/>
+    <SecurityPermission description="商品品牌导出" name="商品品牌导出" permissionId="PRODUCTGOODMGR_BRAND_EXP" parentPermissionId="PRODUCTGOODMGR_BRAND_VIEW" menuType="P"/>
+
+    <SecurityPermission description="商品标签" name="商品标签" permissionId="PRODUCTGOODMGR_LABEL" parentPermissionId="PRODUCTGOODMGR_SET_VIEW"/>
+    <SecurityPermission description="商品标签查看" name="商品标签查看" permissionId="PRODUCTGOODMGR_LABEL_VIEW" parentPermissionId="PRODUCTGOODMGR_LABEL"/>
+    <SecurityPermission description="商品标签添加" name="商品标签添加" permissionId="PRODUCTGOODMGR_LABEL_CREATE" parentPermissionId="PRODUCTGOODMGR_LABEL"/>
+    <SecurityPermission description="商品标签编辑" name="商品标签编辑" permissionId="PRODUCTGOODMGR_LABEL_UPDATE" parentPermissionId="PRODUCTGOODMGR_LABEL"/>
+    <SecurityPermission description="商品标签删除" name="商品标签删除" permissionId="PRODUCTGOODMGR_LABEL_DELETE" parentPermissionId="PRODUCTGOODMGR_LABEL"/>
+    <SecurityPermission description="商品定价" name="商品定价" permissionId="PRODUCTGOODMGR_PCP" parentPermissionId="PRODUCTGOODMGR_SET_VIEW"/>
+    <SecurityPermission description="商品定价查看" name="商品定价查看" permissionId="PRODUCTGOODMGR_PCP_VIEW" parentPermissionId="PRODUCTGOODMGR_PCP"/>
+    <SecurityPermission description="商品定价编辑" name="商品定价编辑" permissionId="PRODUCTGOODMGR_PCP_UPDATE" parentPermissionId="PRODUCTGOODMGR_PCP"/>
+    <SecurityPermission description="商品定价导入" name="商品定价导入" permissionId="PRODUCTGOODMGR_PCP_IMPORT" parentPermissionId="PRODUCTGOODMGR_PCP"/>
+
+    <!--店铺管理菜单-->
+    <SecurityPermission description="店铺管理" name="店铺管理" permissionId="PORDUCTSTOREMGR_VIEW" parentPermissionId="-1"/>
+    <!--店铺列表-->
+    <SecurityPermission description="店铺查看" name="店铺查看" permissionId="PORDUCTSTOREMGR_LIST_VIEW" parentPermissionId="PORDUCTSTOREMGR_VIEW"/>
+    <SecurityPermission description="店铺编辑" name="店铺编辑" permissionId="PORDUCTSTOREMGR_LIST_UPDATE" parentPermissionId="PORDUCTSTOREMGR_VIEW"/>
+    <SecurityPermission description="店铺删除" name="店铺删除" permissionId="PORDUCTSTOREMGR_LIST_DEL" parentPermissionId="PORDUCTSTOREMGR_VIEW"/>
+
+    <SecurityPermission description="商品收藏" name="商品收藏" permissionId="PRODUCE_COLLECTION_VIEW" parentPermissionId="PRODUCTGOODMGR_VIEW" menuType="A"/>
+
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_ADMIN"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_CREATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_UPDATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_DELETE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_ROLE_CREATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_ROLE_UPDATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_ROLE_DELETE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_PRICE_MAINT"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_VIEW_ALLOW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CATALOG_PURCHASE_ALLOW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SHIPRATE_ADMIN"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SHIPRATE_VIEW"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SHIPRATE_CREATE"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SHIPRATE_DELETE"/>
+</entity-engine-xml>

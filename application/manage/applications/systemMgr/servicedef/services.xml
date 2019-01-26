@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>System Manage Component Services</description>
+    <vendor>ICO</vendor>
+    <version>1.0</version>
+    <service name="findManager" engine="java" location="com.qihua.ofbiz.systemMgr.ManagerServices" invoke="findManager" auth="true">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="userLoginId1" type="String" mode="INOUT" optional="true"/>
+        <attribute name="userName1" type="String" mode="INOUT" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="INOUT" optional="true"/>
+        <attribute name="viewSize" type="Integer" mode="INOUT" optional="true"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="userList" type="java.util.List" mode="OUT"/>
+        <attribute name="userListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+        <attribute name="ownerPartyId" type="String" mode="IN"/>
+        <attribute name="userLoginId" type="String" mode="OUT" optional="true"/>
+        <attribute name="userName" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+
+    <service name="findSecurityGroup" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="queryAllSecurityGroup" auth="true">
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="securityGroups" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="addManager" engine="java" location="com.qihua.ofbiz.systemMgr.ManagerServices" invoke="addManager" auth="false">
+        <attribute name="userName" type="String" mode="IN"/>
+        <attribute name="password" type="String" mode="IN"/>
+        <attribute name="rePassword" type="String" mode="IN"/>
+        <attribute name="name" type="String" mode="IN" optional="true"/>
+        <attribute name="mobile" type="String" mode="IN" optional="true"/>
+        <attribute name="groupId" type="String" mode="IN" optional="true"/>
+        <attribute name="enabled" type="String" mode="IN" optional="true"/>
+        <attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_size" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="OUT"/>
+    </service>
+
+    <service name="updateManager" engine="java" location="com.qihua.ofbiz.systemMgr.ManagerServices" invoke="modifyManager" auth="false">
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="userName" type="String" mode="IN"/>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="password" type="String" mode="IN" optional="true"/>
+        <attribute name="rePassword" type="String" mode="IN" optional="true"/>
+        <attribute name="name" type="String" mode="IN" optional="true"/>
+        <attribute name="mobile" type="String" mode="IN" optional="true"/>
+        <attribute name="groupId" type="String" mode="IN" optional="true"/>
+        <attribute name="enabled" type="String" mode="IN" optional="true"/>
+        <attribute name="oldGroupId" type="String" mode="IN" optional="true"/>
+        <attribute name="oldMobile" type="String" mode="IN" optional="true"/>
+        <attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_fileName" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_contentType" type="String" mode="IN" optional="true"/>
+        <attribute name="contactMechId" type="String" mode="IN" optional="true"/>
+        <attribute name="_uploadedFile_size" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="managerDetail" engine="java" location="com.qihua.ofbiz.systemMgr.ManagerServices" invoke="managerDetail" auth="true">
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="userName" type="String" mode="IN" optional="true"/>
+        <attribute name="mobile" type="String" mode="IN" optional="true"/>
+        <attribute name="groupId" type="String" mode="IN" optional="true"/>
+        <attribute name="enabled" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+    <service name="createEmployee" engine="simple"
+             location="component://party/script/org/ofbiz/party/user/UserEvents.xml" invoke="createEmployee" auth="false">
+        <description>Create a Employ</description>
+        <attribute name="PASSWORD" type="String" mode="IN"/>
+        <attribute name="CONFIRM_PASSWORD" type="String" mode="IN"/>
+        <attribute name="USERNAME" type="String" mode="IN"/>
+        <attribute name="USER_MOBILE_CONTACT" type="String" mode="IN"/>
+        <attribute name="NAME" type="String" mode="IN"/>
+        <attribute name="USE_ADDRESS" type="String" mode="IN" default-value="false" optional="true"/>
+        <attribute name="ENABLED" type="String" mode="IN" optional="false" default-value="Y"/>
+        <attribute name="partyId" type="String" mode="OUT"/>
+    </service>
+
+
+    <service name="createUserLogo" engine="simple"
+             location="component://party/script/org/ofbiz/party/user/UserEvents.xml" invoke="updatePartyContent" auth="false">
+        <description>create user logo</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="dataCategoryId" type="String" mode="IN"/>
+        <attribute name="contentTypeId" type="String" mode="IN"/>
+        <attribute name="statusId" type="String" mode="IN" default-value="CTNT_PUBLISHED"/>
+        <attribute name="roleTypeId" type="String" mode="IN" default-value="OWNER"/>
+        <attribute name="partyContentTypeId" type="String" mode="IN" default-value="LGOIMGURL"/>
+        <attribute name="mimeTypeId" type="String" mode="IN" default-value="image/gif"/>
+        <attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN" optional="false"/>
+        <attribute name="request" mode="IN" type="javax.servlet.http.HttpServletRequest"/>
+    </service>
+
+    <service name="checkManagerExist" engine="simple"
+             location="component://systemMgr/script/com/qihua/party/system/SystemEvents.xml" invoke="findManager" auth="false">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="oldLoginId" type="String" mode="IN" optional="true"/>
+        <attribute name="userLogin" mode="OUT" type="org.ofbiz.entity.GenericValue" optional="true"/>
+    </service>
+
+    <service name="queryManager" require-new-transaction="false"
+             engine="java" location="com.qihua.ofbiz.systemMgr.ManagerServices" invoke="findManagerDetail" auth="false">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="person" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+        <attribute name="userLoginAndSecurityGroup" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="userMobileContact" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="OUT" />
+        <attribute name="partyContent" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+    </service>
+
+    <!--角色服务-->
+    <service name="removeSecurityGroupByUserLogin" engine="java" invoke="removeSecurityGroupByUserLogin"
+             location="com.qihua.ofbiz.systemMgr.ManagerServices" auth="false">
+        <description>Remove a UserLogin from a SecurityGroup</description>
+        <permission-service service-name="securityPermissionCheck" main-action="DELETE"/>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+
+    </service>
+
+
+    <service name="findRoles" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="findRoles" auth="true">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="name" type="String" mode="INOUT" optional="true"/>
+        <attribute name="groupId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="description" type="String" mode="INOUT" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="INOUT" optional="true"/>
+        <attribute name="viewSize" type="Integer" mode="INOUT" optional="true"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="roleList" type="java.util.List" mode="OUT"/>
+        <attribute name="roleListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="findPermissionTree" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="findPermissionTree" auth="true">
+        <attribute name="isInner" type="String" mode="IN" optional="true"/>
+        <attribute name="permissionTree" type="java.util.List" mode="OUT" optional="true" />
+    </service>
+
+    <service name="findPermissionsTree1" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="findPermissionsTree1" auth="true">
+        <attribute name="permissions" type="String" mode="IN"/>
+        <attribute name="permissionTree" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="checkSecurityGroupExist" engine="simple"
+             location="component://systemMgr/script/com/qihua/party/system/SystemEvents.xml" invoke="findSecurityGroupExist" auth="false">
+        <attribute name="groupId" type="String" mode="IN"/>
+        <attribute name="group" mode="OUT" type="org.ofbiz.entity.GenericValue"/>
+    </service>
+    <service name="addRole" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="addRole" auth="false">
+        <attribute name="permissionIds" type="String" mode="IN"/>
+        <attribute name="name" type="String" mode="IN"/>
+        <attribute name="description" type="String" mode="IN"/>
+        <attribute name="groupId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="crmopt" mode="OUT" type="String" optional="true"></attribute>
+    </service>
+
+    <service name="updateRole" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="updateRole" auth="false">
+        <attribute name="permissionIds" type="String" mode="IN"/>
+        <attribute name="name" type="String" mode="IN"/>
+        <attribute name="description" type="String" mode="IN"/>
+        <attribute name="groupId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="crmopt" mode="OUT" type="String" optional="true"></attribute>
+    </service>
+    <service name="deleteRole" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="deleteRole" auth="false">
+        <attribute name="groupId" type="String" mode="IN"/>
+    </service>
+
+    <service name="deleteRoles" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="deleteRoles" auth="false">
+        <attribute name="groupIds" type="String" mode="IN"/>
+    </service>
+    <service name="queryRoleDetail" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="queryRoleDetail" auth="true">
+        <attribute name="groupId" type="String" mode="IN"/>
+        <attribute name="securityGroup" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+        <attribute name="securityGroupPermissions" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    
+    
+    <!--  异常页面创建  begin by gss 2016-1-9-->
+    <service name="createExceptionPage" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.ExceptionPageServices" invoke="createExceptionPage">
+        <description>create ExceptionPage</description>
+        <attribute type="String" mode="IN" name="exceptionPageId" optional="true"/>
+        <attribute type="String" mode="IN" name="pageTitle" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true"/>
+        <attribute type="String" mode="IN" name="content" optional="true" allow-html="any"/>
+    </service>
+    <!--  异常页面创建  begin by gss 2016-1-9-->
+    
+     <!--  异常页面更新  begin by gss 2016-1-9-->
+    <service name="updateExceptionPage" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.ExceptionPageServices" invoke="updateExceptionPage">
+        <description>update ExceptionPage</description>
+        <attribute type="String" mode="IN" name="exceptionPageId" optional="true"/>
+        <attribute type="String" mode="IN" name="pageTitle" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true"/>
+        <attribute type="String" mode="IN" name="editcontent" optional="true" allow-html="any"/>
+    </service>
+    <!--  异常页面更新  begin by gss 2016-1-9-->
+    
+     <!--  异常页面详情查询  begin by gss 2016-1-9-->
+    <service name="findExceptionPage" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.ExceptionPageServices" invoke="findExceptionPage">
+        <description>Find ExceptionPage</description>
+        <attribute type="String" mode="IN" name="exceptionPageId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="exceptionPage" optional="true"/>
+        <attribute type="String" mode="OUT" name="textData" optional="true"/>
+    </service>
+    <!--  异常页面详情查询   begin by gss 2016-1-9-->
+    
+    <!--  号段创建  begin by gss 2016-1-11-->
+    <service name="createSegmentNo" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.SegmentNoServices" invoke="createSegmentNo">
+        <description>create segmentNumber</description>
+        <attribute type="String" mode="IN" name="segmentNumberId" optional="false" />
+        <attribute type="String" mode="IN" name="segmentNoFrom" optional="true"/>
+        <attribute type="String" mode="IN" name="segmentNoTo" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true" />
+        <attribute type="String" mode="IN" name="isInside" optional="true" />
+        <attribute type="String" mode="IN" name="currentNo" optional="true" />
+    </service>
+    <!--  号段创建  begin by gss 2016-1-11-->
+    
+     <!--  号段更新  begin by gss 2016-1-11-->
+    <service name="updateSegmentNo" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.SegmentNoServices" invoke="updateSegmentNo">
+        <description>update segmentNumber</description>
+       <attribute type="String" mode="IN" name="segmentNumberId" optional="false" />
+        <attribute type="String" mode="IN" name="segmentNoFrom" optional="true"/>
+        <attribute type="String" mode="IN" name="segmentNoTo" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true" />
+        <attribute type="String" mode="IN" name="isInside" optional="true" />
+        <attribute type="String" mode="IN" name="currentNo" optional="true" />
+    </service>
+    <!--  号段更新  begin by gss 2016-1-11-->
+    
+     <!--  号段详情查询  begin by gss 2016-1-11-->
+    <service name="findSegmentNoById" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.SegmentNoServices" invoke="findSegmentNoById">
+        <description>Find segmentNumber by id</description>
+        <attribute type="String" mode="IN" name="segmentNumberId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="segmentNumber" optional="true"/>
+    </service>
+    <!--  号段详情查询   begin by gss 2016-1-11-->
+    
+     <!--号段分页查询  begin by gss 2016-1-11  -->
+    <service name="findSegmentNoList" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.SegmentNoServices" invoke="findSegmentNoList">
+        <description>Find segmentNumber </description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="INOUT" optional="true"/>
+        <attribute name="viewSize" type="Integer" mode="INOUT" optional="true"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="segmentNoList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="segmentNoListSize" type="Integer" mode="OUT" optional="true"/>
+    </service>
+    <!--号段分页查询 end by gss 2016-1-11  -->
+      
+    <!-- 删除号段 begin by gss 2016-1-11  -->
+    <service name="delsegmentNumber" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.SegmentNoServices" invoke="delsegmentNumber">
+        <description>deleted segmentNumber </description>
+        <attribute type="String" mode="IN" name="deleteId" optional="true"/>
+    </service>
+   <!--删除号段  begin by gss 2016-1-11 -->
+   
+    <!--  支付宝接口信息查询设置  begin by gss 2016-1-14-->
+    <service name="queryAliPay" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.PayMentConfigServices" invoke="queryAliPay">
+        <description>Find segmentNumber by id</description>
+        <attribute type="String" mode="IN" name="paymentGatewayConfigId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="aliPay" optional="true"/>
+        <attribute type="String" mode="OUT" name="textData" optional="true"/>
+        <attribute type="String" mode="OUT" name="objectInfo" optional="true"/>
+        <attribute type="String" mode="OUT" name="payType" optional="true"/>
+    </service>
+    <!--   支付宝接口信息查询设置   begin by gss 2016-1-14-->
+    
+     <!--  支付宝接口信息更新  begin by gss 2016-1-14-->
+    <service name="updateAliPay" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.PayMentConfigServices" invoke="updateAliPay">
+        <description>updateAliPay</description>
+        <attribute type="String" mode="IN" name="paymentGatewayConfigId" optional="true"/>
+        <attribute type="String" mode="IN" name="paymentName" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true"/>
+        <attribute type="String" mode="IN" name="isDefault" optional="true"/>
+        <attribute type="String" mode="IN" name="apiKey" optional="true"/>
+        <attribute type="String" mode="IN" name="secretKey" optional="true"/>
+        <attribute type="String" mode="IN" name="payAccount" optional="true"/>
+        <attribute type="String" mode="IN" name="payUrl" optional="true"/>
+        <attribute type="String" mode="IN" name="backUrl" optional="true"/>
+        <attribute type="String" mode="IN" name="mobileBindUrl" optional="true"/>
+        <attribute type="String" mode="IN" name="description" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+        <attribute type="String" mode="IN" name="textData" optional="true" allow-html="any"/>
+    </service>
+    <!--   支付宝接口信息更新   begin by gss 2016-1-14-->
+    
+     <!--  微信接口信息查询设置  begin by gss 2016-1-14-->
+    <service name="queryWeixinPay" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.PayMentConfigServices" invoke="queryWeixinPay">
+        <description>Find segmentNumber by id</description>
+        <attribute type="String" mode="IN" name="paymentGatewayConfigId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="weixinPay" optional="true"/>
+        <attribute type="String" mode="OUT" name="textData" optional="true"/>
+        <attribute type="String" mode="OUT" name="objectInfo" optional="true"/>
+        <attribute type="String" mode="OUT" name="payType" optional="true"/>
+    </service>
+    <!--   微信接口信息查询设置   begin by gss 2016-1-14-->
+    
+     <!--  微信接口信息更新  begin by gss 2016-1-14-->
+    <service name="updateWeixinPay" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.PayMentConfigServices" invoke="updateWeixinPay">
+        <description>updateAliPay</description>
+        <attribute type="String" mode="IN" name="paymentGatewayConfigId" optional="true"/>
+        <attribute type="String" mode="IN" name="paymentName" optional="true"/>
+        <attribute type="String" mode="IN" name="isEnabled" optional="true"/>
+        <attribute type="String" mode="IN" name="isDefault" optional="true"/>
+        <attribute type="String" mode="IN" name="apiKey" optional="true"/>
+        <attribute type="String" mode="IN" name="secretKey" optional="true"/>
+        <attribute type="String" mode="IN" name="partner" optional="true"/>
+        <attribute type="String" mode="IN" name="partnerKey" optional="true"/>
+        <attribute type="String" mode="IN" name="notifyUrl" optional="true"/>
+        <attribute type="String" mode="IN" name="description" optional="true"/>
+        <attribute type="String" mode="IN" name="contentId" optional="true"/>
+        <attribute type="String" mode="IN" name="textData" optional="true" allow-html="any"/>
+    </service>
+    <!--   微信接口信息更新   begin by gss 2016-1-14-->
+    
+    <!--   表字段设置创建   begin by gss 2016-1-21-->
+      <service name="createEnumeration" engine="java"
+             location="com.qihua.ofbiz.systemMgr.EnumerationServices" invoke="createEnumeration" auth="false">
+        <description>createEnumeration</description>
+        <attribute name="description" type="String" mode="IN"/>
+        <attribute name="enumId" type="String" mode="IN"/>
+        <attribute name="enumTypeId" type="String" mode="IN"/>
+    </service>
+    <!--   表字段设置创建   begin by gss 2016-1-21-->
+    
+    <!--   表字段设置删除   begin by gss 2016-1-24-->
+      <service name="delEnumeration" engine="java"
+             location="com.qihua.ofbiz.systemMgr.EnumerationServices" invoke="delEnumeration" auth="false">
+        <description>delEnumeration</description>
+        <attribute name="ids" type="String" mode="IN"/>
+    </service>
+    <!--   表字段设置删除    begin by gss 2016-1-24-->
+    
+    <!--   表字段设置更新   begin by gss 2016-1-24-->
+      <service name="updateEnumeration" engine="java"
+             location="com.qihua.ofbiz.systemMgr.EnumerationServices" invoke="updateEnumeration" auth="false">
+        <description>updateEnumeration</description>
+        <attribute name="description" type="String" mode="IN"/>
+        <attribute name="enumId" type="String" mode="IN"/>
+    </service>
+    <!--   表字段设置更新   begin by gss 2016-1-24-->
+    
+      <!--  表字段设置详情查询  begin by gss 2016-1-24-->
+    <service name="findEnumerationById" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.EnumerationServices" invoke="findEnumerationById">
+        <description>find Enumeration By Id</description>
+        <attribute type="String" mode="IN" name="enumId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="Enumeration" optional="true"/>
+        <attribute name="isExits" type="Boolean" mode="OUT"  optional="true"/>
+    </service>
+    <!-- 表字段设置详情查询   begin by gss 2016-1-24-->
+    
+    <!--  支付方式详情查询  begin by gss 2016-1-11-->
+    <service name="findPayMentById" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.PayMentServices" invoke="findPayMentById">
+        <description>Find segmentNumber by id</description>
+        <attribute type="String" mode="IN" name="paymentGatewayConfigTypeId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="payMent" optional="true"/>
+    </service>
+    <!--   支付方式详情查询   begin by gss 2016-1-11-->
+   
+    <!--  支付方式更新  begin by gss 2016-1-11-->
+    <service name="updatePayMent" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.PayMentServices" invoke="updatePayMent">
+        <description>update segmentNumber</description>
+       <attribute type="String" mode="IN" name="hasTable" optional="false" />
+        <attribute type="String" mode="IN" name="paymentGatewayConfigTypeId" optional="true"/>
+        <attribute type="String" mode="IN" name="description" optional="true"/>
+    </service>
+    <!--支付方式更新  begin by gss 2016-1-11-->
+    
+    <!--  更新订单规则  begin by gss 2016-1-11-->
+    <service name="updateOrderRule" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.OrderRuleServices" invoke="updateOrderRule">
+        <description>update OrderRule</description>
+        <attribute type="String" mode="IN" name="orderRuleId" optional="true" />
+        <attribute type="String" mode="IN" name="name" optional="true" />
+        <attribute type="String" mode="IN" name="nameValue" optional="true" />
+        <attribute type="String" mode="IN" name="nameUom" optional="true" />
+        <attribute type="String" mode="IN" name="nameUomValue" optional="true" />
+        <attribute type="String" mode="IN" name="isReturn" optional="true" />
+    </service>
+    <!--更新订单规则  begin by gss 2016-1-11-->
+    
+    <!--  查询退货说明和退款说明  begin by gss 2016-1-27-->
+    <service name="findOrdercontent" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.OrderRuleServices" invoke="findOrdercontent">
+        <description>find OrderRule content</description>
+        <attribute type="String" mode="IN" name="orderRuleId" optional="true" />
+        <attribute type="String" mode="INOUT" name="type" optional="true" />
+        <attribute type="String" mode="OUT" name="textData" optional="true" />
+    </service>
+    <!--更新订单规则  begin by gss 2016-1-11-->
+    
+    <!--  查询退货说明更新  begin by gss 2016-1-27-->
+    <service name="updaterReturnContent" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.OrderRuleServices" invoke="updaterReturnContent">
+        <description>find OrderRule content</description>
+        <attribute type="String" mode="IN" name="orderRuleId" optional="true" />
+        <attribute type="String" mode="IN" name="return_content" optional="true"  allow-html="any"/>
+    </service>
+    <!--查询退货说明更新  begin by gss 2016-1-27-->
+    
+    <!--  更新退款说明  begin by gss 2016-1-27-->
+    <service name="updaterRefundContent" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.OrderRuleServices" invoke="updaterRefundContent">
+        <description></description>
+        <attribute type="String" mode="IN" name="orderRuleId" optional="true" />
+        <attribute type="String" mode="IN" name="refund_content" optional="true" allow-html="any"/>
+    </service>
+    <!--更新退款说明 begin by gss 2016-1-27-->
+    
+	<!--  根据类型Id查询枚举列表  begin by qianjin 2016.02.26-->
+    <service name="getEnumListByEnumTypeId" engine="java"  auth="true" 
+             location="com.qihua.ofbiz.systemMgr.EnumerationServices" invoke="getEnumListByEnumTypeId">
+        <description></description>
+        <attribute name="enumTypeId" type="String" mode="IN"  optional="true"/>
+        <attribute name="recordsList" type="List" mode="OUT"  optional="true"/>
+    </service>
+    <!--  新增地区  begin by Gss 2016.04.11-->
+    <service name="createGeo" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.GeoServices" invoke="createGeo">
+        <description></description>
+        <attribute name="geoName" type="String" mode="IN" optional="true"/><!-- 地区名称 -->
+        <attribute name="sequenceNum" type="String" mode="IN" optional="true"/><!-- 排序号 -->
+        <attribute name="stateProvinceGeoId" type="String" mode="IN" optional="true"/> <!-- 省 -->
+        <attribute name="cityGeoId" type="String" mode="IN" optional="true"/><!-- 市 -->
+    </service>
+    <!--  删除地区  begin by Gss 2016.04.11-->
+    <service name="delGeo" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.GeoServices" invoke="delGeo">
+        <description></description>
+        <attribute name="geoId" type="String" mode="IN" optional="true"/><!-- geoId -->
+        <attribute name="status" type="Boolean" mode="OUT" optional="true"/><!-- 状态 -->
+    </service>
+
+    <!--  根据ID 查询省市  begin by Gss 2016.04.11-->
+    <service name="findGeoById" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.GeoServices" invoke="findGeoById">
+        <description></description>
+        <attribute name="geoId" type="String" mode="INOUT" optional="true"/><!-- geoId -->
+        <attribute name="geoName" type="String" mode="OUT" optional="true"/><!-- 状态 -->
+        <attribute name="geoToName" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="true"/>
+        <attribute name="geoIdFrom" type="String" mode="OUT" optional="true"/>
+        <attribute name="facilityList" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <!--  根据ID 查询区 begin by Gss 2016.04.11-->
+    <service name="findCityGeoById" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.GeoServices" invoke="findCityGeoById">
+        <description></description>
+        <attribute name="geoId" type="String" mode="INOUT" optional="true"/><!-- geoId -->
+        <attribute name="geoName" type="String" mode="OUT" optional="true"/><!-- 状态 -->
+        <attribute name="geoToName" type="String" mode="OUT" optional="true"/>
+        <attribute name="geoIdFrom" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceNum" type="Long" mode="OUT" optional="true"/>
+        <attribute name="facilityList" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <!--  编辑省市区  begin by Gss 2016.04.11-->
+    <service name="updateGeo" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.GeoServices" invoke="updateGeo">
+        <description></description>
+        <attribute name="geoId" type="String" mode="IN" optional="true"/><!-- geoId -->
+        <attribute name="geoName" type="String" mode="IN" optional="true"/><!-- 状态 -->
+        <attribute name="geoIdFrom" type="String" mode="IN" optional="true"/><!-- 状态 -->
+        <attribute name="sequenceNum" type="String" mode="IN" optional="true"/><!-- 状态 -->
+        <attribute name="facility" type="String" mode="IN" optional="true"/><!--  -->
+    </service>
+
+    <!--  根据名称省市区  begin by Gss 2016.04.11-->
+    <service name="findGeoByName" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.GeoServices" invoke="findGeoByName">
+        <description></description>
+        <attribute name="geoId" type="String" mode="IN" optional="true"/><!-- geoId -->
+        <attribute name="geoName" type="String" mode="IN" optional="true"/><!-- geoName -->
+        <attribute name="stateList" type="List" mode="OUT" optional="true"/><!--  -->
+    </service>
+
+    <!--  根据名称省市区  begin by Gss 2016.04.11-->
+    <service name="createDefaultAdd" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.GeoServices" invoke="createDefaultAdd">
+        <description></description>
+        <attribute name="stateProvinceGeoId" type="String" mode="IN" optional="true"/><!-- geoId -->
+        <attribute name="cityGeoId" type="String" mode="IN" optional="true"/><!-- geoName -->
+        <attribute name="countyGeoId" type="String" mode="IN" optional="true"/><!--  -->
+    </service>
+
+
+    <!--begin 物流公司设置  Add By AlexYao 2016-4-11-->
+    <service name="logisticsCompany" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="logisticsCompany">
+        <description></description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="companyName" type="String" mode="IN" optional="true"/>
+        <attribute name="localCompanyId" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    <service name="addLogisticsCompany" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="addLogisticsCompany">
+        <description></description>
+        <attribute name="companyName" type="String" mode="IN" optional="false"/>
+        <attribute name="localCompanyId" type="String" mode="IN" optional="false"/>
+        <attribute name="companyId" type="String" mode="IN" optional="true"/>
+        <attribute name="companyWebsite" type="String" mode="IN" optional="true"/>
+        <attribute name="inquireWebsite" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <service name="editLogisticsCompany" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="editLogisticsCompany">
+        <description></description>
+        <attribute name="id" type="String" mode="IN" optional="false"/>
+        <attribute name="companyName" type="String" mode="IN" optional="false"/>
+        <attribute name="localCompanyId" type="String" mode="IN" optional="false"/>
+        <attribute name="companyId" type="String" mode="IN" optional="true"/>
+        <attribute name="companyWebsite" type="String" mode="IN" optional="true"/>
+        <attribute name="inquireWebsite" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="IN" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="true"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <service name="deleteLogisticsCompany" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="deleteLogisticsCompany">
+        <description></description>
+        <attribute name="ids" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <service name="logisticsCompanyDetail" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="logisticsCompanyDetail">
+        <description></description>
+        <attribute name="id" type="String" mode="INOUT" optional="false"/>
+        <attribute name="companyName" type="String" mode="OUT" optional="true"/>
+        <attribute name="localCompanyId" type="String" mode="OUT" optional="true"/>
+        <attribute name="companyId" type="String" mode="OUT" optional="true"/>
+        <attribute name="companyWebsite" type="String" mode="OUT" optional="true"/>
+        <attribute name="inquireWebsite" type="String" mode="OUT" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="OUT" optional="true"/>
+        <attribute name="isEnabled" type="String" mode="OUT" optional="true"/>
+    </service>
+    <service name="editLCIsEnable" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="editLCIsEnable">
+        <description></description>
+        <attribute name="id" type="String" mode="IN" optional="false"/>
+        <attribute name="isEnabled" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <!--end 物流公司设置  Add By AlexYao 2016-4-11-->
+    <!--begin 物流模板设置  Add By AlexYao 2016-4-12-->
+    <service name="selectProvinceList" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="selectProvinceList">
+        <description></description>
+        <attribute name="areaTree" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <!--复制-->
+    <service name="copyLogisticsTemple" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="copyLogisticsTemple">
+        <description></description>
+        <attribute name="logisticsTempleId" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <!--删除-->
+    <service name="deleteLogisticsTemple" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="deleteLogisticsTemple">
+        <description></description>
+        <attribute name="logisticsTempleId" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <!--设为默认-->
+    <service name="setDefaultLogisticsTemple" engine="java" auth="true"
+             location="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="setDefaultLogisticsTemple">
+        <description></description>
+        <attribute name="logisticsTempleId" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <!--end 物流模板设置  Add By AlexYao 2016-4-12-->
+
+    <!-- messageTemplate -->
+    <service name="messageTemplateService" engine="java"
+             location="com.qihua.ofbiz.systemMgr.MessageTemplateServices"
+             invoke="findMessage"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="messageTemplateId" type="String" mode="IN" optional="true"/>
+        <attribute name="templateType" type="String" mode="IN" optional="true"/>
+        <attribute name="templateName" type="String" mode="IN" optional="true"/>
+        <attribute name="sendMode" type="String" mode="IN" optional="true"/>
+        <attribute name="messageChain" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <service name="editMessageTemplateService" invoke="editMessageTemplate"
+             location="com.qihua.ofbiz.systemMgr.MessageTemplateServices" engine="java">
+        <!--        <auto-attributes mode="INOUT" include="pk" optional="true"/>
+                <auto-attributes mode="IN" include="nonpk" optional="true"/>-->
+        <attribute name="messageTemplateId" type="String" mode="IN" optional="true"/>
+        <attribute name="templateType" type="String" mode="IN" optional="false"/>
+        <attribute name="templateName" type="String" mode="IN" optional="false"/>
+        <attribute name="isUse" type="String" mode="IN" optional="false"/>
+        <attribute name="sendMode" type="String" mode="IN" optional="false"/>
+        <attribute name="templateContent" type="String" mode="IN" optional="false"/>
+        <attribute name="messageSignature" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="operateType" type="String" mode="IN" optional="true"/>
+        <attribute name="firstLinkType" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="deleteMessageTemplateService" invoke="deleteMessageTemplate"
+             location="com.qihua.ofbiz.systemMgr.MessageTemplateServices" engine="java">
+        <attribute name="mtIds" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="settingIsUseService" invoke="settingIsUse"
+             location="com.qihua.ofbiz.systemMgr.MessageTemplateServices" engine="java">
+        <attribute name="messageTemplateId" type="String" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+    </service>
+    <!-- end messageTemplate -->
+    <!-- 更新前端配置  start by liruishi 2017-3-29-->
+    <service name="updatFrontRule" invoke="updateFrontRule" location="com.qihua.ofbiz.systemMgr.OrderRuleServices"
+             engine="java">
+        <attribute name="guessLikeShowNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="hotBrandShowNum" type="Long" mode="IN" optional="false"/>
+        <attribute name="customerServiceNumber" type="String" mode="IN" optional="false"/>
+        <attribute name="reserveUseInteger" type="Long" mode="IN" optional="false"/>
+        <attribute name="status" type="String" mode="OUT" optional="false"/>
+        <attribute name="msg" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- 更新前端配置  end by liruishi 2017-3-29-->
+
+    <!--新增渠道管理-->
+    <service name="addPartyChannel" invoke="addPartyChannel" location="com.qihua.ofbiz.systemMgr.PartyChannelServices"  engine="java">
+        <attribute name="channelCode" type="String" mode="IN" optional="false"/>
+        <attribute name="channelName" type="String" mode="IN" optional="false"/>
+        <attribute name="remark" type="String" mode="IN" optional="true"/>
+        <attribute name="status" type="String" mode="IN" optional="false"/>
+    </service>
+
+
+    <service name="updatePartyChannel" invoke="updatePartyChannel" location="com.qihua.ofbiz.systemMgr.PartyChannelServices"  engine="java">
+        <attribute name="channelId" type="String" mode="IN" optional="false"/>
+        <attribute name="channelCode" type="String" mode="IN" optional="false"/>
+        <attribute name="channelName" type="String" mode="IN" optional="false"/>
+        <attribute name="remark" type="String" mode="IN" optional="true"/>
+        <attribute name="status" type="String" mode="IN" optional="false"/>
+    </service>
+
+
+    <!--获取渠道列表-->
+    <service name="getChannelListForJson" invoke="getChannelListForJson" location="com.qihua.ofbiz.systemMgr.PartyChannelServices"  engine="java">
+        <attribute name="channelCode" type="String" mode="IN" optional="true"/>
+        <attribute name="channelName" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+
+    <!--deleteChannel-->
+    <service name="deleteChannel" invoke="deleteChannel" location="com.qihua.ofbiz.systemMgr.PartyChannelServices"  engine="java">
+        <attribute name="channelId" type="String" mode="IN" optional="false"/>
+    </service>
+    <service name="getChannelById" invoke="getChannelById" location="com.qihua.ofbiz.systemMgr.PartyChannelServices"  engine="java">
+        <attribute name="channelId" type="String" mode="IN" optional="false"/>
+        <attribute name="channelInfo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="false"/>
+    </service>
+
+
+    <!--Add by zhajh at 20180428 积分Code设置 Begin-->
+    <!--  积分Code设置创建  -->
+    <service name="createIntegralCode" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.IntegralCodeServices" invoke="createIntegralCode">
+        <description>createIntegralCode</description>
+        <attribute type="String" mode="IN" name="integralCodeName" optional="true" />
+        <attribute type="String" mode="IN" name="integralCodeNo" optional="true"/>
+
+    </service>
+    <!--  积分Code设置创建  -->
+
+    <!--  积分Code设置更新  -->
+    <service name="updateIntegralCode" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.IntegralCodeServices" invoke="updateIntegralCode">
+        <description>updateIntegralCode</description>
+        <attribute type="String" mode="IN" name="integralCodeId" optional="true" />
+        <attribute type="String" mode="IN" name="integralCodeName" optional="true"/>
+        <attribute type="String" mode="IN" name="integralCodeNo" optional="true"/>
+        <attribute type="String" mode="IN" name="status" optional="true" />
+
+    </service>
+    <!--  积分Code设置更新  -->
+
+    <!--  积分Code设置详情查询  -->
+    <service name="findIntegralCodeById" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.IntegralCodeServices" invoke="findIntegralCodeById">
+        <description>findIntegralCodeById</description>
+        <attribute type="String" mode="IN" name="integralCodeId" optional="true"/>
+        <attribute type="org.ofbiz.entity.GenericValue" mode="OUT" name="integralCode" optional="true"/>
+    </service>
+    <!--  积分Code设置详情查询   -->
+
+    <!--积分Code设置分页查询    -->
+    <service name="findIntegralCodeList" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.IntegralCodeServices" invoke="findIntegralCodeList">
+        <description>findIntegralCodeList </description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="INOUT" optional="true"/>
+        <attribute name="viewSize" type="Integer" mode="INOUT" optional="true"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="integralCodeList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="integralCodeListSize" type="Integer" mode="OUT" optional="true"/>
+    </service>
+    <!--积分Code设置分页查询 end by gss 2016-1-11  -->
+
+    <!-- 删除积分Code设置   -->
+    <service name="delIntegralCode" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.IntegralCodeServices" invoke="delIntegralCode">
+        <description>delIntegralCode </description>
+        <attribute type="String" mode="IN" name="deleteId" optional="true"/>
+    </service>
+    <!--删除积分Code设置   -->
+    <!--Add by zhajh at 20180428 积分Code设置 Begin-->
+
+
+ 
+    <!--  审核开关设置操作  begin by hm 2018-5-12-->
+    <service name="findProductRulesSet" engine="java"  auth="true" export="true"
+             location="com.qihua.ofbiz.systemMgr.ProductRulesSetServices" invoke="findProductRulesSet">
+        <description>findProductRulesSet</description>
+        <attribute name="productRules" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+    </service>
+    <!--  审核开关设置保存更改  begin by hm 2018-5-12-->
+    <service name="updateProductRulesSet" engine="java"
+             location="com.qihua.ofbiz.systemMgr.ProductRulesSetServices" invoke="updateProductRulesSet">
+        <description>updateProductRulesSet</description>
+        <attribute type="String" mode="IN" name="rulesId" optional="false" />
+        <attribute type="String" mode="IN" name="physicalProductStatus" optional="true"/>
+        <attribute type="String" mode="IN" name="virtualProductStatus" optional="true"/>
+    </service>
+
+
+    <!--角色删除验证-->
+    <service name="chkRoles" engine="java" location="com.qihua.ofbiz.systemMgr.RoleServices" invoke="chkRoles" auth="false">
+        <attribute name="groupIds" type="String" mode="IN"/>
+        <attribute name="errGroupIds" type="String" mode="OUT" optional="ture"/>
+        <attribute name="chkFlg" type="String" mode="OUT" optional="true"/>
+    </service>
+
+</services>

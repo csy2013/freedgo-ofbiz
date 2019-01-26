@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>mobile product Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="mobile-productCategoryList" engine="java" location="com.yuaoq.yabiz.mobile.product.ProductServiceImpl" invoke="productCategoryList">
+        <description>product category list for mobile</description>
+        <attribute name="categoryType" type="String" mode="IN"  default-value="PCCT_BROWSE_ROOT"/>
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+
+    <service name="mobile-productCategory" engine="java" location="com.yuaoq.yabiz.mobile.product.ProductServiceImpl" invoke="productCategory">
+        <description>product category list for mobile</description>
+        <attribute name="categoryType" type="String" mode="IN"   default-value="PCCT_BROWSE_ROOT"/>
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+
+
+    <service name="mobile-productCategoryByParentId" engine="java" location="com.yuaoq.yabiz.mobile.product.ProductServiceImpl" invoke="productCategoryByParentId">
+        <description>product category list for mobile</description>
+        <attribute name="categoryId" type="String" mode="IN"/>
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+
+    <service name="mobile-productCategoryByCatalogAndType" engine="java" location="com.yuaoq.yabiz.mobile.product.ProductServiceImpl" invoke="productCategoryByCatalogAndType">
+        <description>product category list for mobile</description>
+        <attribute name="catalogId" type="String" mode="IN"/>
+        <attribute name="categoryType" type="String" mode="IN" default-value="PCCT_BROWSE_ROOT"/>
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+
+    <service name="mobile-productAssoc" engine="java" location="com.yuaoq.yabiz.mobile.product.ProductServiceImpl" invoke="getProductAssoc">
+       <attribute name="productId" type="String" mode="IN"/>
+        <!--ALSO_BOUGHT-->
+        <attribute name="type" type="String" mode="IN"/>
+        <attribute name="checkViewAllow" type="Boolean" mode="IN" default-value="true"/>
+        <attribute name="prodCatalogId" type="String" mode="IN"/>
+        <attribute name="sortDescending" type="Boolean" mode="IN" default-value="true"/>
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+
+
+    <service name="mobile-partyPersonRegister" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="personRegister">
+        <description>product category list for mobile</description>
+        <attribute name="firstname" type="String" mode="IN" />
+        <attribute name="lastname" type="String" mode="IN" />
+        <attribute name="email" type="String" mode="IN" />
+        <attribute name="phone" type="String" mode="IN" />
+        <attribute name="password" type="String" mode="IN"/>
+
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+
+    <service name="mobile-uploadPartyContentFile" engine="group" transaction-timeout="300">
+        <description>Upload and attach a file to a party</description>
+        <group>
+            <invoke name="getAppToken" result-to-context="true"/>
+            <invoke name="createContentFromUploadedFile" result-to-context="true"/>
+            <invoke name="createPartyContent"/>
+        </group>
+    </service>
+
+    <service name="getAppToken" engine="java"
+             location="com.yuaoq.yabiz.mobile.services.ContentService" invoke="getAppToken" auth="false">
+        <description>Create a PartyContent record</description>
+        <attribute name="X-Authorization" type="String" mode="IN" optional="false"/>
+        <attribute name="userLogin" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+    </service>
+    <service name="completePay" engine="java"
+             location="com.yuaoq.yabiz.mobile.services.PaymentService" invoke="completePay" auth="false">
+        <description>支付完成后调用次服务</description>
+        <attribute name="orderGroupId" type="String" mode="IN" optional="false"/>
+        <attribute name="retCode" type="String" mode="OUT" optional="false"/>
+        <attribute name="message" type="String" mode="OUT" optional="false"/>
+    </service>
+
+</services>

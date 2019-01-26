@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>mobile product Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+    <service name="indexBanner" engine="java" location="com.yuaoq.yabiz.mobile.services.ContentService" invoke="indexBanner">
+
+        <attribute name="resultData" type="java.util.List" mode="OUT"/>
+    </service>
+    <service name="indexBall" engine="java" location="com.yuaoq.yabiz.mobile.services.ContentService" invoke="indexBall">
+
+        <attribute name="resultData" type="java.util.List" mode="OUT"/>
+    </service>
+    <service name="indexAct" engine="java" location="com.yuaoq.yabiz.mobile.services.ContentService" invoke="indexAct">
+        <attribute name="resultData" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="getHotSearch" engine="java" location="com.yuaoq.yabiz.mobile.services.IndexService" invoke="getHotSearch">
+        <attribute name="resultData" type="java.util.List" mode="OUT"/>
+    </service>
+</services>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- begin add by AlexYao 咨询列表 at 2016.03.30 -->
+    <screen name="consultList">
+        <section>
+            <actions>
+                <set field="titleProperty" value="CustomerManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>客服管理</label>
+                                <label style="sub-title">咨询列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                            	<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="客服管理" style="breadcrumb"/>
+                                <link target="" text="咨询列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="CONSULT_LIST" action="_VIEW" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://content/webapp/customermgr/customer/ConsultList.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                    <fail-widgets>
+                                <label style="h3" text="需要查看咨询列表的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 咨询列表 at 2016.03.30 -->
+
+    <!-- begin add by AlexYao 反馈列表页面 at 2016.04.01 -->
+    <screen name="feedbackList">
+        <section>
+            <actions>
+                <set field="titleProperty" value="CustomerManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>客服管理</label>
+                                <label style="sub-title">意见反馈</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="客服管理" style="breadcrumb"/>
+                                <link target="" text="意见反馈" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="FEEDBACK_LIST" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://content/webapp/customermgr/customer/FeedbackList.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看意见反馈的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by AlexYao 反馈列表页面 at 2016.04.01 -->
+    <screen name="complain">
+        <section>
+            <actions>
+                <set field="titleProperty" value="CustomerManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>客服管理</label>
+                                <label style="sub-title">申诉单</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="客服管理" style="breadcrumb"/>
+                                <link target="" text="申诉单" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="COMPLAIN" action="_VIEW" />
+                            </condition>
+                            <actions>
+                                <service service-name="findComplain" auto-field-map="parameters"/>
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://content/webapp/customermgr/customer/complain.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看申诉单的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="operateComplain">
+        <section>
+            <actions>
+                <set field="titleProperty" value="CustomerManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>客服管理</label>
+                                <label style="sub-title">申诉单</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="客服管理" style="breadcrumb"/>
+                                <link target="" text="申诉单" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="COMPLAIN" action="_VIEW" />
+                            </condition>
+                            <actions>
+                                <entity-and entity-name="ComplainOperateLog" list="comList">
+                                    <field-map field-name="complainId" from-field="parameters.complainId"/>
+                                    <order-by field-name="operateTime"/>
+                                </entity-and>
+                                <!--新建地址添加 Begin-->
+                                <set field="dependentForm" value="addFirstForm1"/>
+                                <set field="requestName" value="getAssociatedStateList"/>
+                                <set field="responseName" value="stateList"/>
+                                <set field="dependentKeyName" value="geoId"/>
+                                <set field="descName" value="geoName"/>
+                                <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/>
+                                <set field="selectedDependentOption1" from-field="mechMap.postalAddress.cityGeoId" default-value="_none_"/>
+                                <set field="selectedDependentOption2" from-field="mechMap.postalAddress.countyGeoId" default-value="_none_"/>
+
+                                <!--根据国家选择省-->
+                                <set field="paramKey" value="countryGeoId"/>
+                                <set field="mainId" value="countryGeoId"/>
+                                <set field="dependentId" value="stateProvinceGeoId"/>
+
+                                <!--根据省选择市-->
+                                <set field="paramKey1" value="countryGeoId"/>
+                                <set field="mainId1" value="stateProvinceGeoId"/>
+                                <set field="dependentId1" value="cityGeoId"/>
+
+
+                                <!--根据市选择区县-->
+                                <set field="paramKey2" value="countryGeoId"/>
+                                <set field="mainId2" value="cityGeoId"/>
+                                <set field="dependentId2" value="countyGeoId"/>
+
+                                <!--新建地址添加 End-->
+                            </actions>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://common/webcommon/includes/setGeoDependentDropdownValuesJs.ftl"/>
+                                        <html-template location="component://content/webapp/customermgr/customer/operateComplain.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要查看申诉单的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 评价标签页面  add by qianjin 2016.06.06-->
+    <screen name="reviewLabelListPage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="CustomerManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>客服管理</label>
+                                <label style="sub-title">评价标签</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="客服管理" style="breadcrumb"/>
+                                <link target="" text="评价标签" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="REVIEWMGR_LABEL" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://content/webapp/customermgr/review/ReviewLabelList.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要评价标签的查看权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+</screens>

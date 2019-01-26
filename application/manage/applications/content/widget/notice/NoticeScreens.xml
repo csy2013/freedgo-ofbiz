@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+    <!-- 跳转公告列表页面 start add by AlexYao 2016/04/05 -->
+    <screen name="NoticeListPage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                	<!-- 面包屑导航 -->
+                	<decorator-section name="pre-body">
+               			<column-container>      
+               				<column style="body-title">          
+               					<label>公告管理</label>           
+               					<label style="sub-title">公告列表</label>
+               				</column>        
+               				<column style="breadcrumb">      
+               					<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+   						       	<link target="NoticeListPage" text="公告管理" style="breadcrumb"/>     
+   						       	<link target="" text="公告列表" style="breadcrumb active"/>        
+     						</column>    
+               			</column-container>
+                	</decorator-section>
+                	<!-- body内容 -->
+                    <decorator-section name="body">
+                   		<section>
+							<condition>
+								<if-has-permission permission="NOTICEMGR_LIST" action="_VIEW" />
+							</condition>
+							<widgets>
+		                        <platform-specific>
+				          			<html>
+				          				<html-template location="component://content/webapp/content/notice/NoticeList.ftl"/>
+				          			</html>
+				          		</platform-specific>
+				          	</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要公告查看的权限"/>
+							</fail-widgets>
+						</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 跳转公告列表页面 end add by AlexYao 2016/04/05 -->
+  
+  	<!-- 跳转公告新增页面 start add by AlexYao 2016/04/05 -->
+  	<screen name="NoticeAddPage">
+        <section>
+            <actions>
+            	<script location="component://content/webapp/content/WEB-INF/actions/content/NoticeTag.groovy" />
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                	<!-- 面包屑导航 -->
+                	<decorator-section name="pre-body">
+               			<column-container>      
+               				<column style="body-title">          
+               					<label>公告管理</label>           
+               					<label style="sub-title">公告新增</label>
+               				</column>        
+               				<column style="breadcrumb">           
+   						       	<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+   						       	<link target="NoticeListPage" text="公告管理" style="breadcrumb"/>  
+   						       	<link target="" text="公告新增" style="breadcrumb active"/>        
+     						</column>    
+               			</column-container>
+                	</decorator-section>
+                	<!-- body内容 -->
+                    <decorator-section name="body">
+                    	<section>
+							<condition>
+								<if-has-permission permission="NOTICEMGR_LIST" action="_CREATE" />
+							</condition>
+							<widgets>
+		                        <platform-specific>
+				          			<html>
+				          				<html-template location="component://content/webapp/content/notice/NoticeAdd.ftl"/>
+				          			</html>
+				          		</platform-specific>
+				          	</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要公告新增的权限"/>
+							</fail-widgets>
+						</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 跳转公告新增页面 end add by AlexYao 2016/04/05 -->
+    
+    <!-- 跳转公告修改页面 start add by AlexYao 2016/04/05 -->
+  	<screen name="NoticeEditPage">
+        <section>
+            <actions>
+            	<script location="component://content/webapp/content/WEB-INF/actions/content/NoticeTag.groovy" />
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                	<!-- 面包屑导航 -->
+                	<decorator-section name="pre-body">
+               			<column-container>      
+               				<column style="body-title">          
+               					<label>公告管理</label>           
+               					<label style="sub-title">公告编辑</label>
+               				</column>        
+               				<column style="breadcrumb">           
+   						       	<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+   						       	<link target="BannerListPage" text="公告管理" style="breadcrumb"/>  
+   						       	<link target="" text="公告编辑" style="breadcrumb active"/>        
+     						</column>    
+               			</column-container>
+                	</decorator-section>
+                	<!-- body内容 -->
+                    <decorator-section name="body">
+                    	<section>
+							<condition>
+								<if-has-permission permission="NOTICEMGR_LIST" action="_UPDATE" />
+							</condition>
+							<widgets>
+		                        <platform-specific>
+				          			<html>
+				          				<html-template location="component://content/webapp/content/notice/NoticeEdit.ftl"/>
+				          			</html>
+				          		</platform-specific>
+				          	</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要公告编辑的权限"/>
+							</fail-widgets>
+						</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 跳转公告修改页面 end add by AlexYao 2016/04/05 -->
+</screens>

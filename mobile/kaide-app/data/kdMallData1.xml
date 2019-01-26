@@ -1,0 +1,30 @@
+<entity-engine-xml>
+    <WxLiteTemplateConfig tempalteId="新会员通知" templateRule="微信授权登录调用获取手机号接口，判断为新会员时推送" wxLiteTemplateName="AT1167新会员加入提醒" gotoPage="个人中心主页" remark="" templateType="CUST_NEW_NOTIFY"
+                          wxLiteTemplateId="MqFLmbjuAy1guBmpGvwPzTQcces6lZP8DCDJ0hFKnw8"/>
+    <WxLiteTemplateConfig tempalteId="新订单通知" templateRule="订单支付成功后推送" wxLiteTemplateName="AT0079新订单通知" gotoPage="订单详情页" remark="" templateType="ORDER_NEW_NOTIFY"
+                          wxLiteTemplateId="wZJmKLIAIL-KhVRiLaZe4AxWzWPAOUd3WhQKUDVIAkM"/>
+    <WxLiteTemplateConfig tempalteId="退款申请通过通知" templateRule="商家点击“退款”按钮并确认后推送" wxLiteTemplateName="AT0637退款申请通知" gotoPage="退货申请进度页面" remark="" templateType="REFUND_APPLY_NOTIFY"
+                          wxLiteTemplateId="5OegF5wb2QktXowSQmbOraNo_7C72B5oshvop8D5d_g"/>
+    <WxLiteTemplateConfig tempalteId="退款申请驳回通知" templateRule="商家点击“驳回”按钮并确认后推送" wxLiteTemplateName="AT0637退款申请通知" gotoPage="退货申请进度页面" remark="" templateType="REFUND_APPLY_BACK"
+                          wxLiteTemplateId="5OegF5wb2QktXowSQmbOraNo_7C72B5oshvop8D5d_g"/>
+    <WxLiteTemplateConfig tempalteId="拼团成功通知" templateRule="拼团成功后推送" wxLiteTemplateName="AT0051拼团成功通知" gotoPage="订单详情页" remark="" templateType="TOGETHER_SUCCESS_NOTIFY"
+                          wxLiteTemplateId="GpQw4KBTeQxEJUHQQ3fhmur_dqQIe5n1tyOJU_KOlKA"/>
+    <WxLiteTemplateConfig tempalteId="代金券领取通知" templateRule="代金券领取后推送" wxLiteTemplateName="AT1198卡券领取成功通知" gotoPage="代金券列表页" remark="温馨提示内容：您成功领取了一张代金券。" templateType="COUPON_GET_NOTIFY"
+                          wxLiteTemplateId="BpPo9_hmzIx-jMp2uCvk2NqY-cP60txwuiDaCLSzGh0"/>
+    <WxLiteTemplateConfig tempalteId="代金券到期提醒" templateRule="代金券失效前24小时自动推送" wxLiteTemplateName="AT1199卡券到期提醒" gotoPage="代金券列表页" remark="温馨提示内容：您有一张代金券即将到期，请尽快使用。"
+                          templateType="COUPON_LOSEDATE_NOTIFY" wxLiteTemplateId="mrESzgF9R9I7KklP7H2WcYGAT--YHIhyH59zd7uELi4"/>
+    <WxLiteTemplateConfig tempalteId="组团领券成功通知" templateRule="组团成功后推送" wxLiteTemplateName="AT0223组团成功提醒" gotoPage="组团拆红包结果页" remark="温馨提示内容：您发起的组团拆红包，组团成功。"
+                          templateType="COUPON_GROUP_SUCCESS_NOTIFY" wxLiteTemplateId="m_9xNUiaa7Sw0ZrFzACcz7l4rZIvuHewOsrzGyna4kM"/>
+    <WxLiteTemplateConfig tempalteId="组团领券失败通知" templateRule="组团截止时间，人数不足，组团失败后推送" wxLiteTemplateName="AT0896组团人数不足提醒" gotoPage="组团拆红包结果页" remark="温馨提示内容：您发起的组团拆红包，由于人数不足，组团失败。"
+                          templateType="COUPON_GROUP_FAIL_NOTIFY" wxLiteTemplateId="tPh3GOXbwmoME43y3FAFgYHQJFBigAsH3TNR-GKuJFc"/>
+    <WxLiteTemplateConfig tempalteId="礼品领取成功通知（受赠人）" templateRule="受赠人成功领取礼品后推送" wxLiteTemplateName="AT0533礼品领取成功通知" gotoPage="礼品中心页面" remark="" templateType="GIFT_TO_NOTIFY"
+                          wxLiteTemplateId="6xmiEw2bTH1jrasmEvKadrKO_DnbVRQ5OmF1dfnqqoM"/>
+    <WxLiteTemplateConfig tempalteId="礼品领取成功通知（赠送人）" templateRule="受赠人成功领取礼品后推送" wxLiteTemplateName="AT0533礼品领取成功通知" gotoPage="我的赠送列表页" remark="" templateType="GIFT_FROM_NOTIFY"
+                          wxLiteTemplateId="6xmiEw2bTH1jrasmEvKadrKO_DnbVRQ5OmF1dfnqqoM"/>
+    <WxLiteTemplateConfig tempalteId="心愿成功实现通知（心愿发起人）" templateRule="好友成功付款后推送" wxLiteTemplateName="AT1494心愿实现通知" gotoPage="我的心愿单列表页" remark="实现心愿内容：您的好友{实现者微信昵称}帮您实现了一条心愿，我们将尽快为您发货。"
+                          templateType="WISH_FROM_NOTIFY" wxLiteTemplateId="03p0mCUqrFtJa1ZYCCTvYhZcr6G8Hgae_Zp4Ko1F43k"/>
+    <WxLiteTemplateConfig tempalteId="心愿成功实现通知（心愿实现者）" templateRule="成功付款后推送" wxLiteTemplateName="AT1494心愿实现通知" gotoPage="好友心愿单列表页" remark="实现心愿内容：恭喜您成功实现了好友{心愿发起人微信昵称}的心愿单，我们将尽快为您的好友发货。"
+                          templateType="WISH_TO_NOTIFY" wxLiteTemplateId="03p0mCUqrFtJa1ZYCCTvYhZcr6G8Hgae_Zp4Ko1F43k"/>
+    <WxLiteTemplateConfig tempalteId="秒杀提醒通知" templateRule="秒杀开始时推送" wxLiteTemplateName="AT1104预约商品开售通知" gotoPage="订单详情页" remark="备注：您预约的商品秒杀活动已开始，请及时选购。" templateType="SECKILL_NOTIFY"
+                          wxLiteTemplateId="2D99Y6Oo9zgkyUPBoyhPjuY6wUlbQINsgbExg_cN_VY"/>
+</entity-engine-xml>

@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<excel>
+   <entity name="试题信息" code="questionInfo" >
+	   <column name="序号" code="seqId" type="String" maxlength="30">
+		   <rules>
+			   <rule name="max_length" message="序号长度不能超过30位!"></rule>
+		   </rules>
+	   </column>
+	   <column name="类型" code="questionType" type="String" maxlength="30">
+		   <rules>
+			   <rule name="nullable" message="类型不允许为空!"></rule>
+			   <rule name="value_check" message="类型称必须是常规或者画像"></rule>
+		   </rules>
+	   </column>
+
+	   <column name="题干" code="question" type="String" maxlength="30">
+			<rules>
+				<rule name="nullable" message="题干不能为空!"></rule>
+			</rules>
+		</column>
+		<column name="答案" code="result" type="String" maxlength="50">
+			<rules>
+				<rule name="value_check" message="类型是常规的场合为必输项目"></rule>
+			</rules>
+		</column>
+		
+
+	   <column name="选项A" code="answerItemA" type="String" maxlength="10">
+	   	  	<rules> 
+				<rule name="nullable" message="选项A不允许为空!"></rule>
+			</rules>	
+	   </column>
+	   <column name="A标签" code="tagA" type="String" maxlength="30">
+			<rules> 
+				<rule name="value_check" message="A标签不能为空!"></rule>
+			</rules>
+		</column>
+	   <column name="选项B" code="answerItemB" type="String" maxlength="10">
+		   <rules>
+			   <rule name="nullable" message="选项B不允许为空!"></rule>
+		   </rules>
+	   </column>
+	   <column name="B标签" code="tagB" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="B标签不能为空!"></rule>
+		   </rules>
+	   </column>
+
+
+
+	   <column name="选项C" code="answerItemC" type="String" maxlength="10">
+		   <rules>
+			   <rule name="value_check" message=""></rule>
+		   </rules>
+	   </column>
+	   <column name="C标签" code="tagC" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="C标签不能为空!"></rule>
+		   </rules>
+	   </column>
+
+	   <column name="选项D" code="answerItemD" type="String" maxlength="10">
+		   <rules>
+			   <rule name="value_check" message=""></rule>
+		   </rules>
+	   </column>
+	   <column name="D标签" code="tagD" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="D标签不能为空!"></rule>
+		   </rules>
+	   </column>
+
+	   <column name="选项E" code="answerItemE" type="String" maxlength="10">
+		   <rules>
+			   <rule name="value_check" message=""></rule>
+		   </rules>
+	   </column>
+	   <column name="E标签" code="tagE" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="E标签不能为空!"></rule>
+		   </rules>
+	   </column>
+
+	   <column name="选项F" code="answerItemF" type="String" maxlength="10">
+		   <rules>
+			   <rule name="value_check" message=""></rule>
+		   </rules>
+	   </column>
+	   <column name="F标签" code="tagF" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="F标签不能为空!"></rule>
+		   </rules>
+	   </column>
+
+	   <column name="选项G" code="answerItemG" type="String" maxlength="10">
+		   <rules>
+			   <rule name="value_check" message=""></rule>
+		   </rules>
+	   </column>
+	   <column name="G标签" code="tagG" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="G标签不能为空!"></rule>
+		   </rules>
+	   </column>
+	   <column name="选项H" code="answerItemH" type="String" maxlength="10">
+		   <rules>
+			   <rule name="value_check" message=""></rule>
+		   </rules>
+	   </column>
+	   <column name="H标签" code="tagH" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="H标签不能为空!"></rule>
+		   </rules>
+	   </column>
+   </entity>
+</excel>

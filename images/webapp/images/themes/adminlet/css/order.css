@@ -1,0 +1,362 @@
+@charset "utf-8";
+*{
+    margin:0;
+    padding:0;
+}
+.clearfix:after{
+    content:"";
+    display:block;
+    clear:both;
+}
+.clearfix{
+    zoom:1;
+}
+ul li{
+    list-style:none;
+}
+.js-checkparent .xl_meg td,.js-checkparent thead th{
+    text-align: center;
+    vertical-align: middle;
+}
+.js-checkparent .xl_order_num{
+    font-weight: bold;
+}
+.js-checkparent .xl_meg td a{
+    color: black;
+}
+.js-checkparent .xl_order_num td{
+    padding-left: 1.3%;
+    text-align: left;
+}
+.xl_dialog{
+    position:fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index:2999;
+    opacity: 0.75;
+    filter:alpha(opacity=75);
+    background-color: black;
+}
+
+.order_dialog p{
+    margin: 0 ;
+}
+.order_header{
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+.order_header span{
+    font-weight: bold;
+    margin-right:40px;
+}
+.xl_content{
+    padding-left: 30px;
+    margin-top: 15px;
+}
+.xl_content p.p1 span{
+    margin-right:13%;
+}
+.xl_content span.xl_active{
+    color: red;
+}
+.xl_content p.p2 span{
+    margin:0px 8px;
+}
+.xl_content p.p2 i{
+    display: inline-block;
+    width: 15%;
+    height: 1px;
+    background: black;
+    margin-bottom:5px;
+}
+.xl_content .xl_time{
+    margin-left: -18px;
+}
+.xl_content p.p2 i.xl_active{
+    background: red;
+}
+.pay_meg{
+    padding-left: 10px;
+}
+.pay_meg p label{
+    font-weight: normal;
+    margin-bottom: 0px;
+    width: 100px;
+}
+.pay_meg .all_price{
+    display: inline-block;
+    width: 100px;
+}
+.pay_head{
+    font-weight: bold;
+}
+.pay_meg .free{
+    display: inline-block;
+    width: 100px;
+    margin-left: 20%;
+}
+.produce{
+    padding-left: 10px;
+    margin-top: 20px;
+}
+.produce table thead tr{
+    background-color: #ccc;
+}
+.produce table thead th,.produce table tbody td{
+    padding: 0 20px;
+    font-weight: normal;
+}
+.produce table tbody td{
+    text-align: center;
+}
+.logistic_order{
+    padding-left: 10px;
+}
+.goods .span2{
+    padding-left: 5px;
+}
+.address{
+    display: inline-block;
+    width: 40%;
+    font-style: normal;
+}
+
+
+.xl_search{
+    margin-left: 120px;
+}
+.xl_table tr th,.xl_table tr td{
+
+    text-align: center;
+}
+.xl_table>tbody>tr>td{
+    vertical-align: middle;
+}
+.xl_pages{
+    float: right;
+}
+.xl_footer{
+    clear: both;
+    position: relative;
+}
+/*��ѡ����Ʒ�ı����ʽ*/
+.xl_chooseP tbody tr td{
+    text-align: center;
+    vertical-align: middle;
+}
+.xl_tableActive thead tr th,.xl_tableActive tbody tr td{
+    text-align: center;
+    vertical-align: middle;
+}
+.pagination>li>a.active{
+    background:#367fa9;
+    color:white;
+}
+/*退货单处理*/
+.del{
+    padding: 10px;
+    border-bottom:1px solid #ccc;
+    overflow: hidden;
+}
+
+.basic-info{
+    width:90%;
+    margin:0 auto;
+}
+.basic-info tbody{
+    vertical-align:top;
+}
+.t_head{
+    background-color:#3c8dbc;
+    border-collapse:collapse;
+
+}
+.t_head th{
+    padding:3px 10px;
+    color:white;
+}
+.refund-msg{
+    margin:15px;
+}
+.refund-msg p{
+    margin:0;
+    font-weight:normal;
+}
+.refund-msg p label{
+    font-weight:normal;
+}
+.refund-msg p span{
+    margin-left:5px;
+}
+.refund-msg div.img-box{
+    max-width:250px;
+    max-height:250px;
+    margin-left:25px;
+    margin-top:10px;
+    position:relative;
+}
+.refund-msg div.img-box ul.banner{
+    width:100%;
+    height: 100%;
+    list-style:none;
+    overflow:hidden;
+}
+.refund-msg div.img-box ul.banner li{
+    float: left;
+    text-align: center;
+    display:none;
+}
+.refund-msg div.img-box ul.banner li img{
+    width:200px;
+    height: 180px;
+    cursor:pointer;
+}
+.refund-msg div.img-box ul.icon{
+    position:absolute;
+    left:0;
+    bottom:0;
+}
+.refund-msg div.img-box ul.icon li{
+    float:left;
+}
+.refund-msg div.img-box div.number a{
+    font-size:30px;
+}
+.refund-msg div.img-box div.number{
+    display:none;
+}
+.refund-msg div.img-box div.number a.icon1{
+    position:absolute;
+    top:73px;
+    left:0;
+}
+.refund-msg div.img-box div.number a.icon2{
+    position:absolute;
+    top:73px;
+    right:0;
+}
+.each-product{
+    width:90%;
+    margin:20px auto;
+}
+.each-product tbody,.each-product th{
+    text-align:center;
+    vertical-align: middle;
+}
+.each-product tbody td,.each-product th{
+    padding:5px 0px;
+}
+.each-product th{
+    background-color:#3c8dbc;
+    color:white;
+}
+.operate{
+    width:90%;
+    margin:0 auto;
+    border:1px solid #000;
+}
+.operate-head,.logist-head{
+    width:100%;
+    background-color:#3c8dbc;
+    border-bottom:1px solid #000;
+    padding:5px 15px;
+    font-weight: 700;
+    color:white;
+}
+/*.operate-container{
+    padding:0 22%;
+}*/
+.operate-container div.span-left,.operate-container div.span-right{
+    margin-left: 10px;
+    padding:15px 0px;
+    float:left;
+}
+.operate-container div.span-left{
+    width:175px;
+    margin-right:90px;
+}
+.operate-container div.span-left p{
+    position:relative;
+}
+.operate-container div.span-left p:after{
+    content:"";
+    display:inline-block;
+    width:10px;
+    height:10px;
+    background:url(images/logisticsIcon.png) no-repeat;
+    background-size:100% 100%;
+    position:absolute;
+    top:4px;
+    right:-10px;
+}
+.operate-container div.span-left p:before{
+    content:"";
+    display:inline-block;
+    width:1px;
+    height:80%;
+    background-color:#000;
+    position:absolute;
+    top:-13px;
+    right:-6px;
+}
+.operate-container div.span-right p i{
+    font-style:normal;
+}
+.logist{
+    width:90%;
+    margin:20px auto;
+    border:1px solid #000;
+}
+.logist-container{
+    padding:10px 20px;
+}
+.logist-container p i{
+    font-style:normal;
+}
+.logist-num{
+    margin-left:150px;
+}
+.refund-money{
+    width:90%;
+    margin:20px auto;
+    border:1px solid #000;
+}
+.refund-money p:first-of-type{
+    margin-top:8px;
+    margin-left:15px;
+}
+.refund-money p:first-of-type input{
+    border-radius:5px;
+    border:1px solid #ccc;
+    height:30px;
+    width:170px;
+    padding-left:5px;
+}
+.refund-money p:first-of-type label{
+    font-weight:normal;
+    margin-right:20px;
+}
+.refund-money textarea{
+    resize:none;
+    width:340px;
+    height:120px;
+    margin-left:15px;
+    text-indent:5px;
+}
+.xl_write{
+    position:relative;
+}
+.xl_confirm{
+    padding:6px 12px;
+    border-radius:5px;
+    background-color:rgb(0,153,204);
+    border:1px solid #ccc;
+    color:#fff;
+    position:absolute;
+    bottom:15px;
+    right:80px;
+}
+

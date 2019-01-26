@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- begin add by qianjin 商家列表 at 2016.01.25 -->
+    <screen name="businessList">
+        <section>
+             <actions>
+                <set field="titleProperty" value="BusinessManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家管理</label>
+                                <label style="sub-title">商家列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                            	<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="businessList" text="商家管理" style="breadcrumb"/>
+                                <link target="" text="商家列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="BUSINESSMGR_LIST" action="_VIEW" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://party/webapp/businessmgr/business/BusinessList.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                    <fail-widgets>
+                                <label style="h3" text="需要商家查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by qianjin 商家列表 at 2016.01.25 -->
+
+
+    <!-- begin add by qianjin 商家列表 at 2016.01.25 -->
+    <screen name="businessToAuditList">
+        <section>
+            <actions>
+                <set field="titleProperty" value="BusinessManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家管理</label>
+                                <label style="sub-title">待审核商家列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="businessToAuditList" text="商家管理" style="breadcrumb"/>
+                                <link target="" text="待审核商家列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="BUSINESSMGR_LIST" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://party/webapp/businessmgr/business/BusinessToAuditList.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要商家查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- begin add by qianjin 商家新增 at 2016.01.25 -->
+    <screen name="businessAddPage">
+        <section>
+        	<actions>
+        		<script location="component://party/webapp/businessmgr/WEB-INF/actions/BusinessEdit.groovy" />
+        	    <set field="titleProperty" value="BusinessManage"/>
+        		<!--地区选择参数-->
+                <set field="dependentForm" value="BusinessAddForm"/>
+                <set field="requestName" value="getAssociatedStateList"/>
+                <set field="responseName" value="stateList"/>
+                <set field="dependentKeyName" value="geoId"/>
+                <set field="descName" value="geoName"/>
+                <set field="selectedDependentOption" from-field="mechMap.postalAddress.stateProvinceGeoId" default-value="_none_"/>
+                <set field="selectedDependentOption1" from-field="mechMap.postalAddress.cityGeoId" default-value="_none_"/>
+                <set field="selectedDependentOption2" from-field="mechMap.postalAddress.countyGeoId" default-value="_none_"/>
+        	
+        		<!--根据国家选择省-->
+                <set field="paramKey" value="countryGeoId"/>
+                <set field="mainId" value="countryGeoId"/>
+                <set field="dependentId" value="stateProvinceGeoId"/>
+
+                <!--根据省选择市-->
+                <set field="paramKey1" value="countryGeoId"/>
+                <set field="mainId1" value="stateProvinceGeoId"/>
+                <set field="dependentId1" value="cityGeoId"/>
+
+                <!--根据市选择区县-->
+                <set field="paramKey2" value="countryGeoId"/>
+                <set field="mainId2" value="cityGeoId"/>
+                <set field="dependentId2" value="countyGeoId"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家管理</label>
+                                <label style="sub-title">商家新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="businessList" text="商家管理" style="breadcrumb"/>
+                                <link target="" text="商家新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                    	<section>
+	                        <condition>
+								<if-has-permission permission="BUSINESSMGR" action="_CREATE" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                            	<html-template location="component://common/webcommon/includes/setGeoDependentDropdownValuesJs.ftl"/>
+		                                <html-template location="component://party/webapp/businessmgr/business/BusinessAdd.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                    <fail-widgets>
+                                <label style="h3" text="需要商家新增的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by qianjin 商家新增 at 2016.01.25 -->
+    
+    <!-- 商家详情弹出框页面 begin add by qianjin 2016/01/27-->
+	<screen name="businessInfoPage">
+		<section>
+			<actions>
+			    <set field="titleProperty" value="BusinessManage"/>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <!--<property-map resource="WorkEffortUiLabels" map-name="uiLabelMap" global="true"/>-->
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
+			</actions>
+			<widgets>
+				<platform-specific>
+					<html>
+						<html-template location="component://party/webapp/businessmgr/business/BusinessInfo.ftl" />
+					</html>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 商家详情弹出框页面 end add by qianjin 2016/01/27-->
+	
+	<!-- 商家修改页面 begin add by qianjin 2016/01/28-->
+	<screen name="businessEditPage">
+		<section>
+        	<actions>
+        		<script location="component://party/webapp/businessmgr/WEB-INF/actions/BusinessEdit.groovy" />
+        	    <set field="titleProperty" value="BusinessManage"/>
+        		<!--地区选择参数-->
+                <set field="dependentForm" value="BusinessEditForm"/>
+                <set field="requestName" value="getAssociatedStateList"/>
+                <set field="responseName" value="stateList"/>
+                <set field="dependentKeyName" value="geoId"/>
+                <set field="descName" value="geoName"/>
+                <set field="selectedDependentOption" value="${parameters.record.provinceId}" default-value="_none_"/>
+                <set field="selectedDependentOption1" value="${parameters.record.cityId}"  default-value="_none_"/>
+                <set field="selectedDependentOption2" value="${parameters.record.countyId}"  default-value="_none_"/>
+        	
+        		<!--根据国家选择省-->
+                <set field="paramKey" value="countryGeoId"/>
+                <set field="mainId" value="countryGeoId"/>
+                <set field="dependentId" value="stateProvinceGeoId"/>
+
+                <!--根据省选择市-->
+                <set field="paramKey1" value="countryGeoId"/>
+                <set field="mainId1" value="stateProvinceGeoId"/>
+                <set field="dependentId1" value="cityGeoId"/>
+
+                <!--根据市选择区县-->
+                <set field="paramKey2" value="countryGeoId"/>
+                <set field="mainId2" value="cityGeoId"/>
+                <set field="dependentId2" value="countyGeoId"/>
+        	</actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家管理</label>
+                                <label style="sub-title">商家编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="businessList" text="商家管理" style="breadcrumb"/>
+                                <link target="" text="商家编辑" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                    	<section>
+	                        <condition>
+								<if-has-permission permission="BUSINESSMGR" action="_CREATE" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                            	<html-template location="component://common/webcommon/includes/setGeoDependentDropdownValuesJs.ftl"/>
+		                                <html-template location="component://party/webapp/businessmgr/business/BusinessEdit.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+							<fail-widgets>
+								<label style="h3" text="需要商家编辑的权限"/>
+							</fail-widgets>
+						</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+	</screen>
+	<!-- 商家修改页面 begin add by qianjin 2016/01/28-->
+	
+	<!-- 商家导入页面 begin add by qianjin at 2016.01.29 -->
+    <screen name="businessImportPage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="BusinessManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家管理</label>
+                                <label style="sub-title">商家导入</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="businessList" text="商家管理" style="breadcrumb"/>
+                                <link target="" text="商家导入" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                    	<section>
+	                        <condition>
+								<if-has-permission permission="BUSINESSMGR" action="_IMPORT" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://party/webapp/businessmgr/business/BusinessImport.ftl"/>
+		                            </html>
+		                        </platform-specific>
+	                        </widgets>
+		                    <fail-widgets>
+                                <label style="h3" text="需要商家导入的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 商家导入页面 end add by qianjin at 2016.01.29 -->
+
+    <!-- 商家品牌列表 begin add by cc 2018/3/22-->
+    <screen name="businessBrandList">
+        <section>
+            <actions>
+                <set field="titleProperty" value="BusinessManage"/>
+                <service service-name="findPartyProductBrand"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家品牌</label>
+                                <label style="sub-title">品牌列表</label>
+                                <!--<label style="sub-title">商家列表</label>-->
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="businessBrandList" text="商家品牌" style="breadcrumb"/>
+                                <link target="" text="品牌列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="BUSINESSMGR_BRAND_LIST" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <!--<html-template location="component://party/webapp/businessmgr/business/BusinessBrandList.ftl"/>-->
+                                        <html-template location="component://party/webapp/businessmgr/business/BusinessBrandListTest.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要商家查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 商家品牌列表 end add by cc 2018/3/22-->
+
+    <!-- 查看商家端 品牌列表 start -->
+    <screen name="partyBusinessBrandList">
+        <section>
+            <actions>
+                <set field="titleProperty" value="BusinessManage"/>
+                <service service-name="findPartyProductBrand"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家品牌</label>
+                                <label style="sub-title">品牌列表</label>
+                                <!--<label style="sub-title">商家列表</label>-->
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="businessBrandList" text="商家品牌" style="breadcrumb"/>
+                                <link target="" text="品牌列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="BUSINESSMGR_BRAND_LIST" action="_VIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <!--<html-template location="component://party/webapp/businessmgr/business/BusinessBrandList.ftl"/>-->
+                                        <html-template location="component://party/webapp/businessmgr/business/BusinessBrandListTest.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要商家查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 查看商家端 品牌列表 end -->
+
+    <!-- 商品品牌授权 begin add by cc 2018.03.22 -->
+    <screen name="businessBrandAuthorize">
+        <section>
+            <actions>
+                <set field="titleProperty" value="BusinessManage"/>
+                <service service-name="queryProductBrands" auto-field-map="parameters"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家品牌</label>
+                                <label style="sub-title">品牌授权</label>
+                                <!--<label style="sub-title">商家列表</label>-->
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="businessBrandAuthorize" text="商家品牌" style="breadcrumb"/>
+                                <link target="" text="品牌授权" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="BUSINESSMGR_BRAND" action="_AUDIT" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://party/webapp/businessmgr/business/BusinessBrandAuthorize.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要商家查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 商品品牌授权 end add by cc 2018.03.22 -->
+
+    <!-- 商品复选弹出框页面 start add by nf 2018/03/23-->
+    <screen name="ProductBrandListMultiModalPage">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="WorkEffortUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template location="component://party/webapp/businessmgr/business/ProductBrandListMultiModalPage.ftl" />
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 品牌审核 begin add by cc 2018.5.15 -->
+    <screen name="businessBrandReview">
+        <section>
+            <actions>
+                <service service-name="findStoreBrandForWaiting"/>
+                <set field="titleProperty" value="BusinessManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家管理</label>
+                                <label style="sub-title">品牌审核</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="businessToAuditList" text="商家管理" style="breadcrumb"/>
+                                <link target="" text="品牌审核" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="BUSINESSMGR_BRAND" action="_REVIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <!--<html-template location="component://party/webapp/businessmgr/business/BusinessBrandReview.ftl"/>-->
+                                        <html-template location="component://party/webapp/businessmgr/business/BusinessBrandReviewTest.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要商家查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 品牌审核 end add by cc 2018.5.15 -->
+
+    <!-- 品牌查询 -->
+    <screen name="brandList">
+        <section>
+            <actions>
+                <service service-name="findStoreBrandForWaiting"/>
+                <set field="titleProperty" value="BusinessManage"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商家管理</label>
+                                <label style="sub-title">品牌审核</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="businessToAuditList" text="商家管理" style="breadcrumb"/>
+                                <link target="" text="品牌审核" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="BUSINESSMGR_BRAND" action="_REVIEW" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <!--<html-template location="component://party/webapp/businessmgr/business/BusinessBrandReview.ftl"/>-->
+                                        <html-template location="component://party/webapp/businessmgr/business/BrandList.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要商家查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+</screens>

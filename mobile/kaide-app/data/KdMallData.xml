@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+
+    <!-- Kd Mall Info -->
+        <KdMallInfo mallName="凯德广场·新南"  mallId="69" locationId="CN054"/>
+		<KdMallInfo mallName="凯德·西城"  mallId="67" locationId="CN052"/>
+		<KdMallInfo mallName="凯德MALL·新都心"  mallId="64" locationId="CN051"/>
+		<KdMallInfo mallName="凯德MALL赛罕"  mallId="63" locationId="CN029"/>
+		<KdMallInfo mallName="凯德广场涪城"  mallId="56" locationId="CN007"/>
+		<KdMallInfo mallName="凯德广场新地城"  mallId="53" locationId="CN009"/>
+		<KdMallInfo mallName="凯德广场魅力城"  mallId="50" locationId="CN005"/>
+		<KdMallInfo mallName="凯德龙之梦闵行"  mallId="48" locationId="CN033"/>
+		<KdMallInfo mallName="凯德MALL大峡谷"  mallId="40" locationId="CN028"/>
+		<KdMallInfo mallName="凯德广场·云尚"  mallId="39" locationId="CN049"/>
+		<KdMallInfo mallName="凯德龙之梦虹口"  mallId="37" locationId="CN032"/>
+		<KdMallInfo mallName="凯德七宝购物广场"  mallId="36" locationId="CN031"/>
+		<KdMallInfo mallName="凯德·天府"  mallId="35" locationId="CN036"/>
+		<KdMallInfo mallName="凯德广场·金牛"  mallId="34" locationId="CN001"/>
+		<KdMallInfo mallName="凯德广场·学府"  mallId="33" locationId="CN010"/>
+		<KdMallInfo mallName="凯德广场·埃德蒙顿"  mallId="32" locationId="CN011"/>
+		<KdMallInfo mallName="凯德MALL·西直门"  mallId="31" locationId="CN023"/>
+		<KdMallInfo mallName="凯德MALL天津湾"  mallId="30" locationId="CN030"/>
+		<KdMallInfo mallName="凯德晶品购物中心"  mallId="28" locationId="CN025"/>
+		<KdMallInfo mallName="凯德新民众乐园"  mallId="25" locationId="CN038"/>
+		<KdMallInfo mallName="凯德广场·武胜"  mallId="24" locationId="CN037"/>
+		<KdMallInfo mallName="凯德广场·雨花亭"  mallId="23" locationId="CN042"/>
+		<KdMallInfo mallName="凯德MALL·太阳宫"  mallId="19" locationId="CN026"/>
+		<KdMallInfo mallName="凯德1818"  mallId="18" locationId="CN048"/>
+		<KdMallInfo mallName="凯德MALL·望京"  mallId="11" locationId="CN027"/>
+		<KdMallInfo mallName="凯德和平广场"  mallId="4" locationId="CN012"/>
+		<KdMallInfo mallName="凯德广场泉州"  mallId="61" locationId="CN016"/>
+		<KdMallInfo mallName="凯德广场漳州"  mallId="60" locationId="CN017"/>
+		<KdMallInfo mallName="凯德广场茂名"  mallId="59" locationId="CN018"/>
+		<KdMallInfo mallName="凯德广场湛江"  mallId="58" locationId="CN019"/>
+		<KdMallInfo mallName="凯德广场南岸"  mallId="55" locationId="CN008"/>
+		<KdMallInfo mallName="凯德广场德阳"  mallId="54" locationId="CN006"/>
+		<KdMallInfo mallName="凯德广场沙坪坝"  mallId="52" locationId="CN004"/>
+		<KdMallInfo mallName="凯德广场九龙坡"  mallId="51" locationId="CN003"/>
+		<KdMallInfo mallName="凯德广场沙湾"  mallId="49" locationId="CN002"/>
+		<KdMallInfo mallName="凯德广场·桃花仑"  mallId="46" locationId="CN041"/>
+		<KdMallInfo mallName="凯德广场城南苑"  mallId="45" locationId="CN043"/>
+		<KdMallInfo mallName="凯德广场·北关"  mallId="44" locationId="CN040"/>
+		<KdMallInfo mallName="凯德广场·淄博"  mallId="43" locationId="CN020"/>
+		<KdMallInfo mallName="凯德广场·潍坊"  mallId="42" locationId="CN021"/>
+		<KdMallInfo mallName="凯德MALL·翠微路"  mallId="27" locationId="CN024"/>
+		<KdMallInfo mallName="凯德广场金水"  mallId="26" locationId="CN039"/>
+		<KdMallInfo mallName="凯德广场肇庆"  mallId="22" locationId="CN015"/>
+		<KdMallInfo mallName="凯德广场·桂城"  mallId="21" locationId="CN013"/>
+		<KdMallInfo mallName="凯德广场·东莞"  mallId="20" locationId="CN014"/>
+		<KdMallInfo mallName="凯德广场·日照"  mallId="41" locationId="CN022"/>
+		<KdMallInfo mallName="住宅项目"  mallId="76" locationId="CNHOUSE"/>
+		<!--<KdMallInfo mallName="上海雅诗阁衡山服务公寓"  mallId="75" locationId=""/>-->
+		<KdMallInfo mallName="山海连城"  mallId="74" locationId="LHOUSESHLC"/>
+		<KdMallInfo mallName="雅诗阁"  mallId="72" locationId="CN900"/>
+		<KdMallInfo mallName="yabiz商城"  mallId="71" locationId="LHQS"/>
+		<KdMallInfo mallName="凯德住宅·御锦城"  mallId="70" locationId="LHOUSEYJC"/>
+		<KdMallInfo mallName="凯德集团"  mallId="57" locationId="ESITE"/>
+		<KdMallInfo mallName="苏州中心商场"  mallId="79" locationId="cn058"/>
+		<KdMallInfo mallName="凯德·星贸"  mallId="77" locationId="CN057"/>
+		<KdMallInfo mallName="杭州来福士"  mallId="73" locationId="CN056"/>
+		<KdMallInfo mallName="长宁来福士广场"  mallId="68" locationId="CN053"/>
+		<KdMallInfo mallName="深圳来福士广场"  mallId="66" locationId="CN055"/>
+		<KdMallInfo mallName="凯德广场·扬州"  mallId="65" locationId="CN035"/>
+		<KdMallInfo mallName="凯德广场芜湖"  mallId="62" locationId="CN034"/>
+		<KdMallInfo mallName="北京来福士购物中心"  mallId="47" locationId="CN045"/>
+		<KdMallInfo mallName="宁波来福士广场"  mallId="38" locationId="CN047"/>
+		<KdMallInfo mallName="天津国贸购物中心"  mallId="29" locationId="CN050"/>
+		<KdMallInfo mallName="成都来福士广场"  mallId="12" locationId="CN046"/>
+		<KdMallInfo mallName="上海来福士广场"  mallId="10" locationId="CN044"/>
+
+
+
+
+
+</entity-engine-xml>

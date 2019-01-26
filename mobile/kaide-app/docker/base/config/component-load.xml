@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component-loader xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/component-loader.xsd">
+    <load-components parent-directory="framework"/>
+    <load-components parent-directory="application/themes"/>
+    <load-component component-location="images"/>
+    <load-components parent-directory="application/manage/services"/>
+    <load-components parent-directory="application/manage/applications"/>
+    <load-component component-location="mobile/shicai-app"/>
+</component-loader>

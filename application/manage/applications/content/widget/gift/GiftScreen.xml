@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- 跳转帮助分类列表页面 start  -->
+    <screen name="helpCategoryList">
+        <section>
+             <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                	<!-- 面包屑导航 -->
+                	<decorator-section name="pre-body">
+               			<column-container>
+               				<column style="body-title">          
+               					<label>帮助管理</label>
+               					<label style="sub-title">帮助分类列表</label>
+               				</column>        
+               				<column style="breadcrumb">      
+               					<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+   						       	<link target="" text="帮助管理" style="breadcrumb"/>
+   						       	<link target="" text="帮助分类列表" style="breadcrumb active"/>
+     						</column>    
+               			</column-container>
+                	</decorator-section>
+                	<!-- body内容 -->
+                    <decorator-section name="body">
+                   		<section>
+							<condition>
+								<if-has-permission permission="CONSULT_HELPCATEGORY" action="_VIEW" />
+							</condition>
+							<widgets>
+		                        <platform-specific>
+				          			<html>
+				          				<html-template location="component://content/webapp/customermgr/help/HelpCategory.ftl"/>
+				          			</html>
+				          		</platform-specific>
+				          	</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要帮助分类查看的权限"/>
+							</fail-widgets>
+						</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 跳转帮助分类页面 end  -->
+
+
+	<!-- 礼品列表页面 start -->
+	<screen name="GiftList">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>礼品管理</label>
+								<label style="sub-title">礼品列表</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="礼品管理" style="breadcrumb"/>
+								<link target="" text="礼品列表" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="GIFTMANAGE_LIST" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/customermgr/gift/GiftList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要帮助分类查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 礼品列表页面 end -->
+
+</screens>

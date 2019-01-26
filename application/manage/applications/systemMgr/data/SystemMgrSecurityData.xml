@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+
+    <!--系统管理-->
+    <SecurityPermission description="系统管理" name="系统管理" permissionId="SYSTEMMGR_VIEW" parentPermissionId="-1" menuType="A"/>
+    <!--权限管理-->
+    <SecurityPermission description="权限管理" name="权限管理" permissionId="SYSTEMMGR_ROLE_VIEW" parentPermissionId="SYSTEMMGR_VIEW" menuType="A"/>
+
+    <!-- 管理员权限 -->
+    <SecurityPermission description="系统人员管理" name="系统人员管理" permissionId="SYSTEMMGR_USER" parentPermissionId="SYSTEMMGR_ROLE_VIEW" menuType="A"/>
+    <SecurityPermission description="系统管理员查看" name="系统管理员查看" permissionId="SYSTEMMGR_USER_VIEW" parentPermissionId="SYSTEMMGR_USER" menuType="A"/>
+    <SecurityPermission description="系统管理员新增" name="系统管理员新增" permissionId="SYSTEMMGR_USER_CREATE" parentPermissionId="SYSTEMMGR_USER" menuType="A"/>
+    <SecurityPermission description="系统管理员修改" name="系统管理员修改" permissionId="SYSTEMMGR_USER_UPDATE" parentPermissionId="SYSTEMMGR_USER" menuType="A"/>
+    <!--角色权限-->
+    <SecurityPermission description="角色管理" name="角色管理" permissionId="SYSTEMMGR_GROUP" parentPermissionId="SYSTEMMGR_ROLE_VIEW" menuType="A"/>
+    <SecurityPermission description="角色查看" name="角色查看" permissionId="SYSTEMMGR_GROUP_VIEW" parentPermissionId="SYSTEMMGR_GROUP" menuType="A"/>
+    <SecurityPermission description="角色新增" name="角色新增" permissionId="SYSTEMMGR_GROUP_CREATE" parentPermissionId="SYSTEMMGR_GROUP" menuType="A"/>
+    <SecurityPermission description="角色修改" name="角色修改" permissionId="SYSTEMMGR_GROUP_UPDATE" parentPermissionId="SYSTEMMGR_GROUP" menuType="A"/>
+    <SecurityPermission description="角色删除" name="角色删除" permissionId="SYSTEMMGR_GROUP_DELETE" parentPermissionId="SYSTEMMGR_GROUP" menuType="A"/>
+    <SecurityPermission description="角色详细" name="角色详细" permissionId="SYSTEMMGR_GROUP_DETAIL" parentPermissionId="SYSTEMMGR_GROUP" menuType="A"/>
+
+    <!--权限加入角色-->
+    <SecurityGroup description="系统管理员" groupId="SYSTEMMGR" name="系统管理员"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_VIEW" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_ROLE_VIEW" menuType="A"/>
+
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_USER" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_USER_VIEW" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_USER_CREATE" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_USER_UPDATE" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_USER_DELETE" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_USER_DETAIL" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_GROUP" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_GROUP_VIEW" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_GROUP_CREATE" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_GROUP_UPDATE" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_GROUP_DELETE" menuType="A"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SYSTEMMGR_GROUP_DETAIL" menuType="A"/>
+    <!--异常页面权限-->
+    <SecurityPermission description="异常页面" name="异常页面" permissionId="EXCEPTIONPAGE_VIEW" parentPermissionId="SYSTEMMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="异常页面新增" name="异常页面新增" permissionId="EXCEPTIONPAGE_CREATE" parentPermissionId="EXCEPTIONPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="异常页面修改" name="异常页面修改" permissionId="EXCEPTIONPAGE_UPDATE" parentPermissionId="EXCEPTIONPAGE_VIEW" menuType="P"/>
+    <!--支付方式-->
+    <SecurityPermission description="支付方式" name="支付方式" permissionId="PAYMENT_TYPE" parentPermissionId="SYSTEMMGR_VIEW" />
+    <SecurityPermission description="支付方式查看" name="支付方式查看" permissionId="PAYMENT_TYPE_VIEW" parentPermissionId="PAYMENT_TYPE" />
+    <SecurityPermission description="支付方式修改" name="支付方式修改" permissionId="PAYMENT_TYPE_UPDATE" parentPermissionId="PAYMENT_TYPE" />
+    <!--接口管理-->
+    <SecurityPermission description="接口管理" name="接口管理" permissionId="INTERFANCE_MANAGE_VIEW" parentPermissionId="SYSTEMMGR_VIEW"/>
+    <SecurityPermission description="支付接口" name="支付接口" permissionId="PAYMENT_INTERFANCE_VIEW" parentPermissionId="INTERFANCE_MANAGE_VIEW"/>
+    <SecurityPermission description="支付接口更新" name="支付接口更新" permissionId="PAYMENT_INTERFANCE_UPDATE" parentPermissionId="PAYMENT_INTERFANCE_VIEW"/>
+    <!--规则管理-->
+    <SecurityPermission description="规则设置" name="规则设置" permissionId="RULE_MANAGE_VIEW" parentPermissionId="SYSTEMMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="号段配置" name="号段配置" permissionId="SEGMENT_NUMBER" parentPermissionId="RULE_MANAGE_VIEW" />
+    <SecurityPermission description="号段配置查看" name="号段配置查看" permissionId="SEGMENT_NUMBER_VIEW" parentPermissionId="SEGMENT_NUMBER" />
+    <SecurityPermission description="号段配置新增" name="号段配置新增" permissionId="SEGMENT_NUMBER_CREATE" parentPermissionId="SEGMENT_NUMBER" />
+    <SecurityPermission description="号段配置修改" name="号段配置修改" permissionId="SEGMENT_NUMBER_UPDATE" parentPermissionId="SEGMENT_NUMBER" />
+    <SecurityPermission description="号段配置删除" name="号段配置删除" permissionId="SEGMENT_NUMBER_DELETE" parentPermissionId="SEGMENT_NUMBER" />
+    <!-- 订单设置 -->
+    <SecurityPermission description="订单设置" name="订单设置" permissionId="ORDER_SET" parentPermissionId="RULE_MANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="订单设置查看" name="订单设置查看" permissionId="ORDER_SET_VIEW" parentPermissionId="ORDER_SET" menuType="P"/>
+    <SecurityPermission description="订单设置修改" name="订单设置修改" permissionId="ORDER_SET_UPDATE" parentPermissionId="ORDER_SET" menuType="P"/>
+    <!-- 字段表设置 -->
+    <SecurityPermission description="字段表设置" name="字段表设置" permissionId="FIELD_TABLESET" parentPermissionId="RULE_MANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="字段表设置查看" name="字段表设置" permissionId="FIELD_TABLESET_VIEW" parentPermissionId="FIELD_TABLESET" menuType="P"/>
+    <SecurityPermission description="字段表设置修改" name="字段表设置" permissionId="FIELD_TABLESET_UPDATE" parentPermissionId="FIELD_TABLESET" menuType="P"/>
+    <SecurityPermission description="字段表设置新增" name="字段表设置" permissionId="FIELD_TABLESET_CREATE" parentPermissionId="FIELD_TABLESET" menuType="P"/>
+    <SecurityPermission description="字段表设置删除" name="字段表设置" permissionId="FIELD_TABLESET_DELETE" parentPermissionId="FIELD_TABLESET" menuType="P"/>
+
+    <!-- 配送管理 -->
+    <!--<SecurityPermission description="配送管理" name="配送管理" permissionId="DISTRIBUTION_VIEW" parentPermissionId="SYSTEMMGR_VIEW" menuType="A"/>-->
+    <!-- 地区管理 -->
+
+    <SecurityPermission description="地区管理" name="地区管理" permissionId="GEO_VIEW" parentPermissionId="SYSTEMMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="地区修改" name="地区修改" permissionId="GEO_UPDATE" parentPermissionId="GEO_VIEW" menuType="P"/>
+    <SecurityPermission description="地区新增" name="地区新增" permissionId="GEO_CREATE" parentPermissionId="GEO_VIEW" menuType="P"/>
+    <SecurityPermission description="地区删除" name="地区删除" permissionId="GEO_DELETE" parentPermissionId="GEO_VIEW" menuType="P"/>
+
+     <!--配送管理 -->
+    <SecurityPermission description="配送管理" name="配送管理" permissionId="DISTRIBUTION_VIEW" parentPermissionId="SYSTEMMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="物流公司查看" name="物流公司查看" permissionId="LOGISTICS_COMPANY_VIEW" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流公司修改" name="物流公司修改" permissionId="LOGISTICS_COMPANY_UPDATE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流公司新增" name="物流公司新增" permissionId="LOGISTICS_COMPANY_CREATE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流公司删除" name="物流公司删除" permissionId="LOGISTICS_COMPANY_DELETE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流单据查看" name="物流单据查看" permissionId="LOGISTICS_DOCUMENTS_VIEW" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流单据修改" name="物流单据修改" permissionId="LOGISTICS_DOCUMENTS_UPDATE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流单据新增" name="物流单据新增" permissionId="LOGISTICS_DOCUMENTS_CREATE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流单据删除" name="物流单据删除" permissionId="LOGISTICS_DOCUMENTS_DELETE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流模板查看" name="物流模板查看" permissionId="LOGISTICS_TEMPLE_VIEW" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流模板修改" name="物流模板修改" permissionId="LOGISTICS_TEMPLE_UPDATE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流模板新增" name="物流模板新增" permissionId="LOGISTICS_TEMPLE_CREATE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流模板删除" name="物流模板删除" permissionId="LOGISTICS_TEMPLE_DELETE" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+    <SecurityPermission description="物流模板复制" name="物流模板复制" permissionId="LOGISTICS_TEMPLE_COPY" parentPermissionId="DISTRIBUTION_VIEW" menuType="A"/>
+
+    <!--渠道管理-->
+    <SecurityPermission description="渠道管理" name="渠道管理" permissionId="CHANNEL_MANAGE" parentPermissionId="SYSTEMMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="渠道查看" name="渠道查看" permissionId="CHANNEL_MANAGE_VIEW" parentPermissionId="CHANNEL_MANAGE" menuType="P"/>
+    <SecurityPermission description="渠道修改" name="渠道修改" permissionId="CHANNEL_MANAGE_UPDATE" parentPermissionId="CHANNEL_MANAGE" menuType="P"/>
+    <SecurityPermission description="渠道新增" name="渠道新增" permissionId="CHANNEL_MANAGE_CREATE" parentPermissionId="CHANNEL_MANAGE" menuType="P"/>
+    <SecurityPermission description="渠道删除" name="渠道删除" permissionId="CHANNEL_MANAGE_DELETE" parentPermissionId="CHANNEL_MANAGE" menuType="P"/>
+
+    <!--积分Code 设置-->
+    <SecurityPermission description="积分Code配置" name="积分Code配置" permissionId="INTEGRAL_CODE" parentPermissionId="RULE_MANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="积分Code配置查看" name="积分Code配置查看" permissionId="INTEGRAL_CODE_VIEW" parentPermissionId="INTEGRAL_CODE" menuType="P"/>
+    <SecurityPermission description="积分Code配置新增" name="积分Code配置新增" permissionId="INTEGRAL_CODE_CREATE" parentPermissionId="INTEGRAL_CODE" menuType="P"/>
+    <SecurityPermission description="积分Code配置修改" name="积分Code配置修改" permissionId="INTEGRAL_CODE_UPDATE" parentPermissionId="INTEGRAL_CODE" menuType="P"/>
+    <SecurityPermission description="积分Code配置删除" name="积分Code配置删除" permissionId="INTEGRAL_CODE_DELETE" parentPermissionId="INTEGRAL_CODE" menuType="P"/>
+
+    <!--审核开关设置-->
+    <SecurityPermission description="审核开关设置" name="审核开关设置" permissionId="PRODUCT_RULESSET" parentPermissionId="RULE_MANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="审核开关设置查看" name="审核开关设置查看" permissionId="PRODUCT_RULESSET_VIEW" parentPermissionId="PRODUCT_RULESSET" menuType="P"/>
+    <SecurityPermission description="审核开关设置修改" name="审核开关设置修改" permissionId="PRODUCT_RULESSET_UPDATE" parentPermissionId="PRODUCT_RULESSET" menuType="P"/>
+</entity-engine-xml>

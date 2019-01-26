@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+    <screen name="inventoryItemWarn">
+        <section>
+            <condition><not><if-empty field="productId"/></not></condition>
+            <actions>
+                <entity-one entity-name="Product" value-field="product"/>
+
+                <set field="title" value="${product.productName}库存预警"/>
+            </actions>
+            <widgets>
+                <platform-specific><html><html-template location="component://systemMgr/webapp/systemMgr/email/inventoryEmailWarningNotification.ftl"/></html></platform-specific>
+            </widgets>
+            <fail-widgets>
+                <label text=""></label>
+            </fail-widgets>
+        </section>
+    </screen>
+    <screen name="productPromoCouponWarn">
+
+        <section>
+            <condition><not><if-empty field="productPromoCoupon"/></not></condition>
+            <actions>
+                <set field="title" value="${productPromoCoupon.couponName}数量不足预警"/>
+            </actions>
+            <widgets>
+                <platform-specific><html><html-template location="component://systemMgr/webapp/systemMgr/email/productPromoCouponNotification.ftl"/></html></platform-specific>
+            </widgets>
+            <fail-widgets>
+                <label text=""></label>
+            </fail-widgets>
+        </section>
+
+    </screen>
+    <screen name="custApplyReturnCompleted">
+        <section>
+            <condition><not><if-empty field="returnId"/></not></condition>
+            <actions>
+                <set field="title" value="收到订单号为${orderId}的用户退单请求"/>
+            </actions>
+            <widgets>
+                <platform-specific><html><html-template location="component://systemMgr/webapp/systemMgr/email/custApplyReturnCompleted.ftl"/></html></platform-specific>
+            </widgets>
+            <fail-widgets>
+                <label text=""></label>
+            </fail-widgets>
+        </section>
+    </screen>
+    <screen name="productOnlineApplySuccess">
+        <section>
+            <condition><not><if-empty field="productId"/></not></condition>
+            <actions>
+                <set field="title" value="产品上架申请-{productId}"/>
+            </actions>
+            <widgets>
+                <platform-specific><html><html-template location="component://systemMgr/webapp/systemMgr/email/productOnlineApplySuccess.ftl"/></html></platform-specific>
+            </widgets>
+            <fail-widgets>
+                <label text=""></label>
+            </fail-widgets>
+        </section>
+    </screen>
+
+</screens>

@@ -1,0 +1,1210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of an Open For Business Project Component</title>
+    <description>None</description>
+    <version>1.0</version>
+    <!-- 站点店铺关联表 begin by gss 2015/12/22 -->
+    <entity entity-name="WebsiteProductStorelink" package-name="org.ofbiz.content.website"
+            title="Website Type productStore">
+        <field name="websiteProductStorelinkId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <field name="productStoreId" type="id-ne"></field>
+        <prim-key field="websiteProductStorelinkId" />
+        <relation type="many" fk-name="PRODUCT_STORE_ID" rel-entity-name="productStore">
+            <key-map field-name="productStoreId" />
+        </relation>
+        <relation type="many" fk-name="WEB_SITE_ID" rel-entity-name="webSite">
+            <key-map field-name="webSiteId" />
+        </relation>
+    </entity>
+    <!-- 站点店铺关联表 end by gss 2015/12/22 -->
+
+    <!-- 广告表 begin by qianjin 2016/01/06 -->
+    <entity entity-name="Banner" package-name="org.ofbiz.content.banner"
+            title="Banner productStore">
+        <field name="bannerId" type="id-ne"></field>
+        <field name="contentId" type="id-ne"></field>
+        <field name="firstLinkType" type="id-ne"></field>
+        <field name="secondLinkType" type="id-ne"></field>
+        <field name="linkUrl" type="url"></field>
+        <field name="linkId" type="id-ne"></field>
+        <field name="linkName" type="name"></field>
+        <!-- 是否启用 0：是 1：否 -->
+        <field name="isUse" type="indicator"></field>
+        <!-- 是否所有站点 0：是 1：否 -->
+        <field name="isAllWebSite" type="indicator"></field>
+        <!-- 是否所有社区 0：是 1：否 -->
+        <field name="isAllGeo" type="indicator"></field>
+        <field name="sequenceId" type="numeric"></field>
+
+        <field name="productStoreId" type="name"></field><!--店铺编码 -->
+        <!--开始时间和结束时间-->
+        <field name="fromDate" type="date-time"></field>
+        <field name="thruDate" type="date-time"></field>
+        <prim-key field="bannerId" />
+        <relation type="one" fk-name="FK_BAR_CTD"
+                  rel-entity-name="Content">
+            <key-map field-name="contentId" />
+        </relation>
+        <relation type="one" fk-name="FK_BAR_E1"  rel-entity-name="Enumeration">
+            <key-map field-name="firstLinkType" rel-field-name="enumId" />
+        </relation>
+        <relation type="one" fk-name="FK_BAR_E2"  rel-entity-name="Enumeration">
+            <key-map field-name="secondLinkType" rel-field-name="enumId" />
+        </relation>
+    </entity>
+    <!-- 广告表 end by qianjin 2016/01/06 -->
+
+
+    <!-- 标签分类表 begin by gss 2015/12/22 -->
+    <entity entity-name="TagType" package-name="org.ofbiz.content.website"
+            title="tagType">
+        <field name="tagTypeId" type="id-ne"></field><!-- 标签ID -->
+        <field name="parentTagTypeId" type="id-ne"></field><!-- 标签ID -->
+        <field name="tagTypeName" type="id-ne"></field><!-- 标签分类名称 -->
+        <field name="tagTypeLevel" type="id-ne"></field><!-- 标签分类级别 Level1 Level2
+			Level3 -->
+        <prim-key field="tagTypeId" />
+        <relation type="one" fk-name="TAG_TYPE_FK" title="Parent"
+                  rel-entity-name="TagType">
+            <key-map field-name="parentTagTypeId" rel-field-name="tagTypeId" />
+        </relation>
+    </entity>
+    <!-- 标签分类表 end by gss 2015/12/22 -->
+
+    <!-- 广告站点表 begin by qianjin 2016/01/06 -->
+    <entity entity-name="BannerWebSite" package-name="org.ofbiz.content.banner"
+            title="Banner Web Site productStore">
+        <field name="bannerWebSiteId" type="id-ne"></field>
+        <field name="bannerId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="bannerWebSiteId" />
+        <relation type="one" fk-name="BWS_BANNER" rel-entity-name="Banner">
+            <key-map field-name="bannerId" />
+        </relation>
+        <relation type="one" fk-name="BWS_WS" rel-entity-name="WebSite">
+            <key-map field-name="webSiteId" />
+        </relation>
+    </entity>
+    <!-- 广告站点表 end by qianjin 2016/01/06 -->
+
+    <!-- 标签表 begin by gss 2015/12/22 -->
+    <entity entity-name="Tag" package-name="org.ofbiz.content.website"
+            title="Tag">
+        <field name="tagId" type="id-ne"></field><!-- 标签ID -->
+        <field name="tagName" type="id-ne"></field><!-- 标签名称 -->
+        <field name="contentId" type="id-ne"></field><!-- 图片contentId -->
+        <field name="tagTypeId" type="id-ne"></field><!--标签类型ID -->
+        <field name="tagRemark" type="long-varchar"></field><!--标签备注 -->
+        <!-- add by gss -->
+        <field name="isDel" type="indicator"></field><!--是否删除 Y删除,N -->
+        <prim-key field="tagId" />
+        <relation type="one" fk-name="FK_TG_CT" title=""
+                  rel-entity-name="Content">
+            <key-map field-name="contentId" rel-field-name="contentId" />
+        </relation>
+        <relation type="one" fk-name="FK_TG_TTD" title=""
+                  rel-entity-name="TagType">
+            <key-map field-name="tagTypeId" rel-field-name="tagTypeId" />
+        </relation>
+    </entity>
+    <!-- 标签分类表 end by gss 2015/12/22 -->
+
+    <!-- 文章分类表 begin by gss 2015/12/28 -->
+    <entity entity-name="ArticleType" package-name="org.ofbiz.content.article"
+            title="ArticleType">
+        <field name="articleTypeId" type="id-ne"></field><!-- 文章分类ID -->
+        <field name="parentTypeId" type="id-ne"></field><!-- 文章分类parentID -->
+        <field name="description" type="id-ne"></field><!-- 文章分类名称 -->
+        <field name="typeLevel" type="id-ne"></field><!-- 文章分类级别 -->
+        <prim-key field="articleTypeId" />
+        <relation type="many" fk-name="ARTICLE_TYPE" title="Parent"
+                  rel-entity-name="ArticleContentType">
+            <key-map field-name="parentTypeId" rel-field-name="articleTypeId" />
+        </relation>
+    </entity>
+    <!-- 文章分类表 end by gss 2015/12/28 -->
+
+    <!-- 文章表 begin by gss 2015/12/31 -->
+    <entity entity-name="Article" package-name="org.ofbiz.content.article"
+            title="articleType">
+        <field name="articleId" type="id-ne"></field><!-- 文章ID -->
+        <field name="articleTitle" type="name"></field><!--文章标题 -->
+        <field name="articleLink" type="name"></field><!--原文链接 -->
+        <field name="articleAuthor" type="name"></field><!--作者 -->
+        <field name="articleTypeId" type="id-ne"></field><!--文章分类Id -->
+        <field name="articleStatus" type="indicator"></field><!--文章状态 0已保存 ,1待审核,2已审核,3已拒绝 -->
+        <field name="articleOpinion" type="long-varchar"></field><!-- 审批意见 -->
+        <field name="productStoreId" type="name"></field><!--店铺编码 -->
+        <prim-key field="articleId" />
+        <relation type="one" fk-name="ARTICLE_TYPE_ID" title="ArticleTypeId"
+                  rel-entity-name="ArticleType">
+            <key-map field-name="articleTypeId" rel-field-name="articleTypeId" />
+        </relation>
+    </entity>
+    <!-- 文章表 end by gss 2015/12/31 -->
+
+    <!-- 文章标商品关联表 begin by zhajh 2018/04/25 -->
+    <entity entity-name="ArticleProductAssoc" package-name="org.ofbiz.content.article"
+            title="ArticleProductAssoc">
+        <field name="articleProductAssocId" type="id-ne"></field><!-- 文章ID -->
+        <field name="articleId" type="id-ne"></field><!--文章编码 -->
+        <field name="productId" type="id-ne"></field><!-- 商品编码 -->
+        <prim-key field="articleProductAssocId" />
+    </entity>
+    <!-- 文章标商品关联表 end by gss 2018/04/25 -->
+
+    <!-- 文章标签关联表 begin by gss 2015/12/31 -->
+    <entity entity-name="ArticleTagAssoc" package-name="org.ofbiz.content.article"
+            title="ArticleTagAssoc">
+        <field name="articleTagAssocId" type="id-ne"></field><!-- 文章ID -->
+        <field name="articleId" type="id-ne"></field><!--文章标题 -->
+        <field name="tagId" type="id-ne"></field><!-- 文章标签ID -->
+        <prim-key field="articleTagAssocId" />
+    </entity>
+    <!-- 文章标签关联表 end by gss 2015/12/31 -->
+
+    <!-- 文章内容关联表 begin by gss 2015/12/31 -->
+    <entity entity-name="ArticleContent" package-name="org.ofbiz.content.article"
+            title="articleContent ">
+        <field name="articleId" type="id-ne"></field><!-- 文章ID -->
+        <field name="contentId" type="id-ne"></field><!-- 文章内容ID -->
+        <field name="articleContentTypeId" type="id-ne"></field><!-- 文章内容类型ID -->
+        <prim-key field="articleId" />
+        <prim-key field="contentId" />
+        <prim-key field="articleContentTypeId" />
+        <relation type="one" fk-name="ARTICLE_ID" title="articleId"
+                  rel-entity-name="Article">
+            <key-map field-name="articleId" rel-field-name="articleId" />
+        </relation>
+        <relation type="one" fk-name="CONTENT_ID" title="ContenteId"
+                  rel-entity-name="Content">
+            <key-map field-name="contentId" rel-field-name="contentId" />
+        </relation>
+        <relation type="one" fk-name="ARTICLE_CONTENT_TYPE_ID" title="articleContentTypeId"
+                  rel-entity-name="ArticleContentType">
+            <key-map field-name="articleContentTypeId" rel-field-name="articleContentTypeId" />
+        </relation>
+    </entity>
+    <!-- 文章表 end by gss 2015/12/31 -->
+
+    <!-- 文章内容类型表begin by gss 2015/12/31 -->
+    <entity entity-name="ArticleContentType" package-name="org.ofbiz.content.article"
+            title="ArticleContentType ">
+        <field name="articleContentTypeId" type="id-ne"></field><!-- 文章内容类型ID -->
+        <field name="description" type="id-ne"></field><!--文章内容类型描述 -->
+        <prim-key field="articleContentTypeId" />
+    </entity>
+    <!--文章内容类型表 end by gss 2015/12/31 -->
+
+    <!-- 文章关键字表begin by gss 2015/12/31 -->
+    <entity entity-name="ArticleKeyword" package-name="org.ofbiz.content.article"
+            title="ArticleKeyword ">
+        <field name="articleId" type="id-ne"></field><!-- 文章内容类型ID -->
+        <field name="keyword" type="name"></field><!--文章内容类型描述 -->
+        <prim-key field="articleId" />
+        <prim-key field="keyword" />
+    </entity>
+    <!--文章关键字表 end by gss 2015/12/31 -->
+
+    <!-- 广告社区表 begin by qianjin 2016/01/06 -->
+    <entity entity-name="BannerCommunity" package-name="org.ofbiz.content.banner"
+            title="Banner Community productStore">
+        <field name="bannerCommunityId" type="id-ne"></field>
+        <field name="bannerId" type="id-ne"></field>
+        <field name="communityId" type="id-ne"></field>
+        <prim-key field="bannerCommunityId" />
+        <relation type="one" fk-name="BC_BANNER" rel-entity-name="Banner">
+            <key-map field-name="bannerId" />
+        </relation>
+        <relation type="one" fk-name="BC_COMMUNITY" rel-entity-name="Community">
+            <key-map field-name="communityId" />
+        </relation>
+    </entity>
+    <!-- 广告社区表 end by qianjin 2016/01/06 -->
+
+    <!-- 广告地区表 begin by qianjin 2016/04/07 -->
+    <entity entity-name="BannerGeo" package-name="org.ofbiz.content.banner"
+            title="Banner Geo">
+        <field name="bannerGeoId" type="id-ne"></field>
+        <field name="bannerId" type="id-ne"></field>
+        <field name="geoId" type="id-ne"></field>
+        <prim-key field="bannerGeoId" />
+        <relation type="one" fk-name="BG_BANNER" rel-entity-name="Banner">
+            <key-map field-name="bannerId" />
+        </relation>
+        <relation type="one" fk-name="BG_GEO" rel-entity-name="Geo">
+            <key-map field-name="geoId" />
+        </relation>
+    </entity>
+    <!-- 广告地区表 end by qianjin 2016/04/07 -->
+
+    <!-- begin add by Wcy 2016.01.20 -->
+    <view-entity entity-name="BannerAndBannerCommunity"
+                 package-name="org.ofbiz.content.banner" title="BannerAndBannerCommunity View Entity">
+        <member-entity entity-alias="BA" entity-name="Banner" />
+        <member-entity entity-alias="BC" entity-name="BannerCommunity" />
+        <alias entity-alias="BA" name="bannerId" />
+        <alias entity-alias="BA" name="isUse" />
+        <alias entity-alias="BA" name="sequenceId" />
+        <alias entity-alias="BC" name="communityId" />
+        <alias entity-alias="BA" name="contentId" />
+        <view-link entity-alias="BA" rel-entity-alias="BC">
+            <key-map field-name="bannerId" />
+        </view-link>
+    </view-entity>
+
+    <!-- 热门搜索表 add by qianjin 2016.05.09 Begin -->
+    <entity entity-name="HotSearch" package-name="org.ofbiz.content.hotSearch"
+            title="Hot Search">
+        <field name="hotSearchId" type="id-ne"></field><!-- 热门搜索ID -->
+        <field name="hotSearchKeyName" type="name"></field><!--热门搜索关键字名 -->
+        <field name="sequenceId" type="numeric" /><!--序列号 -->
+        <!-- 是否所有站点 0：是 1：否 -->
+        <field name="isAllWebSite" type="indicator"></field>
+        <!-- 是否所有地区 0：是 1：否 -->
+        <field name="isAllGeo" type="indicator"></field>
+        <field name="productStoreId" type="id-ne"/>
+        <prim-key field="hotSearchId" />
+    </entity>
+    <!-- 热门搜索表 add by qianjin 2016.05.09 End -->
+
+    <!-- 热门搜索和站点的关联表 add by qianjin at 2016.05.09 Begin -->
+    <entity entity-name="HotSearchWebSite" package-name="org.ofbiz.content.hotSearch"
+            title="Hot Search Web Site">
+        <field name="hotSearchWebSiteId" type="id-ne"></field>
+        <field name="hotSearchId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="hotSearchWebSiteId" />
+        <relation type="one" fk-name="HSWS_HS" rel-entity-name="HotSearch">
+            <key-map field-name="hotSearchId" />
+        </relation>
+        <relation type="one" fk-name="HSWS_WS" rel-entity-name="WebSite">
+            <key-map field-name="webSiteId" />
+        </relation>
+    </entity>
+    <!--热门搜索和站点的关联表 add by qianjin at 2016.05.09 End -->
+
+    <!-- 广告地区表 begin by qianjin 2016.05.09 -->
+    <entity entity-name="HotSearchGeo" package-name="org.ofbiz.content.hotSearch"
+            title="Hot Search Geo">
+        <field name="hotSearchGeoId" type="id-ne"></field>
+        <field name="hotSearchId" type="id-ne"></field>
+        <field name="geoId" type="id-ne"></field>
+        <prim-key field="hotSearchGeoId" />
+        <relation type="one" fk-name="HSG_HS" rel-entity-name="HotSearch">
+            <key-map field-name="hotSearchId" />
+        </relation>
+        <relation type="one" fk-name="HSG_G" rel-entity-name="Geo">
+            <key-map field-name="geoId" />
+        </relation>
+    </entity>
+    <!-- 广告地区表 end by qianjin 2016.05.09 -->
+
+    <!-- 咨询表 begin by AlexYao 2016/03/30 -->
+    <entity entity-name="Consult" package-name="org.ofbiz.content.customer"
+            title="Consult">
+        <field name="consultId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field><!--商品Id -->
+        <field name="createPartyId" type="id-ne"></field><!--创建人会员Id -->
+        <field name="createDate" type="date-time"></field><!--创建日期 -->
+        <field name="consultType" type="id-ne"></field><!--咨询类型，商品咨询：PRODUCT、库存配送：FACILITY、支付：PAY、发票与保修：INVOICE、促销及赠品：PROMO -->
+        <field name="consultContent" type="description"></field><!--咨询内容 -->
+        <field name="replyPartyId" type="id-ne"></field><!--回复人会员Id -->
+        <field name="replyDate" type="date-time"></field><!--回复日期 -->
+        <field name="replyContent" type="description"></field><!--回复内容 -->
+        <field name="isShow" type="indicator"></field><!--是否显咨询 -->
+        <field name="isShowReply" type="indicator"></field><!--是否显回复 -->
+        <prim-key field="consultId" />
+        <relation type="one" fk-name="CONSULT_PROD" rel-entity-name="Product">
+            <key-map field-name="productId" rel-field-name="productId" />
+        </relation>
+        <relation type="one" fk-name="CONSULT_CREA_PART"
+                  rel-entity-name="Party">
+            <key-map field-name="createPartyId" rel-field-name="partyId" />
+        </relation>
+        <relation type="one" fk-name="CONSULT_REPL_PART"
+                  rel-entity-name="Party">
+            <key-map field-name="replyPartyId" rel-field-name="partyId" />
+        </relation>
+    </entity>
+    <!-- 咨询表 end by AlexYao 2016/03/30 -->
+
+    <!-- 意见反馈表 begin by AlexYao 2016/04/01 -->
+    <entity entity-name="Feedback" package-name="org.ofbiz.content.customer"
+            title="Feedback">
+        <field name="feedbackId" type="id-ne"></field>
+        <field name="createPartyId" type="id-ne"></field><!--创建人会员Id -->
+        <field name="createDate" type="date-time"></field><!--创建日期 -->
+        <field name="feedbackType" type="id-ne"></field><!--反馈类型，商品相关：PRODUCT、活动相关：ACTIVITY、物流相关：LOGISTIC、价格相关：PRICE、售后相关：AFTERSALE、服务相关：SERVICE、操作意见：OPERATE、其他方面：OTHER -->
+        <field name="feedbackContent" type="description"></field><!--咨询内容 -->
+        <field name="replyPartyId" type="id-ne"></field><!--回复人会员Id -->
+        <field name="replyDate" type="date-time"></field><!--回复日期 -->
+        <field name="replyContent" type="description"></field><!--回复内容 -->
+        <field name="isShowReply" type="indicator"></field><!--是否显回复 -->
+        <field name="contactMethod" type="id-long"></field><!--手机号或邮箱 -->
+        <prim-key field="feedbackId" />
+        <relation type="one" fk-name="FEEDBACK_CREA_PART"
+                  rel-entity-name="Party">
+            <key-map field-name="createPartyId" rel-field-name="partyId" />
+        </relation>
+        <relation type="one" fk-name="FEEDBACK_REPL_PART"
+                  rel-entity-name="Party">
+            <key-map field-name="replyPartyId" rel-field-name="partyId" />
+        </relation>
+    </entity>
+    <!-- 意见反馈表 end by AlexYao 2016/04/01 -->
+
+    <!-- 意见反馈图片关联表 begin by gss 2017/04/27 -->
+    <entity entity-name="FeedbackContent" package-name="org.ofbiz.content.feedback"
+            title="FeedbackContent">
+        <field name="feedbackId" type="id-ne"></field>
+        <field name="contentId" type="id-ne"></field><!--图片Id -->
+        <prim-key field="feedbackId" />
+        <prim-key field="contentId" />
+        <relation type="one" rel-entity-name="Feedback" fk-name="FK_FBC_FD">
+            <key-map field-name="feedbackId" rel-field-name="feedbackId" />
+        </relation>
+        <relation type="one" fk-name="FK_FBC_CT" rel-entity-name="Content">
+            <key-map field-name="contentId" rel-field-name="contentId" />
+        </relation>
+    </entity>
+    <!-- 意见反馈图片关联表 end by gss 2017/04/27 -->
+
+    <!-- 图片分组表 begin by qianjin 2016/04/05 -->
+    <entity entity-name="ImgGroup" package-name="org.ofbiz.content.imgmanage"
+            title="ImgGroup">
+        <field name="imgGroupId" type="id-ne"></field>
+        <field name="imgGroupName" type="name"></field><!--分组名称 -->
+        <prim-key field="imgGroupId" />
+    </entity>
+    <!-- 图片分组表 end by qianjin 2016/04/05 -->
+
+    <!-- 图片分组关联表 begin by qianjin 2016/04/05 -->
+    <entity entity-name="ImgGroupAssoc" package-name="org.ofbiz.content.imgmanage"
+            title="ImgGroupAssoc">
+        <field name="imgGroupAssocId" type="id-ne"></field>
+        <field name="imgGroupId" type="id-ne"></field><!--分组ID -->
+        <field name="contentId" type="id-ne"></field><!--图片ID -->
+        <prim-key field="imgGroupAssocId" />
+        <relation type="one" fk-name="IGA_IG" rel-entity-name="ImgGroup">
+            <key-map field-name="imgGroupId" rel-field-name="imgGroupId" />
+        </relation>
+        <relation type="one" fk-name="IGA_CONTENT" rel-entity-name="Content">
+            <key-map field-name="contentId" rel-field-name="contentId" />
+        </relation>
+    </entity>
+    <!-- 图片分组关联表 end by qianjin 2016/04/05 -->
+
+    <!-- 公告表 begin by AlexYao 2016/04/06 -->
+    <entity entity-name="Notice" package-name="org.ofbiz.content.notice"
+            title="Notice productStore">
+        <field name="noticeId" type="id-ne"></field>
+        <field name="noticeTitle" type="description"></field>
+        <field name="firstLinkType" type="id-ne"></field>
+        <field name="secondLinkType" type="id-ne"></field>
+        <field name="linkUrl" type="url"></field>
+        <field name="linkId" type="id-ne"></field>
+        <field name="linkName" type="name"></field>
+        <!-- 是否启用 0：是 1：否 -->
+        <field name="isUse" type="indicator"></field>
+        <!-- 是否所有站点 0：是 1：否 -->
+        <field name="isAllWebSite" type="indicator"></field>
+        <!-- 是否所有地区 0：是 1：否 -->
+        <field name="isAllGeo" type="indicator"></field>
+        <field name="sequenceId" type="numeric"></field>
+        <field name="tagId" type="id-ne"></field> <!-- 公告标签 -->
+
+
+        <prim-key field="noticeId" />
+        <relation type="one" fk-name="NO_FLT_ENUM" rel-entity-name="Enumeration">
+            <key-map field-name="firstLinkType" rel-field-name="enumId" />
+        </relation>
+        <relation type="one" fk-name="NO_SLT_ENUM" rel-entity-name="Enumeration">
+            <key-map field-name="secondLinkType" rel-field-name="enumId" />
+        </relation>
+    </entity>
+    <!-- 公告表 end by AlexYao 2016/04/06 -->
+
+    <!-- 公告站点表 begin by AlexYao 2016/04/06 -->
+    <entity entity-name="NoticeWebSite" package-name="org.ofbiz.content.notice"
+            title="Notice Web Site productStore">
+        <field name="noticeWebSiteId" type="id-ne"></field>
+        <field name="noticeId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="noticeWebSiteId" />
+        <relation type="one" fk-name="NWS_NOTICE" rel-entity-name="Notice">
+            <key-map field-name="noticeId" />
+        </relation>
+        <relation type="one" fk-name="NWS_WS" rel-entity-name="WebSite">
+            <key-map field-name="webSiteId" />
+        </relation>
+    </entity>
+    <!-- 公告站点表 end by AlexYao 2016/04/06 -->
+    <!-- 公告地区表 begin by AlexYao 2016/04/06 -->
+    <entity entity-name="NoticeGeo" package-name="org.ofbiz.content.notice"
+            title="Notice Geo productStore">
+        <field name="noticeGeoId" type="id-ne"></field>
+        <field name="noticeId" type="id-ne"></field>
+        <field name="geoId" type="id-ne"></field>
+        <prim-key field="noticeGeoId" />
+        <relation type="one" fk-name="NG_NOTICE" rel-entity-name="Notice">
+            <key-map field-name="noticeId" />
+        </relation>
+        <relation type="one" fk-name="NG_GEO" rel-entity-name="Geo">
+            <key-map field-name="geoId" />
+        </relation>
+    </entity>
+    <!-- 公告地区表 end by AlexYao 2016/04/06 -->
+
+
+
+    <!-- 分类导航分组表 add by dongxiao at 2016/03/30 Begin -->
+    <entity entity-name="NavigationGroup" package-name="org.ofbiz.content.navigationGroup"
+            title="">
+        <field name="navigationGroupId" type="id-ne"></field>
+        <field name="navigationGroupName" type="name"></field><!-- 导航分组名称 -->
+        <field name="isEnable" type="indicator"></field><!-- 是否启用,0:否，1:是 -->
+        <field name="isShowBrand" type="indicator"></field><!-- 是否显示品牌,0:否，1:是 -->
+        <field name="isAllSite" type="indicator"></field><!-- 是否使用所有站点,0:否，1:是 -->
+        <prim-key field="navigationGroupId" />
+
+    </entity>
+    <!--导航分组表 add by dongxiao at 2016/03/30 End -->
+
+    <!-- 分类导航分组站点关联表 add by dongxiao at 2016/03/30 Begin -->
+    <entity entity-name="NavigationGroupSite" package-name="org.ofbiz.content.navigationGroup"
+            title="">
+        <field name="navigationGroupId" type="id-ne"></field>
+        <field name="siteId" type="id-ne"></field>
+        <prim-key field="siteId" />
+        <prim-key field="navigationGroupId" />
+        <relation type="one" fk-name="ns_s" rel-entity-name="WebSite">
+            <key-map field-name="siteId" rel-field-name="webSiteId" />
+        </relation>
+        <relation type="one" fk-name="ns_n" rel-entity-name="NavigationGroup">
+            <key-map field-name="navigationGroupId" />
+        </relation>
+
+    </entity>
+    <!-- 分类导航分组站点关联表 add by dongxiao at 2016/03/30 End -->
+
+    <!-- 分类导航表 add by dongxiao at 2016/04/6 Begin -->
+    <entity entity-name="Navigation" package-name="org.ofbiz.content.navigationGroup"
+            title="">
+        <field name="id" type="id-ne"></field><!-- 分类导航id -->
+        <field name="parentId" type="id-ne"></field><!-- 分类导航父级id -->
+        <field name="navigationGroupId" type="id-ne"></field><!-- 导航分组id -->
+        <field name="navigationName" type="name"></field><!-- 分类导航名称 -->
+        <field name="productCategoryId" type="id-ne"></field><!-- 商品分类Id -->
+        <field name="navigationImg" type="id-ne"></field><!-- 分类导航图片 -->
+        <field name="sequence" type="id-ne"></field><!-- 序号 -->
+        <field name="isEnable" type="indicator"></field><!-- 是否启用,0:否，1:是 -->
+        <prim-key field="id" />
+        <relation type="one" fk-name="nvi_con_fk" rel-entity-name="Content">
+            <key-map field-name="navigationImg" rel-field-name="contentId" />
+        </relation>
+        <relation type="one" fk-name="nvi_ng_fk" rel-entity-name="NavigationGroup">
+            <key-map field-name="navigationGroupId" />
+        </relation>
+        <relation type="one" fk-name="nvi_pc_fk" rel-entity-name="ProductCategory">
+            <key-map field-name="productCategoryId" />
+        </relation>
+    </entity>
+    <!--分类导航表 add by dongxiao at 2016/04/6 End -->
+    <entity entity-name="NavigationProduct" package-name="org.ofbiz.content.navigationGroup"
+            title="">
+        <field name="id" type="id-ne"></field>
+        <field name="navigationId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <field name="seq" type="id-ne"></field>
+        <field name="isEnable" type="indicator"></field><!-- 是否启用,0:否，1:是 -->
+        <prim-key field="id" />
+        <relation type="one" fk-name="FK_NP_NG"  rel-entity-name="Navigation">
+            <key-map field-name="navigationId" rel-field-name="id" />
+        </relation>
+        <relation type="one" fk-name="FK_NP_PT"    rel-entity-name="Product">
+            <key-map field-name="productId" />
+        </relation>
+    </entity>
+
+    <entity entity-name="NavigationBrand" package-name="org.ofbiz.content.navigationGroup"
+            title="">
+        <field name="id" type="id-ne"></field>
+        <field name="navigationId" type="id-ne"></field>
+        <field name="productBrandId" type="id-ne"></field><!-- 品牌名称 -->
+        <field name="brandImg" type="id-ne"></field><!-- 品牌图片 -->
+        <field name="isEnable" type="indicator"></field><!-- 是否启用,0:否，1:是 -->
+        <field name="seq" type="id-ne"></field>
+        <prim-key field="id" />
+        <relation type="one" fk-name="FK_NB_NGN"  rel-entity-name="Navigation">
+            <key-map field-name="navigationId" rel-field-name="id" />
+        </relation>
+        <relation type="one" fk-name="FK_NB_CONT" rel-entity-name="Content">
+            <key-map field-name="brandImg" rel-field-name="contentId" />
+        </relation>
+        <relation type="one" fk-name="FK_NB_PBD"  rel-entity-name="ProductBrand">
+            <key-map field-name="productBrandId" rel-field-name="productBrandId" />
+        </relation>
+    </entity>
+
+
+    <!-- 分类导航广告表 begin by dongxiao 2016/4/20 -->
+    <entity entity-name="NavigationBanner" package-name="org.ofbiz.content.banner"
+            title="Banner productStore">
+        <field name="navigationId" type="id-ne"></field>
+        <field name="contentId" type="id-ne"></field>
+        <field name="firstLinkType" type="id-ne"></field>
+        <field name="secondLinkType" type="id-ne"></field>
+        <field name="linkUrl" type="url"></field>
+        <field name="linkId" type="id-ne"></field>
+        <field name="linkName" type="name"></field>
+        <!-- 是否启用 0：是 1：否 -->
+        <field name="isUse" type="indicator"></field>
+        <!-- 是否所有站点 0：是 1：否 -->
+        <field name="isAllWebSite" type="indicator"></field>
+        <!-- 是否所有社区 0：是 1：否 -->
+        <field name="isAllGeo" type="indicator"></field>
+        <field name="sequenceId" type="numeric"></field>
+        <prim-key field="navigationId" />
+        <relation type="one" fk-name="FK_NB_CT" rel-entity-name="Content">
+            <key-map field-name="contentId" />
+        </relation>
+        <relation type="one" fk-name="FK_NB_EN1"  rel-entity-name="Enumeration">
+            <key-map field-name="firstLinkType" rel-field-name="enumId" />
+        </relation>
+        <relation type="one" fk-name="FK_NB_EN2"  rel-entity-name="Enumeration">
+            <key-map field-name="secondLinkType" rel-field-name="enumId" />
+        </relation>
+        <relation type="one" fk-name="FK_NB_NAB"  rel-entity-name="Navigation">
+            <key-map field-name="navigationId" rel-field-name="id" />
+        </relation>
+    </entity>
+    <!-- 分类导航广告表 end by dongxiao 2016/4/20 -->
+
+    <!-- 首页导航begin by liruishi 2017-3-20 -->
+    <entity entity-name="NavigationMenu" package-name="org.ofbiz.content.navigation">
+        <field name="navId" type="id-ne"></field><!-- 主键 -->
+        <field name="navName" type="name" /><!-- 导航名称 -->
+        <field name="navUrl" type="url"></field><!-- 导航URL -->
+        <field name="navDesc" type="description"></field><!-- 导航描述 -->
+        <field name="isEnabled" type="indicator"></field><!-- 启用标识 启用Y 禁用N -->
+        <field name="seqNo" type="numeric"></field><!-- 序号，不可重复 -->
+        <field name="exPlat" type="value"></field><!-- 展示平台 P:PC端,M:移动端 -->
+        <field name="navType" type="id-ne"></field><!-- 导航类型 -->
+        <field name="contentId" type="id-ne"></field><!-- 导航图片id -->
+        <!-- 是否所有站点 0：是 1：否 -->
+        <field name="isAllWebSite" type="indicator"></field>
+        <field name="firstLinkType" type="id-ne"></field>
+        <field name="linkUrl" type="url"></field>
+        <field name="linkId" type="id-ne"></field>
+        <field name="linkName" type="name"></field>
+        <prim-key field="navId" /> <!-- 主键 -->
+    </entity>
+    <!-- 导航，站点关系 -->
+    <entity entity-name="NavigationMenuWebSiteRef" package-name="org.ofbiz.content.navigation">
+        <field name="id" type="id-ne"></field>
+        <field name="navId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="id" />
+        <relation type="one" fk-name="NM_MENU" rel-entity-name="NavigationMenu">
+            <key-map field-name="navId" />
+        </relation>
+        <relation type="one" fk-name="NM_WS" rel-entity-name="WebSite">
+            <key-map field-name="webSiteId" />
+        </relation>
+    </entity>
+    <!--首页导航 end by liruishi 2017-3-20 -->
+    <!-- 楼层设置 begin by AlexYao -->
+    <entity entity-name="Floor" package-name="org.ofbiz.content.floor"
+            title="Floor Manager">
+        <field name="floorId" type="id-ne"></field><!-- 主键 -->
+        <field name="productCategoryId" type="id-ne"></field><!--楼层分类 -->
+        <field name="floorName" type="name"></field><!--楼层名称 -->
+        <field name="imgUrl" type="url"></field><!--楼层图片 -->
+        <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N -->
+        <field name="sequenceNum" type="numeric"></field><!--楼层 -->
+        <prim-key field="floorId" />
+        <relation type="one" fk-name="FLOOR_CATEGORY"
+                  rel-entity-name="ProductCategory">
+            <key-map field-name="productCategoryId" />
+        </relation>
+
+    </entity>
+    <!--楼层设置 end by AlexYao -->
+    <!-- 楼层站点表 begin by AlexYao -->
+    <entity entity-name="FloorWebSite" package-name="org.ofbiz.content.floor"
+            title="Floor Web Site">
+        <field name="floorWebSiteId" type="id-ne"></field>
+        <field name="floorId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="floorWebSiteId" />
+        <relation type="one" fk-name="FWS_FLOOR" rel-entity-name="Floor">
+            <key-map field-name="floorId" />
+        </relation>
+        <relation type="one" fk-name="FWS_WS" rel-entity-name="WebSite">
+            <key-map field-name="webSiteId" />
+        </relation>
+    </entity>
+    <!-- 楼层站点表 end by AlexYao -->
+    <!-- 楼层标签表 begin by AlexYao -->
+    <entity entity-name="FloorLabel" package-name="org.ofbiz.content.floor"
+            title="Floor Label">
+        <field name="floorLabelId" type="id-ne"></field>
+        <field name="floorId" type="id-ne"></field><!--楼层ID -->
+        <field name="floorLabelName" type="name"></field><!--标签名称 -->
+        <field name="showBanner" type="indicator"></field><!--是否显示标签广告 是Y 否N -->
+        <field name="showBrand" type="indicator"></field><!--是否显示标签品牌 是Y 否N -->
+        <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N -->
+        <field name="sequenceNum" type="numeric"></field><!--序号 -->
+        <prim-key field="floorLabelId" />
+        <relation type="one" fk-name="FL_FLOOR" rel-entity-name="Floor">
+            <key-map field-name="floorId" />
+        </relation>
+    </entity>
+    <!-- 楼层标签表 end by AlexYao -->
+    <!-- 楼层标签商品表 begin by AlexYao -->
+    <entity entity-name="FloorLabelProduct" package-name="org.ofbiz.content.floor"
+            title="Floor Label Product">
+        <field name="floorLabelProductId" type="id-ne"></field>
+        <field name="floorId" type="id-ne"></field><!--楼层ID -->
+        <field name="floorLabelId" type="id-ne"></field><!--楼层标签ID -->
+        <field name="productId" type="id-ne"></field><!--商品ID -->
+        <field name="sequenceNum" type="numeric"></field><!--序号 -->
+        <prim-key field="floorLabelProductId" />
+        <relation type="one" fk-name="FLP_FLOOR" rel-entity-name="Floor">
+            <key-map field-name="floorId" />
+        </relation>
+        <relation type="one" fk-name="FLP_FL" rel-entity-name="FloorLabel">
+            <key-map field-name="floorLabelId" />
+        </relation>
+        <relation type="one" fk-name="FLP_PRODUCT" rel-entity-name="Product">
+            <key-map field-name="productId" />
+        </relation>
+    </entity>
+    <!-- 楼层标签商品表 end by AlexYao -->
+    <!-- 楼层标签品牌表 begin by AlexYao -->
+    <entity entity-name="FloorLabelBrand" package-name="org.ofbiz.content.floor"
+            title="Floor Label Brand">
+        <field name="floorLabelBrandId" type="id-ne"></field>
+        <field name="floorId" type="id-ne"></field><!--楼层ID -->
+        <field name="floorLabelId" type="id-ne"></field><!--楼层标签ID -->
+        <field name="productBrandId" type="id-ne"></field><!--品牌ID -->
+        <field name="linkUrl" type="url"></field><!--链接地址 -->
+        <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N -->
+        <field name="sequenceNum" type="numeric"></field><!--序号 -->
+        <prim-key field="floorLabelBrandId" />
+        <relation type="one" fk-name="FLBD_FLOOR" rel-entity-name="Floor">
+            <key-map field-name="floorId" />
+        </relation>
+        <relation type="one" fk-name="FLBD_FL" rel-entity-name="FloorLabel">
+            <key-map field-name="floorLabelId" />
+        </relation>
+        <relation type="one" fk-name="FLBD_PB" rel-entity-name="ProductBrand">
+            <key-map field-name="productBrandId" />
+        </relation>
+    </entity>
+    <!-- 楼层标签品牌表 end by AlexYao -->
+    <!-- 楼层标签广告表 begin by AlexYao -->
+    <entity entity-name="FloorLabelBanner" package-name="org.ofbiz.content.floor"
+            title="Floor Label Banner">
+        <field name="floorLabelBannerId" type="id-ne"></field>
+        <field name="floorId" type="id-ne"></field><!--楼层ID -->
+        <field name="floorLabelId" type="id-ne"></field><!--楼层标签ID -->
+        <field name="bannerName" type="name"></field><!--广告名称 -->
+        <field name="imgUrl" type="url"></field><!--广告图片 -->
+        <!-- 链接信息 -->
+        <field name="firstLinkType" type="id-ne"></field> <!-- 链接类型 -->
+        <field name="linkUrl" type="url"></field> <!-- 链接地址 -->
+        <field name="linkId" type="id-ne"></field> 	<!-- 链接id -->
+        <field name="linkName" type="name"></field> <!-- 链接名称 -->
+
+        <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N -->
+        <field name="sequenceNum" type="numeric"></field><!--序号 -->
+        <field name="description" type="description"></field><!--描述 -->
+        <prim-key field="floorLabelBannerId" />
+        <relation type="one" fk-name="FLBR_FLOOR" rel-entity-name="Floor">
+            <key-map field-name="floorId" />
+        </relation>
+        <relation type="one" fk-name="FLBR_FL" rel-entity-name="FloorLabel">
+            <key-map field-name="floorLabelId" />
+        </relation>
+    </entity>
+    <!-- 楼层标签广告表 end by AlexYao -->
+    <!-- 楼层商品表 begin by AlexYao -->
+    <entity entity-name="FloorProduct" package-name="org.ofbiz.content.floor"
+            title="Floor Product">
+        <field name="floorProductId" type="id-ne"></field>
+        <field name="floorId" type="id-ne"></field><!--楼层ID -->
+        <field name="productId" type="id-ne"></field><!--商品ID -->
+        <field name="sequenceNum" type="numeric"></field><!--序号 -->
+        <prim-key field="floorProductId" />
+        <relation type="one" fk-name="FP_FLOOR" rel-entity-name="Floor">
+            <key-map field-name="floorId" />
+        </relation>
+        <relation type="one" fk-name="FP_PRODUCT" rel-entity-name="Product">
+            <key-map field-name="productId" />
+        </relation>
+    </entity>
+    <!-- 楼层商品表 end by AlexYao -->
+    <!-- 楼层品牌表 begin by AlexYao -->
+    <entity entity-name="FloorBrand" package-name="org.ofbiz.content.floor"
+            title="Floor Brand">
+        <field name="floorBrandId" type="id-ne"></field>
+        <field name="floorId" type="id-ne"></field><!--楼层ID -->
+        <field name="productBrandId" type="id-ne"></field><!--品牌ID -->
+        <field name="linkUrl" type="url"></field><!--链接地址 -->
+        <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N -->
+        <field name="sequenceNum" type="numeric"></field><!--序号 -->
+        <prim-key field="floorBrandId" />
+        <relation type="one" fk-name="FBD_FLOOR" rel-entity-name="Floor">
+            <key-map field-name="floorId" />
+        </relation>
+        <relation type="one" fk-name="FBD_PB" rel-entity-name="ProductBrand">
+            <key-map field-name="productBrandId" />
+        </relation>
+    </entity>
+    <!-- 楼层品牌表 end by AlexYao -->
+    <!-- 楼层广告表 begin by AlexYao -->
+    <entity entity-name="FloorBanner" package-name="org.ofbiz.content.floor"
+            title="Floor Banner">
+        <field name="floorBannerId" type="id-ne"></field>
+        <field name="floorId" type="id-ne"></field><!--楼层ID -->
+        <field name="bannerName" type="name"></field><!--广告名称 -->
+        <field name="imgUrl" type="url"></field><!--广告图片 -->
+        <!-- 链接信息 -->
+        <field name="firstLinkType" type="id-ne"></field> <!-- 链接类型 -->
+        <field name="linkUrl" type="url"></field> <!-- 链接地址 -->
+        <field name="linkId" type="id-ne"></field> 	<!-- 链接id -->
+        <field name="linkName" type="name"></field> <!-- 链接名称 -->
+
+        <field name="isEnabled" type="indicator"></field><!--启用标识 启用Y 禁用N -->
+        <field name="sequenceNum" type="numeric"></field><!--序号 -->
+        <field name="description" type="description"></field><!--描述 -->
+        <prim-key field="floorBannerId" />
+        <relation type="one" fk-name="FBR_FLOOR" rel-entity-name="Floor">
+            <key-map field-name="floorId" />
+        </relation>
+    </entity>
+    <!-- 楼层广告表 end by AlexYao -->
+
+    <!-- 社区店管理 begin by Liruishi -->
+    <entity entity-name="CommunityStore" package-name="org.ofbiz.content.store">
+        <field name="commStoreId" type="id-ne"></field><!-- 主键id,编号 -->
+        <field name="storeName" type="name"></field><!-- 社区店名称 -->
+        <field name="isEnabled" type="indicator"></field>	<!-- 是否启用 -->
+        <field name="isDelete" type="indicator"></field>	<!-- 是否删除 -->
+        <field name="iconUrl" type="url"></field><!--社区店图标 -->
+        <field name="storeType" type="id-ne"></field><!-- 社区店类型,单选 -->
+        <field name="payType" type="value"></field><!-- 支付方式,aliPay,wxPay,unionPay -->
+        <field name="businessHours" type="value"></field><!-- 营业时间 -->
+        <field name="contactMan" type="name"></field><!-- 联系人 -->
+        <field name="contactPhone" type="tel-number"></field><!-- 联系电话 -->
+        <field name="remark" type="description"></field><!-- 备注 -->
+        <!-- 省，市，区 ，地址 -->
+        <field name="province" type="id-ne"></field>
+        <field name="city" type="id-ne"></field>
+        <field name="county" type="id-ne"></field>
+        <field name="address" type="description"></field>
+        <field name="orderQuantity" type="numeric"></field><!--下单量-->
+        <prim-key field="commStoreId" />
+        <relation type="one" fk-name="STORE_TYPE_FK" title="storeType" rel-entity-name="Enumeration">
+            <key-map field-name="storeType" rel-field-name="enumId"/>
+        </relation>
+    </entity>
+    <!-- 社区店管理 end by liruishi -->
+
+
+    <!-- 帮助分类表 -->
+    <entity entity-name="HelpCategory" package-name="org.ofbiz.content.help" title="Help Category">
+        <field name="helpCategoryId" type="id-ne"></field>
+        <field name="categoryName" type="name"></field><!--分类名称-->
+        <field name="imgUrl" type="url"></field><!--分类图片图片-->
+        <field name="isShow" type="indicator"></field><!--是否在底部显示 1，显示，0，不显示-->
+        <field name="sequenceNum" type="numeric"></field><!--序号-->
+        <field name="showChannel" type="description"></field><!--展示渠道 0:PC端 1：移动端-->
+        <prim-key field="helpCategoryId"/>
+    </entity>
+    <!-- 帮助分类表 -->
+
+    <!-- 礼品表 -->
+    <entity entity-name="PromoGift" package-name="org.ofbiz.content.gift" title="Promo Gift">
+        <field name="promoGiftId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <field name="giftName" type="name"></field>
+        <field name="giftType" type="name"></field>
+        <field name="isTop" type="indicator"></field><!-- 是否置顶 Y置顶 N不置顶 -->
+        <field name="status" type="indicator"></field><!-- 是否有效 1有效 0 无效 -->
+        <prim-key field="promoGiftId"></prim-key>
+        <relation fk-name="PROMO_GIFT_PRODUCT" type="one" rel-entity-name="Product" >
+            <key-map field-name="productId" />
+        </relation>
+
+    </entity>
+
+    <!-- 帮助信息表start -->
+    <entity entity-name="HelpInfo" package-name="org.ofbiz.content.help" title="Help Info">
+        <field name="helpInfoId" type="id-ne"></field>
+        <field name="helpCategoryId" type="id-ne"></field> <!--分类ID -->
+        <field name="helpTitle" type="short-varchar"></field><!-- 帮助标题 -->
+        <field name="helpIcon" type="url"></field> <!-- 帮助图标 -->
+        <field name="helpAuthor" type="name"></field><!-- 作者 -->
+        <field name="isShow" type="indicator"></field><!--是否在底部显示 1，显示，0，不显示-->
+        <field name="sequenceNum" type="numeric"></field><!--序号-->
+        <field name="showChannel" type="description"></field><!--展示渠道 0:PC端 1：移动端-->
+        <field name="helpContent" type="very-long"></field><!-- 帮助内容 -->
+        <prim-key field="helpInfoId"></prim-key><!-- 主键 -->
+        <relation fk-name="HIC_CATEGORY" type="one" rel-entity-name="HelpCategory">
+            <key-map field-name="helpCategoryId"/>
+        </relation>
+    </entity>
+    <!-- 帮助信息表end -->
+
+    <!-- 服务支持表 -->
+    <entity entity-name="ServiceSupport" package-name="org.ofbiz.content.help" title="Service Support">
+        <field name="serviceSupportId" type="id-ne"></field>
+        <field name="serviceSupportName" type="name"></field><!--服务支持名称-->
+        <field name="imgUrl" type="url"></field><!--分类图片图片-->
+        <field name="helpInfoId" type="id-ne"></field><!--帮助-->
+        <prim-key field="serviceSupportId"/>
+        <relation fk-name="SSHI_HELP" type="one" rel-entity-name="HelpInfo">
+            <key-map field-name="helpInfoId"/>
+        </relation>
+    </entity>
+    <!-- 服务支持表 -->
+
+
+
+    <!-- APP 推送表  by zhajh 2017/08/23 Begin -->
+    <entity entity-name="AppPush" package-name="org.ofbiz.content.appPush" title="APP PUSH">
+        <field name="appPushId" type="id-ne"></field><!--推送编码-->
+        <field name="messageName" type="description"></field><!--消息名称-->
+        <field name="linkType" type="id-ne"></field><!--链接类型-->
+        <field name="linkUrl" type="url"></field><!--链接url-->
+        <field name="linkId" type="id-ne"></field><!--链接Id-->
+        <field name="linkName" type="name"></field><!--链接名称-->
+        <field name="isEnabled" type="indicator"></field><!--是否启用 Y：是 N：否-->
+        <field name="messageTemplate" type="name"></field><!--消息模板-->
+        <field name="messageContent" type="long-varchar"></field><!--消息内容-->
+        <field name="pushTimes" type="numeric"></field><!--序号 -->
+        <field name="messageType" type="id"></field><!--消息类型 system：系统消息 activity：活动消息 interact：互动消息-->
+
+
+        <prim-key field="appPushId" />
+    </entity>
+    <!-- APP 推送表  by zhajh 2017/08/23 End-->
+
+    <!--首页信息配置表-->
+    <entity entity-name="IndexTemplate" package-name="org.ofbiz.content.index" title="Index Template">
+        <field name="templateId" type="id-ne"></field><!--模板Id-->
+        <field name="templateName" type="name"></field><!--模板名称-->
+        <field name="isUsed" type="indicator"></field><!--是否启用 Y:启动 N:未启用-->
+        <prim-key field="templateId" />
+    </entity>
+
+    <entity entity-name="IndexTemplateContent" package-name="org.ofbiz.content.index" title="Index Template Content">
+        <field name="templateContentId" type="id-ne"></field><!--模板Id-->
+        <field name="templateId" type="id-ne"></field><!--模板Id-->
+        <field name="widgetType" type="name"></field><!--模板类型-->
+        <field name="widgetName" type="name"></field><!--模版名称-->
+        <field name="sequenceNum" type="name"></field><!--排列序列号-->
+        <field name="isShow" type="indicator"></field><!--是否展示 Y:展示 N:隐藏-->
+        <field name="remark" type="long-varchar"></field><!--描述-->
+        <prim-key field="templateContentId" />
+    </entity>
+
+
+    <!-- begin add by changsy at 20180402 推荐-->
+    <entity entity-name="ProductRecommend" package-name="org.ofbiz.content.content">
+        <field name="recommendId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <field name="sequenceId" type="id"></field>
+        <!-- 是否所有站点 0：是 1：否 -->
+        <field name="isAllWebSite" type="indicator"></field>
+        <!-- 是否有效 Y：是 N：否 -->
+        <field name="status" type="indicator"></field>
+        <prim-key field="recommendId"/>
+        <relation type="one" rel-entity-name="Product" fk-name="PRD_PT_REL">
+            <key-map field-name="productId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="ProductRecommendWebSite" package-name="org.ofbiz.content.content">
+        <field name="recommendId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="recommendId"/>
+        <prim-key field="webSiteId"/>
+    </entity>
+
+    <entity entity-name="BrandRecommend" package-name="org.ofbiz.content.content">
+        <field name="recommendId" type="id-ne"></field>
+        <field name="brandId" type="id-ne"></field>
+        <field name="sequenceId" type="id"></field>
+        <field name="isAllWebSite" type="indicator"></field>
+        <field name="status" type="indicator"></field>
+        <prim-key field="recommendId"/>
+        <relation type="one" rel-entity-name="ProductBrand" fk-name="BRD_PB_REL">
+            <key-map field-name="brandId" rel-field-name="productBrandId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="BrandRecommendWebSite" package-name="org.ofbiz.content.content">
+        <field name="recommendId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="recommendId"/>
+        <prim-key field="webSiteId"/>
+    </entity>
+    <entity entity-name="ProductStoreRecommend" package-name="org.ofbiz.content.content">
+        <field name="recommendId" type="id-ne"></field>
+        <field name="productStoreId" type="id-ne"></field>
+        <field name="sequenceId" type="id"></field>
+        <field name="isAllWebSite" type="indicator"></field>
+        <field name="status" type="indicator"></field>
+        <prim-key field="recommendId"/>
+        <relation type="one" rel-entity-name="ProductStore" fk-name="PSRD_PS_REL">
+            <key-map field-name="productStoreId"/>
+        </relation>
+
+    </entity>
+
+    <entity entity-name="ProductStoreRecommendWebSite" package-name="org.ofbiz.content.content">
+        <field name="recommendId" type="id-ne"></field>
+        <field name="webSiteId" type="id-ne"></field>
+        <prim-key field="recommendId"/>
+        <prim-key field="webSiteId"/>
+    </entity>
+    <!-- end add by changsy at 20180402 推荐-->
+
+
+
+    <!--Add by zhajh at 20180408 礼品卡片管理 Begin-->
+    <entity entity-name="PresentCard" package-name="org.ofbiz.content.card">
+        <field name="presentCardId" type="id-ne"></field>
+        <field name="cardName" type="name"></field>
+        <field name="contentId" type="id-ne"></field>
+        <field name="cardDesc" type="very-long"></field>
+        <field name="status" type="indicator"></field> <!-- 是否有效 Y:是 N:否 -->
+        <prim-key field="presentCardId"/>
+    </entity>
+    <!--Add by zhajh at 20180408 礼品卡片管理 End -->
+
+
+
+
+    <!--Add by zhajh at 20180409 首页配置 Begin-->
+    <entity entity-name="FirstPageSetting" package-name="org.ofbiz.content.card">
+        <field name="firstPageSettingId" type="id-ne"></field>
+        <field name="firstPageType" type="name"></field><!--首页类型：0: 推荐商品 1:热门品牌 2 热门店铺-->
+        <field name="sequence" type="numeric"></field><!-- 序号 -->
+        <field name="id" type="id-ne"></field><!-- 商品、品牌、店铺编码 -->
+        <field name="productStoreId" type="id-ne"></field>
+        <field name="status" type="indicator"></field> <!-- 是否启用 Y:是 N:否 -->
+        <prim-key field="firstPageSettingId"/>
+    </entity>
+    <!--Add by zhajh at 20180409 首页配置 End -->
+
+
+
+    <!--题库表-->
+    <entity entity-name="Question" package-name="org.ofbiz.content.content">
+        <field name="questionId" type="id-ne"></field>
+        <!--题目内容-->
+        <field name="question" type="long-varchar"></field>
+        <!--正确答案 answer里面的answerId-->
+        <field name="result" type="name"></field>
+        <!--题目类型  0常规 1图像-->
+        <field name="questionType" type="name"></field>
+        <!--Y有效  N无效-->
+        <field name="status" type="indicator"></field>
+        <prim-key field="questionId"/>
+
+    </entity>
+
+    <!--答案表-->
+    <entity entity-name="Answer" package-name="org.ofbiz.content.content">
+        <field name="answerId" type="id-ne"></field>
+        <field name="questionId" type="id-ne"></field>
+        <field name="sequenceId" type="numeric"></field>
+        <field name="answer" type="long-varchar"></field>
+        <!--标签编码-->
+        <field name="tagId" type="id-ne"></field>
+        <prim-key field="answerId"/>
+        <prim-key field="questionId"/>
+    </entity>
+
+    <!--用户答题记录-->
+    <entity entity-name="PartyQuestion" package-name="org.ofbiz.content.content" title="PartyQuestion">
+        <field name="groupId" type="id-ne"></field>
+        <!--是否结束-->
+        <field name="isEnd" type="indicator"></field>
+        <field name="createDate" type="date-time"></field>
+        <prim-key field="groupId"/>
+    </entity>
+    <!--用户答题记录-->
+    <entity entity-name="PartyQuestionAnswer" package-name="org.ofbiz.content.content" title="PartyQuestionAnswer">
+        <field name="groupId" type="id-ne"></field>
+        <!--唯一主键标识-->
+        <field name="userQuestionId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="questionId" type="id-ne"></field>
+        <field name="answerId" type="id-ne"></field>
+        <!--答案是否正确-->
+        <field name="isRight" type="indicator"></field>
+        <field name="createDate" type="date-time"></field>
+        <field name="sequenceId" type="numeric"></field>
+        <prim-key field="userQuestionId"/>
+    </entity>
+
+    <!--当天拒绝访问记录-->
+    <entity entity-name="PartyQuestionRefuseRecord" package-name="org.ofbiz.content.content" title="PartyQuestionRefuseRecord">
+        <field name="pqrrId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="date" type="date-time"></field>
+        <prim-key field="pqrrId"/>
+    </entity>
+
+
+
+    <!--用户获取积分信息表-->
+    <entity entity-name="PartyScoreDetail" package-name="org.ofbiz.content.content" title="PartyScoreDetail">
+        <!--唯一主键标识-->
+        <field name="scoreDetailId" type="id-ne"></field>
+        <field name="partyId" type="id-ne"></field>
+        <!--SCORE_TYPE_QUESTION答题赢的-->
+        <field name="scoreType" type="name"></field>
+        <!--获取积分数-->
+        <field name="scoreValue" type="numeric"></field>
+        <!--用户领取积分对应的业务标识-->
+        <field name="valueId" type="id-ne"></field>
+        <!--A: 增加积分 Q：扣减积分 -->
+        <field name="operate" type="indicator"></field>
+        <!--同步到crm系统   S成功、F失败-->
+        <field name="syncResult" type="indicator"></field>
+        <!--crm返回信息-->
+        <field name="syncMessage" type="long-varchar"></field>
+        <prim-key field="scoreDetailId"/>
+    </entity>
+
+    <entity entity-name="PartyOrderRelPresent" package-name="org.ofbiz.content.content" title="赠送表">
+        <!--唯一主键标识-->
+        <field name="giftId" type="id-ne"></field>
+        <field name="orderGroupId" type="id-ne"></field>
+        <!--赠送对应的订单主表ID-->
+        <!--<field name="orderId" type="id-ne"></field>-->
+        <!--礼品卡信息-->
+        <field name="presentCardId" type="id-ne"></field>
+        <!--留言-->
+        <field name="leaveWord" type="long-varchar"></field>
+        <field name="imgId" type="id-ne"></field>
+        <field name="voiceId" type="id-ne"></field>
+        <field name="videoId" type="id-ne"></field>
+        <!--
+             GIFT_WAIT_PAY 待付款
+             GIFT_WAIT_SEND待赠送
+             GIFT_WAIT_RECEIVE待领取
+             GIFT_HAS_RECEIVE已领取
+             GIFT_HAS_CANCEL已取消
+        -->
+        <field name="status" type="name"></field>
+        <!--接受礼品的人-->
+        <field name="receivePartyId" type="id-ne"></field>
+        <!--发送礼品的人-->
+        <field name="sendPartyId" type="id-ne"></field>
+        <field name="createDate" type="date-time"></field><!--创建日期 -->
+        <!--赠送时间-->
+        <field name="sendDate" type="date-time"></field>
+        <!--领取时间-->
+        <field name="receiveDate" type="date-time"></field>
+        <prim-key field="giftId"/>
+    </entity>
+
+
+    <entity entity-name="PartyOrderWish" package-name="org.ofbiz.content.content" title="心愿单主表">
+        <!--唯一主键标识-->
+        <field name="wishId" type="id-ne"></field>
+        <!--收件人地址-->
+        <field name="contactMechId" type="id-ne"></field>
+        <field name="orderGroupId" type="id-ne"></field>
+        <!--
+             WISH_WAIT_ACHIEVE 待实现
+             WISH_WAIT_PAY 待付款,已经生成订单
+             WISH_HAS_ACHIEVE 已实现
+        -->
+        <field name="status" type="name"></field>
+        <!--发起心愿单人-->
+        <field name="sendPartyId" type="id-ne"></field>
+        <!--实现心愿单人-->
+        <field name="achievePartyId" type="id-ne"></field>
+        <!--发起心愿时间-->
+        <field name="sendDate" type="date-time"></field>
+        <!--实现心愿单时间-->
+        <field name="achieveDate" type="date-time"></field>
+        <prim-key field="wishId"/>
+    </entity>
+
+    <entity entity-name="PartyOrderWishView" package-name="org.ofbiz.content.content" title="心愿访问记录">
+        <field name="wishViewId" type="id-ne"></field>
+        <field name="wishId" type="id-ne"></field>
+        <!--访问该心愿记录人partyId-->
+        <field name="viewPartyId" type="id-ne"></field>
+        <prim-key field="wishViewId"/>
+    </entity>
+
+    <entity entity-name="PartyOrderWishDetail" package-name="org.ofbiz.content.content" title="心愿单明细表">
+        <field name="wishId" type="id-ne"></field>
+        <field name="wishDetailId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <prim-key field="wishDetailId"/>
+    </entity>
+
+    <!--积分code表-->
+    <entity entity-name="IntegralCode" package-name="org.ofbiz.content.content" title="积分Code表">
+        <field name="integralCodeId" type="id-ne"></field><!--编码-->
+        <field name="integralCodeName" type="name"></field><!--积分Code名称-->
+        <field name="integralCodeNo" type="name"></field><!--积分Code-->
+        <!--Y有效  N无效-->
+        <field name="status" type="indicator"></field>
+        <prim-key field="integralCodeId"/>
+    </entity>
+
+
+    <!-- 根据促销专题编码取得栏目数据 -->
+    <view-entity entity-name="GetColumnInfoByProductActivityManagerId"
+                 package-name="org.ofbiz.content.banner" title="getColumnInfoByProductActivityManagerId View Entity">
+        <member-entity entity-alias="PAM" entity-name="ProductActivityManager" />
+        <member-entity entity-alias="SCAA" entity-name="SubjectColumnActivityAssoc" />
+        <member-entity entity-alias="SC" entity-name="SubjectColumn" />
+        <alias entity-alias="PAM" name="productActivityManagerId" />
+        <alias entity-alias="SC" name="subjectColumnId" />
+        <alias entity-alias="SC" name="columnName" />
+        <view-link entity-alias="PAM" rel-entity-alias="SCAA">
+            <key-map field-name="productActivityManagerId" />
+        </view-link>
+        <view-link entity-alias="SCAA" rel-entity-alias="SC">
+            <key-map field-name="subjectColumnId" />
+        </view-link>
+    </view-entity>
+</entitymodel>

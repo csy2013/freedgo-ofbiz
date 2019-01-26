@@ -1,0 +1,1723 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>System Manage Component Services</description>
+    <vendor>ICO</vendor>
+    <version>1.0</version>
+
+    <service name="addGroupOrder" engine="java" location="com.qihua.ofbiz.product.promo.ProGroupOrderService"
+             invoke="addGroupOrder" auth="false">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="productLineList" type="String" mode="IN"/>
+        <attribute name="activityName" type="String" mode="IN"/>
+        <attribute name="activityStartDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityEndDate" type="Timestamp" mode="IN"/>
+        <attribute name="limitQuantity" type="Long" mode="IN"/>
+        <attribute name="isAnyReturn" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportOverTimeReturn" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportScore" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportReturnScore" type="String" mode="IN" optional="true"/>
+        <attribute name="isShowIndex" type="String" mode="IN" optional="true"/>
+        <attribute name="isPostageFree" type="String" mode="IN" optional="true"/>
+        <attribute name="activityDesc" type="String" mode="IN"  optional="true" allow-html="any"/>
+    </service>
+
+
+    <service name="updateGroupOrder" engine="java" location="com.qihua.ofbiz.product.promo.ProGroupOrderService"
+             invoke="updateGroupOrder" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="productLineList" type="String" mode="IN"/>
+        <attribute name="activityName" type="String" mode="IN"/>
+        <attribute name="activityStartDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityEndDate" type="Timestamp" mode="IN"/>
+        <attribute name="limitQuantity" type="Long" mode="IN"/>
+        <attribute name="isAnyReturn" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportOverTimeReturn" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportScore" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportReturnScore" type="String" mode="IN" optional="true"/>
+        <attribute name="isShowIndex" type="String" mode="IN" optional="true"/>
+        <attribute name="isPostageFree" type="String" mode="IN" optional="true"/>
+        <attribute name="activityDesc" type="String" mode="IN"  optional="true" allow-html="any"/>
+        <attribute name="chkFlg" type="String" mode="OUT" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="getAvailableGroupOrderQuantity" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getAvailableGroupOrderQuantity" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="quantities" type="Integer" mode="OUT"/>
+    </service>
+
+
+    <service name="findActivities" engine="java" location="com.qihua.ofbiz.product.promo.ProGroupOrderService" invoke="findActivities" auth="true">
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="activityCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityStartDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityEndDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityAuditStatus" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityType" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="groupList" type="java.util.List" mode="OUT"/>
+        <attribute name="groupListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="productActivityDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProGroupOrderService" invoke="productActivityDetail" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+        <attribute name="d_activityTypeName" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_activityAuditStatusName" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_activityCode" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_activityName" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_activityStartDate" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_activityEndDate" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_limitQuantity" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_isAnyReturn" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_isSupportOverTimeReturn" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_isSupportScore" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_isSupportReturnScore" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_isShowIndex" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_isPostageFree" type="String" mode="OUT" optional="true"/>
+        <attribute name="d_activityDesc" type="String" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+
+    </service>
+
+    <service name="deleteGroupOrder" engine="java" location="com.qihua.ofbiz.product.promo.ProGroupOrderService" invoke="deleteGroupOrder" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+    </service>
+
+    <service name="deleteGroupOrderWithoutMain" engine="java" location="com.qihua.ofbiz.product.promo.ProGroupOrderService" invoke="deleteGroupOrderWithoutMain" auth="false">
+        <attribute name="activityId" type="String" mode="IN"/>
+    </service>
+
+    <service name="shutDownActivity" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="shutDownActivity" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+    </service>
+
+    <service name="auditGroupOrder" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="auditGroupOrder" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+        <attribute name="auditMessage" type="String" mode="IN" optional="true"/>
+        <attribute name="activityAuditStatus" type="String" mode="IN"/>
+    </service>
+
+
+    <!--秒杀begin-->
+    <service name="addSecKill" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="addSecKill" auth="true">
+        <attribute name="productStoreIds" type="String" mode="IN"/>
+        <attribute name="activityName" type="String" mode="IN"/>
+        <attribute name="activityCode" type="String" mode="IN"/>
+        <attribute name="activityType" type="String" mode="IN"/>
+        <attribute name="activityAuditStatus" type="String" mode="IN"/>
+        <attribute name="activityCode" type="String" mode="IN"/>
+        <attribute name="publishDate" type="Timestamp" mode="IN"/>
+        <attribute name="endDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityStartDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityEndDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityQuantity" type="Long" mode="IN"/>
+        <attribute name="scoreValue" type="Long" mode="IN" optional="true"/>
+        <attribute name="productPrice" type="BigDecimal" mode="IN"  optional="true"/>
+
+        <attribute name="limitQuantity" type="Long" mode="IN"/>
+        <attribute name="virtualProductStartDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="virtualProductEndDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="activityDesc" type="String" mode="IN"  optional="true" allow-html="any"/>
+        <attribute name="activityPayType" type="String" mode="IN"/>
+        <attribute name="shipmentType" type="String" mode="IN"/>
+        <attribute name="isAnyReturn" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportOverTimeReturn" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportScore" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportReturnScore" type="String" mode="IN" optional="true"/>
+        <attribute name="isShowIndex" type="String" mode="IN" optional="true"/>
+        <!-- Add by zhajh at 20160318 包邮 Begin -->
+        <attribute name="isPostageFree" type="String" mode="IN" optional="true"/>
+        <!-- Add by zhajh at 20160318 包邮 End -->
+        <attribute name="productActivityPartyLevels" type="String" mode="IN" optional="true"/>
+        <attribute name="productActivityAreas" type="String" mode="IN"/>
+        <attribute name="activityId" type="String" mode="OUT"/>
+    </service>
+
+
+    <service name="updateSecKill" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="updateSecKill" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+        <attribute name="productStoreIds" type="String" mode="IN"/>
+        <attribute name="activityName" type="String" mode="IN"/>
+        <attribute name="activityCode" type="String" mode="IN"/>
+        <attribute name="activityType" type="String" mode="IN"/>
+        <attribute name="activityAuditStatus" type="String" mode="IN"/>
+        <attribute name="activityCode" type="String" mode="IN"/>
+        <attribute name="publishDate" type="Timestamp" mode="IN"/>
+        <attribute name="endDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityStartDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityEndDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityQuantity" type="Long" mode="IN"/>
+        <attribute name="scoreValue" type="Long" mode="IN" optional="true"/>
+        <attribute name="productPrice" type="BigDecimal" mode="IN"  optional="true"/>
+
+        <attribute name="limitQuantity" type="Long" mode="IN"/>
+        <attribute name="virtualProductStartDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="virtualProductEndDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="activityDesc" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="activityPayType" type="String" mode="IN"/>
+        <attribute name="shipmentType" type="String" mode="IN"/>
+        <attribute name="isAnyReturn" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportOverTimeReturn" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportScore" type="String" mode="IN" optional="true"/>
+        <attribute name="isSupportReturnScore" type="String" mode="IN" optional="true"/>
+        <attribute name="isShowIndex" type="String" mode="IN" optional="true"/>
+        <!-- Add by zhajh at 20160318 包邮 Begin -->
+        <attribute name="isPostageFree" type="String" mode="IN" optional="true"/>
+        <!-- Add by zhajh at 20160318 包邮 End -->
+        <attribute name="productActivityPartyLevels" type="String" mode="IN" optional="true"/>
+        <attribute name="productActivityAreas" type="String" mode="IN"/>
+        <attribute name="activityId" type="String" mode="OUT"/>
+    </service>
+    <!--更新团购的订单价格 at 2016.3.10 by changsy-->
+    <service name="updateGroupOrderPrice" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updateGroupOrderPrice" auth="true">
+        <attribute name="activityId" type="String" mode="IN" />
+    </service>
+
+    <service name="deleteSecKill" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="deleteSecKill" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+
+    </service>
+
+    <!--编辑组合商品的结束时间-->
+    <service name="editEndDateSecKill" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="editEndDateSecKill" auth="false">
+        <!--满减,每满减-->
+        <attribute name="endDate" type="Timestamp" mode="IN"/>
+        <attribute name="productSkId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="chkFlg" type="String" mode="OUT" />
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true" />
+    </service>
+    <!--秒杀end-->
+    
+    <!-- 查询促销活动列表，弹出框使用   add by qianjin 2016/01/20 -->
+    <service name="getPromoListForModal" engine="java"
+             location="com.qihua.ofbiz.product.promo.ProPromoService" 
+             invoke="getPromoListForModal" 
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="activityType" type="String" mode="IN" optional="true"/>
+        <attribute name="activityName" type="String" mode="IN" optional="true"/>
+        <attribute name="activityArea" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+
+    <!-- 查询所有促销活动根据社区 add by Wcy 2016.01.22-->
+    <service name="getPromoByCommunity" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="getPromoByCommunity"
+            auth="false">
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+        <attribute name="activityList" type="List" mode="OUT"/>
+    </service>
+
+    <!-- 查询所有专题活动表 add by Gss 2016.02.24-->
+    <service name="getProductTopicActivity" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="getProductTopicActivity"
+            auth="false">
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+        <attribute name="activityList" type="List" mode="OUT"/>
+    </service>
+    
+    <!-- 查询所有推荐到首页的团购活动 add by Wcy 2016.01.25 -->
+    <service name="getPromoShowIndex" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="getPromoShowIndex" auth="false">
+        <attribute name="communityId" type="List" mode="IN"/>
+        <attribute name="activityList" type="List" mode="OUT"/>
+    </service>
+
+	<!--  活动收藏查询  begin by qianjin 2016.02.25-->
+    <service name="findActCollection" engine="java" location="com.qihua.ofbiz.product.ActivityCollectionService" invoke="findActCollection" auth="true">
+    <attribute name="activityId" type="String" mode="INOUT" optional="true"/>
+    <attribute name="activityType" type="String" mode="INOUT" optional="true"/>
+    <attribute name="activityName" type="String" mode="INOUT" optional="true"/>
+    <attribute name="activityAuditStatus" type="String" mode="INOUT" optional="true"/>
+    <attribute name="sortField" type="String" mode="IN" optional="true"/>
+    <attribute name="sortType" type="String" mode="IN" optional="true"/>
+    <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+    <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+    
+    <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+    <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+    <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+    <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+    <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+    <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    
+    <!--  活动收藏查询-收藏会员信息  begin by gss 2016-1-24-->
+    <service name="findPartyInfo" engine="java" location="com.qihua.ofbiz.product.ActivityCollectionService" invoke="findPartyInfo" auth="true">
+    <attribute name="activityId" type="String" mode="INOUT" optional="true"/>
+    <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+    <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+    <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+    <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+    <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+    <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+    <attribute name="partyList" type="java.util.List" mode="OUT" optional="true" />
+    <attribute name="totalSize" type="Integer" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 获取团购数据 add by Wcy at 2016.01.26 -->
+    <service name="getPromoForWap" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="getPromoForWap" auth="false">
+        <!-- 用户登录账号 -->
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/>
+        <!-- 用户绑定社 区ID列表 -->
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+        <!-- 列表当前条数 -->
+        <attribute name="viewIndex" type="String" mode="IN" optional="true"/>
+        <!-- 每次加载条数 -->
+        <attribute name="viewSize" type="String" mode="IN" optional="true"/>
+        <!-- 分类ID -->
+        <attribute name="classify" type="String" mode="IN" optional="true"/>
+        <!-- 关键字 -->
+        <attribute name="keyword" type="String" mode="IN" optional="true"/>
+        <!--排序ID；销量优先(sales),好评优先(comment),价格从高到低(priceDec),价格从低到高(priceAsc),智能排序(default) -->
+        <attribute name="sort" type="String" mode="IN" optional="true"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 获取抢购数据 add by Wcy at 2016.01.26 -->
+
+    <service name="getSecKillForWap" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getSecKillForWap" auth="false">
+        <!-- 用户登录账号 -->
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/>
+        <!-- 用户绑定社 区ID列表 -->
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+        <!-- 列表当前条数 -->
+        <attribute name="viewIndex" type="String" mode="IN" optional="true"/>
+        <!-- 每次加载条数 -->
+        <attribute name="viewSize" type="String" mode="IN" optional="true"/>
+        <attribute name="resultData" type="Map" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 获取团购/秒杀详情 add by Wcy at 2016.01.26 -->
+    <service name="getActivityDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getActivityDetail" auth="false">
+          <attribute name="userLoginId" type="String" mode="IN" optional="true"/> 
+          <attribute name="activityId" type="String" mode="IN" optional="true"/>
+          <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 收藏请求 add by Wcy at 2016.01.26 -->
+    <service name="saveCollect" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="saveCollect" auth="false">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="activityId" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 我的收藏 add by Wcy at 2016.01.28 -->
+    <service name="myCollect" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="myCollect" auth="false">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="type" type="String" mode="IN"/>
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 删除收藏 add by Wcy at 2016.01.28 -->
+    <service name="removeMyCollect" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="removeMyCollect" auth="false">
+         <attribute name="userLoginId" type="String" mode="IN"/>
+         <attribute name="activityId" type="String" mode="IN" optional="true"/>
+         <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    
+      <!-- 团购券自动过期   begin by gss 2016-2-1-->
+    <service name="autoExpireTicket" engine="java"
+            location="com.qihua.ofbiz.product.AutoTicketService" invoke="autoExpireTicket">
+            <description></description>
+        <!-- this service has no parameters IN or OUT -->
+    </service>
+    
+    <!-- 活动管理列表 add by qianjin at 2016.02.15-->
+    <service name="getActivityMgrList" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProActivityMgrServices"
+             invoke="getActivityMgrList" auth="false">
+        <description>getActivityMgrList</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="activityManagerName" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    
+    <!-- 活动管理新增 add by qianjin at 2016.02.16-->
+    <service name="activityMgrAdd" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProActivityMgrServices"
+             invoke="activityMgrAdd" auth="false">
+        <description>activityMgrAdd</description>
+        <attribute name="activityManagerName" type="String" mode="IN" />
+        <attribute name="templateId" type="String" mode="IN" optional="true"/>
+        <attribute name="activityManagerText" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="promos" type="String" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="IN" optional="true"/>
+        <attribute name="colInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="isUsed" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN" optional="true"/>
+    </service>
+    
+    <!-- 根据ID查询活动管理	add by qianjin 2016.02.18-->
+    <!--<service name="getActivityMgrById" engine="java" -->
+			 <!--location="com.qihua.ofbiz.product.promo.ProActivityMgrServices"-->
+             <!--invoke="getActivityMgrById" auth="false">-->
+        <!--<description>getActivityMgrById</description>-->
+        <!--<attribute name="activityManagerId" type="String" mode="INOUT"/>-->
+        <!--<attribute name="templateId" type="String" mode="OUT"/>-->
+        <!--<attribute name="activityManagerName" type="String" mode="OUT"/>-->
+        <!--<attribute name="activityManagerText" type="String" mode="OUT"/>-->
+        <!--<attribute name="promosList" type="List" mode="OUT"/>-->
+        <!--<attribute name="ticket" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>-->
+    <!--</service>-->
+
+    <!-- 根据ID查询活动管理	add by qianjin 2016.02.18-->
+    <service name="getActivityMgrById" engine="java"
+             location="com.qihua.ofbiz.product.promo.ProActivityMgrServices"
+             invoke="getActivityMgrById" auth="false">
+        <description>getActivityMgrById</description>
+        <attribute name="activityManagerId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="columnMapList" type="List" mode="OUT" optional="true"/>
+        <attribute name="activityMgrInfo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 活动管理修改 add by qianjin at 2016.02.18-->
+    <service name="activityMgrEdit" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProActivityMgrServices"
+             invoke="activityMgrEdit" auth="false">
+        <description>activityMgrEdit</description>
+        <attribute name="activityManagerId" type="String" mode="IN" optional="true"/>
+        <attribute name="activityManagerName" type="String" mode="IN" optional="true"/>
+        <attribute name="templateId" type="String" mode="IN" optional="true"/>
+        <attribute name="activityManagerText" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="promos" type="String" mode="IN" optional="true"/>
+        <attribute name="contentId" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="String" mode="IN" optional="true"/>
+        <attribute name="colInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="isUsed" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN" optional="true"/>
+    </service>
+    
+    <!-- 活动管理删除 add by qianjin at 2016.02.18-->
+    <service name="activityMgrDel" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProActivityMgrServices"
+             invoke="activityMgrDel" auth="false">
+        <description>activityMgrDel</description>
+        <attribute name="ids" type="String" mode="IN"/>
+    </service>
+    
+    <!-- 专题活动列表查询 add by qianjin 2016.02.22 -->
+    <service name="getTopicActivityList" engine="java"
+             location="com.qihua.ofbiz.product.promo.ProTopicActivityServices" 
+             invoke="getTopicActivityList" 
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="webSiteName" type="String" mode="IN" optional="true"/>
+        <attribute name="communityName" type="String" mode="IN" optional="true"/>
+        <attribute name="topicActivityName" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    
+    <!-- 根据专题活动ID修改启用状态 add by qianjin 2016.02.22-->
+    <service name="editIsUseByProTopicActivityId" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProTopicActivityServices"
+             invoke="editIsUseByProTopicActivityId" auth="false">
+        <description>editIsUseByProTopicActivityId</description>
+        <attribute name="productTopicActivityId" type="String" mode="IN"/>
+        <attribute name="isUse" type="String" mode="IN"/>
+    </service>
+    
+    <!-- 专题活动新增 add by qianjin 2016.02.23-->
+    <service name="topicActivityAdd" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProTopicActivityServices"
+             invoke="topicActivityAdd" auth="false">
+        <description>topicActivityAdd</description>
+        <attribute name="topicActivityName" type="String" mode="IN" optional="true"/>
+        <attribute name="smallImg" type="String" mode="IN" optional="true"/>
+        <attribute name="bigImg" type="String" mode="IN" optional="true"/>
+        <attribute name="linkType" type="String" mode="IN" optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN" optional="true"/>
+        <attribute name="linkId" type="String" mode="IN" optional="true"/>
+        <attribute name="linkName" type="String" mode="IN" optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN" optional="true"/>
+        <attribute name="isUse" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN" optional="true"/>
+        <attribute name="webSite" type="String" mode="IN" optional="true"/>
+        <attribute name="isAllCommunity" type="String" mode="IN" optional="true"/>
+        <attribute name="community" type="String" mode="IN" optional="true"/>
+        <attribute name="tagId" type="String" mode="IN" optional="true"/>
+
+    </service>
+    
+    <!-- 根据ID获取专题活动信息	add by qianjin 2016.02.23 -->
+    <service name="getTopicActivityById" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProTopicActivityServices"
+             invoke="getTopicActivityById" auth="false">
+        <description>getTopicActivityById</description>
+        <attribute name="productTopicActivityId" type="String" mode="INOUT"/>
+        
+        <attribute name="topicActivityName" type="String" mode="OUT"  optional="true"/>
+        <attribute name="smallImg" type="String" mode="OUT"  optional="true"/>
+        <attribute name="bigImg" type="String" mode="OUT"  optional="true"/>
+        <attribute name="linkType" type="String" mode="OUT"  optional="true"/>
+        <attribute name="linkUrl" type="String" mode="OUT"  optional="true"/>
+        <attribute name="linkId" type="String" mode="OUT"  optional="true"/>
+        <attribute name="linkName" type="String" mode="OUT"  optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="OUT"  optional="true"/>
+        <attribute name="isUse" type="String" mode="OUT"  optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="OUT"  optional="true"/>
+        <attribute name="webSite" type="String" mode="OUT"  optional="true"/>
+        <attribute name="isAllCommunity" type="String" mode="OUT"  optional="true"/>
+        <attribute name="community" type="String" mode="OUT"  optional="true"/>
+        <attribute name="tagId" type="String" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 专题活动修改	add by qianjin 2016.02.23 -->
+    <service name="topicActivityEdit" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProTopicActivityServices"
+             invoke="topicActivityEdit" auth="false">
+        <description>topicActivityEdit</description>
+        <attribute name="productTopicActivityId" type="String" mode="IN"/>
+        <attribute name="topicActivityName" type="String" mode="IN"  optional="true"/>
+        <attribute name="smallImg" type="String" mode="IN"  optional="true"/>
+        <attribute name="bigImg" type="String" mode="IN"  optional="true"/>
+        <attribute name="linkType" type="String" mode="IN"  optional="true"/>
+        <attribute name="linkUrl" type="String" mode="IN"  optional="true"/>
+        <attribute name="linkId" type="String" mode="IN"  optional="true"/>
+        <attribute name="linkName" type="String" mode="IN"  optional="true"/>
+        <attribute name="sequenceId" type="Long" mode="IN"  optional="true"/>
+        <attribute name="isUse" type="String" mode="IN"  optional="true"/>
+        <attribute name="isAllWebSite" type="String" mode="IN"  optional="true"/>
+        <attribute name="webSite" type="String" mode="IN"  optional="true"/>
+        <attribute name="isAllCommunity" type="String" mode="IN"  optional="true"/>
+        <attribute name="community" type="String" mode="IN"  optional="true"/>
+        <attribute name="tagId" type="String" mode="IN"  optional="true"/>
+    </service>
+    
+    <!-- 根据ID删除专题活动,可批量删除 add by qianjin 2016.02.23 -->
+    <service name="topicActivityDel" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProTopicActivityServices"
+             invoke="topicActivityDel" auth="false">
+        <description>topicActivityDel</description>
+        <attribute name="ids" type="String" mode="IN"/>
+    </service>
+    
+    <!-- 首页专题活动头部详情  add by gss 2016-3-1-->
+    <service name="getProductTopicTitle" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getProductTopicTitle" auth="false">
+        <attribute name="topicId" type="String" mode="IN" optional="true"/>
+        <attribute name="resultData" type="Map" mode="OUT" optional="true"/>
+    </service>
+    <!-- 首页专题活动详情  add by gss 2016-3-1-->
+    <service name="getActivityTopicDetail" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getActivityTopicDetail" auth="false">
+        <attribute name="topicId" type="String" mode="IN" optional="true"/>
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/>
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+         <!-- 列表当前条数 -->
+        <attribute name="viewIndex" type="String" mode="IN" optional="true"/>
+        <!-- 每次加载条数 -->
+        <attribute name="viewSize" type="String" mode="IN" optional="true"/>
+        <attribute name="resultData" type="Map" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 热门搜索  add by gss 2016-3-1-->
+    <service name="getHotSearch" engine="java" 
+			 location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getHotSearch" auth="false">
+        <attribute name="communityId" type="List" mode="IN" optional="true"/>
+        <attribute name="resultData" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 校验活动编码是否已存在 add by qianjin 2016.03.08 -->
+    <service name="checkActiveCodeExist" engine="java" location="com.qihua.ofbiz.product.promo.ProActivityMgrServices"
+             invoke="checkActiveCodeExist" auth="false">
+        <description>checkActiveCodeExist</description>
+        <attribute name="activityCode" type="String" mode="IN"/>
+        <attribute name="activity" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- Add by zhajh at 20160322 秒杀活动时间的验证处理 Begin  -->
+    <!-- 秒杀活动时间的验证处理  -->
+    <service name="chkActivityDateForKill" engine="java" location="com.qihua.ofbiz.product.promo.ProActivityMgrServices" invoke="chkActivityDateForKill" auth="true">
+        <attribute name="activityStartDate" type="Timestamp" mode="IN"/>
+        <attribute name="activityEndDate" type="Timestamp" mode="IN"/>
+        <attribute name="chkFlg" type="String" mode="OUT" optional="false"/>
+        <attribute name="activityEndDateChked" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!--add by nf 满减-->
+    <service name="findPromos" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findPromos" auth="true">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fromDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="thruDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoStatus" type="String" mode="INOUT" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="promoList" type="java.util.List" mode="OUT"/>
+        <attribute name="promoListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!--add by changchen 折扣列表 at 20160418-->
+    <service name="findDiscounts" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findDiscount" auth="false">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fromDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="thruDate" type="String" mode="INOUT" optional="true"/>
+        <!-- 满减状态 add by gss -->
+        <attribute name="promoStatus" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="promoList" type="java.util.List" mode="OUT"/>
+        <attribute name="promoListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 直降列表  -->
+    <service name="findStraightDowns" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoPackageService" invoke="findStraightDown" auth="false">
+        <attribute name="promoCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fromDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="thruDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="promoStatus" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="promoList" type="java.util.List" mode="OUT"/>
+        <attribute name="promoListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 包邮列表 -->
+    <service name="findPackage" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findPackage" auth="false">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fromDate" type="String" mode="OUT" optional="true"/>
+        <attribute name="thruDate" type="String" mode="OUT" optional="true"/>
+
+        <attribute name="promoStatus" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="promoList" type="java.util.List" mode="OUT"/>
+        <attribute name="promoListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!--add by nf 满赠列表显示service at 2018/03/05-->
+    <service name="findPromosGift" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findPromosGift" auth="false">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fromDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="thruDate" type="String" mode="INOUT" optional="true"/>
+        <!-- 满减状态 add by gss -->
+        <attribute name="promoStatus" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="promoList" type="java.util.List" mode="OUT"/>
+        <attribute name="promoListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!--会员首次促销列表显示 add by nf-->
+    <service name="findPromosNewCust" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoNewCustService" invoke="findPromosNewCust" auth="false">
+        <attribute name="promoCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="fromDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="thruDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoStatus" type="String" mode="INOUT" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="promoList" type="java.util.List" mode="OUT"/>
+        <attribute name="promoListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="productPromoDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="productPromoDetail" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="condActList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoPartyLevels" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 折扣信息查询 列表页面 点击查看返回的详情数据 -->
+    <!-- 测试用 折扣列表详细信息 正确的接口 productPromoDiscountDetail-->
+    <service name="productPromoDiscountDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="productPromoDiscountDetail" auth="false">
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="condActList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 直降专用接口 -->
+    <service name="productPromoStraightDownDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="productPromoStraightDownDetail" auth="false">
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!--编辑满减回显详情-->
+    <service name="editPromoReduceDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="editPromoReduceDetail" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="condActList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productIds" type="String" mode="OUT" optional="true"/>
+        <attribute name="productNames" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 编辑直降回显详情 -->
+    <service name="editStraightDownDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="editStraightDownDetail" auth="true">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productIds" type="String" mode="OUT" optional="true"/>
+        <attribute name="productNames" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 折扣编辑回显示详情 -->
+    <service name="editDiscountDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="editDiscountDetail" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="condActList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productIds" type="String" mode="OUT" optional="true"/>
+        <attribute name="productNames" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="productPromoGiftDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="productPromoGiftDetail" auth="false">
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoPartyLevels" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList1" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!--编辑满赠回显详情-->
+    <service name="editPromoGiftDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="editPromoGiftDetail" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoCond" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoPartyLevels" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+        <!--参与活动的商品ids-->
+        <attribute name="productIds" type="String" mode="OUT" optional="true"/>
+        <!--赠送的商品ids-->
+        <attribute name="productIds1" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 编辑包邮回显 -->
+    <service name="editPackageDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="editPackageDetail" auth="true">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productIds" type="String" mode="OUT" optional="true"/>
+        <attribute name="productNames" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!--会员首次促销service-->
+    <service name="findPromoNewCustService" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoNewCustService" invoke="findPromoNewCustService" auth="false">
+        <attribute name="productPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productStorePromoAppls" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="productPromoConds" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoActions" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productPromoPartyLevels" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="findPrice" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findPrice" auth="false">
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="addPromoReduce" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="addPromoReduce" auth="false">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <!--满减,每满减-->
+        <!-- ENUM  PRO_PROMO_TYPE-->
+        <attribute name="promoType" type="String" mode="IN"/>
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <attribute name="promoText" type="String" mode="IN" optional="true" allow-html="any"/>
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <!--<attribute name="promoProductType" type="String" mode="IN"/>-->
+        <!-- 满减满多少减多少  1,10|2,100|3,20 -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <!--参与会员等级 levelId1,levelId2-->
+        <attribute name="levelIds" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <!--满赠添加service add by nf-->
+    <service name="addPromoGiftService" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="addPromoGiftService" auth="false" transaction-timeout="120000">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <!-- ENUM  PRO_PROMO_TYPE-->
+        <!--  <attribute name="promoType" type="String" mode="IN"/>-->
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <!--    <attribute name="promoText" type="String" mode="IN" optional="true" allow-html="any"/>-->
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <!--<attribute name="promoProductType" type="String" mode="IN"/>-->
+        <!--满赠条件   -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <attribute name="productIds1" type="String" mode="IN" optional="true"/>
+        <!--参与会员等级 levelId1,levelId2-->
+        <attribute name="levelIds" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <!--满赠修改service add by nf-->
+    <service name="updatePromoGiftService" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updatePromoGiftService" auth="false">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <!-- ENUM  PRO_PROMO_TYPE-->
+        <!--  <attribute name="promoType" type="String" mode="IN"/>-->
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <!--    <attribute name="promoText" type="String" mode="IN" optional="true" allow-html="any"/>-->
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <!--<attribute name="promoProductType" type="String" mode="IN"/>-->
+        <!--满赠条件   -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <attribute name="productIds1" type="String" mode="IN" optional="true"/>
+        <!--参与会员等级 levelId1,levelId2-->
+        <attribute name="levelIds" type="String" mode="IN" optional="true"/>
+        <attribute name="chkFlg" type="String" mode="OUT" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+
+    </service>
+
+    <!---->
+    <!--首次促销添加service add by nf-->
+    <service name="addPromoNewCustService" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoNewCustService" invoke="addPromoNewCustService" auth="false">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <attribute name="paramEnumId" type="String" mode="IN"/>
+        <attribute name="Amount" type="String" mode="IN"/>
+        <attribute name="promoStatus" type="String" mode="IN"/>
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="deleteProductPromoWithoutMainPromo" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoNewCustService" invoke="deleteProductPromoWithoutMainPromo" auth="false">
+        <attribute name="productPromoId" type="String" mode="IN"/>
+    </service>
+
+    <!-- 折扣新增 add by changchen 20180306  -->
+    <service name="addDiscount" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="addDiscount" auth="false">
+
+        <attribute name="promoType" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN" optional="true"/>
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <!--<attribute name="promoProductType" type="String" mode="IN"/>-->
+        <!-- 满减满多少减多少  1,10|2,100|3,20 -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <!-- 暂时没有添加 -->
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <!--参与会员等级 levelId1,levelId2-->
+        <!--<attribute name="levelIds" type="String" mode="IN" optional="true"/>-->
+
+    </service>
+
+
+    <!-- add 包邮新增 -->
+    <service name="addPackage" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="addPackage" auth="false">
+
+        <!--<attribute name="promoType" type="String" mode="IN"/>-->
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <!--<attribute name="promoProductType" type="String" mode="IN"/>-->
+        <!-- 满减满多少减多少  1,10|2,100|3,20 -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--<attribute name="productIds" type="String" mode="IN" />-->
+
+    </service>
+
+    <!-- 直降新增 add by changchen 2018.03.06 -->
+    <service name="addStraightDown" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="addStraightDown" auth="false" >
+        <!--满减,每满减-->
+        <!-- ENUM  PRO_PROMO_TYPE-->
+        <attribute name="promoType" type="String" mode="IN"/>
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN" optional="true"/>
+        <!--<attribute name="promoCode" type="String" mode="IN"/>-->
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <!-- 暂时不加 -->
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <!--<attribute name="promoProductType" type="String" mode="IN"/>-->
+        <!-- 满减满多少减多少  1,10|2,100|3,20 -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <!--参与会员等级 levelId1,levelId2-->
+        <!--<attribute name="levelIds" type="String" mode="IN" optional="true"/>-->
+
+    </service>
+
+    <service name="updatePromoReduce" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updatePromoReduce" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <!--满减,每满减-->
+        <!-- ENUM  PRO_PROMO_TYPE-->
+        <attribute name="promoType" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN"/>
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <attribute name="promoText" type="String" mode="IN" optional="true" allow-html="any"/>
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <!--<attribute name="promoProductType" type="String" mode="IN"/>-->
+        <!-- 满减满多少减多少  1,10|2,100|3,20 -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <!--参与会员等级 levelId1,levelId2-->
+        <attribute name="levelIds" type="String" mode="IN" optional="true"/>
+        <attribute name="chkFlg" type="String" mode="OUT" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+
+    </service>
+
+    <!-- 包邮修改 -->
+    <service name="updatePackage" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updatePackage" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <!-- ENUM  PRO_PROMO_TYPE-->
+        <!--<attribute name="promoTypeId" type="String" mode="IN"/>-->
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <!--<attribute name="promoText" type="String" mode="IN" optional="true" allow-html="any"/>-->
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <attribute name="promoProductType" type="String" mode="IN"/>
+        <!-- 满减满多少减多少  1,10,|2,100|3,20 -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <!--<attribute name="productIds" type="String" mode="IN" optional="true"/>-->
+        <!--参与会员等级 levelId1,levelId2-->
+        <!--<attribute name="levelIds" type="String" mode="IN" optional="true"/>-->
+
+    </service>
+
+    <!-- 直降修改 -->
+    <service name="updateStraightDown" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoPackageService" invoke="updateStraightDown" auth="true">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <!-- ENUM  PRO_PROMO_TYPE-->
+        <attribute name="promoType" type="String" mode="IN"/>
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <!--<attribute name="promoProductType" type="String" mode="IN"/>-->
+        <!-- 满减满多少减多少  1,10,|2,100|3,20 -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <!--参与会员等级 levelId1,levelId2-->
+        <attribute name="chkFlg" type="String" mode="OUT" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+
+    </service>
+
+    <!-- 折扣修改 -->
+    <service name="updateDiscount" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updateDiscount" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <!-- ENUM  PRO_PROMO_TYPE-->
+        <attribute name="promoType" type="String" mode="IN"/>
+        <attribute name="promoName" type="String" mode="IN"/>
+        <attribute name="promoCode" type="String" mode="IN"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN"/>
+        <!-- ENUM PRO_PROMO_PRT_TYPE-->
+        <attribute name="promoProductType" type="String" mode="IN"/>
+        <!-- 满减满多少减多少  1,10,|2,100|3,20 -->
+        <attribute name="promoCondActions" type="String" mode="IN"/>
+        <!--productID1,productId2-->
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <!--参与会员等级 levelId1,levelId2-->
+        <attribute name="chkFlg" type="String" mode="OUT" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="endProductPromo" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="endPromoReduce" auth="false">
+        <!--满减,每满减-->
+        <attribute name="endDate" type="Timestamp" mode="IN"/>
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="chkFlg" type="String" mode="OUT"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="deleteProductPromo" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="deleteProductPromo" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+    </service>
+
+    <service name="auditPromoPromo" engine="java"  location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="auditPromoReduce" auth="false" transaction-timeout="300">
+        <!--满减,每满减-->
+        <!--对应 ENUM ACTY_AUDIT_STUATS-->
+        <attribute name="promoStatus" type="String" mode="IN"/>
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="auditMessage" type="String" mode="IN" optional="true"/>
+    </service>
+    <service name="batchAuditPromoReduce" engine="java"  location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="batchAuditPromoReduce" auth="false">
+        <!--满减,每满减-->
+        <!--对应 ENUM ACTY_AUDIT_STUATS-->
+        <attribute name="obj" type="String" mode="IN"/>
+        <attribute name="promoStatus" type="String" mode="IN"/>
+    </service>
+
+    <service name="findAuditMessage" engine="java"  location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findAuditMessage" auth="false">
+        <!--满减,每满减-->
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="ProductPromoAudit" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+
+    <!--add by changsy 满减 at 20160418-->
+
+    <!--add by changsy 优惠劵 at 20160420-->
+    <service name="findCoupons" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="findCoupons" auth="false">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="couponCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="couponName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="publishType" type="String" mode="INOUT" optional="true"/>
+        <attribute name="couponType" type="String" mode="INOUT" optional="true"/>
+        <attribute name="couponRange" type="String" mode="INOUT" optional="true"/>
+        <attribute name="couponStatus" type="String" mode="INOUT" optional="true"/>
+
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <!-- <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/> -->
+
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="couponList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="couponListSize" type="Integer" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT" optional="true"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <service name="productCouponDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="couponCouponDetail" auth="false">
+        <!-- -->
+        <attribute name="couponCode" type="String" mode="IN"/>
+        <attribute name="productPromoCoupon" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productIds" type="String" mode="OUT" optional="true"/>
+        <attribute name="productCouponProducts" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="couponCodeDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="couponCodeDetail" auth="false">
+        <!-- -->
+        <attribute name="couponCode" type="String" mode="IN"/>
+        <!--未使用、已使用、已过期、已失效-->
+        <attribute name="codeStatus" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="productPromoCoupon" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productPromoCodes" type="java.util.List" mode="OUT" optional="true"/>
+
+    </service>
+
+    <service name="addCoupon" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="addCoupon" auth="true">
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="couponType" type="String" mode="IN"/>
+        <attribute name="couponName" type="String" mode="IN" optional="true"/>
+        <attribute name="publishType" type="String" mode="IN"/>
+        <attribute name="useWithScore" type="String" mode="IN"/>
+        <attribute name="couponPreCustomer" type="Long" mode="IN"/>
+        <attribute name="couponPerDay" type="Long" mode="IN"/>
+        <attribute name="couponQuantity" type="Long" mode="IN"/>
+        <attribute name="payFill" type="Long" mode="IN" optional="true"/>
+        <attribute name="payReduce" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="useIntegral" type="Long" mode="IN" optional="true"/>
+        <attribute name="couponDesc" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="startDate" type="Timestamp" mode="IN" />
+        <attribute name="endDate" type="Timestamp" mode="IN" />
+        <attribute name="useBeginDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="useEndDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <attribute name="validitType" type="String" mode="IN" />
+        <attribute name="validitDays" type="Long" mode="IN" optional="true"/>
+        <attribute name="applyScope" type="String" mode="IN"/>
+
+    </service>
+
+    <service name="editCouponEndTime" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="editCouponEndTime" auth="true">
+        <attribute name="couponCode" type="String" mode="IN"/>
+        <attribute name="endDate" type="Timestamp" mode="IN" />
+        <attribute name="useEndDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="validitType" type="String" mode="IN"/>
+    </service>
+
+    <service name="editTogetherEndDate" engine="java" location="com.qihua.ofbiz.product.promo.ProGroupOrderService" invoke="editTogetherEndDate" auth="true">
+        <attribute name="activityId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="activityEndDate" type="Timestamp" mode="IN" />
+        <attribute name="chkFlg" type="String" mode="OUT" />
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true" />
+    </service>
+
+    <service name="updateCoupon" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="updateCoupon" auth="false">
+        <attribute name="couponCode" type="String" mode="IN"/>
+        <attribute name="couponType" type="String" mode="IN" optional="true"/>
+        <attribute name="couponName" type="String" mode="IN" optional="true"/>
+        <attribute name="publishType" type="String" mode="IN"/>
+        <attribute name="useWithScore" type="String" mode="IN"/>
+        <attribute name="couponPreCustomer" type="Long" mode="IN"/>
+        <attribute name="couponPerDay" type="Long" mode="IN"/>
+        <attribute name="couponQuantity" type="Long" mode="IN"/>
+        <attribute name="payFill" type="Long" mode="IN" optional="true"/>
+        <attribute name="payReduce" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="useIntegral" type="Long" mode="IN" optional="true"/>
+        <attribute name="couponDesc" type="String" mode="IN" optional="true" allow-html="any"/>
+        <attribute name="startDate" type="Timestamp" mode="IN"/>
+        <attribute name="endDate" type="Timestamp" mode="IN"/>
+        <attribute name="useBeginDate" type="Timestamp" optional="true" mode="IN"/>
+        <attribute name="useEndDate" type="Timestamp" optional="true" mode="IN"/>
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+        <attribute name="validitType" type="String" mode="IN" />
+        <attribute name="validitDays" type="Long" mode="IN"  optional="true"/>
+        <attribute name="applyScope" type="String" mode="IN"/>
+    </service>
+
+
+    <service name="deleteCoupon" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="deleteCoupon" auth="false">
+        <!--满减,每满减-->
+        <attribute name="couponCode" type="String" mode="IN"/>
+    </service>
+
+    <service name="auditCoupon" engine="java"  location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="auditCoupon" auth="false">
+        <!--对应 ENUM ACTY_AUDIT_STUATS-->
+        <attribute name="couponStatus" type="String" mode="IN"/>
+        <attribute name="couponCode" type="String" mode="IN"/>
+        <attribute name="auditMessage" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="endCoupon" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="endCoupon" auth="false">
+        <!--  <attribute name="endDate" type="Timestamp" mode="IN"/> -->
+        <attribute name="couponCode" type="String" mode="IN"/>
+    </service>
+    <!--add by changsy 优惠劵 at 20160420-->
+
+    <!--   查看优惠券驳回原因 -->
+    <service name="findCouponAuditMessage" engine="java"  location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="findAuditMessage" auth="false">
+        <!--优惠券-->
+        <attribute name="couponCode" type="String" mode="IN"/>
+        <attribute name="ProductCouponAudit" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+    <!-- 优惠券 批量审核 -->
+    <service name="batchAuditPromoCoupon" engine="java"  location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="batchAuditPromoCoupon" auth="false">
+        <attribute name="obj" type="String" mode="IN"/>
+        <attribute name="couponStatus" type="String" mode="IN"/>
+    </service>
+
+
+    <!--add by GSS 优惠劵领取列表 at 20160518-->
+    <service name="getCouponCodeDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="getCouponCodeDetail" auth="false">
+        <attribute name="couponCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="codeStatus" type="String" mode="OUT" optional="true"/>
+        <attribute name="couponName" type="String" mode="OUT" optional="true"/>
+        <attribute name="couponQuantity" type="Long" mode="OUT" optional="true"/>
+        <attribute name="userCount" type="Long" mode="OUT"/>
+        <attribute name="orderCount" type="Long" mode="OUT"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="totalSize" type="Integer" mode="OUT" optional="true"/>
+    </service>
+
+    <!--add by GSS 优惠券码失效 at 20160518-->
+    <service name="disableCouponCode" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="disableCouponCode" auth="false">
+        <attribute name="couponCode" type="String" mode="IN" optional="true"/>
+    </service>
+    <!--add by GSS 支付后领取  at 20160518-->
+    <service name="checkAfterPayNum" engine="java" location="com.qihua.ofbiz.product.promo.ProductCouponService" invoke="checkAfterPayNum" auth="false">
+        <attribute name="afterPayNum" type="String" mode="IN" optional="true"/>
+        <attribute name="afterPayUom" type="String" mode="IN" optional="true"/>
+        <attribute name="status" type="Boolean" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!--Add by zhajh at 20180313 商品组合 Begin-->
+    <!--商品组合列表-->
+    <service name="findProductGrouping" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findProductGrouping" auth="false">
+        <attribute name="promoName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="promoStatus" type="String" mode="INOUT" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true" />
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="productGroupList" type="java.util.List" mode="OUT"/>
+        <attribute name="productGroupListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!--商品组合的编辑-->
+    <service name="updateProductGroupingService" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updateProductGroupingService" auth="false">
+        <attribute name="productGrpId" type="String" mode="IN" optional="true"/>
+        <attribute name="promoName" type="String" mode="IN" optional="true"/>
+        <attribute name="promoCode" type="String" mode="IN" optional="true"/>
+        <attribute name="fromDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="thruDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="promoPrice" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <!--组合商品-->
+        <attribute name="productGroupInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="chkFlg" type="String" mode="OUT" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+
+    <!--商品组合查看-->
+    <service name="productGroupingDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="productGroupingDetail" auth="false">
+        <attribute name="productGrpId" type="String" mode="IN"/>
+        <attribute name="productGroupPromo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productStoreProductGrpAppl" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="proGrpPromoProducts" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productGroupList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!--根据商品组合编码删除-->
+    <service name="deleteProductGroupingByIds" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="deleteProductGroupingByIds" auth="false">
+        <!--组合商品编码-->
+        <attribute name="productGrpIds" type="String" mode="IN"/>
+    </service>
+
+
+    <!--组合商品审核-->
+    <service name="auditProductGrouping" engine="java"  location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="auditProductGrouping" auth="false">
+        <attribute name="promoStatus" type="String" mode="IN" optional="true"/>
+        <attribute name="productGrpId" type="String" mode="IN" optional="true"/>
+        <attribute name="auditMessage" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+    <!--组合商品查看驳回原因-->
+    <service name="findProductGroupingAuditMessage" engine="java"  location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findProductGroupingAuditMessage" auth="false">
+        <attribute name="productGrpId" type="String" mode="IN"/>
+        <attribute name="productGrpPromoAudit" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+
+    <!--编辑组合商品的结束时间-->
+    <service name="editEndDatePromoProductGrouping" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="editEndDatePromoProductGrouping" auth="false">
+        <!--组合商品-->
+        <attribute name="endDate" type="Timestamp" mode="IN"/>
+        <attribute name="productGrpId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+        <attribute name="chkFlg" type="String" mode="OUT" />
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true" />
+    </service>
+
+    <!--组合和商品批量审核-->
+    <service name="batchAuditProductGrouping" engine="java"  location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="batchAuditProductGrouping" auth="false">
+        <attribute name="obj" type="String" mode="IN"/>
+        <attribute name="promoStatus" type="String" mode="IN"/>
+    </service>
+
+
+    <!--根据组合商品编码取得组合商品信息-->
+    <service name="getProductGroupingProductIdsById" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="getProductGroupingProductIdsById" auth="false">
+        <attribute name="productGrpId" type="String" mode="IN"/>
+        <attribute name="startDate" type="String" mode="OUT" optional="true"/>
+        <attribute name="endDate" type="String" mode="OUT" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <!--Add by zhajh at 20180313 商品组合 End-->
+
+    <!--根据商品id查询出商品详情-->
+
+    <service name="getProductGoodById" engine="java"  location="com.qihua.ofbiz.product.promo.ProProductService" invoke="getProductGoodById" auth="false">
+        <attribute name="id" type="String" mode="IN"/>
+        <attribute name="productName" type="String" mode="OUT" optional="true" />
+        <attribute name="productId" type="String" mode="OUT" optional="true" />
+        <attribute name="salesPrice" type="BigDecimal" mode="OUT" optional="true" />
+        <attribute name="productGoodFeature" type="String" mode="OUT" optional="true" />
+        <attribute name="imgUrl" type="String" mode="OUT" optional="true" />
+    </service>
+
+    <!--Add by zhajh at 20180319 秒杀活动 Begin-->
+    <!--秒杀活动的编辑-->
+    <service name="updateSecKillService" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updateSecKillInfo" auth="false">
+        <attribute name="productSkId" type="String" mode="IN" optional="true"/>
+        <attribute name="activityName" type="String" mode="IN" optional="true"/>
+        <attribute name="activityCode" type="String" mode="IN" optional="true"/>
+        <attribute name="activityStartDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="activityEndDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="activityQuantity" type="Long" mode="IN" optional="true"/>
+        <attribute name="limitQuantity" type="Long" mode="IN" optional="true"/>
+        <attribute name="activityDesc" type="String" mode="IN"  optional="true" allow-html="any"/>
+        <attribute name="productStoreId" type="String" mode="IN"  optional="true" />
+        <attribute name="activityId" type="String" mode="OUT" optional="true"/>
+        <!--秒杀商品-->
+        <attribute name="productSkInfos" type="String" mode="IN" optional="true"/>
+        <attribute name="chkFlg" type="String" mode="OUT" optional="true"/>
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true"/>
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!--秒杀商品查看-->
+    <service name="productSkDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="productSkDetail" auth="false">
+        <attribute name="productSkId" type="String" mode="IN"/>
+        <attribute name="productActivity" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="productSkProductInfoList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!--秒杀列表页面-->
+    <service name="findSkActivities" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findSkActivities" auth="true">
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="activityCode" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityName" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityStartDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityEndDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityAuditStatus" type="String" mode="INOUT" optional="true"/>
+        <attribute name="activityType" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="groupList" type="java.util.List" mode="OUT"/>
+        <attribute name="groupListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+
+
+    <!--Add by zhajh at 20180319 秒杀活动 End-->
+
+
+    <!--Add by zhajh at 20180402 取得代金券的信息 Begin-->
+    <!-- 查询促销优惠金额列表，弹出框使用-->
+    <service name="getPromoCouponListForModal" engine="java"
+             location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getPromoCouponListForModal"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="payReduceStart" type="String" mode="IN" optional="true"/>
+        <attribute name="couponName" type="String" mode="IN" optional="true"/>
+        <attribute name="payReduceEnd" type="String" mode="IN" optional="true"/>
+        <attribute name="isRedPackage" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN"  optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    <!--Add by zhajh at 20180402 取得代金券的信息 End-->
+
+
+    <!--根据促销代金劵查看-->
+    <service name="getPromoCouponListByIds" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="getPromoCouponListByIds" auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+        <attribute name="promoCouponInfoList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+
+
+    <!--红包设置的编辑-->
+    <service name="updatePromoRedPacketSettingService" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updatePromoRedPacketSettingService" auth="false">
+        <attribute name="packageId" type="String" mode="IN" optional="true"/>
+        <attribute name="hourRange" type="String" mode="IN" optional="true"/>
+        <attribute name="nums" type="String" mode="IN" optional="true"/>
+        <attribute name="isUsed" type="String" mode="IN" optional="true"/>
+        <!--代金券-->
+        <attribute name="promoCouponIds" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+    <!--红包设置查看-->
+    <service name="promoRedPacketDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="promoRedPacketDetail" auth="false">
+        <attribute name="packageId" type="String" mode="IN" optional="true"/>
+        <attribute name="redPackageSetting" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="promoCouponList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+
+
+    <!--问题设置的编辑-->
+    <service name="updateQuestionSettingService" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="updateQuestionSettingService" auth="false">
+        <attribute name="questionId" type="String" mode="IN" optional="true"/>
+        <attribute name="scoreQuestNums" type="String" mode="IN" optional="true"/>
+        <attribute name="scoreNums" type="String" mode="IN" optional="true"/>
+        <attribute name="couponQuestNums" type="String" mode="IN" optional="true"/>
+        <attribute name="isUsed" type="String" mode="IN" optional="true"/>
+        <!--代金券-->
+        <attribute name="promoCouponIds" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+    <!--问题设置查看-->
+    <service name="questionSettingDetail" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="questionSettingDetail" auth="false">
+        <attribute name="questionId" type="String" mode="IN" optional="true"/>
+        <attribute name="questionSetting" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="promoCouponList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="getProductPromoInfoByProductId" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="getProductPromoInfoByProductInfo">
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="orderGroupPrice" type="BigDecimal" mode="OUT" optional="true"/>
+        <attribute name="orderGroupInfo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="priceDownInfo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="secKillPrice" type="BigDecimal" mode="OUT" optional="true"/>
+        <attribute name="secKillInfo" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="groupInfo" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="checkGoodIsUsed" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoCommonServices" invoke="checkGoodIsUsed" auth="false">
+        <attribute name="id" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="isExisted" type="String" mode="OUT" optional="true"/>
+    </service>
+
+
+
+
+    <service name="getStorePromoInfoByStoreId" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="getStorePromoInfoByStoreId">
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="promos" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productGrps" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="coupons" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!-- 查询品牌列表，弹出框使用-->
+    <service name="getBrandListForModal" engine="java"
+             location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getBrandListForModal"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    <!--Add by zhajh at 20180412 取得代金券的信息 End-->
+
+
+    <!--根据品牌编码查看品牌信息-->
+    <service name="getBrandListByIds" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getBrandListByIds" auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+        <attribute name="brandInfoList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+
+    <!-- 查询店铺列表，弹出框使用-->
+    <service name="getStoreListForModal" engine="java"
+             location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getStoreListForModal"
+             auth="false">
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="storeName" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    <!--Add by zhajh at 20180412 店铺信息弹框用 End-->
+
+
+    <!--根据店铺编码查看店铺信息-->
+    <service name="getStoreListByIds" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService"
+             invoke="getStoreListByIds" auth="false">
+        <attribute name="ids" type="String" mode="IN" optional="true"/>
+        <attribute name="storeInfoList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!--秒杀商品查看驳回原因-->
+    <service name="findProductSkAuditMessage" engine="java"  location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findProductSkAuditMessage" auth="false">
+        <attribute name="productSkId" type="String" mode="IN"/>
+        <attribute name="curAuditMessage" type="String" mode="OUT"/>
+    </service>
+
+
+    <service name="getAuditLog" engine="java"  location="com.qihua.ofbiz.product.promo.ProPromoCommonServices" invoke="getAuditLog" auth="false">
+        <attribute name="businessId" type="String" mode="IN"/>
+        <attribute name="auditLogList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <!--根据促销id找到产品id用逗号分隔-->
+    <service name="findProductIdsByPromoId" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findProductIdsByPromoId" auth="false">
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="productIds" type="String" mode="OUT" />
+        <attribute name="startDate" type="String" mode="OUT" />
+        <attribute name="endDate" type="String" mode="OUT" />
+    </service>
+    <service name="findProductIdsByActivityId" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="findProductIdsByActivityId" auth="false">
+        <attribute name="activityId" type="String" mode="IN"/>
+        <attribute name="productIds" type="String" mode="OUT" optional="true" />
+        <attribute name="startDate" type="String" mode="OUT"  optional="true"/>
+        <attribute name="endDate" type="String" mode="OUT" optional="true"/>
+    </service>
+  <!--  <service name="checkEndDate" engine="java" location="com.qihua.ofbiz.product.promo.ProPromoService" invoke="checkEndDate" auth="false">
+        <attribute name="productPromoId" type="String" mode="IN"/>
+        <attribute name="chkFlag" type="String" mode="OUT" />
+        <attribute name="errorMsg" type="String" mode="OUT" optional="true" />
+    </service>
+-->
+</services>

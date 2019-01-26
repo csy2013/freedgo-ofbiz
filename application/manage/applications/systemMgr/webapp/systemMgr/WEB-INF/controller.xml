@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <include location="component://commonext/webapp/WEB-INF/controller.xml"/>
+    <description>Catalog Module Site Configuration File</description>
+    
+    <handler name="service-multi" type="request" class="org.ofbiz.webapp.event.ServiceMultiEventHandler"/>
+    <handler name="groovy" type="request" class="org.ofbiz.webapp.event.GroovyEventHandler"/>
+
+    <!-- Events to run on every request before security (chains exempt) -->
+    <!--
+    <preprocessor>
+    </preprocessor>
+    -->
+    <!-- Events to run on every request after all other processing (chains exempt) -->
+    <!--
+    <postprocessor>
+        <event name="test" type="java" path="org.ofbiz.webapp.event.TestEvent" invoke="test"/>
+    </postprocessor>
+    -->
+
+    <!-- Request Mappings -->
+    <request-map uri="main">
+        <security https="true" auth="true"/>
+        <response name="success" type="request" value="userList"></response>
+    </request-map>
+
+    <request-map uri="userList">
+        <security https="true" auth="true"/>
+        <!--<event type="service" invoke="findUser"/>-->
+        <response name="success" type="view" value="userList"/>
+        <response name="error" type="view" value="error"/>
+
+    </request-map>
+
+    <request-map uri="addList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view"></response>
+    </request-map>
+    <request-map uri="queryAllSecurityGroup">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findSecurityGroup"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <request-map uri="addManager">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addManager"/>
+        <response name="success" type="view" value="userList"></response>
+        <response name="error" type="request" value="userList"></response>
+    </request-map>
+
+    <request-map uri="queryManager">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="queryManager"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <request-map uri="checkManagerExist">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="checkManagerExist"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <request-map uri="updateManager">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateManager"/>
+        <response name="success" type="view" value="userList"></response>
+        <response name="error" type="request" value="userList"></response>
+    </request-map>
+
+    <request-map uri="personLogo">
+        <security auth="true" https="true"/>
+        <!--<event type="groovy" path="component://systemMgr/webapp/systemMgr/WEB-INF/actions/party/PersonLogo.groovy"/>-->
+        <event type="java" path="org.ofbiz.content.data.DataEvents" invoke="serveImage"/>
+        <response name="success" type="none"/>
+        <response name="error" type="request" value="jsonp"/>
+    </request-map>
+
+
+    <!--角色管理-->
+
+    <request-map uri="roleList">
+        <security https="true" auth="true"/>
+        <!--<event type="service" invoke="findUser"/>-->
+        <response name="success" type="view" value="roleList"/>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+
+    <request-map uri="perTree">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findPermissionTree"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <request-map uri="checkSecurityGroupExist">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="checkSecurityGroupExist"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <request-map uri="addRole">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addRole"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <request-map uri="updateRole">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateRole"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+
+    <request-map uri="queryRoleDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="queryRoleDetail"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    <request-map uri="deleteRole">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteRole"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <request-map uri="deleteRoles">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteRoles"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <!--删除角色验证-->
+    <request-map uri="chkRoles">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="chkRoles"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+    
+    
+    <!-- 异常页面  begin by gss 2016-1-9-->
+    <request-map uri="exceptionPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="exceptionPage"/>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+    <!-- 异常页面  end by gss 2016-1-9-->
+
+    <!--  异常页面创建  begin by gss 2016-1-9-->
+    <request-map uri="createExceptionPage">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createExceptionPage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  异常页面创建  end by gss 2016-1-9-->
+    
+    <!--  异常页面更新  begin by gss 2016-1-9-->
+    <request-map uri="updateExceptionPage">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateExceptionPage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+   <!--  异常页面更新  end by gss 2016-1-9-->
+    
+    <!--  异常页面详情查询  begin by gss 2016-1-9-->
+    <request-map uri="findExceptionPage">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findExceptionPage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  异常页面详情查询  end by gss 2016-1-9-->
+    
+	    <!-- 号段设置页面  begin by gss 2016-1-11-->
+    <request-map uri="SegmentNumber">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="SegmentNumber"/>
+    </request-map>
+    <!--号段设置页面end by gss 2016-1-11-->
+
+    <!--  号段设置创建  begin by gss 2016-1-11-->
+    <request-map uri="createSegmentNo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createSegmentNo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  号段设置创建  end by gss 2016-1-11-->
+
+    <!--  号段设置更新  begin by gss 2016-1-11-->
+    <request-map uri="updateSegmentNo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateSegmentNo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+   <!--  号段设置更新  end by gss 2016-1-11-->
+
+    <!--  号段设置详情查询  begin by gss 2016-1-11-->
+    <request-map uri="findSegmentNoById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findSegmentNoById"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  号段设置详情查询  end by gss 2016-1-11-->
+    
+    <!--  号段删除  begin by gss 2016-1-11-->
+    <request-map uri="delsegmentNumber">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="delsegmentNumber"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  号段删除  end by gss 2016-1-11-->
+    
+	<!-- 支付接口设置begin by gss 2016-1-13-->
+	<request-map uri="PayMentInterface">
+	<security https="true" auth="true"/>
+	<response name="success" type="view" value="PayMentInterface"/>
+	</request-map>
+	<!-- 支付接口设置  end by gss 2016-1-13-->
+
+	<!-- 支付宝接口设置begin by gss 2016-1-13-->
+	<request-map uri="alipayEdit">
+	<security https="true" auth="true"/>
+	<response name="success" type="view" value="alipayEdit"/>
+	</request-map>
+	<!-- 支付宝接口设置  end by gss 2016-1-13-->
+
+	<!-- 支付宝接口信息查询设置begin by gss 2016-1-14-->
+	<request-map uri="queryAliPay">
+	<security https="true" auth="true"/>
+	<event type="service" invoke="queryAliPay"/>
+	<response name="success" type="request" value="json"/>
+	<response name="error" type="request" value="json"/>
+	</request-map>
+	<!-- 支付宝接口信息查询设置  end by gss 2016-1-14-->
+	
+	<!-- 支付宝接口信息查询设置begin by gss 2016-1-14-->
+	<request-map uri="updateAliPay">
+	<security https="true" auth="true"/>
+	<event type="service" invoke="updateAliPay"/>
+	<response name="success" type="request" value="json"/>
+	<response name="error" type="request" value="json"/>
+	</request-map>
+	<!-- 支付宝接口信息查询设置  end by gss 2016-1-14-->
+	
+	<!-- 微信接口设置begin by gss 2016-1-13-->
+	<request-map uri="weixinPayEdit">
+	<security https="true" auth="true"/>
+	<response name="success" type="view" value="weixinPayEdit"/>
+	</request-map>
+	<!-- 微信接口设置  end by gss 2016-1-13-->
+	
+	<!-- 微信接口信息查询设置begin by gss 2016-1-14-->
+	<request-map uri="queryWeixinPay">
+	<security https="true" auth="true"/>
+	<event type="service" invoke="queryWeixinPay"/>
+	<response name="success" type="request" value="json"/>
+	<response name="error" type="request" value="json"/>
+	</request-map>
+	<!-- 微信接口接口信息查询设置  end by gss 2016-1-14-->
+	
+	<!-- 微信接口接口信息更新begin by gss 2016-1-14-->
+	<request-map uri="updateWeixinPay">
+	<security https="true" auth="true"/>
+	<event type="service" invoke="updateWeixinPay"/>
+	<response name="success" type="request" value="json"/>
+	<response name="error" type="request" value="json"/>
+	</request-map>
+	<!-- 微信接口接口信息更新  end by gss 2016-1-14-->
+	
+    <!-- 字段表设置begin by gss 2016-1-21-->
+	<request-map uri="FieldTableSet">
+	<security https="true" auth="true"/>
+	<response name="success" type="view" value="FieldTableSet"/>
+	</request-map>
+	<!-- 字段表设置end by gss 2016-1-21-->
+    
+     <!--  字段表设置创建  begin by gss 2016-1-21-->
+    <request-map uri="createEnumeration">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createEnumeration"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  字段表设置创建  end by gss 2016-1-21-->
+    
+     <!--  字段表设置查询  begin by gss 2016-1-24-->
+    <request-map uri="findEnumerationById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findEnumerationById"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  字段表设置查询  end by gss 2016-1-24-->
+    
+     <!--  字段表设置更新  begin by gss 2016-1-24-->
+    <request-map uri="updateEnumeration">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateEnumeration"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  字段表设置更新  end by gss 2016-1-24-->
+    
+     <!--  字段表设置删除  begin by gss 2016-1-24-->
+    <request-map uri="delEnumeration">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="delEnumeration"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  字段表设置更新  end by gss 2016-1-24-->
+    
+    	<!-- 支付方式  begin by gss 2016-1-11-->
+	<request-map uri="PaymentType">
+	<security https="true" auth="true"/>
+	<response name="success" type="view" value="PaymentType"/>
+	</request-map>
+	<!-- 支付方式  end by gss 2016-1-11-->
+
+   <!--  支付方式查找  begin by gss 2016-1-11-->
+    <request-map uri="findPayMentById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findPayMentById"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  支付方式查找  end by gss 2016-1-11-->
+    
+   <!--  支付方式更新  begin by gss 2016-1-11-->
+    <request-map uri="updatePayMent">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePayMent"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  支付方式更新  end by gss 2016-1-11-->
+    
+	    <!-- 订单规则  begin by gss 2016-1-12-->
+	<request-map uri="OrderRule">
+	<security https="true" auth="true"/>
+	<response name="success" type="view" value="OrderRule"/>
+	</request-map>
+	<!-- 订单规则  end by gss 2016-1-12-->
+	
+	<!-- 订单规则 退货说明 退款说明  begin by gss 2016-1-12-->
+	<request-map uri="findOrdercontent">
+	<security https="true" auth="true"/>
+	<event type="service" invoke="findOrdercontent"/>
+	<response name="success" type="request" value="json"/>
+	<response name="error" type="request" value="json"/>
+	</request-map>
+	
+	<!-- 更新订单规则  begin by gss 2016-1-12-->
+	<request-map uri="updateOrderRule">
+	<security https="true" auth="true"/>
+	<event type="service" invoke="updateOrderRule"/>
+	<response name="success" type="request" value="json"/>
+	<response name="error" type="request" value="json"/>
+	</request-map>
+	<!-- 更新订单规则  end by gss 2016-1-12-->
+	
+	<!-- 更新退货说明  begin by gss 2016-1-12-->
+	<request-map uri="updaterRefundContent">
+	<security https="true" auth="true"/>
+	<event type="service" invoke="updaterRefundContent"/>
+	<response name="success" type="request" value="json"/>
+	<response name="error" type="request" value="json"/>
+	</request-map>
+	<!-- 更新退货说明  end by gss 2016-1-12-->
+	
+	<!-- 更新退款说明  begin by gss 2016-1-12-->
+	<request-map uri="updaterReturnContent">
+	<security https="true" auth="true"/>
+	<event type="service" invoke="updaterReturnContent"/>
+	<response name="success" type="request" value="json"/>
+	<response name="error" type="request" value="json"/>
+	</request-map>
+	<!-- 更新退款说明  end by gss 2016-1-12-->
+	
+	<!-- 根据类型Id查询枚举列表  begin by qianjin 2016.02.26-->
+	<request-map uri="GetEnumListByEnumTypeId">
+		<security https="true" auth="true"/>
+		<event type="service" invoke="getEnumListByEnumTypeId"/>
+		<response name="success" type="request" value="json"/>
+	</request-map>
+
+    <!-- Image Management request mappings -->
+    <request-map uri="RegionalManage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="RegionalManage"/>
+    </request-map>
+
+    <!-- 地区新增  begin by Gss 2016.04.11-->
+    <request-map uri="createGeo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createGeo"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 地区删除  begin by Gss 2016.04.11-->
+    <request-map uri="delGeo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="delGeo"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 省市查询  begin by Gss 2016.04.11-->
+    <request-map uri="findGeoById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findGeoById"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 地区查询  begin by Gss 2016.04.11-->
+    <request-map uri="findCityGeoById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findCityGeoById"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 地区根据名称查询  begin by Gss 2016.04.11-->
+    <request-map uri="findGeoByName">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findGeoByName"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 省市区编辑 begin by Gss 2016.04.11-->
+    <request-map uri="updateGeo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateGeo"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!--begin 物流公司设置  Add By AlexYao 2016-4-11-->
+    <request-map uri="logisticsCompany">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="logisticsCompany"/>
+    </request-map>
+    <request-map uri="logisticsCompanyJson">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="logisticsCompany"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="addLogisticsCompany">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addLogisticsCompany"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="editLogisticsCompany">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="editLogisticsCompany"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="deleteLogisticsCompany">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteLogisticsCompany"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="logisticsCompanyDetail">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="logisticsCompanyDetail"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="editLCIsEnable">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="editLCIsEnable"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!--end 物流公司设置  Add By AlexYao 2016-4-11-->
+
+    <!--begin 物流模板设置  Add By AlexYao 2016-4-12-->
+    <request-map uri="logisticsTemple">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="logisticsTemple"/>
+    </request-map>
+    <!--复制-->
+    <request-map uri="copyLogisticsTemple">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="copyLogisticsTemple"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!--删除-->
+    <request-map uri="deleteLogisticsTemple">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteLogisticsTemple"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!--设为默认-->
+    <request-map uri="setDefaultLogisticsTemple">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="setDefaultLogisticsTemple"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="addLogisticsTemple">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addLogisticsTemple"/>
+    </request-map>
+    <!--省市-->
+    <request-map uri="selectProvinceList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="selectProvinceList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!--新增模板-->
+    <request-map uri="addLogisticsTempleJson">
+        <security auth="true" https="true"/>
+        <event type="java" path="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="addLogisticsTempleJson"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="editLogisticsTemple">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editLogisticsTemple"/>
+    </request-map>
+    <!--编辑模板-->
+    <request-map uri="editLogisticsTempleJson">
+        <security auth="true" https="true"/>
+        <event type="java" path="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="editLogisticsTempleJson"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--end 物流模板设置  Add By AlexYao 2016-4-12-->
+    <!--begin 物流单据设置  Add By AlexYao 2016-4-14-->
+    <request-map uri="logisticsDocuments">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="logisticsDocuments"/>
+    </request-map>
+    <request-map uri="addLogisticsDocuments">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="addLogisticsDocuments"/>
+    </request-map>
+    <request-map uri="addDocuments">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="addDocuments"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="editLogisticsDocuments">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editLogisticsDocuments"/>
+    </request-map>
+    <request-map uri="editDocuments">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="editDocuments"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="deleteDocuments">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.systemMgr.LogisticsServices" invoke="deleteDocuments"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="ListShipmentMethods">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ListShipmentMethods"/>
+    </request-map>
+    <!--end 物流单据设置  Add By AlexYao 2016-4-14-->
+
+    <!--新增渠道管理页面-->
+    <request-map uri="partyChannelAdd">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="partyChannelAdd"></response>
+    </request-map>
+
+
+
+    <request-map uri="partyChannelList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="partyChannelList"></response>
+    </request-map>
+
+    <!--渠道编辑-->
+    <request-map uri="channelEditPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="channelEditPage"></response>
+    </request-map>
+
+    <!--新增渠道管理-->
+    <request-map uri="addPartyChannel">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addPartyChannel"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--渠道编辑-->
+    <request-map uri="updatePartyChannel">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePartyChannel"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--获取渠道列表-->
+    <request-map uri="getChannelListForJson">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getChannelListForJson"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--删除一条渠道-->
+    <request-map uri="deleteChannel">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deleteChannel"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!---->
+    <request-map uri="getChannelById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getChannelById"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+
+    <!--Add by zhajh at 20180428 积分Code 设置 Begin-->
+    <!-- 积分Code设置页面  begin by zhajh 2018-4-28-->
+    <request-map uri="IntegralCodeSetting">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="IntegralCodeSetting"/>
+    </request-map>
+    <!--积分Code设置页面end by zhajh 2018-4-28-->
+
+    <!--  积分Code设置创建  begin by zhajh 2018-4-28-->
+    <request-map uri="createIntegralCode">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createIntegralCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  积分Code设置创建  end by zhajh 2018-4-28-->
+
+    <!--  积分Code设置更新  begin by zhajh 2018-4-28-->
+    <request-map uri="updateIntegralCode">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateIntegralCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  积分Code设置更新  end by zhajh 2018-4-28-->
+
+    <!--  积分Code设置详情查询  begin by zhajh 2018-4-28-->
+    <request-map uri="findIntegralCodeById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findIntegralCodeById"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  积分Code设置详情查询  end by zhajh 2018-4-28-->
+
+    <!--  积分Code设置删除  begin by zhajh 2018-4-28-->
+    <request-map uri="delIntegralCode">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="delIntegralCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--  积分Code设置删除  end by zhajh 2018-4-28-->
+    <!--Add by zhajh at 20180428 积分Code 设置 End-->
+
+
+
+    <!--审核开关设置 add by hm 2018-5-12-->
+    <request-map uri="ProductRulesSet">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ProductRulesSet"/>
+    </request-map>
+
+    <!-- 保存或修改积审核开关设置  add by hm 2018-5-12-->
+    <request-map uri="updateProductRulesSet">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updateProductRulesSet"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <!-- end of view mappings -->
+    <view-map name="userList" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#managerList"/>
+    <view-map name="roleList" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#roleList"/>
+    <!-- 异常页面 -->
+    <view-map name="exceptionPage" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#exceptionPage"/>
+    <!-- 号段设置 -->
+    <view-map name="SegmentNumber" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#SegmentNumber"/>
+    <!-- 支付接口设置 -->
+    <view-map name="PayMentInterface" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#PayMentInterface"/>
+    <!-- 字段表设置 -->
+    <view-map name="FieldTableSet" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#FieldTableSet"/>
+     <!-- 支付方式  -->
+    <view-map name="PaymentType" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#PaymentType" type="screen"/>
+     <!-- 订单设置  -->
+    <view-map name="OrderRule" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#OrderRule" type="screen"/>
+
+
+    <view-map name="RegionalManage" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#RegionalManage" type="screen"/>
+    <!-- 物流公司  -->
+    <view-map name="logisticsCompany" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#logisticsCompany" type="screen"/>
+    <!-- 物流模板  -->
+    <view-map name="logisticsTemple" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#logisticsTemple" type="screen"/>
+    <!-- 新增物流模板  -->
+    <view-map name="addLogisticsTemple" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#addLogisticsTemple" type="screen"/>
+    <!-- 编辑物流模板  -->
+    <view-map name="editLogisticsTemple" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#editLogisticsTemple" type="screen"/>
+    <!-- 物流单据  -->
+    <view-map name="logisticsDocuments" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#logisticsDocuments" type="screen"/>
+    <!-- 新增物流单据  -->
+    <view-map name="addLogisticsDocuments" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#addLogisticsDocuments" type="screen"/>
+    <!-- 编辑物流单据  -->
+    <view-map name="editLogisticsDocuments" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#editLogisticsDocuments" type="screen"/>
+    <!-- 消息模板列表  -->
+    <view-map name="messageTemplateList" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#messageTemplateList" type="screen"/>
+    <!-- 添加消息页面 -->
+    <view-map name="addMessageTemplate" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#addMessage" type="screen"/>
+    <!-- 编辑消息页面 -->
+    <view-map name="editMessageTemplate_" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#editMessage" type="screen"/>
+
+    <view-map name="ListShipmentMethods" type="screen" page="component://product/widget/catalog/ShippingScreens.xml#ListShipmentMethods"/>
+
+    <view-map name="partyChannelAdd" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#partyChannelAdd"/>
+
+    <view-map name="partyChannelList" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#partyChannelList"/>
+
+    <view-map name="channelEditPage" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#channelEditPage"/>
+
+    <!-- 积分Code设置 -->
+    <view-map name="IntegralCodeSetting" type="screen" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#integralCodeSetting"/>
+
+    <!--审核开关设置-->
+    <view-map name="ProductRulesSet" page="component://systemMgr/widget/systemMgr/CommonScreens.xml#ProductRulesSet" type="screen"/>
+
+
+   </site-conf>
+

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project name="OFBiz - Product Promo Service Component" default="jar" basedir=".">
+    <import file="../../../../common.xml"/>
+
+    <!-- ================================================================== -->
+    <!-- Initialization of all property settings                            -->
+    <!-- ================================================================== -->
+
+    <property name="desc" value="Product Promo Service Component"/>
+    <property name="name" value="prodPromo service"/>
+    <path id="local.class.path">
+
+        <fileset dir="${ofbiz.home.dir}/framework/base/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/base/lib/j2eespecs" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/base/lib/scripting" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/base/build/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/entity/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/entity/build/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/security/build/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/service/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/service/build/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/webapp/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/webapp/build/lib" includes="*.jar"/>
+        <fileset dir="${ofbiz.home.dir}/framework/common/build/lib" includes="*.jar"/>
+        <fileset dir="../party/build/lib" includes="*.jar"/>
+        <fileset dir="../content/build/lib" includes="*.jar"/>
+        <fileset dir="../product/build/lib" includes="*.jar"/>
+    </path>
+
+</project>

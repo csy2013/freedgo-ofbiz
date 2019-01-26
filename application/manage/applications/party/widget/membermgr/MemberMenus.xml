@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+
+<menus xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-menu.xsd">
+
+    <menu name="MemberAppBar" title="${uiLabelMap.MemberManager}" extends="CommonAppBarMenu" extends-resource="component://common/widget/CommonMenus.xml">
+        <!-- <menu-item name="find" title="${uiLabelMap.MemberList}">
+        	<condition>
+                <if-has-permission permission="PARTYMGR_LIST" action="_VIEW"/>
+        	</condition>
+        	<link target="findmember"/>
+        </menu-item> -->
+         <menu-item name="partyMasterManage" title="${uiLabelMap.MemberList}">
+            <condition>
+                <if-has-permission permission="PARTYMGR_LIST" action="_VIEW"/>
+        	</condition>
+        <link target="partyMasterManage"/>
+        </menu-item> 
+        <!--<menu-item name="partyLevel" title="会员等级规则">-->
+        <!--<condition>-->
+                <!--<if-has-permission permission="PARTY_LEVEL" action="_VIEW"/>-->
+        <!--</condition>-->
+        <!--<link target="partyLevelTypeSet"/>-->
+        <!--</menu-item>-->
+        
+        <menu-item name="consumeIntegralSet" title="消费积分规则">
+        <condition>
+                <if-has-permission permission="PARTY_CONSUME" action="_VIEW"/>
+        </condition>
+        <link target="consumeIntegralSet"/>
+        </menu-item>
+        
+        <menu-item name="partyIntegralSet" title="积分使用设置">
+        <condition>
+                <if-has-permission permission="PARTY_INTEGRAL" action="_VIEW"/>
+        </condition>
+        <link target="partyIntegralSet"/>
+        </menu-item> 
+        
+        <menu-item name="partyConsumption" title="会员消费查询">
+         <condition>
+                <if-has-permission permission="PARTY_CONSUMPTION" action="_VIEW"/>
+        </condition>
+        <link target="partyConsumption"/>
+        </menu-item>
+		
+		<!--积分赠送规则By ct 2018 5 11 -->
+        <menu-item name="partyIntegralGift" title="积分赠送规则">
+            <condition>
+                <if-has-permission permission="PARTY_INTEGRALGIFT" action="_VIEW"/>
+            </condition>
+            <link target="findIntegralGiftes"/>
+        </menu-item>
+
+        <!--<menu-item name="QQ" title="QQ授权登录">
+            <link target="QQRegister"/>
+        </menu-item>
+
+        <menu-item name="Weibo" title="微博授权登录">
+            <link target="WeiboRegisters"/>
+        </menu-item>-->
+
+
+
+    </menu>
+
+</menus>

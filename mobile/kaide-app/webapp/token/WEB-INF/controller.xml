@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <!-- The controller elements that are common to all OFBiz components
+         can be found in the following xml file. A component can override the
+         elements found in the common-controller.xml file. -->
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+
+    <description>mobile Component</description>
+    <request-map uri="party.token">
+        <event type="service" invoke="indexBanner"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="common.hotsearch">
+        <security https="false" auth="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.services.IndexService" invoke="getHotSearch"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="common.ball">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="indexBall"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="common.act3">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="indexAct"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="common.recommendProduct">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="recommendProduct"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+
+    <!-- party Request Mappings -->
+
+    <request-map uri="party.personAddressList">
+        <security https="false" auth="false"></security>
+        <event type="java" path="com.yuaoq.yabiz.mobile.party.PartyEvents" invoke="queryPersonAddressList"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+    <request-map uri="party.personAddressDetail">
+        <security https="false" auth="false"></security>
+        <event type="java" path="com.yuaoq.yabiz.mobile.party.PartyEvents" invoke="getPersonAddressDetail"/>
+        <!--<event type="service" invoke="customAddressDetail"/>-->
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+
+    <request-map uri="party.personAddressUpdate">
+        <security https="false" auth="false"></security>
+        <event type="java" path="com.yuaoq.yabiz.mobile.party.PartyEvents" invoke="updatePersonAddress"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+
+    <request-map uri="party.personAddressAdd">
+        <security https="false" auth="false"></security>
+        <event type="java" path="com.yuaoq.yabiz.mobile.party.PartyEvents" invoke="addPersonAddress"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+
+    <request-map uri="party.personAddressDel">
+        <security https="false" auth="false"></security>
+        <event type="java" path="com.yuaoq.yabiz.mobile.party.PartyEvents" invoke="delPersonAddress"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+
+    <request-map uri="party.personProfileDefault">
+        <security https="false" auth="false"></security>
+        <event type="groovy" path="component://mobile-party/webapp/party/WEB-INF/actions/party/PersonProfileDefault.groovy"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+    <request-map uri="party.setPartyProfileDefaults">
+        <security https="false" auth="false"></security>
+        <event type="groovy" path="component://mobile-party/webapp/party/WEB-INF/actions/party/setPartyProfileDefaults.groovy"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+
+    <request-map uri="party.personContent">
+        <security https="false" auth="false"></security>
+        <event type="groovy" path="component://mobile-party/webapp/party/WEB-INF/actions/party/PersonLogoQuery.groovy"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+    <request-map uri="party.personRegister">
+        <security https="false" auth="false"></security>
+        <event type="service" invoke="mobile-partyPersonRegister"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+    <request-map uri="party.personAddressDefault">
+        <security auth="false" https="false"/>
+        <event type="groovy" path="component://mobile-party/webapp/party/WEB-INF/actions/party/PersonAddressDefault.groovy"/>
+        <response name="success" type="request" value="appJson"></response>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+    <request-map uri="party.personContentUpload">
+        <security https="false" auth="false"/>
+        <!--<event type="service" invoke="uploadAdditionalViewImages"/>-->
+        <event type="service" invoke="app-uploadPartyContentFile"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- product Request Mappings -->
+    <request-map uri="product.productSearch">
+        <security https="false" auth="false"/>
+        <!--非服务-->
+        <event type="java" path="com.yuaoq.yabiz.service.local.product.ProductServices" invoke="keywordSearch" />
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+
+    <request-map uri="product.productsSummary">
+        <security https="false" auth="false"/>
+        <!--<event type="java" path="com.yuaoq.yabiz.o2o.c.product.api.ProductServiceImpl" invoke="productSummary"/>-->
+        <event type="service" invoke="productsSummary"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+
+    <request-map uri="product.detail">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="productDetail"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="party.addFavorite">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="addProductFavorite"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="party.productFavorite">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="viewProductFavorite"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="party.disFavorite">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="disProductFavorite"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="product.addTotalTimesViewed">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="countProductView"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="product.variantProductQuery">
+        <security https="false" auth="false"></security>
+        <event type="groovy" path="component://mobile-product/webapp/product/WEB-INF/actions/products/VariantProductQuery.groovy"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"></response>
+    </request-map>
+
+    <!--order-->
+    <request-map uri="order.addItemToShoppingCart">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/OrderShoppingCartAdd.groovy"></event>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="addToCart"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.addItemsToShoppingCart">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/OrderShoppingCartAdd.groovy"></event>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="addProductsToCart"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+
+    <request-map uri="order.getShoppingCart">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/GetShoppingCart.groovy"></event>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="getShoppingCart"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+
+    <request-map uri="order.getShoppingCartTotal">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/GetShoppingCart.groovy"></event>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="getShoppingCartTotal"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+
+    <request-map uri="order.modifyCartItem">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/ModifyCart.groovy"></event>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="modifyCart"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.chooseCartItem">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/ModifyCart.groovy"></event>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="chooseProductToCart"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.deleteCartItem">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/ModifyCart.groovy"></event>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="deleteCart"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+
+    <request-map uri="order.clearCart">
+        <security auth="false" https="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="clearCart"/>
+        <response name="success" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.checkout">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/CartCheckout.groovy"/>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.CheckOutEvents" invoke="cartNotEmpty"/>
+        <response name="success" type="request" value="order.setOptions"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.setOptions">
+        <security auth="false" https="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.CheckOutEvents" invoke="setCheckOutOptions"/>
+        <response name="success" type="request" value="order.calcShipping"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.calcShipping">
+        <security auth="false" https="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShippingEvents" invoke="getShipEstimate"/>
+        <!--<response name="success" type="request" value="order.calcTax"/>-->
+        <response name="success" type="request" value="order.validatePaymentMethods"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <!--<request-map uri="order.calcTax">
+        <security auth="false" https="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.CheckOutEvents" invoke="calcTax"/>
+        <response name="success" type="request" value="order.validatePaymentMethods"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>-->
+    <request-map uri="order.validatePaymentMethods">
+        <security auth="false" https="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.CheckOutEvents" invoke="checkPaymentMethods"/>
+        <response name="success" type="request" value="order.processOrder"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.processOrder">
+        <security auth="false" https="false"/>
+        <!--<event type="groovy" path="component://mobile-token/webapp/token/WEB-INF/actions/order/CreateOrder.groovy"/>-->
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.CheckOutEvents" invoke="createOrder"/>
+        <response name="sales_order" type="request" value="order.checkBlacklist"/>
+        <response name="work_order" type="request" value="order.checkBlacklist"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.checkBlacklist">
+        <security auth="false" https="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.CheckOutEvents" invoke="checkOrderBlacklist"/>
+        <response name="success" type="request" value="order.processpayment"/>
+        <response name="failed" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.processpayment">
+        <security auth="false" https="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.CheckOutEvents" invoke="processPayment"/>
+        <response name="success" type="request" value="order.clearcartfororder"/>
+        <response name="fail" type="request" value="appJson"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+    <request-map uri="order.clearcartfororder">
+        <security auth="false" https="false"/>
+        <event type="java" path="com.yuaoq.yabiz.mobile.order.shoppingcart.ShoppingCartEvents" invoke="clearCart"/>
+        <response name="success" type="request" value="order.checkExternalPayment"/>
+        <response name="error" type="request" value="appJson"/>
+    </request-map>
+
+</site-conf>

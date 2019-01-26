@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+	<!-- 公告链接类型 -->
+	<EnumerationType enumTypeId="FIRST_LINK_TYPE" description="第一链接类型" />
+    <Enumeration enumId="FLT_SPLJ" enumTypeId="FIRST_LINK_TYPE" sequenceId="01" description="商品链接"/>
+    <Enumeration enumId="FLT_WZLJ" enumTypeId="FIRST_LINK_TYPE" sequenceId="02" description="文章链接"/>
+    <Enumeration enumId="FLT_HDLJ" enumTypeId="FIRST_LINK_TYPE" sequenceId="03" description="活动链接"/>
+    <Enumeration enumId="FLT_CXLJ" enumTypeId="FIRST_LINK_TYPE" sequenceId="04" description="促销链接"/>
+    <Enumeration enumId="FLT_ZDYLJ" enumTypeId="FIRST_LINK_TYPE" sequenceId="05" description="自定义链接"/>
+    <!-- 导航链接类型 -->
+    <EnumerationType enumTypeId="NAV_LINK_TYPE" description="导航链接类型" />
+    <Enumeration enumId="BUY_CAR_NAV" enumTypeId="NAV_LINK_TYPE" sequenceId="01" description="买车导航"/>
+    <Enumeration enumId="MAINTAIN_NAV" enumTypeId="NAV_LINK_TYPE" sequenceId="02" description="养车导航"/>
+    <Enumeration enumId="CAR_TYPE_NAV" enumTypeId="NAV_LINK_TYPE" sequenceId="03" description="车品导航"/>
+    <Enumeration enumId="ENTERTAIN_NAV" enumTypeId="NAV_LINK_TYPE" sequenceId="04" description="吃喝玩乐导航"/>
+    <!--<Enumeration enumId="CUSTOM_NAV" enumTypeId="NAV_LINK_TYPE" sequenceId="05" description="自定义导航"/>-->
+</entity-engine-xml>

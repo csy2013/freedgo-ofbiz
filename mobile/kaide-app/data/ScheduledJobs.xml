@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+
+<!-- This is a recurring job with will check for communication events which need to be send as emails. -->
+<entity-engine-xml>
+  <!-- create recurring job to check email communication events with the status COM_IN_PROGRESS to send these emails.. -->
+  <!--<TemporalExpression tempExprId="SENDEMAIL" tempExprTypeId="FREQUENCY" description="Every 15 Minutes" integer1="12" integer2="15"/>-->
+  <!--<JobSandbox jobId="SENDEMAIL" jobName="Send Email" runTime="2000-01-01 00:00:00.000" serviceName="sendEmailDated" poolId="pool" runAsUser="system" tempExprId="SENDEMAIL"
+              maxRecurrenceCount="-1"/>-->
+    <TemporalExpression tempExprId="TOGET_AUTO_COMPLETE" tempExprTypeId="FREQUENCY" description="30 MINUTE" date1="2014-07-27 12:30:00.000" integer1="12" integer2="30"/>
+    <JobSandbox jobId="TOGET_COMPLETE_JOBS" jobName="拼团自动完成" runTime="2014-07-27 12:30:00.000" serviceName="togetherOrderAutoComplete"   poolId="pool"  runAsUser="system" tempExprId="TOGET_AUTO_COMPLETE"  maxRecurrenceCount="-1"/>
+
+    <JobSandbox jobId="TEMPLATE_SEND_JOBS" jobName="消息模板发送" runTime="2014-07-27 12:30:00.000" serviceName="templateSendMsgTask"   poolId="pool"  runAsUser="system" tempExprId="TOGET_AUTO_COMPLETE"  maxRecurrenceCount="-1"/>
+
+    <JobSandbox jobId="PROMO_CODE_TASK" jobName="代金券通知" runTime="2014-07-27 12:30:00.000" serviceName="promoCodeTask"   poolId="pool"  runAsUser="system" tempExprId="TOGET_AUTO_COMPLETE"  maxRecurrenceCount="-1"/>
+
+  <TemporalExpression tempExprId="SENDSCORE2KD_AUTO" tempExprTypeId="FREQUENCY" description="30 MINUTE" date1="2014-07-27 12:30:00.000" integer1="12" integer2="30"/>
+  <JobSandbox jobId="ORDER_SENDSCORE2KD" jobName="订单满足条件获取积分" runTime="2014-07-27 12:30:00.000" serviceName="sendScore2Kd"   poolId="pool"  runAsUser="system" tempExprId="SENDSCORE2KD_AUTO"  maxRecurrenceCount="-1"/>
+
+
+</entity-engine-xml>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-form.xsd">
+    <form name="findGroupOrderListCond" target="findGroupOrder" title="" type="single"
+          header-row-style="header-row" default-table-style="basic-table" entity-name="ProductActivity" >
+        <!-- <auto-fields-entity entity-name="Product" default-field-type="hidden"/> -->
+        <field name="activityCode" title="${uiLabelMap.activityCode}">
+            <text/>
+            <!--<text-find/>-->
+        </field>
+        <field name="activityName" title="${uiLabelMap.activityName}">
+            <text/>
+        </field>
+        <field name="activityAuditStatus" title="${uiLabelMap.activityAuditStatus}">
+            <drop-down allow-empty="true" no-current-selected-key="ACTY_AUDIT_INIT">
+                <entity-options entity-name="Enumeration" description="${description}" key-field-name="enumId">
+                    <entity-constraint name="enumTypeId" value="ACTY_AUDIT_STUATS" operator="equals" />
+                    <entity-order-by field-name="sequenceId" />
+                </entity-options>
+
+            </drop-down>
+        </field>
+        <field name="noConditionFind">
+            <hidden value="Y"/>
+        </field>
+        <field name="activityStartDate" title="${uiLabelMap.activityStartDate}">
+            <date-find/>
+
+        </field>
+        <field name="activityEndDate" title="${uiLabelMap.activityEndDate}">
+            <date-find/>
+        </field>
+        <!-- NOTE DEJ20070829 not sure why this is here, but it doesn't seem applicable for a general product lookup, also doesn't handle case where isVariant is null <field name="isVariant"><hidden value="N"/></field> -->
+        <field name="submitButton" title="${uiLabelMap.CommonFind}" widget-style="smallSubmit">
+            <submit button-type="button"/>
+        </field>
+    </form>
+
+    <form name="listGroupOrder" list-name="listIt" title="" type="list" paginate-target="findGroupOrderListCond"
+          odd-row-style="alternate-row" default-table-style="basic-table" view-size="20">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="ProductActivity"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <field name="activityCode" title="${uiLabelMap.activityCode}" widget-style="buttontext">
+            <display/>
+        </field>
+        <field name="activityName" title="${uiLabelMap.activityName}"><display/></field>
+        <field name="activityType" title="${uiLabelMap.activityType}"><display description="${activityType}"/>
+            <display-entity description="${description}" entity-name="Enumeration" key-field-name="enumId" />
+        </field>
+            <!--<display description="${activityType}"/></field>-->
+        <field name="activityStartDate" title="${uiLabelMap.activityStartDate}"><display/></field>
+        <field name="activityEndDate" title="${uiLabelMap.activityEndDate}"><display type="date-time"/></field>
+        <field name="activityAuditStatus" title="${uiLabelMap.activityAuditStatus}"> <display-entity description="${description}" entity-name="Enumeration" key-field-name="enumId" /></field>
+        <field name="hasGroup" title="${uiLabelMap.hasGroup}"><display/></field>
+        <field name="leaveQuantity" title="${uiLabelMap.leaveQuantity}"><display/></field>
+        <field name="removeLink" title="${uiLabelMap.CommonDelete}"><submit/></field>
+        <field name="addLink" title="${uiLabelMap.CommonView}"><submit/></field>
+        <field name="updateLink" title="${uiLabelMap.CommonUpdate}"><submit/></field>
+    </form>
+</forms>

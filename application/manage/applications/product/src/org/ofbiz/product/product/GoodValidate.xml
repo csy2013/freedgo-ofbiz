@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<excel>
+   <entity name="商品信息" code="productGoods" >
+
+
+	   <column name="所属商家" code="businessPartyId" type="String" maxlength="20">
+		   <rules>
+			   <rule name="nullable" message="所属商家不能为空!"></rule>
+			   <rule name="max_length" message="所属商家长度不能超过20位!"></rule>
+			   <rule name="value_check" message="该所属商家不存在"></rule>
+		   </rules>
+	   </column>
+	   <!--<column name="商品类型" code="productTypeName" type="String" maxlength="20">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="商品类型不能为空!"></rule>-->
+			   <!--<rule name="max_length" message="商品名称长度不能超过20位!"></rule>-->
+			   <!--<rule name="value_check" message="该商品类型不存在"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+	   <column name="商品标题" code="productName" type="String" maxlength="100">
+		   <rules>
+			   <rule name="nullable" message="商品标题不能为空!"></rule>
+			   <rule name="max_length" message="商品标题长度不能超过100位!"></rule>
+		   </rules>
+	   </column>
+	   <column name="商品描述" code="productSubheadName" type="String" maxlength="80">
+		   <rules>
+			   <rule name="max_length" message="商品描述长度不能超过80位!"></rule>
+		   </rules>
+	   </column>
+
+	   <column name="商品分类" code="primaryProductCategoryId" type="String" maxlength="80">
+		   <rules>
+			   <rule name="nullable" message="商品分类不能为空!"></rule>
+			   <rule name="max_length" message="商品分类长度不能超过80位!"></rule>
+			   <rule name="value_check" message="该商品分类不存在"></rule>
+		   </rules>
+	   </column>
+	   <column name="商品标签" code="tagNames" type="String" maxlength="100">
+		   <rules>
+			   <!--<rule name="nullable" message="商品标签不能为空!"></rule>-->
+			   <rule name="max_length" message="商品标签长度不能超过100位!"></rule>
+			   <rule name="value_check" message="该商品标签不存在"></rule>
+		   </rules>
+	   </column>
+	   <column name="是否申请上架" code="isOnline" type="String" maxlength="20">
+		   <rules>
+			   <rule name="nullable" message="是否申请上架不能为空!"></rule>
+			   <rule name="max_length" message="是否申请上架长度不能超过20位!"></rule>
+			   <rule name="value_check" message="请确认是否申请上架填 是 或 否"></rule>
+		   </rules>
+	   </column>
+	   <column name="是否保税商品" code="isBondedGoods" type="String" maxlength="30">
+		   <rules>
+			   <rule name="max_length" message="是否保税商品长度不能超过20位!"></rule>
+			   <rule name="value_check" message="请确认是否保税商品填 是 或 否"></rule>
+		   </rules>
+	   </column>
+	   <column name="服务支持" code="supportServiceType" type="String" maxlength="100">
+		   <rules>
+			   <!--<rule name="nullable" message="服务支持不能为空!"></rule>-->
+			   <rule name="max_length" message="服务支持长度不能超过100位!"></rule>
+			   <rule name="value_check" message="该服务支持不存在"></rule>
+		   </rules>
+	   </column>
+	   <column name="销售开始时间" code="saleStartTime" type="String" maxlength="30">
+		   <rules>
+			   <rule name="nullable" message="销售开始时间不能为空!"></rule>
+			   <rule name="date_check" message="销售开始时间必须为时间类型【格式为: 2016-01-09 23:39】"></rule>
+		   </rules>
+	   </column>
+
+	   <column name="销售结束时间" code="saleEndTime" type="String" maxlength="30">
+		   <rules>
+			   <rule name="date_check" message="销售结束时间必须为时间类型【格式为: 2016-01-09 23:39】"></rule>
+			   <rule name="value_check" message="销售结束时间不能早于销售开始时间"></rule>
+		   </rules>
+	   </column>
+
+	   <column name="主营分类" code="platformClassId" type="String" maxlength="80">
+		   <rules>
+			   <rule name="nullable" message="主营分类不能为空!"></rule>
+			   <rule name="max_length" message="主营分类长度不能超过80位!"></rule>
+			   <rule name="value_check" message="该主营分类不存在"></rule>
+		   </rules>
+	   </column>
+	   <column name="商品品牌" code="brandName" type="String" maxlength="40">
+		   <rules>
+			   <!--<rule name="nullable" message="商品品牌不能为空!"></rule>-->
+			   <rule name="max_length" message="商品品牌长度不能超过40位!"></rule>
+			   <rule name="value_check" message="该商品品牌不存在"></rule>
+		   </rules>
+	   </column>
+	   <column name="销售价格(元)" code="salePrice" type="String" maxlength="30">
+		   <rules>
+			   <rule name="nullable" message="销售价格不能为空!"></rule>
+			   <!--<rule name="value_check" message="销售价格必须大于0"></rule>-->
+		   </rules>
+	   </column>
+
+
+	   <column name="积分抵扣" code="integralDeductionType" type="String" maxlength="40">
+		   <rules>
+			   <rule name="nullable" message="积分抵扣不能为空!"></rule>
+			   <rule name="max_length" message="积分抵扣长度不能超过40位!"></rule>
+			   <rule name="value_check" message="该积分抵扣不存在"></rule>
+		   </rules>
+	   </column>
+	   <column name="积分抵扣上限" code="integralDeductionUpper" type="String" maxlength="30">
+		   <rules>
+			   <!--<rule name="nullable" message="积分抵扣上限不能为空!"></rule>-->
+			   <rule name="max_length" message="积分抵扣上限长度不能超过30位!"></rule>
+			   <rule name="value_check" message="积分抵扣上限必须大于0"></rule>
+		   </rules>
+	   </column>
+	   <column name="每人限购数量" code="purchaseLimitationQuantity" type="String" maxlength="20">
+		   <rules>
+			   <rule name="max_length" message="每人限购数量长度不能超过20位!"></rule>
+			   <rule name="value_check" message="每人限购数量必须大于0"></rule>
+		   </rules>
+	   </column>
+	   <column name="列表展示" code="isListShow" type="String" maxlength="30">
+		   <rules>
+			   <rule name="max_length" message="列表展示长度不能超过20位!"></rule>
+			   <rule name="value_check" message="是否列表展示填 是 或 否"></rule>
+		   </rules>
+	   </column>
+	   <column name="市场价格(元)" code="marketPrice" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="市场价格必须大于0"></rule>
+		   </rules>
+	   </column>
+	   <column name="成本价格(元)" code="costPrice" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="成本价格必须大于0"></rule>
+		   </rules>
+	   </column>
+	   <column name="体积(m³)" code="volume" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="体积必须大于0"></rule>
+		   </rules>
+	   </column>
+	   <column name="重量(kg)" code="weight" type="String" maxlength="30">
+		   <rules>
+			   <rule name="value_check" message="重量必须大于0"></rule>
+		   </rules>
+	   </column>
+	   <column name="是否使用规格" code="isUsedFeature" type="String" maxlength="20">
+		   <rules>
+			   <rule name="nullable" message="是否使用规格不能为空!"></rule>
+			   <rule name="max_length" message="是否使用规格长度不能超过20位!"></rule>
+			   <rule name="value_check" message="请填写是 或 否"></rule>
+		   </rules>
+	   </column>
+	   <!--<column name="仓库" code="facilityName" type="String" maxlength="80">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="仓库不能为空!"></rule>-->
+			   <!--<rule name="max_length" message="仓库长度不能超过80位!"></rule>-->
+			   <!--<rule name="value_check" message="该仓库不存在"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+	   <column name="可用库存" code="accountingQuantityTotal" type="String" maxlength="30">
+		   <rules>
+			   <!--<rule name="nullable" message="可用库存不能为空!"></rule>-->
+			   <rule name="max_length" message="可用库存长度不能超过20位!"></rule>
+			   <rule name="value_check" message="可用库存必须大于0"></rule>
+		   </rules>
+	   </column>
+	   <column name="库存预警数量" code="warningQuantity" type="String" maxlength="20">
+		   <rules>
+			   <rule name="max_length" message="库存预警数量长度不能超过20位!"></rule>
+			   <rule name="value_check" message="该库存预警数量必须大于0"></rule>
+		   </rules>
+	   </column>
+	   <column name="预警提示人邮箱" code="warningMail" type="String" maxlength="80">
+		   <rules>
+			   <rule name="max_length" message="预警提示人邮箱长度不能超过80位!"></rule>
+			   <rule name="value_check" message="该预警提示人邮箱格式不正确"></rule>
+		   </rules>
+	   </column>
+	   <column name="搜索关键字" code="seoKeyword" type="String" maxlength="30">
+		   <rules>
+			   <rule name="max_length" message="搜索关键字长度不能超过20位!"></rule>
+		   </rules>
+	   </column>
+	   <column name="供应商" code="providerName" type="String" maxlength="50">
+		   <rules>
+			   <rule name="max_length" message="供应商长度不能超过50位!"></rule>
+			   <rule name="value_check" message="该供应商不存在"></rule>
+		   </rules>
+	   </column>
+
+	   <!--<column name="代金券面额" code="voucherAmount" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="max_length" message="代金券面额长度不能超过30位!"></rule>-->
+			   <!--<rule name="value_check" message="该代金券面额不存在"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+	   <!--<column name="使用开始时间" code="useEndTimeGroup" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="使用开始时间不能为空!"></rule>-->
+			   <!--<rule name="date_check" message="使用开始时间必须为时间类型【格式为: 2016-01-09 23:39】"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="使用结束时间" code="useEndTimeGroup" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="date_check" message="使用结束时间必须为时间类型【格式为: 2016-01-09 23:39】"></rule>-->
+			   <!--<rule name="value_check" message="使用结束时间不能早于使用开始时间"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="商品类型" code="productTypeName" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="商品类型不能为空!"></rule>-->
+			   <!--<rule name="max_length" message="商品名称长度不能超过20位!"></rule>-->
+			   <!--<rule name="value_check" message="该商品类型不存在"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+	   <!--<column name="商品名称" code="productName" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="商品名称不能为空!"></rule>-->
+			   <!--<rule name="max_length" message="商品名称长度不能超过40位!"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="商品副标题" code="productSubName" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="max_length" message="商品副标题长度不能超过80位!"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="一级分类" code="levelFirst" type="String" maxlength="10">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="一级分类不允许为空!"></rule>-->
+			   <!--<rule name="value_check" message="一级分类名称必须是已有的一级分类"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+	   <!--<column name="二级分类" code="levelSecond" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="二级分类不能为空!"></rule>-->
+			   <!--<rule name="max_length" message="二级分类名称必须是已有的二级分类"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="三级分类" code="levelThird" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="三级分类不能为空!"></rule>-->
+			   <!--<rule name="max_length" message="三级分类名称必须是已有的三级分类"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="销售开始时间" code="saleStartTime" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="销售开始时间不能为空!"></rule>-->
+			   <!--<rule name="date_check" message="销售开始时间必须为时间类型【格式为: 2016-01-09 23:39】"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="销售结束时间" code="saleEndTime" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="date_check" message="销售结束时间必须为时间类型【格式为: 2016-01-09 23:39】"></rule>-->
+			   <!--<rule name="value_check" message="销售结束时间不能早于销售开始时间"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="商家名称" code="businessPartyId" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="商家名称不能为空!"></rule>-->
+			   <!--<rule name="value_check" message="商家名称必须是已存在于系统商家"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="销售价格(元)" code="salePrice" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="nullable" message="销售价格不能为空!"></rule>-->
+			   <!--<rule name="value_check" message="销售价格必须大于0"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="市场价格(元)" code="marketPrice" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="value_check" message="市场价格必须大于0"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="成本价格(元)" code="costPrice" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="value_check" message="成本价格必须大于0"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="体积(m³)" code="volume" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="value_check" message="体积必须大于0"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+
+	   <!--<column name="重量(kg)" code="weight" type="String" maxlength="30">-->
+		   <!--<rules>-->
+			   <!--<rule name="value_check" message="重量必须大于0"></rule>-->
+		   <!--</rules>-->
+	   <!--</column>-->
+   </entity>
+</excel>

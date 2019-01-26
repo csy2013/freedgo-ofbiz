@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+   
+
+	<!-- 跳转题库管理列表页面 start  -->
+	<screen name="questionBankPage">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>题库管理</label>
+								<label style="sub-title">题库管理列表</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="题库管理" style="breadcrumb"/>
+								<link target="" text="题库管理列表" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="QUESTIONBANK_LIST" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/question/questionBankList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要题库管理查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转题库管理页面 end  -->
+
+
+
+</screens>

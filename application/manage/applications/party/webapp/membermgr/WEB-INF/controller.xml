@@ -1,0 +1,2062 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+    <include location="component://common/webcommon/WEB-INF/security-controller.xml"/>
+    <include location="component://commonext/webapp/WEB-INF/controller.xml"/>
+    <include location="component://content/webapp/content/WEB-INF/controller.xml"/>
+    <description>Member Manager Module Site Configuration File</description>
+
+    <handler name="service-multi" type="request" class="org.ofbiz.webapp.event.ServiceMultiEventHandler"/>
+    <handler name="simplecontent" type="view" class="org.ofbiz.content.view.SimpleContentViewHandler"/>
+
+    <!-- Events to run on every request before security (chains exempt) -->
+    <!--
+    <preprocessor>
+    </preprocessor>
+    -->
+    <!-- Events to run on every request after all other processing (chains exempt) -->
+    <!--
+    <postprocessor>
+        <event name="test" type="java" path="org.ofbiz.webapp.event.TestEvent" invoke="test"/>
+    </postprocessor>
+    -->
+
+    <!-- Request Mappings -->
+    <!-- begin add by Wcy 会员列表 at 2016.01.06 -->
+    <request-map uri="findmember">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findmember"/>
+    </request-map>
+
+    <request-map uri="findmemberForJson">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findmember"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- end add by Wcy 会员列表 at 2016.01.06 -->
+
+    <!-- add by dx 2016.2.22 会员收货地址 start-->
+    <request-map uri="editcontactmechforcustomer">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="editcontactmechforcustomer" save-current-view="true"/>
+    </request-map>
+
+    <request-map uri="createPostalAddressforcustomer">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPartyPostalAddress"/>
+        <response name="success" type="request" value="memberDetail" save-current-view="true">
+            <redirect-parameter name="partyId"/>
+        </response>
+    </request-map>
+
+    <request-map uri="updatePostalAddressforcustomer">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePartyPostalAddress"/>
+        <response name="success" type="view" value="memberDetail"/>
+        <response name="error" type="view" value="memberDetail"/>
+    </request-map>
+
+    <request-map uri="deleteContactMechforcustomer">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePartyContactMech"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+        <!--  <response name="success" type="view" value="memberDetail"/>
+         <response name="error" type="view" value="memberDetail"/> -->
+    </request-map>
+    <request-map uri="setDefault">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="savePostalAddressOtherIsDefault"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by dx 2016.2.22 会员收货地址 end -->
+    <!-- begin add by Wcy 自动登录同步接口 at 2016.01.08 -->
+    <request-map uri="loginauto">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="loginSync"/>
+        <response name="success" type="request-redirect" value="login">
+            <redirect-parameter name="USERNAME"/>
+            <redirect-parameter name="PASSWORD"/>
+        </response>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--<request-map uri="login">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.securityext.login.LoginEvents" invoke="storeLoginForWap"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>-->
+    <request-map uri="testlogin">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="testlogin"/>
+    </request-map>
+    <!-- end add by Wcy 自动登录同步接口 at 2016.01.08 -->
+
+    <!-- begin add by Wcy 社区同步接口 at 2016.01.09 -->
+    <request-map uri="communitySync">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="communitySync"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- end add by Wcy 社区同步接口 at 2016.01.09 -->
+
+    <!-- begin add by Wcy 查看会员详情 at 2016.01.09 -->
+    <request-map uri="memberDetail">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="memberDetail"/>
+    </request-map>
+    <!-- end add by Wcy 查看会员详情 at 2016.01.09 -->
+
+    <!-- begin add by Wcy 查看会员详情 at 2016.01.09 -->
+    <request-map uri="adjustAmount">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="adjustAmount"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end add by Wcy 查看会员详情 at 2016.01.09 -->
+
+    <!-- begin add by Wcy 查看账号余额明细 at 2016.01.10 -->
+    <request-map uri="adjustAmountHistory">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="adjustAmountHistory"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end add by Wcy 查看账号余额明细 at 2016.01.10 -->
+
+    <!--================ begin 测试用的  =======================-->
+    <!-- add by Wcy 查询首页 -->
+    <request-map uri="mainIndex">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="mainIndex"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by wcy 评价列表 -->
+    <request-map uri="findProductReview">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findProductReview"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by Wcy 确认收货 at 2016.01.13 -->
+    <request-map uri="changeOrderStatusValuate">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="changeOrderStatusValuate"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end by Wcy 确认收货 at 2016.01.13 -->
+    <!-- begin add by Wcy 个人中心 at 2016.01.10 -->
+    <!-- begin 用户个人信息 -->
+    <request-map uri="userInfo">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="userInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end 用户个人信息 -->
+    <!-- end add by Wcy 个人中心 at 2016.01.10 -->
+
+    <!-- begin add by Wcy 用户订单信息 at 2016.01.11 -->
+    <!--<request-map uri="userOrderInfo">-->
+    <!--<security https="true" auth="true"/>-->
+    <!--<event type="service" path="component://order/servicedef/services_ico.xml" invoke="userOrderTypeNum"/>-->
+    <!--<response name="success" type="request" value="json"/>-->
+    <!--<response name="error" type="request" value="json"/>-->
+    <!--</request-map>-->
+    <!-- end add by Wcy 用户订单信息 at 2016.01.11 -->
+
+    <!-- begin add by Wcy 订单列表 at 2016.01.11 -->
+    <request-map uri="userOrderList">
+        <security https="true" auth="true"/>
+        <event type="service" path="component://order/servicedef/services_ico.xml" invoke="userOrderList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end add by Wcy 订单列表 at 2016.01.11 -->
+
+    <request-map uri="userOrderInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="userOrderInfo"/>
+        <response name="success" type="request-redirect" value="login">
+            <redirect-parameter name="USERNAME"/>
+            <redirect-parameter name="PASSWORD"/>
+        </response>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- begin add by Wcy 订单评价图片上传 at 2016.01.13 -->
+    <request-map uri="uploadImgsForProductReview">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.content.content.ContentServices" invoke="uploadImgsForProductReview"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end add by Wcy 订单评价图片上传 at 2016.01.13 -->
+
+    <!-- begin add by Wcy 订单详情 at 2016.01.13 -->
+    <!--<request-map uri="orderDetail">
+        <security https="true" auth="true"/>
+        <event type="service" path="component://order/servicedef/services_ico.xml" invoke="orderDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>-->
+
+    <!--  添加修改消费积分规则 begin by gss 2016-1-19-->
+    <request-map uri="createPartyIntegral">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPartyIntegral"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 添加修改消费积分规则   end by gss 2016-1-19-->
+
+    <!--  获取所有等级类型 begin by gss 2016-1-19-->
+    <request-map uri="getAllLevelType">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getAllLevelType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 获取所有等级类型   end by gss 2016-1-19-->
+
+    <!--  获取会员类型 begin by gss 2016-1-19-->
+    <request-map uri="getLevelType">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getLevelType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 获取会员类型   end by gss 2016-1-19-->
+
+    <!-- 获取产品分类表数据 -->
+    <request-map uri="getProductCategoryList">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getProductCategoryList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 消费积分设置  begin by gss 2016-1-16-->
+    <request-map uri="consumeIntegralSet">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="consumeIntegralSet"/>
+    </request-map>
+    <!-- 消费积分设置  end by gss 2016-1-16-->
+
+    <!-- begin add by Gss 会员等级规则  2016.01.20-->
+    <request-map uri="partyLevelTypeSet">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="partyLevelTypeSet"/>
+    </request-map>
+    <!-- end add by Gss 会员等级规则  2016.01.20-->
+
+    <!-- begin add by Gss 会员等级规则  2016.01.20-->
+    <request-map uri="partyCompanyLevelTypeSet">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="partyCompanyLevelTypeSet"/>
+    </request-map>
+    <!-- end add by Gss 会员等级规则  2016.01.20-->
+
+    <!--  添加会员等级规则 begin by gss 2016-1-19-->
+    <request-map uri="createPartyLevelType">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPartyLevelType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 添加会员等级规则   end by gss 2016-1-19-->
+    <!--  修改会员等级规则 begin by gss 2016-1-19-->
+    <request-map uri="updatePartyLevelType">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePartyLevelType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 修改会员等级规则   end by gss 2016-1-19-->
+
+    <!--  删除会员等级规则 begin by gss 2016-1-19-->
+    <request-map uri="deletePartyLevelType">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="deletePartyLevelType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 删除会员等级规则   end by gss 2016-1-19-->
+
+    <!--  删除会员等级规则 判断是否有会员使用 begin by gss 2016-1-19-->
+    <request-map uri="find_PartyLevel">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="find_PartyLevel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 删除会员等级规则   end by gss 2016-1-19-->
+
+    <!-- 消费积分设置  begin by gss 2016-1-16-->
+    <request-map uri="partyIntegralSet">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="partyIntegralSet"/>
+    </request-map>
+    <!-- 消费积分设置  end by gss 2016-1-16-->
+
+    <!-- begin add by GSS 更新消费积分设置at 2016.01.26 -->
+    <request-map uri="updatePartyIntegralSet">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePartyIntegralSet"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end add by gss更新消费积分设置 at 2016.01.26 -->
+
+    <!--================ end 测试用的  =======================-->
+
+    <!-- begin add by Wcy 会员积分变动 at 2016.01.21 -->
+    <request-map uri="partyScoreChange">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="partyScoreChange"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end add by Wcy 会员积分变动 at 2016.01.21 -->
+
+    <!-- begin add by Wcy 收货地址 at 2016.01.28 -->
+    <request-map uri="partyPostalAddress">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="partyPostalAddress"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- end add by Wcy 收货地址 at 2016.01.28 -->
+    <!-- 跳转人员查询弹出框页面 add by qianjin 2016.01.26 -->
+    <request-map uri="personListModalPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="personListModalPage"/>
+    </request-map>
+    <!-- 人员列表查询，返回json格式 add by qianjin 2016.01.26 -->
+    <request-map uri="personListForJson">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getPersonListForModal"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="getPartyDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyDetail"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="personListModalPage1">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="personListModalPage1"/>
+    </request-map>
+
+    <!--  选择地区页面接口  add by gss 2016-2-3 -->
+    <request-map uri="getAllStateList">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getAllStateList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--  新增/编辑收货地址页面接口  add by gss 2016-2-3 -->
+    <request-map uri="createOrUpdatePostalAddressAndPurposes">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createOrUpdatePostalAddressAndPurposes"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--  删除收货地址页面接口  add by gss 2016-2-3 -->
+    <request-map uri="deletePostalAddress">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="deletePostalAddress"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+
+    <!-- 会员消费查询  begin by gss 2016-3-30-->
+    <request-map uri="partyConsumption">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="partyConsumption"/>
+    </request-map>
+    <!-- 会员消费查询 end by gss  2016-3-30-->
+
+    <!-- 会员优惠券记录  begin by gss 2016-5-6-->
+    <request-map uri="productPromoCodeParty">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="productPromoCodeParty"/>
+    </request-map>
+    <!-- 会员优惠券记录 end by gss  2016-5-6-->
+
+    <!-- 定制果汁记录  begin by gss 2016-5-6-->
+    <request-map uri="CustomJuice">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="CustomJuice"/>
+    </request-map>
+    <!-- 定制果汁记录 end by gss  2016-5-6-->
+
+    <!-- 会员主数据  begin by gss 2016-4-5-->
+    <request-map uri="partyMasterManage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="partyMasterManage"/>
+    </request-map>
+    <!--  会员主数据 end by gss  2016-4-5-->
+
+    <!-- 会员主数据  begin by gss 2016-4-5-->
+    <request-map uri="memberAdd">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="memberAdd"/>
+    </request-map>
+    <!--  会员主数据 end by gss  2016-4-5-->
+
+    <!-- add by gss 2016-4-6  创建会员-->
+    <request-map uri="createCustomerforIco">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createCustomerforIco"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by gss 2016-4-6  创建会员-->
+
+    <!-- add by gss 2016-4-6  更新会员-->
+    <request-map uri="updateCustomerforIco">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="updateCustomerforIco"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- add by gss 2016-4-6  更新会员-->
+
+    <!-- begin add by gss 2016-4-6  查询会员主数据列表-->
+    <request-map uri="find_memberForJson">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findPartymember"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- end add by gss 2016-4-6  查询会员主数据列表-->
+
+    <!-- begin add by GSS会员主数据详情 at 2016-4-6  -->
+    <request-map uri="member_Detail">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="member_Details"/>
+    </request-map>
+    <!-- end add by GSS会员主数据详情 at 2016-4-6  -->
+
+    <!-- begin add by GSS会员主数据 会员编辑at 2016-4-7  -->
+    <request-map uri="memberEdit">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="memberEdit"/>
+    </request-map>
+    <!-- end add by GSS会员主数据 会员编辑at 2016-4-7  -->
+
+    <!-- begin add by GSS会员主数据 更新地址at 2016-4-7  -->
+    <request-map uri="updatePostalAddressforIco">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePartyPostalAddress"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- begin add by GSS会员主数据 创建地址at 2016-4-7  -->
+    <request-map uri="createPostalAddressforIco">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createPartyPostalAddress"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!--获取认证token-->
+    <!--<request-map uri="getAuthToken">
+        <security https="true" auth="true"/>
+        <event type="simple" path="com.qihua.ofbiz.member.MemberEvents" invoke="getAuthToken"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>-->
+    <!--登陆并获取认证token-->
+    <request-map uri="autoLogin">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.securityext.login.LoginEvents" invoke="autoLogin"/>
+        <response name="url" type="none"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 手机注册时获取验证码 AlexYao 2016-4-22 13:43:16-->
+    <request-map uri="getRegisterCheckCode">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.securityext.login.LoginEvents" invoke="getRegisterMobileAuthCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 普通获取验证码-->
+    <request-map uri="getCheckCode">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.securityext.login.LoginEvents" invoke="getMobileAuthCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--校验验证码-->
+    <request-map uri="validateCheckCode">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="validateCheckCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--手机号注册账号-->
+    <request-map uri="normalRegister">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="normalRegister"/>
+        <response name="weixin" type="none"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--查询积分使用规则（积分价值）-->
+    <request-map uri="getIntegralDesc">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getIntegralDesc"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--QQ、微博登录-->
+    <request-map uri="otherLogin">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.securityext.login.LoginEvents" invoke="otherLogin"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取第三方账号注册信息-->
+    <request-map uri="getOtherLoginInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getOtherLoginInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--绑定第三方账号-->
+    <request-map uri="bindOtherLoginId">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="bindOtherLoginId"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--手机号注册账号成功之后-->
+    <request-map uri="registerSuccess">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="registerSuccess"/>
+        <response name="success" type="request-redirect" value="autoLogin">
+            <redirect-parameter name="USERNAME"/>
+            <redirect-parameter name="PASSWORD"/>
+            <redirect-parameter name="url"/>
+        </response>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--用户相关水果-->
+    <request-map uri="partyAssocProduct">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="partyAssocProduct"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取基础数据-->
+    <request-map uri="getBaseInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getBaseInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取首页轮播数据-->
+    <request-map uri="getBaseBanner">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getBaseBanner"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取首页分类数据-->
+    <request-map uri="getBaseNavigation">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getBaseNavigation"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取首页专题活动数据-->
+    <request-map uri="getBaseTopicActivity">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getBaseTopicActivity"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取首页品牌数据-->
+    <request-map uri="getBaseBrand">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getBaseBrand"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取首页车型数据-->
+    <request-map uri="getBaseCarModel">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getBaseCarModel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取首页猜你喜欢数据-->
+    <request-map uri="getBaseBrowse">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getBaseBrowse"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="getPartyBrowse">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyBrowse"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取所有店铺-->
+    <request-map uri="getAllProductStore">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getAllProductStore"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取所有分类-->
+    <request-map uri="getAllCategory">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getAllCategory"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取用户设置-->
+    <request-map uri="getPartyConfigInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyConfigInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--编辑用户设置-->
+    <request-map uri="editPartyConfigInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="editPartyConfigInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取新车数量-->
+    <request-map uri="getNewCarNum">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getNewCarNum"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取品牌数据-->
+    <request-map uri="getBrandList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getBrandList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取车型库条件-->
+    <request-map uri="getCarCondition">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarCondition"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--根据车型库条件查询新车-->
+    <request-map uri="getCarByCondition">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarByCondition"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--车系详情-->
+    <request-map uri="carSeriesDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="carSeriesDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--车型详情-->
+    <request-map uri="carModelDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="carModelDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取车辆国别-->
+    <request-map uri="getCarCountry">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarCountry"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--根据品牌获取车系-->
+    <request-map uri="getCarSeries">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarSeries"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--查询平行进口车-->
+    <request-map uri="getImportedCar">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getImportedCar"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--查询二手车推荐车辆接口-->
+    <request-map uri="getRecommendCar">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getRecommendCar"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--查询二手车列表-->
+    <request-map uri="getUsedCar">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getUsedCar"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--保存浏览历史记录-->
+    <request-map uri="savePartyBrowse">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="savePartyBrowse"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--根据车型查找二手车-->
+    <request-map uri="getCarByModel">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarByModel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取资讯类型-->
+    <request-map uri="getNewsType">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getNewsType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取资讯列表-->
+    <request-map uri="getNewsList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getNewsList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取资讯列表-->
+    <request-map uri="getNewsDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getNewsDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--根据车系查询车型-->
+    <request-map uri="getCarModel">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarModel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取小保养项目-->
+    <request-map uri="getMaintainInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getMaintainInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取其他保养项目-->
+    <request-map uri="getOtherMaintain">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getOtherMaintain"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取可用时间段-->
+    <request-map uri="getMaintainServiceCharge">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getMaintainServiceCharge"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取社区店类型-->
+    <request-map uri="getCommunityStoreType">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCommunityStoreType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取社区店列表-->
+    <request-map uri="getCommunityStore">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCommunityStore"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取社区店地区-->
+    <request-map uri="getStoreGeo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getStoreGeo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取保险公司-->
+    <request-map uri="getInsuranceBusiness">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getInsuranceBusiness"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取险种列表-->
+    <request-map uri="getInsuranceProduct">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getInsuranceProduct"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取保险预订信息-->
+    <request-map uri="getInsuranceReserveDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getInsuranceReserveDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取维修类型-->
+    <request-map uri="getRepairType">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getRepairType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取维修标签-->
+    <request-map uri="getRepairTag">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getRepairTag"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取轮胎列表-->
+    <request-map uri="getTyreList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getTyreList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取车品商城下的三级分类-->
+    <request-map uri="getCarGoodsCategory">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarGoodsCategory"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取车品商城列表-->
+    <request-map uri="getParetsList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getParetsList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--产品详情-->
+    <request-map uri="getProductDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getProductDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--产品库存-->
+    <request-map uri="getProductInventory">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getProductInventory"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--会员基础数据-->
+    <request-map uri="getPartyBaseInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyBaseInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--会员成长足迹获取接口-->
+    <request-map uri="getPartyGrowthHis">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyGrowthHis"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--积分流水数据获取-->
+    <request-map uri="getPartyScoreHis">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyScoreHis"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--积分流水数据获取-->
+    <request-map uri="getPartyScoreHisPC">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyScoreHisPC"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--会员账户余额信息获取接口-->
+    <request-map uri="getPartyAccount">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyAccount"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--会员账户余额信息获取接口-->
+    <request-map uri="getPartyAccountPC">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyAccountPC"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--充值项获取接口-->
+    <request-map uri="getRecAmount">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getRecAmount"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--支付密码设定-->
+    <request-map uri="setPayPassword">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="setPayPassword"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--赠送积分项获取接口-->
+    <request-map uri="getPointsGift">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPointsGift"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--余额流水获取接口-->
+    <request-map uri="getPartyAcountDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyAcountDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--用户可分享积分数-->
+    <request-map uri="getSharePartyScore">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getSharePartyScore"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--赠送积分接口-->
+    <request-map uri="sharePartyScore">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="sharePartyScore"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+	
+	<!-- 积分赠送规则  begin by ct 2018-5-11-->
+    <request-map uri="findIntegralGiftes">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findIntegralGiftes"/>
+    </request-map>
+    <!-- 积分赠送规则  end by ct 2018-5-11-->
+
+    <!-- 保存或修改积分赠送规则  begin by ct 2018-5-11-->
+    <request-map uri="saveIntegralGift">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="saveOrUpdateGiftes"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 积分赠送规则  end by ct 2018-5-11-->
+
+    <!--查找首次积分赠送信息回显到页面findIntegralNewService By ct 2018 5 11-->
+    <request-map uri="findIntegralNewService">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findIntegralNewService"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+	
+    <!--扣减积分接口-->
+    <request-map uri="subtractPartyScore">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="subtractPartyScore"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--分享记录-->
+    <request-map uri="getScoreShareDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getScoreShareDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--领取积分接口-->
+    <request-map uri="getPartyScore">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyScore"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--车辆收藏-->
+    <request-map uri="getProductCollection">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getProductCollection"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 用户新增接口调用CRM-ICO -->
+    <request-map uri="crmCustomer">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="crmCustomer"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 优惠券新增和发放CRM-ICO -->
+    <request-map uri="createCouponAndGrant">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="createCouponAndGrant"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--个人资料-->
+    <request-map uri="getPersonalInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPersonalInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--用户信息-->
+    <request-map uri="getUserInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getUserInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--上传头像-->
+    <request-map uri="uploadHeadImage">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="addHeadImgForParty"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--PC端修改用户信息-->
+    <request-map uri="editUserInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="editUserInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--修改用户信息-->
+    <request-map uri="updateUserInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="updateUserInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--检验旧手机号-->
+    <request-map uri="checkOldMobile">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="checkOldMobile"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--更换绑定手机-->
+    <request-map uri="bindNewMobile">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="bindNewMobile"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--用户消息类型-->
+    <request-map uri="messageType">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="messageType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--用户消息列表-->
+    <request-map uri="messageList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="messageList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--更新消息-->
+    <request-map uri="updateMessage">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="updateMessage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--账号列表-->
+    <request-map uri="accountList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="accountList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--绑定手机号-->
+    <request-map uri="bindMobile">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="bindMobile"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--修改密码-->
+    <request-map uri="updatePassword">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.securityext.login.LoginEvents" invoke="updatePassword"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--密码找回-->
+    <request-map uri="resetPassword">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="resetPassword"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--解绑手机号-->
+    <request-map uri="unbindMobile">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="unbindMobile"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--省市区数据-->
+    <request-map uri="getGeoList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="findAreaTree"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!--收货地址列表-->
+    <request-map uri="addressList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyPostalAddresses"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--收货地址详情-->
+    <request-map uri="addressDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyPostalAddressesDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--新增或修改收货地址-->
+    <request-map uri="editAddress">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="createOrUpdatePostalAddressAndPurposes"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--删除收货地址-->
+    <request-map uri="deleteAddress">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="deletePostalAddress"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--设置默认收货地址-->
+    <request-map uri="setDefaultAddress">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="savePostalAddressOtherIsDefault"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--优惠券列表-->
+    <request-map uri="getPartyPromoCode">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyPromoCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--可使用优惠券列表-->
+    <request-map uri="getPartyUsePromoCode">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="getPartyUsePromoCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--检验库存-->
+    <request-map uri="validateInventory">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appValidateInventory"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--下单页面数据-->
+    <request-map uri="prepareOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="prepareOrder"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--选择配送时间-->
+    <request-map uri="getDeliveryTime">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="getDeliveryTime"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--选择物流公司，计算运费-->
+    <request-map uri="getLogisticsCompany">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="getLogisticsCompany"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--查找订单-->
+    <request-map uri="findOrderList">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="findAllOrderList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--立即支付-->
+    <request-map uri="payOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.accounting.thirdparty.weixin.WeixinEvents" invoke="appCallWeixin"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--确认收货-->
+    <request-map uri="receiveOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appReceiveOrder"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--订单详情-->
+    <request-map uri="orderDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appOrderDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--再来一单-->
+    <request-map uri="prepareSameOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="prepareSameOrder"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--物流信息-->
+    <request-map uri="logisticsDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appLogisticsDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--申诉问题-->
+    <request-map uri="complainReason">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appComplainReason"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--申诉-->
+    <request-map uri="createComplain">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appCreateComplain"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--上传图片-->
+    <request-map uri="uploadComplainImage">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="addCompalinImgForParty"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--创建回复-->
+    <request-map uri="createReviewReply">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="createReviewReply"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--产品类目-->
+    <request-map uri="getProductLabel">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getProductLabel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--产品列表-->
+    <request-map uri="getProductList">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getProductList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--定制产品标签-->
+    <request-map uri="getSemiProductLabel">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getSemiProductLabel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--定制产品列表-->
+    <request-map uri="getSemiProductList">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getSemiProductList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--计算定制商品单价-->
+    <request-map uri="calculatePrice">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="calculatePrice"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--热门商品名称-->
+    <request-map uri="hotProductName">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="hotProductName"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--黑猫物流查询-->
+    <request-map uri="getLogistics">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="getLogisticsInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- begin add by GSS会员主数据 创建地址at 2016-4-7  -->
+    <request-map uri="findUserloginIdById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findUserloginIdById"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!-- 会员密码修改 add by GSS 2016.04.15  -->
+    <request-map uri="UpdatePasswordForParty">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="updatePassword"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="weixinOrder">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="weixinOrder"/>
+    </request-map>
+    <view-map name="weixinOrder" type="ftl" page="component://party/webapp/membermgr/member/weixinOrder.ftl"/>
+    <!-- end of request mappings -->
+    <request-map uri="getConfig">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getWeixinConfig"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--我的爱车获取接口-->
+    <request-map uri="getPartyFavoriteCarList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getPartyFavoriteCarList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--我的爱车新增接口-->
+    <request-map uri="createPartyFavoriteCar">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="createPartyFavoriteCar"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--我的爱车更新信息接口-->
+    <request-map uri="updatePartyFavoriteCar">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="updatePartyFavoriteCar"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--我的爱车更新车型接口-->
+    <request-map uri="updateFavoriteCar">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="updateFavoriteCar"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--我的爱车删除接口-->
+    <request-map uri="deletePartyFavoriteCar">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="deletePartyFavoriteCar"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--我的爱车 修改默认车辆接口-->
+    <request-map uri="setDefaultFavoriteCar">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="setDefaultFavoriteCar"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--我的反馈 创建接口 base64-->
+    <request-map uri="createFeedback">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="createFeedback"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--我的反馈 创建接口 Form-->
+    <request-map uri="appCreateFeedback">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appCreateFeedback"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--我的反馈列表接口-->
+    <request-map uri="getFeedBackList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getFeedBackList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--我的订单列表接口-->
+    <request-map uri="getMyOrderList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getMyOrderList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--我的订单列表接口-->
+    <request-map uri="getMyOrderDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getMyOrderDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--PC端订单列表接口-->
+    <request-map uri="getOrderList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getOrderList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--PC端订单数量接口-->
+    <request-map uri="getOrderNum">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getOrderNum"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取评价标签-->
+    <request-map uri="getReviewLabel">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getReviewLabel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--评价 base64-->
+    <request-map uri="createReview">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="createReview"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--评价 Form-->
+    <request-map uri="appCreateReview">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appCreateReview"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--取消订单原因-->
+    <request-map uri="getCancelType">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCancelType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--取消订单-->
+    <request-map uri="cancelOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="appCancelOrder"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取保养服务列表-->
+    <request-map uri="getMaintainType">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getMaintainType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取保养计划-->
+    <request-map uri="getMaintainReference">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getMaintainReference"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--购物车-->
+    <request-map uri="shoppingCart">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="getShoppingCart"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--加入购物车-->
+    <request-map uri="addToCart">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="appAddToCart"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--更新购物车-->
+    <request-map uri="updateToCart">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="appUpdateToCart"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--从购物车删除-->
+    <request-map uri="removeFromCart">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="appRemoveFromCart"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--活动详情获取-->
+    <request-map uri="getActivityManager">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getActivityManager"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--关于我们-->
+    <request-map uri="getIntroduce">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getIntroduce"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取帮助分类-->
+    <request-map uri="getHelpCategory">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getHelpCategory"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取帮助信息-->
+    <request-map uri="getHelpInfo">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getHelpInfo"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--PC端获取帮助信息-->
+    <request-map uri="getHelpInfoList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getHelpInfoList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取预约列表-->
+    <request-map uri="getReserveList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getReserveList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取预约单数量-->
+    <request-map uri="getReserveNum">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getReserveNum"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--预约维修详情获取接口-->
+    <request-map uri="getReserveRepair">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getReserveRepair"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--取消预约单接口-->
+    <request-map uri="cancelReserveOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="cancelReserveOrder"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取退款原因-->
+    <request-map uri="getReturnType">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getReturnType"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--申请退款-->
+    <request-map uri="applyReturn">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="applyReturn"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--退款单列表-->
+    <request-map uri="getReturnList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getReturnList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取楼层信息-->
+    <request-map uri="getFloorList">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getFloorList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--PC端获取车型库条件-->
+    <request-map uri="getCarConditionPC">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarConditionPC"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--PC端根据车型库条件查询新车、平行进口车-->
+    <request-map uri="getCarByConditionPC">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getCarByConditionPC"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--PC端根据车型库条件查询二手车-->
+    <request-map uri="getUsedCarByConditionPC">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getUsedCarByConditionPC"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取系统时间-->
+    <request-map uri="getSystemTime">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getSystemTime"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取客服电话-->
+    <request-map uri="getServiceTel">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getServiceTel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--积分兑换数量-->
+    <request-map uri="getScoreOrderNum">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getScoreOrderNum"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--积分规则-->
+    <request-map uri="getIntegralContent">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getIntegralContent"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--升级规则-->
+    <request-map uri="getLevelContent">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="getLevelContent"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--PC端验证支付密码-->
+    <request-map uri="checkPayPassword">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="checkPayPassword"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--获取推荐餐厅-->
+    <request-map uri="getRecommendRecreation">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getRecommendRecreation"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--移动端获取餐厅列表-->
+    <request-map uri="getRecreationList">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getRecreationList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--PC端获取餐饮分类-->
+    <request-map uri="getRepastGoodsCategory">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getRepastGoodsCategory"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--PC端获取餐厅列表-->
+    <request-map uri="getRecreationListPC">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getRecreationListPC"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--餐厅详情-->
+    <request-map uri="recreationDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="recreationDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!--获取可预订时间-->
+    <request-map uri="getReserveTime">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getReserveTime"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--获取使用积分上限-->
+    <request-map uri="getIntegralUpperLimit">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getIntegralUpperLimit"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--获取推荐休闲-->
+    <request-map uri="getRecommendLeisure">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getRecommendLeisure"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--移动端获取休闲列表-->
+    <request-map uri="getLeisureList">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getLeisureList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--PC端获取休闲分类-->
+    <request-map uri="getAmusementGoodsCategory">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getAmusementGoodsCategory"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--PC端获取休闲列表-->
+    <request-map uri="getLeisureListPC">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getLeisureListPC"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--休闲详情-->
+    <request-map uri="leisureDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="leisureDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--获取房型列表-->
+    <request-map uri="getHotelList">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="getHotelList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--酒店详情-->
+    <request-map uri="hotelDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductEvents" invoke="hotelDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--获取充值单号-->
+    <request-map uri="createRechargeDetail">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberEvents" invoke="createRechargeDetail"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--QQ授权登录 -->
+    <request-map uri="QQRegister">
+        <security auth="true" https="true"/>
+        <event type="java" path="com.qihua.ofbiz.qq.QQEvents" invoke="QQRegister"/>
+        <response name="success" type="none"/>
+        <response name="error" type="request" value="main"/>
+    </request-map>
+    <!--QQ授权登录 回调-->
+    <request-map uri="afterQQLogin">
+        <security auth="true" https="true"/>
+        <event type="java" path="com.qihua.ofbiz.qq.QQEvents" invoke="afterQQLogin"/>
+        <response name="success" type="none"/>
+        <response name="error" type="none"/>
+    </request-map>
+    <!--weibo授权登录 回调-->
+    <request-map uri="WeiboRegisters">
+        <security auth="true" https="true"/>
+        <event type="java" path="com.qihua.ofbiz.weibo.WeiBoEvents" invoke="WeiboRegister"/>
+        <response name="success" type="none"/>
+        <response name="error" type="request" value="main"/>
+    </request-map>
+
+    <!--weibo授权登录 回调-->
+    <request-map uri="afterWeiboLogin">
+        <security auth="true" https="true"/>
+        <event type="java" path="com.qihua.ofbiz.weibo.WeiBoEvents" invoke="afterWeiboLogin"/>
+        <response name="success" type="none"/>
+        <response name="error" type="none"/>
+    </request-map>
+
+    <!--获取付款二维码-->
+    <request-map uri="getQrCode">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.pay.GetQrCode" invoke="getQrCode"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--检查付款状态-->
+    <request-map uri="longConnectionCheck">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.pay.LongConnectionCheck" invoke="longConnectionCheck"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!--扫码付款-->
+    <request-map uri="scanPay">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="scanPay"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- begin add by wcy 365car Sync CRM -->
+    <request-map uri="syncCrm27">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addUserCrm27"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm28">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="modifyUserCrm28"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="syncCrm29">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.party.common.PartyInfo2CrmServices" invoke="addCustRoleCrm29"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm30">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.party.common.PartyInfo2CrmServices" invoke="modifyRoleCrm30"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm31">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getBrandMenuLisCrm31"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm32">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="saveRolePermissionCrm3233"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm34">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getMenuIdsByRoleIdCrm34"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm3637">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="sycnCustomerMoneyCrm3637"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm05">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addRightsToMemberCrm05"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm06">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="searchCustRightsCrm06"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm07">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="expendRightsCrm07"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm10">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="receiveCouponsCrm10"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <request-map uri="syncCrm11">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="consumeCardCrm11"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="exportMember">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.member.MemberExcelServices" invoke="exportMember"/>
+        <response name="success" type="none"/>
+    </request-map>
+
+    <!-- end add by wcy 365car -->
+    <!-- View Mappings -->
+    <!-- begin add by Wcy 会员列表 at 2016.01.06 -->
+    <view-map name="findmember" type="screen" page="component://party/widget/membermgr/MemberScreens.xml#findmember"/>
+    <view-map name="testlogin" type="ftl" page="component://party/webapp/membermgr/member/testlogin.ftl"/>
+    <!-- end add by Wcy 会员列表 at 2016.01.06 -->
+
+    <!-- begin add by Wcy 查看会员详情 at 2016.01.09 -->
+    <view-map name="memberDetail" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#memberDetail"/>
+    <!-- end add by Wcy 查看会员详情 at 2016.01.09 -->
+
+    <!-- begin add by Gss 消费积分规则  2016.01.20-->
+    <view-map name="consumeIntegralSet" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#consumeIntegralSet"/>
+    <!-- end add by Gss 消费积分规则  2016.01.20-->
+
+    <!-- begin add by Gss 会员等级规则  2016.01.20-->
+    <view-map name="partyLevelTypeSet" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#partyLevelTypeSet"/>
+    <view-map name="partyCompanyLevelTypeSet" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#partyCompanyLevelTypeSet"/>
+    <!-- end add by Gss 会员等级规则  2016.01.20-->
+    <!-- 跳转人员查询弹出框页面 add by qianjin 2016.01.26 -->
+    <view-map name="personListModalPage" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#personListModalPage"/>
+    <view-map name="personListModalPage1" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#personListModalPage1"/>
+
+    <!-- begin add by Gss 积分使用规则  2016.01.26-->
+    <view-map name="partyIntegralSet" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#partyIntegralSet"/>
+    <!-- end add by Gss 积分使用规则  2016.01.26-->
+
+    <view-map name="editcontactmechforcustomer" type="screen"
+              page="component://party/widget/partymgr/PartyScreens.xml#editcontactmechforcustomer"/>
+
+    <!-- begin add by Gss 会员消费查询  2016.3.30-->
+    <view-map name="partyConsumption" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#partyConsumption"/>
+    <!-- end add by Gss 会员消费查询  2016.3.30-->
+
+    <!-- begin add by Gss 会员主数据  2016.4.5-->
+    <view-map name="partyMasterManage" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#partyMasterManage"/>
+    <!-- end add by Gss 会员主数据  2016.4.5-->
+
+    <!-- begin add by Gss 会员主数据  2016.4.5-->
+    <view-map name="memberAdd" type="screen" page="component://party/widget/membermgr/MemberScreens.xml#memberAdd"/>
+    <!-- end add by Gss 会员主数据  2016.4.5-->
+
+    <!-- begin add by Gss 会员主数据会员详情  2016.4.6-->
+    <view-map name="member_Details" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#member_Details"/>
+    <!-- end add by Gss 会员主数据会员详情  2016.4.6-->
+
+    <!-- begin add by Gss 会员主数据会员编辑  2016.4.7-->
+    <view-map name="memberEdit" type="screen" page="component://party/widget/membermgr/MemberScreens.xml#memberEdit"/>
+    <!-- end add by Gss 会员主数据会员编辑  2016.4.7-->
+    <!-- begin add by Gss 会员主数据优惠券  2016.4.7-->
+    <view-map name="productPromoCodeParty" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#productPromoCodeParty"/>
+    <!-- end add by Gss 会员主数据优惠券 2016.4.7-->
+    <!-- begin add by Gss 定制果汁  2016.4.7-->
+    <view-map name="CustomJuice" type="screen" page="component://party/widget/membermgr/MemberScreens.xml#CustomJuice"/>
+    <!-- end add by Gss定制果汁  2016.4.7-->
+	
+	<!-- begin add by ct 积分赠送规则  2018-5-11-->
+    <view-map name="findIntegralGiftes" type="screen"
+              page="component://party/widget/membermgr/MemberScreens.xml#findIntegralGiftes"/>
+    <!-- end add by ct 积分赠送规则  2018-5-11-->
+
+    <!-- CRM_01 -->
+    <request-map uri="syncCRM19">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.party.common.PartyInfo2CrmServices" invoke="addOrderInfoCrm19"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- CRM_02 -->
+    <request-map uri="syncCRM02">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.party.common.PartyInfo2CrmServices" invoke="updateCustInfoCrm02"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="ico">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ico"/>
+    </request-map>
+    <view-map name="ico" type="ftl" page="component://party/webapp/membermgr/member/ico.ftl"/>
+	
+	
+	
+	
+</site-conf>

@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+    <include location="component://common/webcommon/WEB-INF/security-controller.xml"/>
+    <include location="component://commonext/webapp/WEB-INF/controller.xml"/>
+    <include location="component://content/webapp/content/WEB-INF/controller.xml"/>
+    <description>Member Manager Module Site Configuration File</description>
+    
+    <handler name="service-multi" type="request" class="org.ofbiz.webapp.event.ServiceMultiEventHandler"/>
+    <handler name="simplecontent" type="view" class="org.ofbiz.content.view.SimpleContentViewHandler"/>
+    
+    
+    <!-- 商家列表页面 add by qianjin at 2016.01.25 -->
+    <request-map uri="businessList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessList"/>
+    </request-map>
+
+
+    <!-- 待审核商家列表 -->
+    <request-map uri="businessToAuditList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessToAuditList"/>
+    </request-map>
+
+    <!-- 商品品牌列表 add by cc 2018.03.22-->
+    <request-map uri="businessBrandList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessBrandList"/>
+    </request-map>
+
+    <!-- 商品品牌授权 add by cc 2018.03.22 -->
+    <request-map uri="businessBrandAuthorize">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessBrandAuthorize"/>
+    </request-map>
+
+    <!-- 品牌审核 add by cc 2018.5.15 -->
+    <request-map uri="businessBrandReview">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessBrandReview"/>
+    </request-map>
+
+    <!-- 授权操作 add by cc 2018.03.30 begin -->
+    <request-map uri="authorizeProductBrandByIds">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.product.product.ProductBrandServices" invoke="authorizeProductBrandByIds"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 授权操作 add by cc 2018.03.30 end -->
+
+    <!-- 商家品牌新增 add by cc 20180327 -->
+    <request-map uri="createProductBrands">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="createProductBrand"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+        <!--<response name="success" type="request-redirect" value="businessBrandAuthorize"/>-->
+        <!--<response name="error" type="request" value="json"/>-->
+    </request-map>
+
+    <!-- 商品品牌自定义授权 -->
+    <request-map uri="brandsAdd">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="brandsAdd"/>
+    </request-map>
+
+    <!-- 根据productBrandId查看品牌 -->
+    <request-map uri="findProductBrandById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findProductBrandById"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 商家端 根据productBrandId查看品牌 -->
+    <request-map uri="findPartyProductBrandById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findPartyProductBrandById"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 查看品牌 -->
+    <request-map uri="findProductBrands">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findProductBrands"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 查看品牌 模糊查询 -->
+    <request-map uri="findProductBrands">
+        <security https="true" auth="true"/>
+        <!--<event type="service" invoke="findUser"/>-->
+        <response name="success" type="view" value="brandList"/>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+
+    <!-- 查看品牌审核原因 -->
+    <request-map uri="findBrandAuditMessage">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="findBrandAuditMessage"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 审核品牌 -->
+    <request-map uri="auditProductBrand">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="auditProductBrand"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <!-- 品牌审核 删除品牌 -->
+    <request-map uri="deleteProductBrand">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="deleteBrand"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+    <!-- 商家端 品牌列表查看 -->
+    <request-map uri="findPartyBusinessBrand">
+        <security https="true" auth="true"/>
+        <!--<event type="service" invoke="findUser"/>-->
+        <response name="success" type="view" value="partyBusinessBrandList"/>
+        <response name="error" type="view" value="error"/>
+    </request-map>
+
+    <!-- 商家端查看品牌 根据productBrandId 查看品牌分类-->
+    <request-map uri="getPartyProductBrandCategoryList">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getPartyProductBrandCategoryList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 商家端 根据productBrandId删除品牌 -->
+    <request-map uri="deletePartyProductBrand">
+        <security auth="true" https="true"/>
+        <event type="service" invoke="deletePartyProductBrand"/>
+        <response name="success" type="request" value="json"></response>
+        <response name="error" type="request" value="json"></response>
+    </request-map>
+
+        
+    <!-- 商家新增页面 add by qianjin at 2016.01.25 -->
+    <request-map uri="businessAddPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessAdd"/>
+    </request-map>
+    
+    <!-- 商家新增(Json格式) add by qianjin at 2016.01.25 -->
+    <request-map uri="businessAdd">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="businessAdd"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--获取产品目录的树结构的json数据-->
+    <request-map uri="getCategoryTree">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getCategoryTree"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--商家品牌列表弹出框-->
+    <request-map uri="ProductBrandListMultiModalPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="ProductBrandListMultiModalPage"/>
+    </request-map>
+
+    <!-- 商家修改(Json格式)-->
+    <request-map uri="businessEdit">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="businessEdit"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="commitAudit">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="commitAudit"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--获取商家结算信息-->
+    <request-map uri="getSettleSettingInfo">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getSettleSettingInfo"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+	<!-- 检查该用户是否已是商家(Json格式) add by qianjin at 2016.01.25 -->
+    <request-map uri="checkPartyIsBusiness">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="checkPartyIsBusiness"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 商家列表(Json格式) add by qianjin at 2016.01.25 -->
+    <request-map uri="getBusinessListForJson">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getBusinessList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--获取待审核商家列表-->
+    <request-map uri="getBusinessToAuditListForJson">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getBusinessToAuditListForJson"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 待修改 -->
+    <request-map uri="getProductCategoryList">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getProductCategoryList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 获取商家(当前商家)新增时 商品分类 -->
+    <request-map uri="getPartyProductCategory">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getPartyProductCategoryList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 自定义申请商家品牌时 获取商品分类 -->
+    <request-map uri="getPartyProductCategorys">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getPartyProductCategoryList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 平台根据partyId 查看商品分类 -->
+    <request-map uri="getPartyProductCategoryByPartyId">
+        <security https="true" auth="true"/>
+        <event type="service" path="" invoke="getPartyProductCategoryListByParyId"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 商家 品牌列表查看 -->
+    <request-map uri="getBusinessBrandListForJson">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getBusinessBrandList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 品牌审核 列表展示 add by cc 2018.5.15 查询所有商家提交审核的品牌 -->
+    <request-map uri="getPartyBusinessBrandForReview">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getPartyReviewBrandList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--添加商家时候列出所有的品牌列表-->
+    <request-map uri="getAllBusinessBrandList">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getAllBusinessBrandList"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+	<!-- 商家修改是否启用状态(Json格式) add by qianjin at 2016.01.27 -->
+    <request-map uri="editBusinessIsUse">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="editBusinessIsUse"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+	<!-- 商家详情(Json格式) -->
+    <request-map uri="getBusinessInfoById">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="getBusinessInfoById"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--商家修改回显数据-->
+    <request-map uri="businessEditDetail">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="businessEditDetail"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 商家详情弹出框页面 add by qianjin at 2016.01.27 -->
+    <request-map uri="businessInfoPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessInfoPage"/>
+    </request-map>
+    
+    <!-- 商家修改页面-->
+    <request-map uri="businessEditPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessEditPage"/>
+    </request-map>
+    
+    <!-- 商家审核 add by qianjin at 2016.01.28 -->
+    <request-map uri="businessAudit">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="businessAudit"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--商家审核通过-->
+    <request-map uri="businessAuditPass">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="businessAuditPass"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    <!--商家审核不通过-->
+    <request-map uri="businessAuditNoPass">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="businessAuditNoPass"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+
+    <!--修改结算信息-->
+    <request-map uri="updateBusinessSettle">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="updateBusinessSettle"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 商家拒绝原因(Json格式)	add by qianjin 2016.01.28 -->
+    <request-map uri="businessRefuseReason">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="businessRefuseReason"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 商家导入页面 add by qianjin at 2016.01.29 -->
+    <request-map uri="businessImportPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="businessImportPage"/>
+    </request-map>
+    
+    <!-- 商家导入方法 add by qianjin at 2016.01.29 -->
+    <request-map uri="businessImport">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.business.BusinessServices" invoke="businessImport" />
+        <response name="success" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 商家密码修改 add by qianjin 2016.02.29  -->
+    <request-map uri="UpdatePasswordForBusiness">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="updatePassword"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--上传文件-->
+    <request-map uri="uploadPartyContent">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="uploadPartyContentFile"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="uploadPartyContentJava">
+        <security https="true" auth="true"/>
+        <event type="java" path="com.qihua.ofbiz.business.BusinessCommonServices" invoke="uploadPartyContentJava" />
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!--商家品牌审核-->
+    <request-map uri="brandAuth">
+        <security https="false" auth="false"/>
+        <event type="service" invoke="brandAuth"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 商家列表 add by qianjin  at 2016.01.25 -->
+    <view-map name="businessList" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessList"/>
+    <!--待审核商家列表-->
+    <view-map name="businessToAuditList" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessToAuditList"/>
+
+    <!-- 商家新增  add by qianjin at 2016.01.25 -->
+    <view-map name="businessAdd" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessAddPage"/>
+    <!-- 商家详情弹出框页面 add by qianjin at 2016.01.27 -->
+    <view-map name="businessInfoPage" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessInfoPage"/>
+    <!-- 商家修改页面 add by qianjin at 2016.01.28 -->
+    <view-map name="businessEditPage" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessEditPage"/>
+    <!-- 商家导入页面 add by qianjin at 2016.01.29 -->
+    <view-map name="businessImportPage" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessImportPage"/>
+
+    <!-- 商品品牌列表 add  by cc 2018/3/22-->
+    <view-map name="businessBrandList" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessBrandList"/>
+
+    <!-- 查看商家品牌 -->
+    <view-map name="partyBusinessBrandList" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#partyBusinessBrandList"/>
+
+    <!-- 商品品牌授权 add by cc 2018.03.22-->
+    <view-map name="businessBrandAuthorize" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessBrandAuthorize"/>
+
+    <!-- 商品品牌自定义授权 -->
+    <view-map name="brandsAdd" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#brandsAdd"/>
+
+    <!-- 品牌审核 -->
+    <view-map name="businessBrandReview" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#businessBrandReview"/>
+
+    <!-- 查询品牌 -->
+    <view-map name="brandList" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#brandList"/>
+
+
+    <!-- 跳转商品品牌复选弹出框页面 add by nf 2018/03/21 -->
+    <view-map name="ProductBrandListMultiModalPage" type="screen" page="component://party/widget/businessmgr/BusinessScreens.xml#ProductBrandListMultiModalPage"/>
+
+
+</site-conf>

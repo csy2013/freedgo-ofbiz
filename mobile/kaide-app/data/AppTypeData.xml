@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+    <OrderAdjustmentType description="凯德积分兑换金额" hasTable="N" orderAdjustmentTypeId="INTEGRAL_ADJUESTMENT"  parentTypeId=""/>
+    <OrderAdjustmentType description="优惠劵兑换金额" hasTable="N" orderAdjustmentTypeId="COUPON_ADJUESTMENT"  parentTypeId=""/>
+</entity-engine-xml>

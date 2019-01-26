@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<site-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/site-conf.xsd">
+    <include location="component://common/webcommon/WEB-INF/common-controller.xml"/>
+    <include location="component://common/webcommon/WEB-INF/security-controller.xml"/>
+    <include location="component://commonext/webapp/WEB-INF/controller.xml"/>
+    <include location="component://content/webapp/content/WEB-INF/controller.xml"/>
+    <description>Member Manager Module Site Configuration File</description>
+    
+    <handler name="service-multi" type="request" class="org.ofbiz.webapp.event.ServiceMultiEventHandler"/>
+    <handler name="simplecontent" type="view" class="org.ofbiz.content.view.SimpleContentViewHandler"/>
+    
+    
+    <!-- 咨询列表页面 add by AlexYao at 2016.03.30 -->
+    <request-map uri="consultList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="consultList"/>
+    </request-map>
+
+    <request-map uri="consultListJson">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="findConsult"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="editConsultIsShow">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="editConsultIsShow"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="replyConsult">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="replyConsult"/>
+        <response name="success" type="request" value="consultList"/>
+    </request-map>
+
+    <!-- 反馈列表页面 add by AlexYao at 2016.04.01 -->
+    <request-map uri="feedbackList">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="feedbackList"/>
+    </request-map>
+
+    <request-map uri="feedbackListJson">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="findFeedback"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="replyFeedback">
+        <security https="true" auth="true"/>
+        <event type="service"  invoke="replyFeedback"/>
+        <response name="success" type="request" value="feedbackList"/>
+    </request-map>
+
+    <!-- 申诉单查询页面 add by dong xiao at 2016.4.27 -->
+    <request-map uri="complain">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="complain"/>
+    </request-map>
+
+    <request-map uri="operateComplain">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="operateComplain"/>
+    </request-map>
+
+    <request-map uri="getOrderProduct">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderEvents" invoke="getOrderProduct"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="createComplain">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="createComplain"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="updateComplain">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="updateComplain"/>
+        <response name="success" type="request-redirect" value="complain"/>
+    </request-map>
+
+    <request-map uri="getOrderPostalAddress">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderLookupServices" invoke="getOrderPostalAddress"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <!-- 创建补货订单 add by dongxiao 2016.5.4 -->
+    <request-map uri="getAssociatedStateList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getAssociatedStateList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="addBHOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="addBHOrder"/>
+        <response name="success" type="request" value="salesFinalizeOrder"/>
+    </request-map>
+
+    <!-- 订单商品评价 -->
+    <request-map uri="getProductReviewImages">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="getProductReviewImages"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="changeIsShow">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="changeIsShow"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="changeReplyIsShow">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="changeReplyIsShow"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <!-- 批量显示或屏蔽订单评论 -->
+    <request-map uri="batchShowOrHidden">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="batchShowOrHidden"/>
+        <response name="success" type="view" value="findcomment"/>
+        <response name="error" type="request" value="findcomment"/>
+    </request-map>
+    <request-map uri="replyList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="replyList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="likeList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="likeList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="hateList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="hateList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    <request-map uri="updateOrderComment">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="updateOrderComment"/>
+        <response name="success" type="view" value="findcomment"/>
+        <response name="error" type="request" value="findcomment"/>
+    </request-map>
+    
+    <!-- 补货订单的库存校验方法 add by qianjin 2016.05.30 -->
+    <request-map uri="checkInventoryForBHOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.CheckOutEvents" invoke="checkInventoryForBHOrder"/>
+        <response name="success" type="request" value="json"/>
+    </request-map>
+
+    <!-- 检查有效订单 -->
+    <request-map uri="checkValidOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.CheckOutEvents" invoke="checkValidOrder"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+
+    <request-map uri="salesFinalizeOrder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.CheckOutEvents" invoke="salesFinalizeOrderEntry"/>
+        <response name="replenishment" type="request" value="processorder"/>
+    </request-map>
+
+    <request-map uri="processorder">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.CheckOutEvents" invoke="createOrder"/>
+        <response name="success" type="request" value="clearcart"/>
+    </request-map>
+
+    <request-map uri="clearcart">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.shoppingcart.ShoppingCartEvents" invoke="destroyCart"/>
+        <response name="success" type="request" value="complain"/>
+        <response name="error" type="view" value="complain"/>
+    </request-map>
+
+    <request-map uri="createRefund">
+        <security https="true" auth="true"/>
+        <event type="java" path="org.ofbiz.order.order.OrderServices" invoke="createRefund"/>
+        <response name="success" type="request" value="complain"/>
+        <response name="error" type="view" value="complain"/>
+    </request-map>
+    
+    <!-- 评价标签页面  add by qianjin 2016.06.06-->
+    <request-map uri="reviewLabelListPage">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="reviewLabelListPage"/>
+        <response name="error" type="view" value="reviewLabelListPage"/>
+    </request-map>
+    
+    <!-- 查询评价标签列表 add by qianjin 2016.06.06 -->
+    <request-map uri="getReviewLabelList">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getReviewLabelList"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 新增评价标签 add by qianjin 2016.06.06 -->
+    <request-map uri="addReviewLabel">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="addReviewLabel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 修改评价标签 add by qianjin 2016.06.06 -->
+    <request-map uri="editReviewLabel">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="editReviewLabel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 获取标签评价表新的主键ID add by qianjin 2016.06.06 -->
+    <request-map uri="getReviewLabelNextSeqId">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getReviewLabelNextSeqId"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 根据ID获取评价标签ID add by qianjin 2016.06.06 -->
+    <request-map uri="getReviewLabelById">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="getReviewLabelById"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 修改评价标签启用状态 add by qianjin 2016.06.06 -->
+    <request-map uri="editReviewLabelIsUse">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="editReviewLabelIsUse"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 根据ID删除评价标签,可批量删除 add by qianjin 2016.06.06 -->
+    <request-map uri="delReviewLabel">
+        <security https="true" auth="true"/>
+        <event type="service" invoke="delReviewLabel"/>
+        <response name="success" type="request" value="json"/>
+        <response name="error" type="request" value="json"/>
+    </request-map>
+    
+    <!-- 商品评价页面 add by qianjin 2016.06.06 -->
+    <request-map uri="findcomment">
+        <security https="true" auth="true"/>
+        <response name="success" type="view" value="findcomment"/>
+        <response name="error" type="request" value="findcomment"/>
+    </request-map>
+
+    <request-map uri="getProductCategoryLists">
+        <security https="true" auth="true" />
+        <event type="service" invoke="getProductCategoryLists" />
+        <response name="success" type="request" value="json" />
+        <response name="error" type="request" value="json" />
+    </request-map>
+
+
+    
+    <!-- 咨询列表页面 add by AlexYao at 2016.03.30 -->
+    <view-map name="consultList" type="screen" page="component://content/widget/customermgr/CustomerScreens.xml#consultList"/>
+    <!-- 反馈列表页面 add by AlexYao at 2016.04.01 -->
+    <view-map name="feedbackList" type="screen" page="component://content/widget/customermgr/CustomerScreens.xml#feedbackList"/>
+    <view-map name="complain" type="screen" page="component://content/widget/customermgr/CustomerScreens.xml#complain"/>
+    <view-map name="operateComplain" type="screen" page="component://content/widget/customermgr/CustomerScreens.xml#operateComplain"/>
+	<!-- 评价标签页面  add by qianjin 2016.06.06-->
+	<view-map name="reviewLabelListPage" type="screen" page="component://content/widget/customermgr/CustomerScreens.xml#reviewLabelListPage"/>
+	<!-- 商品评价页面 add by qianjin 2016.06.06 -->
+	<view-map name="findcomment" type="screen" page="component://order/widget/ordermgr/OrderViewScreens.xml#findcomment"/>
+
+
+
+</site-conf>

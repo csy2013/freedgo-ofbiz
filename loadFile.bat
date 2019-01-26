@@ -1,0 +1,1 @@
+java  -Xms128M -Xmx384M -jar ./framework/ofbiz.jar install delegator=default file=mobile/kaide-app/data/KdProductContentData.xml

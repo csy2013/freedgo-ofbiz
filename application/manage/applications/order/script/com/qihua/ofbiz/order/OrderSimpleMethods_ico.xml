@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<simple-methods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/simple-methods-v2.xsd">
+    <!-- Add by Wcy 获取订单信息列表 at 2016.01.11 -->
+    <simple-method method-name="userOrderList" short-description="Get order List by a userloginId"
+                   login-required="false">
+        <!-- 赋值 -->
+        <set from-field="parameters.userLoginId" field="userLoginId" />
+        <set from-field="parameters.type" field="type"/>
+        <set from-field="parameters.viewIndex" field="viewIndex"/>
+        <set from-field="parameters.viewSize" field="viewSize"/>
+        <!-- 登录账号提示不能为空 -->
+        <if-empty field="userLoginId">
+            <add-error>
+                <fail-property resource="OrderErrorUiLabels" property="UserLoginIdRequired"/>
+            </add-error>
+        </if-empty>
+        <!-- 查询状态不能为空 -->
+        <if-empty field="type">
+            <add-error>
+                <fail-property resource="OrderErrorUiLabels" property="OrderStatusRequired"/>
+            </add-error>
+        </if-empty>
+
+        <if>
+            <!-- 全部 -->
+            <condition>
+                  <if-compare field="type" value="0" type="String" operator="equals"/>
+            </condition>
+            <then>
+                <set-service-fields service-name="findAllOrderList" map="parameters" to-map="condition"/>
+                <call-service service-name="findAllOrderList" in-map-name="condition">
+                    <result-to-result result-name="resultData"/>
+                </call-service>
+            </then>
+            <else-if>
+                <!-- 待使用 -->
+                <condition>
+                    <if-compare field="type" value="1" type="String" operator="equals"/>
+                </condition>
+                <then>
+                    <set-service-fields service-name="findUnUsedVirtualList" map="parameters" to-map="condition"/>
+                    <call-service service-name="findUnUsedVirtualList" in-map-name="condition">
+                        <result-to-result result-name="resultData"/>
+                    </call-service>
+                </then>
+            </else-if>
+            <else-if>
+                <!-- 待收货 -->
+                <condition>
+                    <if-compare field="type" value="2" type="String" operator="equals"/>
+                </condition>
+                <then>
+                    <set-service-fields service-name="findDealGoodsList" map="parameters" to-map="condition"/>
+                    <call-service service-name="findDealGoodsList" in-map-name="condition">
+                        <result-to-result result-name="resultData"/>
+                    </call-service>
+                </then>
+            </else-if>
+            <else-if>
+                <!-- 待评价 -->
+                <condition>
+                    <if-compare field="type" value="3" type="String" operator="equals"/>
+                </condition>
+                <then>
+                    <set-service-fields service-name="findUnReviewList" map="parameters" to-map="condition"/>
+                    <call-service service-name="findUnReviewList" in-map-name="condition">
+                        <result-to-result result-name="resultData"/>
+                    </call-service>
+                </then>
+            </else-if>
+            <else-if>
+                <!-- 售后/退款 -->
+                <condition>
+                    <if-compare field="type" value="4" type="String" operator="equals"/>
+                </condition>
+                <then>
+                    <set-service-fields service-name="findAfterSalesList" map="parameters" to-map="condition"/>
+                    <call-service service-name="findAfterSalesList" in-map-name="condition">
+                        <result-to-result result-name="resultData"/>
+                    </call-service>
+                </then>
+            </else-if>
+        </if>
+    </simple-method>
+    <!-- end by Wcy 获取订单信息列表 at 2016.01.11 -->
+
+    <!--&lt;!&ndash; begin by Wcy 个人中心 at 2016.01.11 &ndash;&gt;-->
+    <!--<simple-method method-name="userCenter" short-description="userCenter">-->
+        <!--&lt;!&ndash; 赋值 &ndash;&gt;-->
+        <!--<set from-field="parameters.userLoginId" field="userLoginId"/>-->
+        <!--<set from-field="parameters.communityId" field="communityId"/>-->
+        <!--<set from-field="parameters.token" field="token"/>-->
+        <!--<set from-field="parameters.page" field="page"/>-->
+        <!--&lt;!&ndash; 登录账号提示不能为空 &ndash;&gt;-->
+        <!--<if-empty field="userLoginId">-->
+            <!--<add-error>-->
+                <!--<fail-property resource="OrderErrorUiLabels" property="UserLoginIdRequired"/>-->
+            <!--</add-error>-->
+        <!--</if-empty>-->
+        <!--&lt;!&ndash; 当前页面不能为空 &ndash;&gt;-->
+        <!--<if-empty field="type">-->
+            <!--<add-error>-->
+                <!--<fail-property resource="OrderErrorUiLabels" property="CurrentPageRequired"/>-->
+            <!--</add-error>-->
+        <!--</if-empty>-->
+        <!--<if>-->
+            <!--&lt;!&ndash; 获取用户订单信息 &ndash;&gt;-->
+            <!--<condition>-->
+                <!--<if-compare field="page" value="userCenter" type="String" operator="equals"/>-->
+            <!--</condition>-->
+            <!--<then>-->
+                <!--<set-service-fields service-name="userOrderTypeNum" map="parameters" to-map="condition"/>-->
+                <!--<call-service service-name="userOrderTypeNum" in-map-name="condition">-->
+                    <!--<result-to-result result-name="resultData"/>-->
+                    <!--<result-to-result result-name="USERNAME"/>-->
+                    <!--<result-to-result result-name="PASSWORD"/>-->
+                <!--</call-service>-->
+            <!--</then>-->
+            <!--<else-if>-->
+                <!--&lt;!&ndash; 首磁 &ndash;&gt;-->
+                <!--<condition>-->
+                    <!--<if-compare field="page" value="index" type="String" operator="equals"/>-->
+                <!--</condition>-->
+                <!--<then>-->
+                    <!--<set-service-fields service-name="shopMain" map="parameters" to-map="condition"/>-->
+                    <!--<call-service service-name="shopMain" in-map-name="condition">-->
+                        <!--<result-to-result result-name="resultData"/>-->
+                        <!--<result-to-result result-name="USERNAME"/>-->
+                        <!--<result-to-result result-name="PASSWORD"/>-->
+                    <!--</call-service>-->
+                <!--</then>-->
+            <!--</else-if>-->
+
+        <!--</if>-->
+    <!--</simple-method>-->
+    <!--&lt;!&ndash; end by Wcy 个人中心 at 2016.01.11 &ndash;&gt;-->
+    <!-- Add by AlexYao 商家订单信息列表 at 2016.02.27 -->
+    <simple-method method-name="busOrderList" short-description="Get order List by a userloginId"
+                   login-required="false">
+        <!-- 赋值 -->
+        <set from-field="parameters.userLoginId" field="userLoginId" />
+        <set from-field="parameters.type" field="type"/>
+        <set from-field="parameters.viewIndex" field="viewIndex"/>
+        <set from-field="parameters.viewSize" field="viewSize"/>
+        <!-- 登录账号提示不能为空 -->
+        <if-empty field="userLoginId">
+            <add-error>
+                <fail-property resource="OrderErrorUiLabels" property="UserLoginIdRequired"/>
+            </add-error>
+        </if-empty>
+        <!-- 查询状态不能为空 -->
+        <if-empty field="type">
+            <add-error>
+                <fail-property resource="OrderErrorUiLabels" property="OrderStatusRequired"/>
+            </add-error>
+        </if-empty>
+
+        <if>
+            <!-- 待发货 -->
+            <condition>
+                <if-compare field="type" value="0" type="String" operator="equals"/>
+            </condition>
+            <then>
+                <set field="parameters.orderStatus" type="String" value="ORDER_WAITSHIP"/>
+                <set-service-fields service-name="busNotShippedOrder" map="parameters" to-map="condition"/>
+                <call-service service-name="busNotShippedOrder" in-map-name="condition">
+                    <result-to-result result-name="resultData"/>
+                </call-service>
+            </then>
+        <else-if>
+            <!-- 待收货 -->
+            <condition>
+                <if-compare field="type" value="1" type="String" operator="equals"/>
+            </condition>
+            <then>
+                <set field="parameters.orderStatus" type="String" value="ORDER_WAITRECEIVE"/>
+                <set-service-fields service-name="busNotReceivedOrder" map="parameters" to-map="condition"/>
+                <call-service service-name="busNotReceivedOrder" in-map-name="condition">
+                    <result-to-result result-name="resultData"/>
+                </call-service>
+            </then>
+        </else-if>
+        <else-if>
+            <!-- 已完成 -->
+            <condition>
+                <if-compare field="type" value="2" type="String" operator="equals"/>
+            </condition>
+            <then>
+                <set-service-fields service-name="busCompletedOrder" map="parameters" to-map="condition"/>
+                <call-service service-name="busCompletedOrder" in-map-name="condition">
+                    <result-to-result result-name="resultData"/>
+                </call-service>
+            </then>
+        </else-if>
+        <else-if>
+            <!-- 售后/退款 -->
+            <condition>
+                <if-compare field="type" value="3" type="String" operator="equals"/>
+            </condition>
+            <then>
+                <set-service-fields service-name="busRefundedOrder" map="parameters" to-map="condition"/>
+                <call-service service-name="busRefundedOrder" in-map-name="condition">
+                    <result-to-result result-name="resultData"/>
+                </call-service>
+            </then>
+        </else-if>
+        </if>
+    </simple-method>
+
+</simple-methods>

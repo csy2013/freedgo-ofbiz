@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+
+    <!--营销管理-->
+    <SecurityPermission description="营销管理" name="营销管理" permissionId="PRODPROMO_VIEW" parentPermissionId="-1" menuType="A"/>
+
+    <!--团购管理-->
+    <SecurityPermission description="团购" name="团购" permissionId="PRODPROMO_GROUPORDER_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="团购列表" name="团购列表" permissionId="PRODPROMO_GROUPORDER_LIST" parentPermissionId="PRODPROMO_GROUPORDER_VIEW" menuType="A"/>
+    <SecurityPermission description="新增团购" name="新增团购" permissionId="PRODPROMO_GROUPORDER_ADD" parentPermissionId="PRODPROMO_GROUPORDER_VIEW" menuType="A"/>
+    <SecurityPermission description="修改团购" name="修改团购" permissionId="PRODPROMO_GROUPORDER_UPDATE" parentPermissionId="PRODPROMO_GROUPORDER_VIEW" menuType="A"/>
+    <SecurityPermission description="删除团购" name="删除团购" permissionId="PRODPROMO_GROUPORDER_DELETE" parentPermissionId="PRODPROMO_GROUPORDER_VIEW" menuType="A"/>
+    <SecurityPermission description="审批团购" name="审批团购" permissionId="PRODPROMO_GROUPORDER_AUDIT" parentPermissionId="PRODPROMO_GROUPORDER_VIEW" menuType="A"/>
+    <SecurityPermission description="团购详细" name="团购详细" permissionId="PRODPROMO_GROUPORDER_DETAIL" parentPermissionId="PRODPROMO_GROUPORDER_VIEW" menuType="A"/>
+    <!-- 秒杀 -->
+    <SecurityPermission description="秒杀" name="秒杀" permissionId="PRODPROMO_SECKILL_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="秒杀列表" name="秒杀列表" permissionId="PRODPROMO_SECKILL_LIST" parentPermissionId="PRODPROMO_SECKILL_VIEW" menuType="A"/>
+    <SecurityPermission description="新增秒杀" name="新增秒杀" permissionId="PRODPROMO_SECKILL_ADD" parentPermissionId="PRODPROMO_SECKILL_VIEW" menuType="A"/>
+    <SecurityPermission description="修改秒杀" name="修改秒杀" permissionId="PRODPROMO_SECKILL_UPDATE" parentPermissionId="PRODPROMO_SECKILL_VIEW" menuType="A"/>
+    <SecurityPermission description="删除秒杀" name="删除秒杀" permissionId="PRODPROMO_SECKILL_DELETE" parentPermissionId="PRODPROMO_SECKILL_VIEW" menuType="A"/>
+    <SecurityPermission description="审批秒杀" name="审批秒杀" permissionId="PRODPROMO_SECKILL_AUDIT" parentPermissionId="PRODPROMO_SECKILL_VIEW" menuType="A"/>
+    <SecurityPermission description="秒杀详细" name="秒杀详细" permissionId="PRODPROMO_SECKILL_DETAIL" parentPermissionId="PRODPROMO_SECKILL_VIEW" menuType="A"/>
+
+    <!--活动收藏 add by gss 2016/1/29-->
+    <SecurityPermission description="活动收藏" name="活动收藏" permissionId="PRODPROMO_COLLECTION_VIEW" parentPermissionId="PRODPROMO_VIEW"/>
+
+    <!--满减管理-->
+    <SecurityPermission description="满减" name="满减" permissionId="PRODPROMO_REDUCE_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="满减列表" name="满减列表" permissionId="PRODPROMO_REDUCE_LIST" parentPermissionId="PRODPROMO_REDUCE_VIEW" menuType="A"/>
+    <SecurityPermission description="新增满减" name="新增满减" permissionId="PRODPROMO_REDUCE_ADD" parentPermissionId="PRODPROMO_REDUCE_VIEW" menuType="A"/>
+    <SecurityPermission description="修改满减" name="修改满减" permissionId="PRODPROMO_REDUCE_UPDATE" parentPermissionId="PRODPROMO_REDUCE_VIEW" menuType="A"/>
+    <SecurityPermission description="删除满减" name="删除满减" permissionId="PRODPROMO_REDUCE_DELETE" parentPermissionId="PRODPROMO_REDUCE_VIEW" menuType="A"/>
+    <SecurityPermission description="审批满减" name="审批满减" permissionId="PRODPROMO_REDUCE_AUDIT" parentPermissionId="PRODPROMO_REDUCE_VIEW" menuType="A"/>
+    <SecurityPermission description="满减详细" name="满减详细" permissionId="PRODPROMO_REDUCE_DETAIL" parentPermissionId="PRODPROMO_REDUCE_VIEW" menuType="A"/>
+
+    <!-- 折扣管理 -->
+    <SecurityPermission description="折扣" name="折扣" permissionId="PRODPROMO_DISCOUNT_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="折扣列表" name="折扣列表" permissionId="PRODPROMO_DISCOUNT_LIST" parentPermissionId="PRODPROMO_DISCOUNT_VIEW" menuType="A"/>
+    <SecurityPermission description="新增折扣" name="新增折扣" permissionId="PRODPROMO_DISCOUNT_ADD" parentPermissionId="PRODPROMO_DISCOUNT_VIEW" menuType="A"/>
+    <SecurityPermission description="修改折扣" name="修改折扣" permissionId="PRODPROMO_DISCOUNT_UPDATE" parentPermissionId="PRODPROMO_DISCOUNT_VIEW" menuType="A"/>
+    <SecurityPermission description="删除折扣" name="删除折扣" permissionId="PRODPROMO_DISCOUNT_DELETE" parentPermissionId="PRODPROMO_DISCOUNT_VIEW" menuType="A"/>
+    <SecurityPermission description="审批折扣" name="审批折扣" permissionId="PRODPROMO_DISCOUNT_AUDIT" parentPermissionId="PRODPROMO_DISCOUNT_VIEW" menuType="A"/>
+    <SecurityPermission description="折扣详细" name="折扣详细" permissionId="PRODPROMO_DISCOUNT_DETAIL" parentPermissionId="PRODPROMO_DISCOUNT_VIEW" menuType="A"/>
+
+     <!--直降管理-->
+    <SecurityPermission description="直降" name="直降" permissionId="PRODPROMO_SPE_PRICE_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="直降列表" name="直降列表" permissionId="PRODPROMO_SPE_PRICE_LIST" parentPermissionId="PRODPROMO_SPE_PRICE_VIEW" menuType="A"/>
+    <SecurityPermission description="新增直降" name="新增直降" permissionId="PRODPROMO_SPE_PRICE_ADD" parentPermissionId="PRODPROMO_SPE_PRICE_VIEW" menuType="A"/>
+    <SecurityPermission description="修改直降" name="修改直降" permissionId="PRODPROMO_SPE_PRICE_UPDATE" parentPermissionId="PRODPROMO_SPE_PRICE_VIEW" menuType="A"/>
+    <SecurityPermission description="删除直降" name="删除直降" permissionId="PRODPROMO_SPE_PRICE_DELETE" parentPermissionId="PRODPROMO_SPE_PRICE_VIEW" menuType="A"/>
+    <SecurityPermission description="审批直降" name="审批直降" permissionId="PRODPROMO_SPE_PRICE_AUDIT" parentPermissionId="PRODPROMO_SPE_PRICE_VIEW" menuType="A"/>
+    <SecurityPermission description="直降详细" name="直降详细" permissionId="PRODPROMO_SPE_PRICE_DETAIL" parentPermissionId="PRODPROMO_SPE_PRICE_VIEW" menuType="A"/>
+
+    <!-- 包邮 -->
+    <SecurityPermission description="包邮" name="包邮" permissionId="PROMO_FREE_SHIPPING_FEE_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="包邮列表" name="包邮列表" permissionId="PROMO_FREE_SHIPPING_FEE_LIST" parentPermissionId="PROMO_FREE_SHIPPING_FEE_VIEW" menuType="A"/>
+    <SecurityPermission description="新增包邮" name="新增包邮" permissionId="PROMO_FREE_SHIPPING_FEE_ADD" parentPermissionId="PROMO_FREE_SHIPPING_FEE_VIEW" menuType="A"/>
+    <SecurityPermission description="修改包邮" name="修改包邮" permissionId="PROMO_FREE_SHIPPING_FEE_UPDATE" parentPermissionId="PROMO_FREE_SHIPPING_FEE_VIEW" menuType="A"/>
+    <SecurityPermission description="删除包邮" name="删除包邮" permissionId="PROMO_FREE_SHIPPING_FEE_DELETE" parentPermissionId="PROMO_FREE_SHIPPING_FEE_VIEW" menuType="A"/>
+    <SecurityPermission description="审批包邮" name="审批包邮" permissionId="PROMO_FREE_SHIPPING_FEE_AUDIT" parentPermissionId="PROMO_FREE_SHIPPING_FEE_VIEW" menuType="A"/>
+    <SecurityPermission description="包邮详细" name="包邮详细" permissionId="PROMO_FREE_SHIPPING_FEE_DETAIL" parentPermissionId="PROMO_FREE_SHIPPING_FEE_VIEW" menuType="A"/>
+
+    <!--满赠管理-->
+    <SecurityPermission description="满赠" name="满赠" permissionId="PRODPROMO_GIFT_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="满赠列表" name="满赠列表" permissionId="PRODPROMO_GIFT_LIST" parentPermissionId="PRODPROMO_GIFT_VIEW" menuType="A"/>
+    <SecurityPermission description="新增满赠" name="新增满赠" permissionId="PRODPROMO_GIFT_ADD" parentPermissionId="PRODPROMO_GIFT_VIEW" menuType="A"/>
+    <SecurityPermission description="修改满赠" name="修改满赠" permissionId="PRODPROMO_GIFT_UPDATE" parentPermissionId="PRODPROMO_GIFT_VIEW" menuType="A"/>
+    <SecurityPermission description="删除满赠" name="删除满赠" permissionId="PRODPROMO_GIFT_DELETE" parentPermissionId="PRODPROMO_GIFT_VIEW" menuType="A"/>
+    <SecurityPermission description="审批满赠" name="审批满赠" permissionId="PRODPROMO_GIFT_AUDIT" parentPermissionId="PRODPROMO_GIFT_VIEW" menuType="A"/>
+    <SecurityPermission description="满赠详细" name="满赠详细" permissionId="PRODPROMO_GIFT_DETAIL" parentPermissionId="PRODPROMO_GIFT_VIEW" menuType="A"/>
+
+    <!--会员首次促销-->
+    <SecurityPermission description="会员首次促销" name="会员首次促销" permissionId="PRODPROMO_NEWCUST_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="P"/>
+    <SecurityPermission description="会员首次促销列表" name="会员首次促销列表" permissionId="PRODPROMO_NEWCUST_LIST" parentPermissionId="PRODPROMO_NEWCUST_VIEW" menuType="P"/>
+    <SecurityPermission description="新增会员首次促销" name="新增会员首次促销" permissionId="PRODPROMO_NEWCUST_ADD" parentPermissionId="PRODPROMO_NEWCUST_VIEW" menuType="P"/>
+    <SecurityPermission description="修改会员首次促销" name="修改会员首次促销" permissionId="PRODPROMO_NEWCUST_UPDATE" parentPermissionId="PRODPROMO_NEWCUST_VIEW" menuType="P"/>
+    <SecurityPermission description="删除会员首次促销" name="删除会员首次促销" permissionId="PRODPROMO_NEWCUST_DELETE" parentPermissionId="PRODPROMO_NEWCUST_VIEW" menuType="P"/>
+    <SecurityPermission description="审批会员首次促销" name="审批会员首次促销" permissionId="PRODPROMO_NEWCUST_AUDIT" parentPermissionId="PRODPROMO_NEWCUST_VIEW" menuType="P"/>
+    <SecurityPermission description="会员首次促销详细" name="会员首次促销详细" permissionId="PRODPROMO_NEWCUST_DETAIL" parentPermissionId="PRODPROMO_NEWCUST_VIEW" menuType="P"/>
+
+    <!--优惠券管理-->
+    <SecurityPermission description="优惠券管理" name="优惠券管理" permissionId="PRODPROMO_COUPON_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="查看" name="查看" permissionId="PRODPROMO_COUPON_LIST" parentPermissionId="PRODPROMO_COUPON_VIEW" menuType="A"/>
+    <SecurityPermission description="新增" name="新增" permissionId="PRODPROMO_COUPON_ADD" parentPermissionId="PRODPROMO_COUPON_VIEW" menuType="A"/>
+    <SecurityPermission description="修改" name="修改" permissionId="PRODPROMO_COUPON_UPDATE" parentPermissionId="PRODPROMO_COUPON_VIEW" menuType="A"/>
+    <SecurityPermission description="删除" name="删除" permissionId="PRODPROMO_COUPON_DELETE" parentPermissionId="PRODPROMO_COUPON_VIEW" menuType="A"/>
+    <SecurityPermission description="审批" name="审批" permissionId="PRODPROMO_COUPON_AUDIT" parentPermissionId="PRODPROMO_COUPON_VIEW" menuType="A"/>
+
+
+    <!--商品组合管理-->
+    <SecurityPermission description="商品组合" name="商品组合" permissionId="PRODUCT_GROUP_VIEW" parentPermissionId="PRODPROMO_VIEW" menuType="A"/>
+
+    <SecurityPermission description="商品组合列表" name="商品组合列表" permissionId="PRODUCT_GROUP_LIST" parentPermissionId="PRODUCT_GROUP_VIEW" menuType="A"/>
+    <SecurityPermission description="新增商品组合" name="新增商品组合" permissionId="PRODUCT_GROUP_ADD" parentPermissionId="PRODUCT_GROUP_VIEW" menuType="A"/>
+    <SecurityPermission description="修改商品组合" name="修改商品组合" permissionId="PRODUCT_GROUP_UPDATE" parentPermissionId="PRODUCT_GROUP_VIEW" menuType="A"/>
+    <SecurityPermission description="删除商品组合" name="删除商品组合" permissionId="PRODUCT_GROUP_DELETE" parentPermissionId="PRODUCT_GROUP_VIEW" menuType="A"/>
+    <SecurityPermission description="审批商品组合" name="审批商品组合" permissionId="PRODUCT_GROUP_AUDIT" parentPermissionId="PRODUCT_GROUP_VIEW" menuType="A"/>
+    <SecurityPermission description="商品组合详细" name="商品组合详细" permissionId="PRODUCT_GROUP_DETAIL" parentPermissionId="PRODUCT_GROUP_VIEW" menuType="A"/>
+
+
+</entity-engine-xml>

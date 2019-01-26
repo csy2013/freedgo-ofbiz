@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+        <EmailTemplateSetting emailTemplateSettingId="INVENTORY_ITEM_WARN"
+                              bodyScreenLocation="component://systemMgr/widget/systemMgr/EmailSendScreens.xml#inventoryItemWarn"
+                              subject="凯德茂 - 商品库存预警"/>
+
+        <EmailTemplateSetting emailTemplateSettingId="PRODUCT_COUPON_WARN"
+                              bodyScreenLocation="component://systemMgr/widget/systemMgr/EmailSendScreens.xml#productPromoCouponWarn"
+                              subject="凯德茂 - 代金券库存预警"/>
+
+        <EmailTemplateSetting emailTemplateSettingId="CUST_APPLY_RETURN"
+                              bodyScreenLocation="component://systemMgr/widget/systemMgr/EmailSendScreens.xml#custApplyReturnCompleted"
+                              subject="凯德茂 - 退款申请通知"/>
+
+        <EmailTemplateSetting emailTemplateSettingId="PRODUCT_ONLINE_APPLY"
+                              bodyScreenLocation="component://systemMgr/widget/systemMgr/EmailSendScreens.xml#productOnlineApplySuccess"
+                              subject="凯德茂 - 商品上架审核通知"/>
+</entity-engine-xml>

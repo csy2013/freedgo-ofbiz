@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- 跳转赠送列表页面 start  -->
+    <screen name="givePresentList">
+        <section>
+             <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+				 <service service-name="givePresentList" auto-field-map="parameters"/>
+			 </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                	<!-- 面包屑导航 -->
+                	<decorator-section name="pre-body">
+               			<column-container>
+               				<column style="body-title">          
+               					<label>礼品管理</label>
+               					<label style="sub-title">赠送列表</label>
+               				</column>        
+               				<column style="breadcrumb">      
+               					<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+   						       	<link target="" text="礼品管理" style="breadcrumb"/>
+   						       	<link target="" text="赠送列表" style="breadcrumb active"/>
+     						</column>    
+               			</column-container>
+                	</decorator-section>
+                	<!-- body内容 -->
+                    <decorator-section name="body">
+                   		<section>
+							<condition>
+								<if-has-permission permission="GIVEPRESENT_LIST" action="_VIEW" />
+							</condition>
+							<widgets>
+		                        <platform-specific>
+				          			<html>
+				          				<html-template location="component://content/webapp/content/give/findGivePresent.ftl"/>
+										<!--<html-template location="component://content/webapp/content/give/givePresent.ftl"/>-->
+				          			</html>
+				          		</platform-specific>
+				          	</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要赠送列表查看的权限"/>
+							</fail-widgets>
+						</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 跳转赠送列表页面 end  -->
+
+
+
+</screens>

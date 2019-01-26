@@ -1,0 +1,2489 @@
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>管理员列表</title>
+
+    <!-- Bootstrap -->
+    <link href="http://kstore.qianmi.com:80/boss/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://kstore.qianmi.com:80/boss/css/font-awesome.min.css">
+    <link href="http://kstore.qianmi.com:80/boss/iconfont/iconfont.css" rel="stylesheet">
+    <link href="http://kstore.qianmi.com:80/boss/css/summernote.css" rel="stylesheet">
+    <link href="http://kstore.qianmi.com:80/boss/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="http://kstore.qianmi.com:80/boss/css/select2.min.css" rel="stylesheet">
+    <link href="http://kstore.qianmi.com:80/boss/css/style.css" rel="stylesheet">
+    <link href="http://kstore.qianmi.com:80/boss/css/style_new.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- 引用头 -->
+
+
+
+
+
+
+<link rel="stylesheet" href="http://kstore.qianmi.com:80/boss/css/font-awesome.min.css">
+<link href="http://kstore.qianmi.com:80/boss/iconfont/iconfont.css" rel="stylesheet">
+<style>
+    .ctrl_nav li>a>i {
+        margin:0 auto 10px;
+    }
+    .modal-dialog{
+        margin:90px auto;
+    }
+    .modal-article {padding: 0 10px; height: 400px; overflow-y: scroll;}
+    .modal-article p {line-height: 180%; font-size: 16px; position: relative; padding-left: 50px;}
+    .modal-article p em {font-style: normal; position: absolute; top: 0; left: 0;}
+    .modal-article img {display: block; width: 100%; margin: 10px auto 20px;}
+    h1 {
+        font-size: 18px;
+        font-weight: normal;
+    }
+    .shop-guide-wrapper {
+        width: 780px;
+        margin: 0 auto;
+    }
+    .shop-guide-wrapper .mtitle, .shop-guide-wrapper .mbody {
+        border: 1px solid #ECECEC;
+    }
+    .shop-guide-wrapper .mtitle {
+        height: 85px;
+        background-color: #F8F8F8;
+        text-align: center;
+        border-radius: 5px 5px 0 0;
+        box-shadow: inset 0 0 10px #ECECEC;
+    }
+    .shop-guide-wrapper .mbody {
+        height: 332px;
+        border-top: 0;
+        border-radius: 0 0 5px 5px;
+        position: relative;
+    }
+
+    .shop-guide-wrapper .stepInsts {
+        width: 770px;
+        padding-top: 18px;
+        margin: 0 auto;
+    }
+    .shop-guide-wrapper .stepInsts .stepShow {
+        height: 25px;
+        background-image: url(images/guide-step-sprite.png);
+        background-repeat: no-repeat;
+    }
+    .shop-guide-wrapper .stepInsts ul {
+        *zoom: 1;
+        margin-left:97px;
+    }
+    .shop-guide-wrapper .stepInsts ul:before, .shop-guide-wrapper .stepInsts ul:after {
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+    .shop-guide-wrapper .stepInsts ul:after {
+        clear: both;
+    }
+    .shop-guide-wrapper .stepInsts ul li {
+        width: 96px;
+        height: 18px;
+        padding: 9px 0;
+        font-size: 14px;
+        color: #68676C;
+        line-height: 18px;
+        text-align: center;
+        float: left;
+    }
+    .shop-guide-wrapper .stepInsts ul li.past {
+        color: #333;
+    }
+    .shop-guide-wrapper .stepInsts ul li.finish {
+        color: #C00;
+    }
+    .shop-guide-wrapper .step-0 .stepShow {
+        background-position: center 0;
+    }
+    .shop-guide-wrapper .step-1 .stepShow {
+        background-position: center -25px;
+    }
+    .shop-guide-wrapper .step-2 .stepShow {
+        background-position: center -50px;
+    }
+    .shop-guide-wrapper .step-3 .stepShow {
+        background-position: center -75px;
+    }
+    .shop-guide-wrapper .step-4 .stepShow {
+        background-position: center -100px;
+    }
+    .shop-guide-wrapper .step-5 .stepShow {
+        background-position: center -125px;
+    }
+    .shop-guide-wrapper .step-6 .stepShow {
+        background-position: center -150px;
+    }
+    .shop-guide-wrapper .step-7 .stepShow {
+        background-position: center -175px;
+    }
+    .shop-guide-wrapper .step-8 .stepShow {
+        background-position: center -200px;
+    }
+    .shop-guide-wrapper .center-btn-wrapper {
+        text-align: center;
+        margin-top: 50px;
+    }
+    .shop-guide-wrapper .corner-btn-wrapper {
+        position: absolute;
+        right: 45px;
+        bottom: 20px;
+    }
+    .shop-guide-wrapper .inner-content {
+        padding: 15px 45px 0;
+    }
+    .shop-guide-wrapper .inner-content .content {
+        padding-left: 70px;
+        height: 178px;
+        overflow-y: auto;
+    }
+    .shop-guide-wrapper .centered-content {
+        padding: 60px 0 0;
+        text-align: center;
+    }
+    .shop-guide-wrapper .mtitle h1 {
+        text-align: center;
+        margin: 30px 0 0;
+    }
+    .shop-guide-wrapper .mbody .stepInsts {
+        padding-top: 44px;
+    }
+
+    .web_preview li {
+        display: block;
+        width: 37%;
+        margin: 0 12px;
+        float: left;
+        vertical-align: top;
+    }
+</style>
+
+<div class="page_top container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-md-5 col-sm-6">
+            <h1 class="logo"><img alt="paistore" src="http://img01.ningpai.com/1426758561857.jpg"></h1>
+        </div>
+        <div class="col-lg-20 col-md-19 col-sm-18">
+            <div class="top_banner">
+                <div class="ctrl_banner">
+                    <div class="ctrl_nav_top pull-right">
+                        <ul>
+                            <li>
+                                <a href="http://bbs.qianmi.com/forum-45-1.html" target="_blank">商家社区</a>
+                            </li>
+
+
+                            <li>
+                                <a class="qIcon youjian" href="orderlist.htm?menuId=89&menuParentId=1165&myselfId=947">
+                                    <span>消息</span>
+                                    <label class="badge">0</label>
+                                </a>
+                            </li>
+                            <li class="user_ctrl">
+                                <a href="#" style="min-width:140px;">qmb2c<em></em></a>
+                                <div class="user_box">
+                                    <ul>
+
+                                        <li>
+                                            <a href="javascript:modifyPwd();" class="qIcon suoding">修改密码</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" onclick="goOut();" class="qIcon guanji">退出</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="ctrl_nav_top pull-left">
+                        <ul>
+                            <li>
+                                <a class="qIcon home" href="index.htm"><span>桌面</span></a>
+                            </li>
+                            <li class="rel_sites">
+                                <a href="#">产品与服务 <em></em></a>
+                                <div class="site_box" style="width:200px">
+                                    <ul class="web_preview" >
+
+                                        <li class="shop_preview" >
+                                            <a href="javascript:;" target="_blank" id="link">
+                                                <i></i>
+                                                <span>商城预览</span>
+                                            </a>
+                                        </li>
+
+
+
+
+
+
+                                        <li class="weixin_preview">
+                                            <i style="margin:0 auto 10px auto"><div id="erweima"></div></i>
+                                            <span>微商城预览</span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="feedback" class="modal fade Noprint" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">用户反馈</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"><span class="text-danger">*</span>反馈内容：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-15">
+                            <textarea class="form-control" rows="5" id="feedbackcontent" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"></label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <p class="text-muted">限定输入250字</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="fankui();">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<div id="goout" class="modal fade Noprint" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">退出系统</h4>
+            </div>
+            <form class="form-horizontal" method="post" action="login.htm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-7">
+                            <p class="text-muted">您确定要退出系统吗？</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary"/>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+<div id="dalog-send-sms" class="modal fade Noprint" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">密码验证</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="sendCodeForm" method="post">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">手机号码：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <label class="radio-inline" style="padding-left:0px;"> <span id="viewmobile"></span></label>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-4"><input id="sendCodeButton" value="发送验证码" type="button" onclick="sendCode();"/></div>
+                        <div class="col-sm-4"><label class="radio-inline"><span id="sendCodeButtonTip"></span></label></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"><span class="text-danger">*</span>验证码：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <input class="form-control required" rows="5" id="mcode"/>
+                            <span id="errorCode"></span>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="checkCode();">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+
+<div id="dalog-updatepass-sms" class="modal fade Noprint" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal"  method="post" id="updatePassForm">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"><span class="text-danger">*</span>原始密码：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input class="form-control required" rows="5" name="userkey" id="userkey" type="password"/><span id="oldpass"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"><span class="text-danger">*</span>新密码：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input class="form-control required" rows="5" name="newuserkey" id="newuserkey" type="password"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-5 required"><span class="text-danger">*</span>重复新密码：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input class="form-control" rows="5"  equalTo="#newuserkey" name="renewuserkey" id="renewuserkey" type="password"/>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="updatepass();">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+<div id="dalog-checkPass-sms" class="modal fade Noprint" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">密码验证</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal"  method="post" id="checkPassForm">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"><span class="text-danger">*</span>原始密码：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input class="form-control required" rows="5"  id="userkeyold" type="password"/><span id="oldpassuse"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="checkPass();">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
+<div id="dalog-Info-sms" class="modal fade Noprint" role="dialog" style="z-index:1700;" >
+    <div class="modal-dialog" style="z-index:1800;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">修改资料</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal"  method="post" id="InfoForm" action="modifymanager.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"><span class="text-danger">*</span>用户名：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input id="manaid" name="id" type="hidden" value="149">
+                            <label class="radio-inline"> <span class="usernamen">qmb2c</span></label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">头像：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-1">
+                            <input name="photoImg" id="photoImg1" type="hidden" value="http://183.131.78.28:10000/M00/00/1D/CgQSa1X5LRKASzrNAAAPuZPKOAc304.jpg">
+                            <img src="http://183.131.78.28:10000/M00/00/1D/CgQSa1X5LRKASzrNAAAPuZPKOAc304.jpg" height="30" height="30" id="headImgs"/>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2"><input id="chooseAdminImg" type="button" value="选择"/></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">手机号：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <input class="form-control mobile" rows="5"  id="mobileupdate" name="mobile"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="subInfoForm();">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="kdxd"  role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">开店向导</h4>
+            </div>
+            <div class="modal-body">
+                <div class="shop-guide-wrapper" id="step-0" style="/* display: none; */">
+                    <div class="module">
+                        <div class="mtitle">
+                            <h1>欢迎使用系统开店向导，请按以下步骤操作</h1>
+                        </div>
+                        <div class="mbody">
+                            <div class="stepInsts step-0">
+                                <div class="stepShow">&nbsp;</div>
+                                <ul>
+                                    <li>开始准备</li>
+                                    <li>接口设置</li>
+                                    <li>添加商品</li>
+                                    <li>页面设置</li>
+                                    <li>订单处理</li>
+                                    <li>完成</li>
+                                </ul>
+                            </div>
+                            <div class="center-btn-wrapper">
+                                <a href="javascript:void(0)" onclick="nextStep('1')" class="btn btn-primary">&nbsp;&nbsp;开始向导&nbsp;&nbsp;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shop-guide-wrapper" id="step-1">
+                    <div class="module">
+                        <div class="mtitle">
+                            <div class="stepInsts step-1">
+                                <div class="stepShow">&nbsp;</div>
+                                <ul>
+                                    <li class="past">开始准备</li>
+                                    <li>接口设置</li>
+                                    <li>添加商品</li>
+                                    <li>页面设置</li>
+                                    <li>订单处理</li>
+                                    <li>完成</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="mbody">
+                            <div class="inner-content">
+                                <h1>Step1&nbsp;&nbsp;&nbsp;&nbsp;站点设置</h1>
+                                <div class="content">
+                                    <p>站点设置用来设置店铺的基本信息，在这里配置网站名称、网站地址、网站logo、版权信息、注册时的用户协议等基本信息。</p>
+                                    <a href="http://kstore.qianmi.com:80/boss/basicset.htm?menuId=1&menuParentId=37&myselfId=38">（现在设置>>）</a>
+                                </div>
+                            </div>
+
+                            <div class="corner-btn-wrapper">
+                                <a href="javascript:void(0)" onclick="nextStep('2')" class="btn btn-primary">下一步</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shop-guide-wrapper" id="step-2">
+                    <div class="module">
+                        <div class="mtitle">
+                            <div class="stepInsts step-2">
+                                <div class="stepShow">&nbsp;</div>
+                                <ul>
+                                    <li class="past">开始准备</li>
+                                    <li class="past">接口设置</li>
+                                    <li>添加商品</li>
+                                    <li>页面设置</li>
+                                    <li>订单处理</li>
+                                    <li>完成</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mbody">
+                            <div class="inner-content">
+                                <h1>Step2&nbsp;&nbsp;&nbsp;&nbsp;接口设置</h1>
+                                <div class="content">
+                                    <h1>1）邮箱接口设置</h1>
+                                    <p class="embbled">
+                                        提交有效的邮件地址（没有的去申请相关的个人邮箱或企业邮箱），你的网店会员账号的注册验证和密码找回等邮件都将使用该邮箱地址发送。<a href="http://kstore.qianmi.com:80/boss/emailset.htm?menuId=1&menuParentId=72&myselfId=39">（现在设置>>）</a><br>
+                                    </p>
+
+                                    <h1>2）支付接口设置</h1>
+                                    <p class="embbled">
+                                        系统已对接好支付宝支付接口，你需要去申请支付宝企业支付，申请成功后，修改成您的支付宝信息。
+                                        <br>
+                                        <a href="http://kstore.qianmi.com:80/boss/payset.htm?menuId=1&menuParentId=72&myselfId=78">（现在设置>>）</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="corner-btn-wrapper">
+                                <a href="javascript:void(0)" onclick="nextStep('1')" class="btn btn-default">上一步</a>
+                                <a href="javascript:void(0)" onclick="nextStep('3')" class="btn btn-primary">下一步</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shop-guide-wrapper" id="step-3">
+                    <div class="module">
+                        <div class="mtitle">
+                            <div class="stepInsts step-3">
+                                <div class="stepShow">&nbsp;</div>
+                                <ul>
+                                    <li class="past">开始准备</li>
+                                    <li class="past">接口设置</li>
+                                    <li class="past">添加商品</li>
+                                    <li>页面设置</li>
+                                    <li>订单处理</li>
+                                    <li>完成</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="mbody">
+                            <div class="inner-content">
+                                <h1>Step3&nbsp;&nbsp;&nbsp;&nbsp;添加商品</h1>
+                                <div class="content">
+                                    <h1>1)添加商品品牌</h1>
+                                    <p>商品品牌是对您商品个性的一种区分，您需要在这里添加所有商品所需要的品牌。<a href="http://kstore.qianmi.com:80/boss/findAllBrand.htm?menuId=3&menuParentId=8&myselfId=23">（现在设置>>）</a></p>
+                                    <h1>2)添加商品分类</h1>
+                                    <p>商品分类是对您的商品进行分门别类，可以让客户对店铺销售的商品一目了然，快速找到相应商品；系统需添加配置三级分类，通过第三级分类来添加对应商品。<a href="http://kstore.qianmi.com:80/boss/findAllCate.htm?menuId=3&menuParentId=8&myselfId=20">（现在设置>>）</a></p>
+                                    <h1>3)添加商品规格</h1>
+                                    <p>商品规格是对第三极分类商品的品质的划分，如颜色、尺码等；通过已添加的三级分类，去添加相应的分类商品规格。<a href="http://kstore.qianmi.com:80/boss/findAllSpec.htm?menuId=3&menuParentId=8&myselfId=22">（现在设置>>）</a></p>
+                                    <h1>4)添加商品类型</h1>
+                                    <p>商品类型是对第三级分类商品的所有属性的划分，通过已添加的三级分类，添加相应的分类类型，添加过程中关联已添加的商品品牌和商品规格。<a href="http://kstore.qianmi.com:80/boss/findAllType.htm?menuId=3&menuParentId=8&myselfId=21">（现在设置>>）</a></p>
+                                    <h1>5)修改商品分类</h1>
+                                    <p>商修改下已添加好的三级分类，把对应的商品类型关联到该分类当中。<a href="http://kstore.qianmi.com:80/boss/findAllCate.htm?menuId=3&menuParentId=8&myselfId=20">（现在设置>>）</a></p>
+                                    <h1>6)添加商品</h1>
+                                    <p>前面配置完后，您可以添加商品了，选择相应的三级分类，添加该分类的商品信息。<a href="http://kstore.qianmi.com:80/boss/newUploadGoods.htm?menuId=3&menuParentId=7&myselfId=1587">（现在设置>>）</a></p>
+                                </div>
+                            </div>
+                            <div class="corner-btn-wrapper">
+                                <a href="javascript:void(0)" onclick="nextStep('2')" class="btn btn-default">上一步</a>
+                                <a href="javascript:void(0)" onclick="nextStep('4')" class="btn btn-primary">下一步</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shop-guide-wrapper" id="step-4">
+                    <div class="module">
+                        <div class="mtitle">
+                            <div class="stepInsts step-4">
+                                <div class="stepShow">&nbsp;</div>
+                                <ul>
+                                    <li class="past">开始准备</li>
+                                    <li class="past">接口设置</li>
+                                    <li class="past">添加商品</li>
+                                    <li class="past">页面设置</li>
+                                    <li>订单处理</li>
+                                    <li>完成</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mbody">
+                            <div class="inner-content">
+                                <h1>Step4&nbsp;&nbsp;&nbsp;&nbsp;页面设置</h1>
+                                <div class="content">
+                                    <p class="embbled">
+                                    <h1>1)挑选模板</h1>
+                                    系统内置了多套主流的模板，你可以挑选一套，进行你的页面设置。<a href="http://kstore.qianmi.com:80/boss/queryTempByType.htm?menuId=945&menuParentId=1039&myselfId=1041">（现在设置>>）</a>
+                                    </p>
+                                    <p class="embbled">
+                                    <h1>2)模板配置</h1>
+                                    选择好模板后，点击模板配置，配置商品分类、轮播广告、页面广告、楼层等信息。
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="corner-btn-wrapper">
+                                <a href="javascript:void(0)" onclick="nextStep('3')" class="btn btn-default">上一步</a>
+                                <a href="javascript:void(0)" onclick="nextStep('5')" class="btn btn-primary">下一步</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shop-guide-wrapper" id="step-5">
+                    <div class="module">
+                        <div class="mtitle">
+                            <div class="stepInsts step-5">
+                                <div class="stepShow">&nbsp;</div>
+                                <ul>
+                                    <li class="past">开始准备</li>
+                                    <li class="past">接口设置</li>
+                                    <li class="past">添加商品</li>
+                                    <li class="past">页面设置</li>
+                                    <li class="past">订单处理</li>
+                                    <li>完成</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mbody">
+                            <div class="inner-content">
+                                <h1>Step5&nbsp;&nbsp;&nbsp;&nbsp;订单处理</h1>
+                                <div class="content">
+                                    <p>系统通过拣货、装箱、发货三个步骤来进行订单处理。</p>
+                                    <p class="embbled">
+                                    <h1>1)订单查看</h1>
+                                    系统可以查看所有订单信息，包含已付款和未付款的，可以对订单状态和价格进行修改。
+                                    <a href="http://kstore.qianmi.com:80/boss/orderlist.htm?menuId=89&menuParentId=1165&myselfId=947">（现在查看>>）</a>
+                                    </p>
+                                    <p class="embbled">
+                                    <h1>2)拣货处理</h1>
+                                    在拣货列表，您可以对已付款的订单进行拣货处理。
+                                    <a href="http://kstore.qianmi.com:80/boss/orderpickinglist.htm?menuId=1565&menuParentId=1567&myselfId=1441">（现在拣货>>）</a>
+                                    </p>
+                                    <p class="embbled">
+                                    <h1>3)装箱处理</h1>
+                                    在拣货列表，您可以对已拣货的订单进行装箱处理。
+                                    <a href="http://kstore.qianmi.com:80/boss/orderdeliverylist.htm?menuId=1565&menuParentId=1567&myselfId=1467">（现在装箱>>）</a>
+                                    </p>
+                                    <p class="embbled">
+                                    <h1>4)出库处理</h1>
+                                    在拣货列表，您可以对已装箱的订单进行发货处理。
+                                    <a href="http://kstore.qianmi.com:80/boss/ordersendgoods.htm?menuId=1565&menuParentId=1567&myselfId=1471">（现在发货>>）</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="corner-btn-wrapper">
+                                <a href="javascript:void(0)" onclick="nextStep('4')" class="btn btn-default">上一步</a>
+                                <a href="javascript:void(0)" onclick="nextStep('6')" class="btn btn-primary">下一步</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="shop-guide-wrapper" id="step-6">
+                    <div class="module">
+                        <div class="mtitle">
+                            <div class="stepInsts step-6">
+                                <div class="stepShow">&nbsp;</div>
+                                <ul>
+                                    <li class="past">开始准备</li>
+                                    <li class="past">接口设置</li>
+                                    <li class="past">添加商品</li>
+                                    <li class="past">页面设置</li>
+                                    <li class="past">订单处理</li>
+                                    <li class="finish">完成</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mbody">
+                            <div class="centered-content">
+                                <h1>祝贺您，您已经完成了系统开店向导！</h1>
+                                <p>
+                                    您可以
+                                    <a href="" id="shouye" target="_blank">您可以登录企业主站测试购物流程</a>
+                                </p>
+                            </div>
+                            <div class="center-btn-wrapper">
+                                <a href="javascript:void(0)" onclick="completeStep()" class="btn btn-primary">&nbsp;&nbsp;完&nbsp;&nbsp;成&nbsp;&nbsp;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="appProtocalModal" role="dialog" style="z-index:1700;" >
+    <div class="modal-dialog" style="z-index:1800;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">应用市场协议</h4>
+            </div>
+            <div class="modal-body">
+                <div class="agreement_wp mt15" style="height:300px;overflow-y:scroll;">
+                    <p style="font-family:HannotateSC-W5;line-height:16px;white-space:normal;">
+                        本协议是您与网站（简称"本站"，网址：www.XXXX.com）所有者（以下简称为""）之间就网站服务等相关事宜所订立的契约，请您仔细阅读本注册协议，您点击"同意并继续"按钮后，本协议即构成对双方有约束力的法律文件。
+                    </p>
+                    <h5 style="font-family:HannotateSC-W5;white-space:normal;">
+                        第1条 本站服务条款的确认和接纳
+                    </h5>
+                    <p style="font-family:HannotateSC-W5;line-height:16px;white-space:normal;">
+                        1.1本站的各项电子服务的所有权和运作权归所有。用户同意所有注册协议条款并完成注册程序，才能成为本站的正式用户。用户确认：本协议条款是处理双方权利义务的契约，始终有效，法律另有强制性规定或双方另有特别约定的，依其规定。
+                    </p>
+                    <p style="font-family:HannotateSC-W5;line-height:16px;white-space:normal;">
+                        1.2用户点击同意本协议的，即视为用户确认自己具有享受本站服务、下单购物等相应的权利能力和行为能力，能够独立承担法律责任。
+                    </p>
+                    <p style="font-family:HannotateSC-W5;line-height:16px;white-space:normal;">
+                        1.3如果您在18周岁以下，您只能在父母或监护人的监护参与下才能使用本站。
+                    </p>
+                    <p style="font-family:HannotateSC-W5;line-height:16px;white-space:normal;">
+                        1.4保留在中华人民共和国大陆地区法施行之法律允许的范围内独自决定拒绝服务、关闭用户账户、清除或编辑内容或取消订单的权利。
+                    </p>
+                    <h5 style="font-family:HannotateSC-W5;white-space:normal;">
+                        第2条 本站服务
+                    </h5>
+                    <p style="font-family:HannotateSC-W5;line-height:16px;white-space:normal;">
+                        2.1通过互联网依法为用户提供互联网信息等服务，用户在完全同意本协议及本站规定的情况下，方有权使用本站的相关服务。
+                    </p>
+                    <p style="font-family:HannotateSC-W5;line-height:16px;white-space:normal;">
+                        2.2用户必须自行准备如下设备和承担如下开支：（1）上网设备，包括并不限于电脑或者其他上网终端、调制解调器及其他必备的上网装置；（2）上网开支，包括并不限于网络接入费、上网设备租用费、手机流量费等。
+                    </p>
+                    <h5 style="font-family:HannotateSC-W5;white-space:normal;">
+                        第3条 用户信息
+                    </h5>
+                    <p style="font-family:HannotateSC-W5;line-height:16px;white-space:normal;">
+                        3.1用户应自行诚信向本站提供注册资料，用户同意其提供的注册资料真实、准确、完整、合法有效，用户注册资料如有变动的，应及时更新其注册资料。如果用户提供的注册资料不合法、不真实、不准确、不详尽的，用户需承担因此引起的相应责任及后果，并且保留终止用户使用各项服务的权利。
+                    </p>
+                    <div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="goAppMarket();">同意并继续</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="http://kstore.qianmi.com:80/boss/js/jquery.min.js"></script>
+<script type="text/javascript" src="http://kstore.qianmi.com:80/boss/js/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="http://kstore.qianmi.com:80/boss/js/jquery.validate.js"></script>
+<script type="text/javascript" src="http://kstore.qianmi.com:80/boss/js/artDialog4.1.7/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="http://kstore.qianmi.com:80/boss/js/artDialog4.1.7/plugins/iframeTools.js"></script>
+<script type="text/javascript" src="http://kstore.qianmi.com:80/boss/js/jquery.cookie.js"></script>
+
+
+<script type="text/javascript">
+
+    $(function(){
+
+        $("#InfoForm").validate();
+        $("#sendCodeForm").validate();
+        $("#updatePassForm").validate();
+        $("#checkPassForm").validate();
+
+        $("#chooseAdminImg").click(function(){
+            i=1;
+            art.dialog.open('queryImageManageByPbAndCidForChoose.htm?location=Head&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95&size=10000', {
+                lock: true,
+                opacity:0.3,
+                width: '900px',
+                height: '400px',
+                title: '选择图片'
+            });
+        });
+
+        var logoflag = "http://img01.ningpai.com/1426758561857.jpg";
+        if(logoflag==null||logoflag==''){
+            //获取登录logo
+            $.ajax({
+                url: "ajaxGetSysBasic.htm",
+
+                success: function(data){
+                    if(data.indexLogo!=""){
+                        $("#logo").attr("src",data.indexLogo);
+                    }
+                }});
+        }
+
+
+        $.ajax({
+            url:"getBasicSetName.htm",
+            success:function(data){
+                if(data!=""){
+                    $('#link').attr("href",data.bsetAddress);
+                    $('#shouye').attr("href",data.bsetAddress);
+                    $("title").html("管理员列表 - "+data.bsetName);
+                    $('#thirdlink').attr("href",data.bsetThirdAddress);
+                    jQuery('#erweima').qrcode({
+                        render  : "canvas",
+                        width   : 50,
+                        height  : 50,
+                        text    : data.bsetAddress
+                    });
+                }
+            }});
+
+
+
+        /* 导航弹出菜单 */
+
+        $('.nav ul li').each(function(){
+            $(this).mouseenter(function(e){
+                var positionX =$(this).width()/2 - 200;
+                $(this).append('<div class="menu_down popover bottom" style="position:absolute;top: 32px; left: ' + positionX + 'px; display: block;"><div class="arrow" style="left: 44%;"></div><div class="popover-content">' + $(this).next().html() + '</div></div>');
+                $(this).mouseleave(function(){
+                    $(this).find(".menu_down").remove();
+                });
+            });
+
+        });
+
+
+        $.ajax({
+            url: "initNotice.htm?"+Math.random(),
+            context: document.body,
+            async:true,
+            success: function(data){
+
+                /* 顶部右侧功能辅助导航 */
+                var message_num = data.count,//信息数量
+                        $message = '';
+
+                if(data.list!=null&&data.list.length!=0){
+                    /* for (var i = 0; i < data.list.length; i++) {
+                     var d= new Date(data.list[i].payTime);
+                     $message+='<p><a href="orderlist.htm?menuId=89&menuParentId=1165&myselfId=947&orderCode='+data.list[i].orderNo+'"';
+                     if(i==0){
+                     $message+='class="text-danger"';
+                     }
+                     $message+='>';
+                     $message+='<span>'+(setNumToTen(d.getMonth()+1))+'-'+setNumToTen(d.getDate())+'</span>';
+                     $message+='<i class="glyphicon glyphicon-comment"></i>';
+                     $message+='订单:'+data.list[i].orderNo+'</a>';
+                     $message+='</p>';
+                     }
+                     $(".message_list").html($message);
+                     $("#messagecount").html('您有<span>'+message_num+'</span>条未读消息');*/
+                    $(".youjian .badge").html(message_num);
+                } else{
+                    $(".youjian .badge").html("0");
+                }
+
+            }});
+
+
+    });
+
+
+    function setNumToTen(data){
+        if(data<10){
+            return "0"+data;
+        }else{
+            return data;
+        }
+
+    }
+
+
+    function goOut(){
+        $('#goout').modal('show');
+    }
+
+    var uurl='getmobile.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95';
+
+    function fankui(){
+        if($("#feedbackcontent").val()!=''){
+            $("#feedbackcontent").removeClass('error');
+            jQuery.ajax({
+                url : "sendemailusersite.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95&feedbackname=qmb2c&feedbackcontent="+$("#feedbackcontent").val(),
+                success : function(html) {
+                    if (html == 1) {
+                        $('#feedback').modal('hide');
+                        $("#feedbackcontent").val('');
+                        showNoAlert('反馈成功');
+                    } else {
+                        $('#feedback').modal('hide');
+                        showNoAlert('反馈失败');
+
+                    }
+                }
+            });
+        }else{
+            $("#feedbackcontent").addClass('error');
+        }
+
+    }
+
+    /**
+     * 删除单个记录的确认框
+     * @param deleteUrl 删除链接。
+     */
+    function showNoAlert(tips) {
+        $("#ViewmodalDialog").remove();
+        var confirmDialog =
+                '<div class="modal fade" id="ViewmodalDialog"  role="dialog">'+
+                '    <div class="modal-dialog">'+
+                '        <div class="modal-content">'+
+                '            <div class="modal-header">'+
+                '                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                '               <h4 class="modal-title">系统提示</h4>'+
+                '           </div>'+
+                '           <div class="modal-body">'+tips+
+                '           </div>'+
+                '           <div class="modal-footer">'+
+                '               <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$(\'#ViewmodalDialog\').modal(\'hide\');">确定</button>'+
+                '           </div>'+
+                '       </div>'+
+                '   </div>'+
+                '</div>';
+        $(document.body).append(confirmDialog);
+        $('#ViewmodalDialog').modal('show');
+    }
+
+    var updateFlag = '';
+    function modifyPwd(){
+        $('#mcode').val('');
+        $('#userkeyold').val('');
+        //修改密码
+        updateFlag = '0';
+        $.ajax({
+            type : 'post',
+            url : uurl,
+            success : function(data) {
+                if(data.mobile == null || data.mobile.trim().length == 0){
+                    $("#dalog-checkPass-sms").modal('show');
+                }else{
+                    $("#viewmobile").text(data.mobile);
+                    $("#dalog-send-sms").modal("show");
+                }
+            }
+        });
+    }
+
+
+    function modifyInfo(){
+        $('#mcode').val('');
+        $('#userkeyold').val('');
+        //修改资料
+        updateFlag = '1';
+        $.ajax({
+            type : 'post',
+            url : uurl,
+            success : function(data) {
+                if(data.mobile == null || data.mobile.trim().length == 0){
+                    $("#dalog-checkPass-sms").modal("show");
+                }else{
+                    $("#viewmobile").text(data.mobile);
+                    $("#dalog-send-sms").modal("show");
+                }
+            }
+        });
+    }
+
+    function sendCode(){
+        // var url = 'getcodecore.htm?code='+code+"&CSRFToken="+$("#hi_token").val();
+        var url = 'sendcodecore.htm?mobile='+$(".mobile").text()+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95";
+        $.ajax({
+            type : 'post',
+            url : url,
+            async : false,
+            success : function(data) {
+                if (data > 0) {
+
+                    time($("#sendCodeButton"));
+                    $("#sendCodeButtonTip").text('发送成功');
+                } else if(data == 0) {
+                    $("#sendCodeButtonTip").text('发送失败');
+                }else if(data == -1){
+                    $("#sendCodeButtonTip").text('60秒内只能发送一次!');
+                }
+            }
+        });
+    }
+
+    var wait = 60;
+    function time(o) {
+        if (wait == 0) {
+            o.attr("disabled", false);
+            o.val('发送验证码');
+            wait = 60;
+        } else {
+            o.attr("disabled", true);
+            o.val("重新发送(" + wait + ")");
+            wait--;
+            setTimeout(function() {
+                        time(o);
+                    },
+                    1000);
+        }
+    }
+
+
+    function checkCode(){
+        if( $("#sendCodeForm").valid()){
+            var url = 'getcodecore.htm?code='+$("#mcode").val()+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95";
+            $.ajax({
+                type : 'post',
+                url : url,
+                async : false,
+                success : function(data) {
+                    if (data > 0) {
+
+                        if(updateFlag=='0'){
+                            $("#dalog-send-sms").modal("hide");
+                            $("#dalog-updatepass-sms").modal('show');
+                        }else{
+                            getMobileForm();
+                            $("#dalog-send-sms").modal("hide");
+                            $("#dalog-Info-sms").modal('show');
+                        }
+
+
+                    } else if(data == 0) {
+                        $("#mcode").addClass('error');
+                        $("#errorCode").html("<label class='error'>验证码不正确</label>");
+                        return;
+                    }else if(data == -1){
+                        $("#mcode").addClass('error');
+                        $("#errorCode").html("<label class='error'>验证码已过期</label>");
+
+                        return;
+                    }
+                }
+            });
+        }
+
+
+    }
+
+    function checkPass(){
+        if($("#checkPassForm").valid()){
+            var userkey=$("#userkeyold");
+            var url="checkUserKeyMain.htm?userKey="+userkey.val()+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95";
+            $.ajax({
+                type: 'post',
+                url:url,
+                async:false,
+                success: function(data) {
+                    if (data > 0){
+                        $("#dalog-checkPass-sms").modal('hide');
+                        if(updateFlag=='0'){
+                            $("#dalog-updatepass-sms").modal('show');
+                        }else{
+                            getMobileForm();
+                            $("#dalog-Info-sms").modal('show');
+                        }
+                    } else {
+                        $("#userkeyold").addClass('error');
+                        $("#oldpassuse").html('<label class="error">原始密码不正确</label>');
+                    }
+                }
+            });
+        }
+
+    }
+
+    function getMobileForm(){
+        $.ajax({
+            type : 'post',
+            url : 'getmobile.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95',
+            success : function(data) {
+                if(data.mobile != null && data.mobile.trim().length != 0){
+                    $("#mobileupdate").val(data.mobile);
+                }
+
+            }
+        });
+    }
+    function updatepass(){
+        if($("#updatePassForm").valid()){
+            var bValid = true;
+            var userkey=$("#userkey"),
+                    newuserkey=$("#newuserkey");
+            var url="checkUserKey.htm?userKey="+userkey.val()+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95";
+            $.ajax({
+                type: 'post',
+                url:url,
+                async:false,
+                success: function(data) {
+                    if (data > 0){
+                        bValid=true&&bValid;
+                    } else {
+                        $("#userkey").addClass('error');
+                        $("#oldpass").html('<label class="error">原始密码不正确</label>');
+                        bValid=false&&bValid;
+                    }
+                }
+            });
+
+            if(bValid){
+                var url="modifiedUserKey.htm?userKey="+userkey.val()+"&newuserkey="+newuserkey.val()+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95";
+                $.ajax({
+                    type: 'post',
+                    url:url,
+                    async:false,
+                    success: function(data) {
+                        if (data > 0){
+                            $("#dalog-updatepass-sms").modal('hide');
+                            showNoAlert('修改成功');
+                        } else {
+                            $("#dalog-updatepass-sms").modal('hide');
+                            $("#mcode").val('');
+                            showNoAlert('修改失败');
+                        }
+                    }
+                });
+            }
+
+
+        }
+
+
+    }
+
+
+
+
+    //图片回调
+    function saveChoooseImageHead(url,id) {
+        if(typeof (url) != 'string') {
+            url = url[0];
+        }
+        if(url.indexOf(',')!=-1){
+            url=url.substring(0,url.indexOf(','));
+        }
+
+        $("#headImgs").attr("src",url);
+        $("#photoImg1").val(url);
+
+    }
+
+    function subInfoForm(){
+        if($("#InfoForm").valid()){
+            $("#InfoForm").submit();
+        }
+    }
+
+
+
+
+    var ckey = 'guide_step';
+    var path = '/';
+    $(document).ready(function() {
+        $(".shop-guide-wrapper").hide();
+        continueLastStep();
+    });
+    //根据cookie判断跳转的页面
+    function continueLastStep(){
+        var step = $.cookie(ckey);
+        if(step==null||step=='0'){
+            // 记录向导的步骤
+            $.cookie(ckey, '0', { expires: 365, path: path });
+            $("#step-0").show();
+        }else{
+            $("#step-"+step).show();
+        }
+    }
+    // 跳转到某个步骤
+    function nextStep(step){
+        if(step=='1'){  //开始向导
+            $.cookie('guideSidebar', null);
+            $.cookie('closeAutoGuide', 'true', { expires: 1 });  //关闭自动弹出开店向导
+            $("#guideSidebar").removeClass("hide-i");
+        }
+        // cookie值修改
+        $.cookie(ckey, step, { expires: 365, path: path });
+        $(".shop-guide-wrapper").hide();
+        $("#step-"+step).show();
+    }
+    //完成
+    function completeStep(){
+        //隐藏向导侧栏
+        $('#kdxd').modal('hide');
+        nextStep('1');
+    }
+    //跳转到相应的页面
+    function toSetPage(url){
+        closeDialog();
+        if(url!=null && url.indexOf("/store")==0){
+            unfoldMenu(url, '2');
+        }else{
+            unfoldMenu(url, '1');
+        }
+    }
+
+    function toB2c(furl, extended, cssTargetUrl,subUrl){
+        unfoldMenu(furl, extended, cssTargetUrl,subUrl);
+        closeDialog();
+    }
+    //点击“应用市场”，判断
+    function appMarket() {
+        $.ajax({
+            url:'queryAppMarketKeyState.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95',
+            async:false,
+            success:function(result) {
+                if(result==-1) {
+//                    showSimpleConfirmAlert("初次访问应用市场，需要获取秘钥，点击“确定”获取","goAppMarket()");
+                    $("#appProtocalModal").modal("show");
+                    return;
+                }
+                if(result==-2) {
+                    showSimpleConfirmAlert("您的秘钥已过期，点击“确定”重新获取秘钥","goAppMarket()");
+                    return;
+                }
+                window.location='app.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95';
+            }
+        });
+    }
+    //应用市场协议中，点击“同意”，判断基本信息
+    function goAppMarket() {
+        $.ajax({
+            url:'newgetLoginPatcha.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95',
+            success:function(data) {
+                var tip = '请在系统→基本信息中填写您网站的';
+                var errorName = '';
+                if(data.bsetName=='') {
+                    errorName += '名称、';
+                }
+                if(data.bsetAddress=='') {
+                    errorName += '地址、';
+                }
+                if(data.bsetAdmin=='') {
+                    errorName += '联系人、';
+                }
+                if(data.bsetPhone=='') {
+                    errorName += '联系电话、';
+                }
+                if(data.bsetEmail=='') {
+                    errorName += '联系邮箱、';
+                }
+                if(errorName!='') {
+                    errorName = errorName.substr(0,errorName.lastIndexOf(''))
+                    showSimpleConfirmAlert(errorName,'goBasicset()')
+                    return;
+                }
+                window.location='app.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95';
+            }
+        });
+    }
+
+    function goBasicset() {
+        window.location = 'basicset.htm';
+    }
+
+    /**
+     * 简单的确认框，返回true或false
+     */
+    function showSimpleConfirmAlert(tips,functionName) {
+        $('#modalDialog').remove();
+        var confirmDialog =
+                '<div class="modal fade" id="modalDialog" tabindex="-1" role="dialog">'+
+                '    <div class="modal-dialog">'+
+                '        <div class="modal-content">'+
+                '            <div class="modal-header">'+
+                '                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+
+                '               <h4 class="modal-title">确认提示</h4>'+
+                '           </div>'+
+                '           <div class="modal-body">'
+                +tips+
+                '           </div>'+
+                '           <div class="modal-footer">'+
+                '             <button type="button" class="btn btn-primary" onclick="'+functionName+'">确定</button>'+
+                '               <button type="button" class="btn btn-default" data-dismiss="modal" onclick="$(\'#modalDialog\').modal(\'hide\');">取消</button>'+
+                '           </div>'+
+                '       </div>'+
+                '   </div>'+
+                '</div>';
+        $(document.body).append(confirmDialog);
+        $('#modalDialog').modal('show');
+    }
+
+</script>
+
+
+<div class="page_body container-fluid">
+    <div class="row">
+
+
+
+
+
+
+        <style>
+
+            .sidebar{min-height:427px;}
+        </style>
+        <div class="col-lg-4 col-md-5 col-sm-6 sidebar">
+
+            <div class="menu">
+
+
+
+                <!-- 判断菜单不是全部 全部为null -->
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="89">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a  href="orderlist.htm?menuId=89&menuParentId=1165&myselfId=947" data-pid="89"><img src="http://183.131.78.28:10000/M00/00/2D/CgQSa1Y0TbKARlePAAAIAa_7lFg144.jpg" width="18" height="18" style="margin-top:-3px;"/> 订单</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="71">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a  href="createproductmarket.htm?menuId=71&menuParentId=125&myselfId=2607" data-pid="71"><img src="http://183.131.78.28:10000/M00/00/2D/CgQSa1Y0Tc2AYHxNAAAHeVVyfuU503.jpg" width="18" height="18" style="margin-top:-3px;"/> 营销</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="1565">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a  href="orderpickinglist.htm?menuId=1565&menuParentId=1567&myselfId=1441" data-pid="1565"><img src="http://183.131.78.28:10000/M00/00/2D/CgQSa1Y0TeCAO_CnAAAH-Nzsra4293.jpg" width="18" height="18" style="margin-top:-3px;"/> 出库</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="1727">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a  href="showMobSiteBasic.htm?menuId=1727&menuParentId=1806&myselfId=1807" data-pid="1727"><img src="http://183.131.78.28:10000/M00/00/2D/CgQSa1Y0Te-ASCJXAAAFqFnSD6U572.jpg" width="18" height="18" style="margin-top:-3px;"/> 移动版</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="1">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a class="selected" href="basicset.htm?menuId=1&menuParentId=37&myselfId=38" data-pid="1"><img src="http://kstore.qianmi.com:80/boss/images/default.png" width="18" height="18" style="margin-top:-3px;"/> 系统</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="945">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a  href="queryTempByType.htm?menuId=945&menuParentId=1039&myselfId=1041" data-pid="945"><img src="http://183.131.78.28:10000/M00/00/2E/CgQSa1Y0ThaAKNKIAAAGh5zsM5E851.jpg" width="18" height="18" style="margin-top:-3px;"/> 站点</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="3">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a  href="newUploadGoods.htm?menuId=3&menuParentId=7&myselfId=1587" data-pid="3"><img src="http://183.131.78.28:10000/M00/00/2E/CgQSa1Y0Ti2AXSDaAAAIqXQn_ok941.jpg" width="18" height="18" style="margin-top:-3px;"/> 商品</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="4">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a  href="initCustomer.htm?menuId=4&menuParentId=5&myselfId=13" data-pid="4"><img src="http://183.131.78.28:10000/M00/00/2E/CgQSa1Y0TjuAEt1zAAAJJt_gnY8024.jpg" width="18" height="18" style="margin-top:-3px;"/> 会员</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+                <div class="menu_item">
+                    <div class="menu_title" nid="1709">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <h4><a  href="selectcountbytime.htm?menuId=1709&menuParentId=1959&myselfId=1960" data-pid="1709"><img src="http://183.131.78.28:10000/M00/00/2E/CgQSa1Y0TkuAI2G8AAAE01Cxl28905.jpg" width="18" height="18" style="margin-top:-3px;"/> 统计</a></h4>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+        <script type="text/javascript" src="http://kstore.qianmi.com:80/boss/js/sidebar-roll.js"></script>
+
+
+
+
+
+
+
+
+
+        <div class="col-lg-20 col-md-19 col-sm-18 main">
+
+
+
+
+
+
+
+
+
+            <div class="sub_menu">
+                <div class="sub_menu_in">
+                    <dl>
+
+                        <dt>
+                            <img alt="" data-pid="37" src="http://114.215.114.9:10000/M00/00/AC/ctdyCVXNg6-AXo79AAAQU42VINY434.jpg" width="18" height="18">
+                            <span>系统管理</span>
+                        </dt>
+
+                        <dd style="display:none;">
+                            <ul>
+
+
+                                <a  href="basicset.htm?menuId=1&menuParentId=37&myselfId=38">基本信息</a>
+
+                                <a  href="toAdvancedSet.htm?menuId=1&menuParentId=37&myselfId=1563">高级设置</a>
+
+                                <a  href="pointset.htm?menuId=1&menuParentId=37&myselfId=44">积分设置</a>
+
+                                <a  href="setBackOrder.htm?menuId=1&menuParentId=37&myselfId=1890">订单设置</a>
+
+                                <a  href="initSeoConf.htm?menuId=1&menuParentId=37&myselfId=135">SEO设置</a>
+
+                                <a  href="queryPaymentByPb.htm?menuId=1&menuParentId=37&myselfId=1883">支付方式</a>
+
+                                <a  href="stockwarningsel.htm?menuId=1&menuParentId=37&myselfId=1871">库存预警</a>
+
+                                <a  href="initSysErrorPage.htm?menuId=1&menuParentId=37&myselfId=97">异常页面</a>
+
+
+                            </ul>
+                        </dd>
+
+                        <dt>
+                            <img alt="" data-pid="72" src="http://img01.ningpai.com/1420853805232.jpg" width="18" height="18">
+                            <span>接口管理</span>
+                        </dt>
+
+                        <dd style="display:none;">
+                            <ul>
+
+
+                                <a  href="emailset.htm?menuId=1&menuParentId=72&myselfId=39">邮箱接口设置</a>
+
+                                <a  href="payset.htm?menuId=1&menuParentId=72&myselfId=78">支付接口设置</a>
+
+                                <a  href="authset.htm?menuId=1&menuParentId=72&myselfId=42">登录接口设置</a>
+
+                                <a  href="queryMessageSetByPb.htm?menuId=1&menuParentId=72&myselfId=43">短信接口设置</a>
+
+                                <a  href="queryestore.htm?menuId=1&menuParentId=72&myselfId=1892">ERP接口设置</a>
+
+
+                            </ul>
+                        </dd>
+
+                        <dt>
+                            <img alt="" data-pid="84" src="http://114.215.114.9:10000/M00/00/AC/ctdyCVXNg3eAZPP0AAAPVuHm-5k369.jpg" width="18" height="18">
+                            <span>配送管理</span>
+                        </dt>
+
+                        <dd style="display:none;">
+                            <ul>
+
+
+                                <a  href="initExpressConf.htm?menuId=1&menuParentId=84&myselfId=85">上门自提设置</a>
+
+                                <a  href="initLogisticsCompany.htm?menuId=1&menuParentId=84&myselfId=129">物流公司设置</a>
+
+                                <a  href="logisticssingle.htm?menuId=1&menuParentId=84&myselfId=2039">物流单据设置</a>
+
+                                <a  href="freighttemplatelist.htm?menuId=1&menuParentId=84&myselfId=1884">物流模板设置</a>
+
+
+                            </ul>
+                        </dd>
+
+                        <dt>
+                            <img alt="" data-pid="1927" src="http://img01.ningpai.com/1422003159868.jpg" width="18" height="18">
+                            <span>权限管理</span>
+                        </dt>
+
+                        <dd style="display:block;">
+                            <ul>
+
+
+                                <a  class="selected" href="initManager.htm?menuId=1&menuParentId=1927&myselfId=1929">管理员列表</a>
+
+                                <a  href="initAuthority.htm?menuId=1&menuParentId=1927&myselfId=1928">角色管理</a>
+
+
+                            </ul>
+                        </dd>
+
+                        <dt>
+                            <img alt="" data-pid="87" src="http://img01.ningpai.com/1420853902453.jpg" width="18" height="18">
+                            <span>地区管理</span>
+                        </dt>
+
+                        <dd style="display:none;">
+                            <ul>
+
+
+                                <a  href="findAllProvince.htm?menuId=1&menuParentId=87&myselfId=88">地区管理</a>
+
+
+                            </ul>
+                        </dd>
+
+                        <dt>
+                            <img alt="" data-pid="75" src="http://img01.ningpai.com/1420853929629.jpg" width="18" height="18">
+                            <span>图片管理</span>
+                        </dt>
+
+                        <dd style="display:none;">
+                            <ul>
+
+
+                                <a  href="queryImageManageByPbAndCid.htm?menuId=1&menuParentId=75&myselfId=1019">图片库</a>
+
+                                <a  href="queryImageClassifyByPb.htm?menuId=1&menuParentId=75&myselfId=2018">图片分类</a>
+
+                                <a  href="initUpyunConf.htm?menuId=1&menuParentId=75&myselfId=139">又拍云设置</a>
+
+
+                            </ul>
+                        </dd>
+
+                    </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div><script type="text/javascript" src="http://kstore.qianmi.com:80/boss/js/sidebar-roll.js"></script>
+            <div class="main_cont">
+
+
+
+
+
+
+                <ol class="breadcrumb Noprint">
+                    <li>系统</li>
+                    <li>权限管理</li>
+                    <li class="active">管理员列表</li>
+                </ol>
+
+
+                <h2 class="main_title">管理员列表<small>(共3条)</small></h2>
+
+                <div class="common_data p20">
+                    <div class="filter_area">
+                        <form role="form" class="form-inline" action="initManager.htm" method="post" id="searchForm">
+                            <input type="hidden" value="searchForm" id="formId">
+                            <input type="hidden" value="initManager.htm" id="formName">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">管理员用户名</span>
+                                    <input type="text" class="form-control" name="username"  value="" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">搜索</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="data_ctrl_area mb20">
+                        <div class="data_ctrl_search pull-right"></div>
+                        <div class="data_ctrl_brns pull-left">
+                            <button type="button" class="btn btn-info" onclick="addmanager();">
+                                <i class="glyphicon glyphicon-plus"></i> 添加
+                            </button>
+                            <button type="button" class="btn btn-info" onclick="batchManager();">
+                                <i class="glyphicon glyphicon-trash"></i> 删除
+                            </button>
+                            <button type="button" class="btn btn-info" onclick="refresh();">
+                                <i class="glyphicon glyphicon-refresh"></i> 刷新
+                            </button>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+
+                    <form action="deleteallmanager.htm" method="post" id="delForm">
+                        <input type="hidden" name="CSRFToken" value="ebe9465c-e460-45d5-bdc3-8220f9ed7f95">
+                        <table class="table table-striped table-hover">
+
+                            <thead>
+                            <tr>
+                                <th width="25"><input type="checkbox"  onclick="allunchecked(this,'managerid');"></th>
+                                <th>管理员用户名</th>
+                                <th>是否启用</th>
+                                <th class="w100">最后登录时间</th>
+                                <th width="150">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr>
+                                <td width="50"><input type="checkbox" name="managerid"  value="170"></td>
+                                <td>营销</td>
+                                <td>
+
+                                    <a href="javascript:;" class="label label-success">是</a>
+
+
+                                </td>
+                                <td>  2015-10-23 15:07:31</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" onclick="openedit(170);">编辑</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="javascript:void(0);" onclick="delmanager(170);">删除</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="50"><input type="checkbox" name="managerid"  value="169"></td>
+                                <td>配送员</td>
+                                <td>
+
+                                    <a href="javascript:;" class="label label-success">是</a>
+
+
+                                </td>
+                                <td>  2015-10-23 14:59:34</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" onclick="openedit(169);">编辑</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="javascript:void(0);" onclick="delmanager(169);">删除</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td width="50"><input type="checkbox" name="managerid"  value="151"></td>
+                                <td>wu33yuan</td>
+                                <td>
+
+                                    <a href="javascript:;" class="label label-success">是</a>
+
+
+                                </td>
+                                <td>  </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" onclick="openedit(151);">编辑</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="javascript:void(0);" onclick="delmanager(151);">删除</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </form>
+                    <div class="table_foot">
+
+
+
+
+
+
+
+                        <head>
+                            <script type="text/javascript">
+                                var formId=$("#formId").val();
+                                function changePage(obj){
+                                    $("#"+$("#formId").val()).attr("action",$("#formName").val()).append("<input type='hidden' name='pageSize' value='"+$(obj).val()+"''>").submit();
+                                }
+
+                                function changeNextPage(pageSize,pageNo){
+                                    $("#"+$("#formId").val()).attr("action",$("#formName").val())
+                                            .append("<input type='hidden' name='pageSize' value='"+pageSize+"''>")
+                                            .append("<input type='hidden' name='pageNo' value='"+pageNo+"''>")
+                                            .submit();
+                                }
+                            </script>
+                        </head>
+                        <div class="table_pagenav pull-right" id="rightPage">
+                            <div class="meneame">
+
+
+
+                                <span class="disabled"> 上一页 </span>
+
+
+
+
+
+                                <span class="current"> 1</span>
+
+
+
+
+
+
+
+
+
+                                <span class="disabled"> 下一页 </span>
+
+
+                            </div>
+                        </div>
+                        <div class="table_ctrl pull-left" id="leftpage">
+                            <form role="form" class="form-inline">
+                                <label class="control-label">每页显示：</label>
+                                <!--    <input type="text"  class="form-control"> -->
+                                <select class="form-control" onChange="changePage(this);">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="15" >15</option>
+                                    <option value="20" >20</option>
+                                    <option value="30" >30</option>
+                                    <option value="50" >50</option>
+                                    <option value="100" >100</option>
+                                </select>
+                            </form>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addManager"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加管理员</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal" id="addForm" method="post" enctype="multipart/form-data">
+                    <div class="form-group" id="user">
+                        <label class="control-label col-sm-5"> <span class="text-danger">*</span>用户名：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-16">
+                            <input type="hidden" name="id" id="id" value=""  />
+                            <input type="text" class="form-control required" name="username" id="username">
+                            <span id="usertip"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">头像：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-12">
+                            <img height="50" alt="" src="" id="img" style="height:50px;width:50px;"><input style="margin-left:5px;" type="button" id="choose" value="选择"/>
+                            <input type="hidden" name="photoImg" id="photoImg"/>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">手机号码：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-16">
+                            <input type="text" class="form-control mobile" name="mobile" id="mobile">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">是否启用：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-16">
+                            <label class="radio-inline">
+                                <input type="radio" name="flag" id="open1" value="0" checked> 是
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="flag" id="open2" value="1"> 否
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"> <span class="text-danger">*</span>角色：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-16">
+                            <select class="w200" data-live-search="true" name="authorityId" id="auth_list_s">
+
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="submanager();">保存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editManager"  role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">编辑管理员</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal" id="editForm" method="post" enctype="multipart/form-data">
+                    <div class="form-group" id="edituser">
+                        <label class="control-label col-sm-5"> <span class="text-danger">*</span>用户名：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-16">
+                            <input type="hidden" name="id" id="editid" value=""  />
+                            <input type="text" class="form-control required" name="username" id="editusername">
+                            <span id="editusertip"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">头像：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-12">
+                            <img height="50" alt="" src="" id="editimg" style="height:50px;width:50px;"><input style="margin-left:5px;" type="button" id="editchoose" value="选择"/>
+                            <input type="hidden" name="photoImg" id="editphotoImg"/>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">手机号码：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-16">
+                            <input type="text" class="form-control mobile" name="mobile" id="editmobile">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5">是否启用：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-16">
+                            <label class="radio-inline">
+                                <input type="radio" name="flag" id="editopen1" value="0" checked> 是
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="flag" id="editopen2" value="1"> 否
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-5"> <span class="text-danger">*</span>角色：</label>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-16">
+                            <select class="w200" data-live-search="true" name="authorityId" id="editauth_list_s">
+
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="subEditManager();">保存</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" value="ebe9465c-e460-45d5-bdc3-8220f9ed7f95" id="hi_token"/>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://kstore.qianmi.com:80/boss/js/bootstrap.min.js"></script>
+<script src="http://kstore.qianmi.com:80/boss/js/summernote.min.js"></script>
+<script src="http://kstore.qianmi.com:80/boss/js/language/summernote-zh-CN.js"></script>
+<script src="http://kstore.qianmi.com:80/boss/js/bootstrap-select.min.js"></script>
+<script src="http://kstore.qianmi.com:80/boss/js/common.js"></script>
+<script src="http://kstore.qianmi.com:80/boss/js/common/common_alert.js"></script>
+<script src="http://kstore.qianmi.com:80/boss/js/common/common_checked.js"></script>
+<script src="http://kstore.qianmi.com:80/boss//js/select2.min.js"></script>
+<script>
+    $(function(){
+        $("#addForm").validate();
+        /* 为选定的select下拉菜单开启搜索提示 */
+
+
+        $("#choose").click(function(){
+            i=1;
+            art.dialog.open('queryImageManageByPbAndCidForChoose.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95&size=10000', {
+                lock: true,
+                opacity:0.3,
+                width: '900px',
+                height: '400px',
+                title: '选择图片'
+            });
+        });
+
+        $("#editchoose").click(function(){
+            i=1;
+            art.dialog.open('queryImageManageByPbAndCidForChoose.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95&size=10000', {
+                lock: true,
+                opacity:0.3,
+                width: '900px',
+                height: '400px',
+                title: '选择图片'
+            });
+        });
+    });
+
+    function addmanager(){
+        $("#partyName").val('');
+        $("#mobile").val('');
+        $("#img").attr("src",'');
+        $("#photoImg").val('');
+        $("#id").val('');
+        $("input[name=flag]:eq(0)").attr("checked",'checked');
+        $('#addManager').find('.modal-title').text('添加管理员');
+        $('#addForm').attr('action', 'addManager.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95');
+        loadAuthority();
+        if($("#pass1").length==0){
+            addgrouphtm();
+        }
+        $("#addForm").validate();
+        $('#addManager').modal('show');
+    }
+
+
+
+    function addgrouphtm(){
+        var htm=' <div class="form-group" id="pass1">';
+        htm+=' <label class="control-label col-sm-5"> <span class="text-danger">*</span>密码：</label>';
+        htm+='<div class="col-sm-1"></div>';
+        htm+=' <div class="col-sm-16">';
+        htm+='   <input type="password" class="form-control required"  maxlength="16" minlength="6"  name="userkey" id="password" >';
+        htm+='  </div>';
+        htm+=' </div>';
+        htm+='<div class="form-group" id="pass2">';
+        htm+=' <label class="control-label col-sm-5"> <span class="text-danger">*</span>重复密码：</label>';
+        htm+='  <div class="col-sm-1"></div>';
+        htm+=' <div class="col-sm-16">';
+        htm+='   <input type="password" class="form-control required" equalTo="#password" name="repassword" id="repassword">';
+        htm+='  </div>';
+        htm+='  </div>';
+        $("#user").after(htm);
+
+    }
+    var num=0;
+    function submanager(){
+        if($("#addForm").valid()){
+            $.ajax({
+                type: 'post',
+                url:'checkManagerExist.htm?username='+$("#username").val()+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95",
+                async:false,
+                success: function(data) {
+                    if (data!=null&&data!='') {
+                        $("#usertip").html('<label for="username" generated="true" class="error" style="display: inline-block;">管理员名称已存在</label>');
+                        $("#username").addClass('error');
+                    } else {
+                        $("#usertip").html('');
+                        $("#username").removeClass('error');
+                        $("#addForm").submit();
+                    }
+                }
+            });
+        }
+    }
+
+    function subEditManager(){
+        var managerId=$("#editid").val();
+        if($("#editForm").valid()){
+            $.ajax({
+                type: 'post',
+                url:'checkManagerExist.htm?username='+$("#editusername").val()+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95",
+                async:false,
+                success: function(data) {
+                    if (data != null && data != "") {
+                        if(managerId == data.id){
+                            $("#editusertip").html('');
+                            $("#editusername").removeClass('error');
+                            $("#editForm").submit();
+                        }else{
+                            $("#editusertip").html('<label for="username" generated="true" class="error" style="display: inline-block;">管理员名称已存在</label>');
+                            $("#editusername").addClass('error');
+                        }
+                    } else {
+                        $("#editusertip").html('');
+                        $("#editusername").removeClass('error');
+                        $("#editForm").submit();
+                    }
+
+                }
+            });
+        }
+    }
+    function saveChoooseImage(url) {
+        if(typeof (url) != 'string') {
+            url = url[0];
+        }
+        if(url.indexOf(',')!=-1){
+            url=url.substring(0,url.indexOf(','));
+        }
+        $("#img").attr("src",url);
+        $("#photoImg").val(url);
+
+    }
+
+    function saveChoooseImage(url) {
+        if(typeof (url) != 'string') {
+            url = url[0];
+        }
+        if(url.indexOf(',')!=-1){
+            url=url.substring(0,url.indexOf(','));
+        }
+        $("#img").attr("src",url);
+        $("#photoImg").val(url);
+        $("#editimg").attr("src",url);
+        $("#editphotoImg").val(url);
+
+    }
+
+
+    /**加载权限列表*/
+    function loadAuthority(){
+        $.post("queryAllAuthority.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95",function(data){
+            var options = "";
+            for( var i=0; i<data.length; i++){
+                var auth=data[i];
+                options +=  "<option value='"+auth.id+"'>"+auth.designation+"</option>";
+            }
+            $('#auth_list_s').html(options);
+            /* 为选定的select下拉菜单开启搜索提示 END */
+            $('select[data-live-search="true"]').select2();
+        });
+
+
+    }
+
+    /**加载编辑权限列表*/
+    function loadEditAuthority(){
+        $.post("queryAllAuthority.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95",function(data){
+            var options = "";
+            for( var i=0; i<data.length; i++){
+                var auth=data[i];
+                options +=  "<option value='"+auth.id+"'>"+auth.designation+"</option>";
+            }
+            $('#editauth_list_s').html(options);
+            /* 为选定的select下拉菜单开启搜索提示 END */
+            $('select[data-live-search="true"]').select2();
+        });
+
+
+    }
+
+    function openedit(authorId){
+        $("#editusername").val('');
+        $("#editmobile").val('');
+        $("#editimg").attr("src",'');
+        $("#editphotoImg").val('');
+        $("#editid").val('');
+        $("input[name=flag]:eq(0)").attr("checked",'checked');
+        $('#editForm').attr('action', 'updateManager.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95');
+        doSearchManager(authorId);
+        loadEditAuthority();
+        $('#editManager').modal('show');
+        $('#editid').val(authorId);
+
+        $("#pass1").remove();
+        $("#pass2").remove();
+        $("#editForm").validate();
+    }
+
+
+    function doSearchManager(id){
+        $.post("queryManagerById.htm?id="+id+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95",function(data){
+            $.post("queryAuthorByManagerId.htm?mid="+data.id+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95",function(auth){
+                $("#editusername").val(data.username);
+                $("#editmobile").val(data.mobile);
+                $("#editimg").attr("src",data.photoImg);
+                $("#editphotoImg").val(data.photoImg);
+                $("#editid").val(data.id);
+                $("input[name=flag]:eq("+data.flag+")").attr("checked",'checked');
+                $("#editauth_list_s").val(auth.authorityId);
+                $('select[data-live-search="true"]').select2();
+            });
+        });
+    }
+
+    function doEditSearchManager(id){
+        $.post("queryManagerById.htm?id="+id+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95",function(data){
+            $.post("queryAuthorByManagerId.htm?mid="+data.id+"&CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95",function(auth){
+                $("#editusername").val(data.username);
+                $("#editmobile").val(data.mobile);
+                $("#editimg").attr("src",data.photoImg);
+                $("#editphotoImg").val(data.photoImg);
+                $("#editid").val(data.id);
+                $("input[name=flag]:eq("+data.flag+")").attr("checked",'checked');
+                $("#editauth_list_s").val(auth.authorityId);
+                $('select[data-live-search="true"]').select2();
+            });
+        });
+    }
+
+    function delmanager(id){
+        showDeleteOneConfirmAlert('deleteManager.htm?CSRFToken=ebe9465c-e460-45d5-bdc3-8220f9ed7f95&managerId='+id,'确定要删除此管理员吗？');
+    }
+
+    function batchManager(){
+        showDeleteBatchConfirmAlert('delForm','managerid','确定要删除所选中的管理员吗？');
+    }
+
+</script>
+</body>
+</html>

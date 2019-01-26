@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+	<!--楼层设置 begin by AlexYao-->
+	<screen name="floorManager">
+		<section>
+			<actions>
+				<service service-name="findFloors" auto-field-map="parameters" />
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label text="内容管理"></label>
+								<label style="sub-title" text="楼层设置（共${floorListSize}条）"></label>
+							</column>
+							<column style="breadcrumb">
+								<link target="main" text="内容管理" style="breadcrumb"/>
+								<link target="floorManager" text="楼层设置" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="FLOOR" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/floor/floorList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看楼层设置的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--楼层设置 end by AlexYao -->
+	<!--楼层标签 begin by AlexYao-->
+	<screen name="floorLabelManager">
+		<section>
+			<actions>
+				<service service-name="findFloorLabels" auto-field-map="parameters" />
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label text="内容管理"></label>
+								<label style="sub-title" text="楼层标签（共${floorLabelListSize}条）"></label>
+							</column>
+							<column style="breadcrumb">
+								<link target="main" text="内容管理" style="breadcrumb"/>
+								<link target="floorManager" text="楼层设置" style="breadcrumb"/>
+								<link target="floorLabelManager" text="楼层标签" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="FLOOR_LABEL" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/floor/floorLabelList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看楼层标签的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--楼层标签 end by AlexYao -->
+	<!--楼层标签商品 begin by AlexYao-->
+	<screen name="floorLabelProductManager">
+		<section>
+			<actions>
+				<service service-name="findFloorLabelProducts" auto-field-map="parameters" />
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label text="内容管理"></label>
+								<label style="sub-title" text="标签商品（共${floorLabelProductListSize}条）"></label>
+							</column>
+							<column style="breadcrumb">
+								<link target="main" text="内容管理" style="breadcrumb"/>
+								<link target="floorManager" text="楼层设置" style="breadcrumb"/>
+								<link target="floorLabelManager" text="楼层标签" style="breadcrumb"/>
+								<link target="floorLabelProductManager" text="标签商品" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="FLOOR_LABEL_PRODUCT" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/floor/floorLabelProductList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看楼层标签商品的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--楼层标签商品 end by AlexYao -->
+	<!--楼层标签品牌 begin by AlexYao-->
+	<screen name="floorLabelBrandManager">
+		<section>
+			<actions>
+				<service service-name="findFloorLabelBrands" auto-field-map="parameters" />
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label text="内容管理"></label>
+								<label style="sub-title" text="标签品牌（共${floorLabelBrandListSize}条）"></label>
+							</column>
+							<column style="breadcrumb">
+								<link target="main" text="内容管理" style="breadcrumb"/>
+								<link target="floorManager" text="楼层设置" style="breadcrumb"/>
+								<link target="floorLabelManager" text="楼层标签" style="breadcrumb"/>
+								<link target="floorLabelBrandManager" text="标签品牌" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="FLOOR_LABEL_BRAND" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/floor/floorLabelBrandList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看楼层标签品牌的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--楼层标签品牌 end by AlexYao -->
+	<!--楼层标签广告 begin by AlexYao-->
+	<screen name="floorLabelBannerManager">
+		<section>
+			<actions>
+				<script location="component://content/webapp/content/WEB-INF/actions/content/LinkTypeQuery.groovy" />
+				<service service-name="findFloorLabelBanners" auto-field-map="parameters" />
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label text="内容管理"></label>
+								<label style="sub-title" text="标签广告（共${floorLabelBannerListSize}条）"></label>
+							</column>
+							<column style="breadcrumb">
+								<link target="main" text="内容管理" style="breadcrumb"/>
+								<link target="floorManager" text="楼层设置" style="breadcrumb"/>
+								<link target="floorLabelManager" text="楼层标签" style="breadcrumb"/>
+								<link target="floorLabelBannerManager" text="标签广告" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="FLOOR_LABEL_BRAND" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/floor/floorLabelBannerList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看楼层标签广告的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--楼层标签广告 end by AlexYao -->
+	<!--楼层商品 begin by AlexYao-->
+	<screen name="floorProductManager">
+		<section>
+			<actions>
+				<service service-name="findFloorProducts" auto-field-map="parameters" />
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label text="内容管理"></label>
+								<label style="sub-title" text="楼层商品（共${floorProductListSize}条）"></label>
+							</column>
+							<column style="breadcrumb">
+								<link target="main" text="内容管理" style="breadcrumb"/>
+								<link target="floorManager" text="楼层设置" style="breadcrumb"/>
+								<link target="floorProductManager" text="楼层商品" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="FLOOR_LABEL_PRODUCT" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/floor/floorProductList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看楼层商品的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--楼层商品 end by AlexYao -->
+	<!--楼层品牌 begin by AlexYao-->
+	<screen name="floorBrandManager">
+		<section>
+			<actions>
+				<service service-name="findFloorBrands" auto-field-map="parameters" />
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label text="内容管理"></label>
+								<label style="sub-title" text="楼层品牌（共${floorBrandListSize}条）"></label>
+							</column>
+							<column style="breadcrumb">
+								<link target="main" text="内容管理" style="breadcrumb"/>
+								<link target="floorManager" text="楼层设置" style="breadcrumb"/>
+								<link target="floorBrandManager" text="楼层品牌" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="FLOOR_LABEL_BRAND" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/floor/floorBrandList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看楼层品牌的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--楼层品牌 end by AlexYao -->
+	<!--楼层广告 begin by AlexYao-->
+	<screen name="floorBannerManager">
+		<section>
+			<actions>
+				<script location="component://content/webapp/content/WEB-INF/actions/content/LinkTypeQuery.groovy" />
+				<service service-name="findFloorBanners" auto-field-map="parameters" />
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label text="内容管理"></label>
+								<label style="sub-title" text="楼层广告（共${floorBannerListSize}条）"></label>
+							</column>
+							<column style="breadcrumb">
+								<link target="main" text="内容管理" style="breadcrumb"/>
+								<link target="floorManager" text="楼层设置" style="breadcrumb"/>
+								<link target="floorBannerManager" text="楼层广告" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="FLOOR_LABEL_BRAND" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/floor/floorBannerList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要查看楼层广告的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!--楼层广告 end by AlexYao -->
+</screens>

@@ -1,0 +1,7 @@
+"priceWithoutTax"
+"priceWithTax"
+"taxAmount"
+"createdDate"
+"createdByUserLogin"
+"lastModifiedDate"
+"lastModifiedByUserLogin"

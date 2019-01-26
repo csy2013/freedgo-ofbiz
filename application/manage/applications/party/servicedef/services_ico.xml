@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Member Component Services</description>
+    <vendor>ICO</vendor>
+    <version>1.0</version>
+
+    <!-- begin add Wcy 会员列表数据 at 2016.01.06 -->
+    <service name="findmember" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="findmember" auth="true">
+        <description>General Member Find Service, Used in the findmember page in the Member Manager, etc</description>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="INOUT" optional="true"/>
+        <attribute name="sortType" type="String" mode="INOUT" optional="true"/>
+        <!-- begin 查询字段 -->
+        <attribute name="nickname" type="String" mode="IN" optional="true"/>
+        <attribute name="telphone" type="String" mode="IN" optional="true"/>
+        <attribute name="communtiy" type="String" mode="IN" optional="true"/>
+        <!-- end 查询字段 -->
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    <!-- end add Wcy 会员列表数据 at 2016.01.06 -->
+
+    <!-- begin add Wcy 自动登录接口 at 2016.01.08 -->
+    <service name="loginSync" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="loginSync" auth="false">
+        <description>loginSync</description>
+        <attribute mode="IN" name="session" optional="true" type="javax.servlet.http.HttpSession"/>
+        <attribute name="sign" type="String" mode="IN"/>
+        <attribute name="phone" type="String" mode="IN"/>
+        <attribute name="token" type="String" mode="IN"/>
+        <attribute name="status" type="String" mode="OUT"/>
+        <attribute name="info" type="String" mode="OUT"/>
+        <attribute name="USERNAME" type="String" mode="OUT" optional="true"/>
+        <attribute name="PASSWORD" type="String" mode="OUT" optional="true"/>
+    </service>
+    <!-- end add Wcy 自动登录接口 at 2016.01.08 -->
+
+    <!-- begin add Wcy 社区同步接口 at 2016.01.08 -->
+    <service name="communitySync" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="communityListSync"
+             auth="false">
+        <description>communitySync</description>
+        <attribute name="sign" type="String" mode="IN" optional="true"/>
+        <attribute name="token" type="String" mode="IN" optional="true"/>
+        <attribute name="status" type="String" mode="OUT"/>
+        <attribute name="info" type="String" mode="OUT"/>
+    </service>
+    <!-- end add Wcy 社区同步接口 at 2016.01.08 -->
+
+    <!-- begin add by Wcy 调整账户余额 at 2016.01.09 -->
+    <service name="adjustAmount" engine="java" location="com.qihua.ofbiz.member.MemberService"
+             invoke="adjustAmount" auth="true">
+        <description>adjustAmount</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="amount" type="BigDecimal" mode="IN"/>
+        <attribute name="adjustCause" type="String" mode="IN"/>
+        <!--<attribute name="status" type="String" mode="OUT"/>-->
+        <!--<attribute name="info" type="String" mode="OUT"/>-->
+    </service>
+    <!-- end add by Wcy 调整账户余额 at 2016.01.09 -->
+
+    <!-- begin add by Wcy 账户余额明细 at 2016.01.10-->
+    <service name="adjustAmountHistory" engine="java" location="com.qihua.ofbiz.member.MemberService"
+             invoke="adjustAmountHistory" auth="true">
+        <description>adjustAmountHistory</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="partyAccountDetailList" type="List" mode="OUT"/>
+    </service>
+    <!-- end add by Wcy 账户余额明细 at 2016.01.10-->
+
+    <!-- begin add by Wcy 用户个人中心 at 2016.01.10-->
+    <service name="userInfo" engine="java" location="com.qihua.ofbiz.member.MemberService"
+             invoke="userInfo" auth="false">
+        <description>userInfo</description>
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="resultData" type="Map" mode="OUT"/>
+    </service>
+    <!-- end add by Wcy 用户个人中心 at 2016.01.10-->
+    
+    <!--添加积分规则  begin by gss 2016-1-11-->
+    <service name="createPartyIntegral" engine="java" location="com.qihua.ofbiz.integral.IntegralServices" invoke="createPartyIntegral" auth="true">
+        <attribute name="integral" type="String" mode="IN" optional="true"/>
+    </service>
+    <!-- 获取产品分类表数据 -->
+    <service name="getProductCategoryList" engine="java"
+             location="org.ofbiz.product.product.ProductServices" invoke="getProductCategoryList"
+             auth="false">
+    	<attribute name="productCategoryList" type="List" mode="OUT"/>  
+    </service>
+
+
+    
+    <!--查询会员等级  begin by gss 2016-1-11-->
+    <service name="findPartyLevel" engine="java" location="com.qihua.ofbiz.integral.IntegralServices" invoke="queryAllLevelType" auth="true">
+        <attribute name="option" type="String" mode="OUT"/>
+    </service>
+    <!--shuzu会员等级  begin by gss 2016-1-11-->
+    <service name="getAllLevelType" engine="java" location="com.qihua.ofbiz.integral.IntegralServices" invoke="getAllLevelType" auth="true">
+        <attribute name="level" type="List" mode="OUT"/>
+    </service>
+    <!--会员会员类型 begin by gss 2016-1-11-->
+    <service name="getLevelType" engine="java" location="com.qihua.ofbiz.integral.IntegralServices" invoke="getLevelType" auth="true">
+        <attribute name="levelId" type="String" mode="IN"/>
+        <attribute name="partyLevel" type="org.ofbiz.entity.GenericValue" mode="OUT" />
+    </service>
+    
+    <!--新增会员等级规则  begin by gss 2016-1-20-->
+    <service name="createPartyLevelType" engine="java" location="com.qihua.ofbiz.partylevel.PartyLevelTypeServices" invoke="createPartyLevelType" auth="true">
+        <attribute name="levelName" type="String" mode="IN" optional="true"/>
+        <attribute name="partyType" type="String" mode="IN" optional="true"/>
+        <attribute name="levelDescrption" type="String" mode="IN" optional="true"/>
+        <attribute name="levelExperience" type="String" mode="IN" optional="true"/>
+        <attribute name="levelDiscount" type="String" mode="IN" optional="true"/>
+    </service>
+    <!-- 新增会员等级规则 end by gss 2016-1-20 -->
+    
+    <!--添加修改会员等级规则  begin by gss 2016-1-20-->
+    <service name="updatePartyLevelType" engine="java" location="com.qihua.ofbiz.partylevel.PartyLevelTypeServices" invoke="updatePartyLevelType" auth="true">
+        <attribute name="levelId" type="String" mode="IN" optional="true"/>
+        <attribute name="levelName" type="String" mode="IN" optional="true"/>
+        <attribute name="levelDescrption" type="String" mode="IN" optional="true"/>
+        <attribute name="levelExperience" type="String" mode="IN" optional="true"/>
+        <attribute name="levelDiscount" type="String" mode="IN" optional="true"/>
+    </service>
+    <!-- 添加修改会员等级规则end by gss 2016-1-20 -->
+    
+    <!--删除会员等级规则  begin by gss 2016-1-20-->
+    <service name="deletePartyLevelType" engine="java" location="com.qihua.ofbiz.partylevel.PartyLevelTypeServices" invoke="deletePartyLevelType" auth="true">
+        <attribute name="levelId" type="String" mode="IN" optional="true"/>
+    </service>
+    <!-- 删除会员等级规则end by gss 2016-1-20 -->
+    
+    <!--删除会员等级规则  begin by gss 2016-1-20-->
+    <service name="find_PartyLevel" engine="java" location="com.qihua.ofbiz.partylevel.PartyLevelTypeServices" invoke="findPartyLevel" auth="true">
+        <attribute name="levelId" type="String" mode="IN" optional="true"/>
+        <attribute name="flag" type="Boolean" mode="OUT" optional="true"/>
+    </service>
+    <!-- 删除会员等级规则end by gss 2016-1-20 -->
+    
+
+    <!-- begin add by Wcy 用户积分改变 at 2016.01.21 -->
+    <service name="partyScoreChange" engine="java" location="com.qihua.ofbiz.member.MemberService"
+             invoke="partyScoreChange" auth="false">
+       <!--  <attribute name="sign" type="String" mode="IN"/> -->
+        <attribute name="token" type="String" mode="IN" optional="true"/>
+        <!-- 变动方向 -->
+        <attribute name="changedir" type="String" mode="IN" optional="true"/>
+        <!-- 积分值 -->
+        <attribute name="point" type="Integer" mode="IN" optional="true"/>
+        <!-- 积分发生订单 -->
+        <attribute name="vouchercode" type="String" mode="IN" optional="true"/>
+        <!-- 积分发生类型 1 购物奖励 2购物消耗 3购物退货 -->
+        <attribute name="type" type="String" mode="IN" optional="true"/>
+        <attribute name="info" type="String" mode="OUT" optional="true"/>
+        <attribute name="status" type="Boolean" mode="OUT" optional="true"/>
+    </service>
+    <!-- end add by Wcy 用户积分改变 at 2016.01.21 -->
+    
+    <!-- 商家新增 add by qianjin at 2016.01.25-->
+    <service name="businessAdd" engine="java" 
+			 location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="businessAdd" auth="false">
+        <description>businessAdd</description>
+        <attribute name="memberId" type="String" mode="IN"/>
+        <attribute name="partyName" type="String" mode="IN"/>
+        <attribute name="province" type="String" mode="IN"/>
+        <attribute name="city" type="String" mode="IN" optional="true"/>
+        <attribute name="county" type="String" mode="IN" optional="true"/>
+        <attribute name="address" type="String" mode="IN"/>
+        <attribute name="statusId" type="String" mode="IN"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="companyName" type="String" mode="IN"/>
+        <attribute name="companyCreateDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="businessEndDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="leageName" type="String" mode="IN"/>
+        <attribute name="leageTel" type="String" mode="IN" optional="true"/>
+        <attribute name="leageEmail" type="String" mode="IN" optional="true"/>
+        <attribute name="leageCardNo" type="String" mode="IN" optional="true"/>
+        <!--<attribute name="leageImgContentId" type="String" mode="IN" optional="true"/>-->
+        <!--合同附件-->
+        <attribute name="contractDoc" type="String" mode="IN" optional="true"/>
+        <attribute name="idCardProsImg" type="String" mode="IN" optional="true"/>
+        <attribute name="idCardConsImg" type="String" mode="IN" optional="true"/>
+        <!--相关资质（酒水）-->
+        <attribute name="qualifImg" type="String" mode="IN" optional="true"/>
+        <attribute name="socialCardNo" type="String" mode="IN" optional="true"/>
+        <attribute name="logoImg" type="String" mode="IN" />
+        <!--营业执照-->
+        <attribute name="busiImgContentId" type="String" mode="IN" optional="true"/>
+        <attribute name="busiProvince" type="String" mode="IN" optional="true"/>
+        <attribute name="busiCity" type="String" mode="IN" optional="true"/>
+        <attribute name="busiCounty" type="String" mode="IN" optional="true"/>
+        <attribute name="busiAddress" type="String" mode="IN" optional="true"/>
+        <attribute name="bankAcountName" type="String" mode="IN" optional="true"/>
+        <attribute name="bankAccount" type="String" mode="IN" optional="true"/>
+        <attribute name="bankBranchName" type="String" mode="IN" optional="true"/>
+        <attribute name="bankBranchAcount" type="String" mode="IN" optional="true"/>
+        <attribute name="branchProvince" type="String" mode="IN" optional="true"/>
+        <attribute name="branchCity" type="String" mode="IN" optional="true"/>
+        <attribute name="branchCounty" type="String" mode="IN" optional="true"/>
+        <attribute name="partyCategoryArrs" type="String" mode="IN" optional="true"/>
+        <attribute name="partyBrandArrs" type="String" mode="IN" optional="true"/>
+        <attribute name="success" type="String" mode="IN" optional="true"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 商家修改-->
+    <service name="businessEdit" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="businessEdit" auth="false">
+        <description>businessAdd</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="auditStatus" type="String" mode="IN"/>
+        <attribute name="memberId" type="String" mode="IN"/>
+        <attribute name="partyName" type="String" mode="IN"/>
+        <attribute name="province" type="String" mode="IN"/>
+        <attribute name="city" type="String" mode="IN" optional="true"/>
+        <attribute name="county" type="String" mode="IN" optional="true"/>
+        <attribute name="address" type="String" mode="IN"/>
+        <attribute name="statusId" type="String" mode="IN"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="companyName" type="String" mode="IN"/>
+        <attribute name="companyCreateDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="businessEndDate" type="Timestamp" mode="IN" optional="true"/>
+        <attribute name="leageName" type="String" mode="IN"/>
+        <attribute name="leageTel" type="String" mode="IN" optional="true"/>
+        <attribute name="leageEmail" type="String" mode="IN" optional="true"/>
+        <attribute name="leageCardNo" type="String" mode="IN" optional="true"/>
+        <!--<attribute name="leageImgContentId" type="String" mode="IN" optional="true"/>-->
+        <!--合同附件-->
+        <attribute name="contractDoc" type="String" mode="IN" optional="true"/>
+        <attribute name="idCardProsImg" type="String" mode="IN" optional="true"/>
+        <attribute name="idCardConsImg" type="String" mode="IN" optional="true"/>
+        <!--相关资质（酒水）-->
+        <attribute name="qualifImg" type="String" mode="IN" optional="true"/>
+        <attribute name="socialCardNo" type="String" mode="IN" optional="true"/>
+        <attribute name="logoImg" type="String" mode="IN" />
+
+        <attribute name="busiImgContentId" type="String" mode="IN" optional="true"/>
+        <attribute name="busiProvince" type="String" mode="IN" optional="true"/>
+        <attribute name="busiCity" type="String" mode="IN" optional="true"/>
+        <attribute name="busiCounty" type="String" mode="IN" optional="true"/>
+        <attribute name="busiAddress" type="String" mode="IN" optional="true"/>
+        <attribute name="bankAcountName" type="String" mode="IN" optional="true"/>
+        <attribute name="bankAccount" type="String" mode="IN" optional="true"/>
+        <attribute name="bankBranchName" type="String" mode="IN" optional="true"/>
+        <attribute name="bankBranchAcount" type="String" mode="IN" optional="true"/>
+        <attribute name="branchProvince" type="String" mode="IN" optional="true"/>
+        <attribute name="branchCity" type="String" mode="IN" optional="true"/>
+        <attribute name="branchCounty" type="String" mode="IN" optional="true"/>
+        <attribute name="partyCategoryArrs" type="String" mode="IN" optional="true"/>
+        <attribute name="partyBrandArrs" type="String" mode="IN" optional="true"/>
+        <attribute name="success" type="String" mode="IN" optional="true"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 商家品牌新增修改 add by cc 20180328 begin-->
+    <service name="addProductBrands" engine="java"
+             location="org.ofbiz.product.product.ProductBrandServices" invoke="addProductBrands">
+        <attribute name="productBrandId" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="brandNameAlias" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryIds" type="String" mode="IN" optional="true"/>
+        <attribute name="logoContentId" type="String" mode="IN" optional="true"/>
+        <attribute name="licenseContentId" type="String" mode="IN" optional="true"/>
+
+        <!--<attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>-->
+        <!--<attribute name="_uploadedFile_fileName" type="String" mode="IN" optional="true"/>-->
+        <!--<attribute name="_uploadedFile_contentType" type="String" mode="IN" optional="true"/>-->
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productContentTypeId" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <!-- 商家新增品牌 add by cc  -->
+    <service name="createProductBrand" engine="java"
+             location="org.ofbiz.product.product.ProductBrandServices" invoke="createProductBrand">
+        <!--<attribute name="productBrandId" type="String" mode="IN" optional="true"/>-->
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="brandNameAlias" type="String" mode="IN" optional="true"/>
+        <!--<attribute name="productCategoryIds" type="String" mode="IN" optional="true"/>-->
+        <attribute name="logoContentId" type="String" mode="IN" optional="true"/>
+        <!--<attribute name="licenseContentId" type="String" mode="IN" optional="true"/>-->
+
+        <!--<attribute name="uploadedFile" type="java.nio.ByteBuffer" mode="IN" optional="true"/>-->
+        <!--<attribute name="_uploadedFile_fileName" type="String" mode="IN" optional="true"/>-->
+        <!--<attribute name="_uploadedFile_contentType" type="String" mode="IN" optional="true"/>-->
+        <!--<attribute name="productId" type="String" mode="IN" optional="true"/>-->
+        <!--<attribute name="productContentTypeId" type="String" mode="IN" optional="true"/>-->
+
+    </service>
+
+
+    <!-- 品牌新增 -->
+    <service name="brandsAdd" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="brandsAdd" auth="false">
+        <description>brandsAdd</description>
+        <attribute name="brandName" type="String" mode="IN"/>
+        <attribute name="logoContentId" type="String" mode="IN"/>
+        <attribute name="licenseContentId" type="String" mode="IN"/>
+        <attribute name="productCategoryIds" type="String" mode="IN"/>
+
+        <attribute name="success" type="String" mode="IN" optional="true"/>
+        <attribute name="error" type="String" mode="IN" optional="true"/>
+    </service>
+
+
+
+    
+    <!-- 人员列表 add by qianjin at 2016.01.25-->
+    <service name="getPersonListForModal" engine="java" 
+			 location="org.ofbiz.party.party.PartyServices"
+             invoke="getPersonListForModal" auth="false">
+        <description>getPersonListForModal</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="name" type="String" mode="IN" optional="true"/>
+        <attribute name="mobile" type="String" mode="IN" optional="true"/>
+        <attribute name="roleTypeId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+    
+    <!-- 检查该用户是否已是商家 add by qianjin 2016.01.26 -->
+    <service name="checkPartyIsBusiness" engine="java" 
+			 location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="checkPartyIsBusiness" auth="false">
+        <description>checkPartyIsBusiness</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="equals" type="String" mode="IN" optional="true"/>
+        <attribute name="status" type="Integer" mode="OUT"/>
+        <attribute name="recordsList" type="List" mode="OUT" optional="true"/>
+    </service>
+    
+    
+    <!-- 商家列表 add by qianjin at 2016.01.27-->
+    <service name="getBusinessList" engine="java" 
+			 location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="getBusinessList" auth="false">
+        <description>getBusinessList</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="partyName" type="String" mode="IN" optional="true"/>
+        <attribute name="leageName" type="String" mode="IN" optional="true"/>
+        <attribute name="auditStatus" type="String" mode="IN" optional="true"/>
+        
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 待审核商家列表-->
+    <service name="getBusinessToAuditListForJson" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="getBusinessToAuditList" auth="false">
+        <description>待审核商家列表</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="partyName" type="String" mode="IN" optional="true"/>
+        <attribute name="leageName" type="String" mode="IN" optional="true"/>
+        <attribute name="auditStatus" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- add by cc 3/22 -->
+    <!-- 商家品牌列表查询 -->
+    <service name="getBusinessBrandList" engine="java"
+             location="com.qihua.ofbiz.business.BusinessBrandServices"
+             invoke="getBusinessBrandList" auth="false">
+        <description>getBusinessBrandList</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="auditStatus" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 查询所有商家提交审核的品牌 -->
+    <service name="getPartyReviewBrandList" engine="java"
+             location="com.qihua.ofbiz.business.BusinessBrandServices"
+             invoke="getPartyReviewBrandList" auth="false">
+        <description>getBusinessBrandList</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="storeName" type="String" mode="IN" optional="true"/>
+        <attribute name="auditStatus" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <service name="getAllBusinessBrandList" engine="java"
+             location="com.qihua.ofbiz.business.BusinessCommonServices"
+             invoke="getAllBusinessBrandList" auth="false">
+        <description>getBusinessBrandList</description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="IN" optional="true"/>
+        <attribute name="sortType" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="auditStatus" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT" />
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+
+    <!-- 商家修改是否启用状态-->
+    <service name="editBusinessIsUse" engine="java" 
+			 location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="editBusinessIsUse" auth="false">
+        <description>editBusinessIsUse</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="isUse" type="String" mode="IN"/>
+    </service>
+    
+    <!-- 商家详情-->
+    <service name="getBusinessInfoById" engine="java" 
+			 location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="getBusinessInfoById" auth="false">
+        <description>getBusinessInfoById</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="party" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="partyGroup" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="partyBusiness" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="partyBusinessAudit" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="partyProductCategory" type="List" mode="OUT" optional="true"/>
+        <attribute name="partyBusinessBrand" type="List" mode="OUT" optional="true"/>
+        <attribute name="partyRelationShip" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true"/>
+        <attribute name="contractDocUrl" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!--回显商家信息-->
+    <service name="businessEditDetail" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="businessEditDetail" auth="false">
+        <description>回显商家信息</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="party" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+        <attribute name="partyGroup" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+        <attribute name="partyBusiness" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+        <attribute name="partyBusinessAudit" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+        <attribute name="partyRelationShip" type="org.ofbiz.entity.GenericValue" mode="OUT" />
+        <attribute name="partyProductCategory" type="List" mode="OUT" optional="true"/>
+        <attribute name="partyBusinessBrand" type="List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 商家审核-->
+    <service name="businessAudit" engine="java" 
+			 location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="businessAudit" auth="false">
+        <description>businessAudit</description>
+        <attribute name="businessId" type="String" mode="IN"/>
+        <attribute name="auditStatus" type="String" mode="IN"/>
+        <attribute name="auditContent" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="businessAuditPass" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="businessAuditPass" auth="false">
+        <description>商家审核通过</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="settingType" type="String" mode="IN"/>
+        <attribute name="daysNum" type="String" mode="IN"/>
+        <attribute name="commission" type="String" mode="IN"/>
+    </service>
+
+    <service name="updateBusinessSettle" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="updateBusinessSettle" auth="false">
+        <description>修改结算信息</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="settingType" type="String" mode="IN"/>
+        <attribute name="daysNum" type="String" mode="IN"/>
+        <attribute name="commission" type="String" mode="IN"/>
+    </service>
+
+    <service name="businessAuditNoPass" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="businessAuditNoPass" auth="false">
+        <description>商家审核不通过</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="refuseReason" type="String" mode="IN"/>
+    </service>
+    
+    <!-- 商家拒绝信息-->
+    <service name="businessRefuseReason" engine="java" 
+			 location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="businessRefuseReason" auth="false">
+        <description>businessRefuseReason</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="auditContent" type="String" mode="OUT"/>
+    </service>
+
+    <!--重新提交审核-->
+    <service name="commitAudit" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="commitAudit" auth="false">
+        <description>commitAudit</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+    </service>
+
+    <!--获取商家结算信息-->
+    <service name="getSettleSettingInfo" engine="java"
+             location="com.qihua.ofbiz.business.BusinessServices"
+             invoke="getSettleSettingInfo" auth="false">
+        <description>获取商家结算信息</description>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="partySettleSetting" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+
+     <!--积分使用规则  begin by gss 2016-1-26-->
+    <service name="updatePartyIntegralSet" engine="java" location="com.qihua.ofbiz.integral.PartyIntegralSetServices" invoke="updatePartyIntegralSet" auth="true">
+        <attribute name="integralValue" type="String" mode="IN"/>
+        <attribute name="partyIntegralSetId" type="String" mode="IN"/>
+    </service>
+    <!-- 积分使用规则 -->
+
+    <!-- begin add by Wcy 收货地址 at 2016.01.28 -->
+    <service name="partyPostalAddress" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="partyPostalAddress" auth="false">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="resultData " type="Map" mode="OUT"/>
+    </service>
+    <!-- end add by Wcy 收货地址 at 2016.01.28 -->
+    
+    <!-- 商家信息Excel单元格校验通用方法 -->
+    <service name="businessValidateCell" engine="java"
+             location="com.qihua.ofbiz.business.BusinessValidateCell" 
+             invoke="validateCellData" auth="false">
+             <attribute name="curRow" type="Integer" mode="IN"/> 
+             <attribute name="curCol" type="Integer" mode="IN" /> 
+             <attribute name="colCell" type="org.apache.poi.ss.usermodel.Cell" mode="IN" optional="true"/> 
+             <attribute name="entityName" type="String" mode="IN"/> 
+             <attribute name="headName" type="String" mode="IN"/> 
+             <attribute name="curColType" type="String" mode="IN"/> 
+             <attribute name="curColCode" type="String" mode="IN"/> 
+             <attribute name="columnRow" type="org.apache.poi.ss.usermodel.Row" mode="IN" optional="true"/> 
+             <attribute name="curColMaxlength" type="String" mode="IN"/> 
+             <attribute name="parseXmlUtil" type="com.qihua.ofbiz.excel.ParseXMLUtil" mode="IN" optional="true"/> 
+             <attribute name="errorString" type="String" mode="OUT"/> 
+    </service>
+    
+    <!-- 选择地区页面接口 -->
+    <service name="getAllStateList" engine="java"
+             location="com.qihua.ofbiz.member.MemberService" 
+             invoke="getAllStateList" auth="false">
+             <attribute name="provinceId" type="String" mode="IN" optional="true"/> 
+             <attribute name="cityId" type="String" mode="IN" optional="true"/> 
+             <attribute name="resultData" type="List" mode="OUT"/> 
+    </service>
+    
+    <!-- 新增/编辑收货地址页面接口 -->
+     <service name="createOrUpdatePostalAddressAndPurposes" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="createOrUpdatePostalAddressAndPurposes">
+        <description>Create postal address, purposes and set them defaults</description>
+        <attribute name="userLoginId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="id" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="name" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="defaultId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="telphone" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="location" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="stateProvinceGeoId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="city" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="countyGeoId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="resultData" mode="OUT" type="Map" optional="true"></attribute>
+    </service>
+    
+    <!-- 删除收货地址页面接口 -->
+     <service name="deletePostalAddress" engine="java" 
+     location="com.qihua.ofbiz.member.MemberService" 
+     invoke="deletePostalAddress">
+        <description>delete postal address, purposes and set them defaults</description>
+        <attribute name="userLoginId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="delId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="resultData" mode="OUT" type="Map" optional="true"></attribute>
+    </service>
+    
+    <!-- 保存积分操作记录	add by qianjin 2016.03.09 -->
+     <service name="savePartyIntegralHistory" engine="java" 
+     location="com.qihua.ofbiz.integral.IntegralServices" 
+     invoke="savePartyIntegralHistory">
+        <description>savePartyIntegralHistory</description>
+        <attribute name="partyId" mode="IN" type="String"></attribute>
+        <attribute name="integralValue" mode="IN" type="BigDecimal"></attribute>
+        <attribute name="getWay" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="description" mode="IN" type="String" optional="true"></attribute>
+    </service>
+
+	 <!-- 积分操作	add by qianjin 2016.03.14 -->
+     <service name="partyIntegralChange" engine="java" 
+     location="com.qihua.ofbiz.integral.IntegralServices" 
+     invoke="partyIntegralChange">
+        <description>partyIntegralChange</description>
+        <attribute name="partyId" mode="IN" type="String"></attribute>
+        <attribute name="integralValue" mode="IN" type="BigDecimal"></attribute>
+        <!-- 增减方式  增加：plus  减少：minus -->
+        <attribute name="changedir" mode="IN" type="String"></attribute>
+        <!-- 积分发生类型 1：购物奖励 2：购物消耗 3：购物退货 -->
+        <attribute name="type" mode="IN" type="String"></attribute>
+        <attribute name="getWay" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="description" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="orderId" mode="IN" type="String" optional="true"></attribute>
+    </service>
+    
+    <!-- 会员消费查询	add by gss 2016.03.30 -->
+    <service name="findPartyConsumption" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="findPartyConsumption" auth="true">
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="userLoginId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="nickname" type="String" mode="INOUT" optional="true"/>
+        <attribute name="mobile" type="String" mode="INOUT" optional="true"/>
+        <attribute name="orderId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="startDate" type="String" mode="INOUT" optional="true"/>
+        <attribute name="endDate" type="String" mode="INOUT" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="partyConsumptionList" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="partyConsumptionListSize" type="Long" mode="OUT" optional="true"/>
+        <attribute name="paramList" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true" />
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 会员创建	add by gss 2016.03.30 -->
+    <service name="createCustomerforIco" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="createCustomerforIco" auth="true">
+        <attribute name="partyCategory" type="String" mode="IN" optional="true"/><!-- 会员类型 -->
+        <attribute name="name" type="String" mode="IN" optional="true"/><!-- 真实姓名 -->
+        <attribute name="nickname" type="String" mode="IN" optional="true"/><!-- 昵称 -->
+        <attribute name="mobile" type="String" mode="IN" optional="true"/><!-- 电话、联系方式 -->
+        <attribute name="gender" type="String" mode="IN" optional="true"/><!-- 性别 -->
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/><!-- 用户名 -->
+        <attribute name="currentPassword" type="String" mode="IN" optional="true"/><!--密码 -->
+        <attribute name="partyId" type="String" mode="IN" optional="true"/><!--会员编码-->
+        <!-- 企业会员 -->
+        <attribute name="company_name" type="String" mode="IN" optional="true"/><!-- 企业名称 -->
+        <attribute name="company_nickname" type="String" mode="IN" optional="true"/><!-- 昵称 -->
+        <attribute name="company_mobile" type="String" mode="IN" optional="true"/><!-- 联系方式 -->
+        <attribute name="description" type="String" mode="IN" optional="true"/><!--企业地址 -->
+        <attribute name="company_userLoginId" type="String" mode="IN" optional="true"/><!-- 用户名 -->
+        <attribute name="company_currentPassword" type="String" mode="IN" optional="true"/><!--密码 -->
+        <attribute name="allAddress" type="String" mode="IN" optional="true"/><!--地址 -->
+        <attribute name="status" type="Boolean" mode="OUT" optional="true"/>
+        <attribute name="info" type="String" mode="OUT" optional="true"/>
+    </service>
+    
+    <!-- 会员创建	add by gss 2016.03.30 -->
+    <service name="updateCustomerforIco" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="updateCustomerforIco" auth="true">
+        <attribute name="partyCategory" type="String" mode="IN" optional="true"/><!-- 会员类型 -->
+        <attribute name="partyId" type="String" mode="IN" optional="true"/><!-- 真实姓名 -->
+        <attribute name="name" type="String" mode="IN" optional="true"/><!-- 真实姓名 -->
+        <attribute name="nickname" type="String" mode="IN" optional="true"/><!-- 昵称 -->
+        <attribute name="mobile" type="String" mode="IN" optional="true"/><!-- 电话、联系方式 -->
+        <attribute name="gender" type="String" mode="IN" optional="true"/><!-- 性别 -->
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/><!-- 用户名 -->
+        <attribute name="currentPassword" type="String" mode="IN" optional="true"/><!--密码 -->
+        <!-- 企业会员 -->
+        <attribute name="company_name" type="String" mode="IN" optional="true"/><!-- 企业名称 -->
+        <attribute name="company_nickname" type="String" mode="IN" optional="true"/><!-- 昵称 -->
+        <attribute name="company_mobile" type="String" mode="IN" optional="true"/><!-- 联系方式 -->
+        <attribute name="description" type="String" mode="IN" optional="true"/><!--企业地址 -->
+        <attribute name="company_userLoginId" type="String" mode="IN" optional="true"/><!-- 用户名 -->
+        <attribute name="company_currentPassword" type="String" mode="IN" optional="true"/><!--密码 -->
+        <attribute name="allAddress" type="String" mode="IN" optional="true"/><!--地址 -->
+    </service>
+    
+    <!-- begin add Gss 会员列表数据 at 2016.04.18 -->
+    <service name="findPartymember" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="findPartymember" auth="true">
+        <description>General Member Find Service, Used in the findmember page in the Member Manager, etc</description>
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="sortField" type="String" mode="INOUT" optional="true"/>
+        <attribute name="sortType" type="String" mode="INOUT" optional="true"/>
+        <!-- begin 查询字段 -->
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="mobile" type="String" mode="IN" optional="true"/>
+        <attribute name="partyCategory" type="String" mode="IN" optional="true"/>
+        <attribute name="levelId" type="String" mode="IN" optional="true"/>
+        <attribute name="userLoginId" type="String" mode="IN" optional="true"/>
+        <attribute name="name" type="String" mode="IN" optional="true"/>
+        <!-- end 查询字段 -->
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="recordsList" type="java.util.List" mode="OUT"/>
+        <attribute name="totalSize" type="Integer" mode="OUT"/>
+    </service>
+     <!-- begin add Gss 会员列表数据 at 2016.04.18 -->
+    
+       <!-- 保存积分操作记录	add by qianjin 2016.03.09 -->
+     <service name="findUserloginIdById" engine="java" 
+     location="com.qihua.ofbiz.member.MemberService" 
+     invoke="findUserloginIdById">
+        <description>findUserloginIdById</description>
+        <attribute name="userLoginId" mode="IN" type="String" optional="true"></attribute>
+        <attribute name="status" mode="OUT" type="Boolean" optional="true"></attribute>
+        <attribute name="info" mode="OUT" type="String" optional="true"></attribute>
+    </service>
+    
+    <!-- 会员新增与修改 -->
+    <service name="crmCustomer" engine="java"
+    	location="com.qihua.ofbiz.member.MemberIcoForCrmService" invoke="crmCustomer">
+    	<description></description>
+    	<attribute name="custCode" mode="IN" type="String" optional="true"/>
+    	<attribute name="rowId" mode="IN" type="String" optional="true"/>
+    	<attribute name="nick" mode="IN" type="String" optional="true"/>
+    	<attribute name="realName" mode="IN" type="String" optional="true"/>
+    	<attribute name="picUrl" mode="IN" type="String" optional="true"/>
+    	<attribute name="mobile" mode="IN" type="String" optional="true"/>
+    	<attribute name="gender" mode="IN" type="String" optional="true"/>
+    	<attribute name="wechat" mode="IN" type="String" optional="true"/>
+    	<attribute name="storeId" mode="IN" type="String" optional="true"/>
+    	<attribute name="birthday" mode="IN" type="Date" optional="true"/>
+    	<attribute name="mail" mode="IN" type="String" optional="true"/>
+    	<attribute name="qq" mode="IN" type="String" optional="true"/>
+    	<attribute name="blog" mode="IN" type="String" optional="true"/>
+    	<attribute name="passportType" mode="IN" type="String" optional="true"/>
+    	<attribute name="passportNo" mode="IN" type="String" optional="true"/>
+    	
+    	<attribute name="status" mode="OUT" type="String" optional="true"/>
+    	<attribute name="code" mode="OUT" type="String" optional="true"/>
+    	<attribute name="msg" mode="OUT" type="String" optional="true"/>
+    </service>
+    
+    <!-- 优惠券同步 -->
+    <service name="createCouponAndGrant" engine="java"
+    	location="com.qihua.ofbiz.member.MemberIcoForCrmService" invoke="createCouponAndGrant">
+    	<description></description>
+    	<attribute name="custCode" mode="IN" type="String" optional="true"/>
+    	<attribute name="couponId" mode="IN" type="String" optional="true"/>
+    	<attribute name="couponType" mode="IN" type="String" optional="true"/>
+    	<attribute name="batch" mode="IN" type="String" optional="true"/>
+    	<attribute name="couponName" mode="IN" type="String" optional="true"/>
+    	<attribute name="couponDiscount" mode="IN" type="BigDecimal" optional="true"/>
+    	<attribute name="couponPar" mode="IN" type="BigDecimal" optional="true"/>
+    	<attribute name="userCaseType" mode="IN" type="String" optional="true"/>
+    	<attribute name="userCase" mode="IN" type="String" optional="true"/>
+    	<attribute name="activeDate" mode="IN" type="String" optional="true"/>
+    	<attribute name="endDate" mode="IN" type="String" optional="true"/>
+    	<attribute name="grantDate" mode="IN" type="String" optional="true"/>
+    	<attribute name="couponStatus" mode="IN" type="String" optional="true"/>
+    	
+    	<attribute name="status" mode="OUT" type="String" optional="true"/>
+    	<attribute name="code" mode="OUT" type="String" optional="true"/>
+    	<attribute name="msg" mode="OUT" type="String" optional="true"/>
+    </service>
+    
+     <!-- begin add Gss 会员详情 优惠券信息 at 2016.05.06 -->
+    <service name="findProductPromoCodeParty" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="findProductPromoCodeParty" auth="true">
+        <description></description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <!-- begin 查询字段 -->
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <!-- end 查询字段 -->
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="usedCouponSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="promoList" type="java.util.List" mode="OUT"/>
+        <attribute name="promoListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+   </service>
+    <!-- end add Gss  会员详情 优惠券信息  at 2016.05.06 -->
+    
+     <!-- begin add Gss 会员详情定制果汁 at 2016.05.06 -->
+    <service name="findCustomJuice" engine="java" location="com.qihua.ofbiz.member.MemberService" invoke="findCustomJuice" auth="true">
+        <description></description>
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <!-- begin 查询字段 -->
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <!-- end 查询字段 -->
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="usedCouponSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="promoList" type="java.util.List" mode="OUT"/>
+        <attribute name="promoListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+   </service>
+    <!-- end add Gss  会员详情 优惠券信息  at 2016.05.06 -->
+    <!--获取微信accesstoken Add By AlexYao-->
+    <service name="weixinAccessTokenGet"   use-transaction="false"
+             engine="java" location="com.qihua.ofbiz.weixin.service.WeixinServices"
+             invoke="getWeixinAccessToken" auth="false">
+        <description>Get Access Token</description>
+    </service>
+    <service name="getWeixinConfig"   engine="java"
+             location="com.qihua.ofbiz.weixin.service.WeixinServices" invoke="getWeixinConfig">
+        <description>Send Short message To Mobile Service GateWay</description>
+        <attribute name="url" type="String" mode="IN" optional="false"/>
+        <attribute name="appId" type="String" mode="OUT"/>
+        <attribute name="accessToken" type="String" mode="OUT"/>
+
+        <attribute name="jsapi_ticket" type="String" mode="OUT"/>
+        <attribute name="timestamp" type="String" mode="OUT"/>
+        <attribute name="nonceStr" type="String" mode="OUT"/>
+        <attribute name="signature" type="String" mode="OUT"/>
+    </service>
+
+
+    <!--Add By AlexYao 2016-6-6 11:31:49 评价推送消息到微信-->
+    <service name="sendWeiXinMessageServices"   engine="java"
+             location="com.qihua.ofbiz.weixin.service.WeixinServices" invoke="sendWeiXinMessage">
+        <description>Send Short message To Weixin</description>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="productReviewId" type="String" mode="IN" optional="false"/>
+        <attribute name="result" type="String" mode="OUT"/>
+    </service>
+    
+     <!--Add By liruishi 2017-4-17 CRM用户新增同步 -->
+    <service name="crmCreateCustomer"   engine="java"
+             location="com.qihua.ofbiz.party.party.CrmSynchronizeParty" invoke="createCustomer">
+        <description>Crm 用户信息新增同步接口</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+    </service>
+    
+    <!--Add By liruishi 2017-4-17 CRM 用户更新同步 -->
+    <service name="crmUpdateCustomer"   engine="java"
+             location="com.qihua.ofbiz.party.party.CrmSynchronizeParty" invoke="updateCustomer">
+        <description>Crm 用户信息更新同步接口</description>
+        <attribute name="userLoginId" type="String" mode="IN" optional="false"/>
+    </service>
+     <!--Add By liruishi 2017-4-17 CRM 查询客户权限 -->
+     <service name="crmSearchCustRights"   engine="java"
+             location="com.qihua.ofbiz.party.party.CrmSynchronizeParty" invoke="searchCustRights">
+        <description>Crm 用户信息更新同步接口</description>
+        <attribute name="productBrandId" type="String" mode="IN" optional="false"/> <!-- 商户id -->
+        <attribute name="rightsCode" type="String" mode="IN" optional="true"/> <!-- 权益编号 -->
+        <attribute name="custId" type="String" mode="IN" optional="false"/> <!-- 客户id -->
+        <attribute name="rightsName" type="String" mode="IN" optional="true"/> <!-- 权益名称 -->
+        <attribute name="status" type="Integer" mode="IN" optional="true"/> <!-- 状态 -->
+        <attribute name="current" type="Integer" mode="INOUT" optional="true"/> <!-- 当前页面 -->
+        <attribute name="pageSize" type="Integer" mode="INOUT" optional="true"/> <!-- 每页大小 -->
+        
+        <attribute name="totalRecord" type="Integer" mode="OUT" optional="true"/> <!-- 总数据量 -->
+        <attribute name="totalPage" type="Integer" mode="OUT" optional="true"/> <!-- 总页数 -->
+        <attribute name="pre" type="Integer" mode="OUT" optional="true"/> <!-- 前一页 -->
+        <attribute name="next" type="Integer" mode="OUT" optional="true"/> <!-- 下一页 -->
+        <attribute name="list" type="List" mode="OUT" optional="true"/> <!-- 会员列表 -->
+    </service>
+    
+     <!--Add By liruishi 2017-4-19 CRM 会员优惠券查询 -->
+     <service name="crmSearchCouponAccount"   engine="java"
+             location="com.qihua.ofbiz.party.party.CrmSynchronizeParty" invoke="searchCouponAccount">
+        <description>Crm 用户信息更新同步接口</description>
+        <attribute name="productBrandId" type="String" mode="IN" optional="false"/> <!-- 商户id -->
+        <attribute name="couponCode" type="String" mode="IN" optional="true"/> <!-- 优惠券编号 -->
+        <attribute name="custId" type="String" mode="IN" optional="false"/> <!-- 客户编号 -->
+        <attribute name="couponName" type="String" mode="IN" optional="true"/> <!-- 优惠券名称 -->
+        
+        <attribute name="current" type="Integer" mode="INOUT" optional="true"/> <!-- 当前页面 -->
+        <attribute name="pageSize" type="Integer" mode="INOUT" optional="true"/> <!-- 每页大小 -->
+        
+        <attribute name="totalRecord" type="Integer" mode="OUT" optional="true"/> <!-- 总数据量 -->
+        <attribute name="totalPage" type="Integer" mode="OUT" optional="true"/> <!-- 总页数 -->
+        <attribute name="pre" type="Integer" mode="OUT" optional="true"/> <!-- 前一页 -->
+        <attribute name="next" type="Integer" mode="OUT" optional="true"/> <!-- 下一页 -->
+        <attribute name="list" type="List" mode="OUT" optional="true"/> <!-- 优惠券信息列表 -->
+    </service>
+    <!-- 优惠券消耗  -->
+    <service name="crmConsumeCard"   engine="java"
+             location="com.qihua.ofbiz.party.party.CrmSynchronizeParty" invoke="consumeCard">
+        <description>Crm 用户信息更新同步接口</description>
+        <attribute name="code" type="String" mode="IN" optional="false"/> <!-- 优惠券编号 -->
+        <attribute name="appId" type="String" mode="IN" optional="false"/> <!-- 微信公众号appid -->
+        <attribute name="appSecret" type="String" mode="IN" optional="false"/> <!-- 微信公众号 appSecret -->
+        
+        <attribute name="status" type="String" mode="OUT" optional="false"/> <!-- 请求结果 -->
+        <attribute name="msg" type="Integer" mode="OUT" optional="true"/> <!-- 下一页 -->
+    </service>
+    
+    <!-- CRM角色信息更新  add by liruishi 2017.04.25 -->
+    <service name="crmModifyRole" engine="java"
+             location="com.qihua.ofbiz.category.CrmSyncPrivilege"
+             invoke="modifyRole"
+             auth="false">
+        <attribute name="rowId" type="String" mode="IN" optional="false"/> <!-- 角色id -->
+        <attribute name="productBrandId" type="String" mode="IN" optional="false"/> <!-- 商户id -->
+        <attribute name="roleName" type="String" mode="IN" optional="true"/>	<!-- 角色名称 -->
+        <attribute name="status" type="String" mode="IN" optional="true"/>	<!-- 角色状态 -->
+        <attribute name="descp" type="String" mode="IN" optional="true"/>	<!-- 角色描述 -->
+        
+        <attribute name="status" type="String" mode="IN" optional="false"/> <!-- 响应标识：SUCCESS、ERROR -->
+        <attribute name="code" type="Integer" mode="IN" optional="true"/> <!-- 编码： 1 成功 ，2 参数错误，3 没有数据产生，4 系统繁忙，5 操作失败 -->
+        <attribute name="msg" type="String" mode="IN" optional="true"/>	<!-- 响应消息 -->
+        <attribute name="data" type="String" mode="IN" optional="true"/>	<!-- 响应消息结果 -->
+        <attribute name="receivetime" type="String" mode="IN" optional="true"/>	<!-- 请求时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="backtime" type="String" mode="IN" optional="true"/>		<!-- 响应时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="syscode" type="String" mode="IN" optional="true"/>	<!-- 系统code -->
+        <attribute name="itfcode" type="String" mode="IN" optional="true"/>	<!-- 接口code -->
+    </service>
+    
+     <!-- CRM角色信息添加  add by liruishi 2017.04.25 -->
+    <service name="crmAddRole" engine="java"
+             location="com.qihua.ofbiz.category.CrmSyncPrivilege"
+             invoke="addRole"
+             auth="false">
+        <attribute name="productBrandId" type="String" mode="IN" optional="false"/> <!-- 商户id -->
+        <attribute name="roleName" type="String" mode="IN" optional="false"/>	<!-- 角色名称 -->
+        <attribute name="status" type="String" mode="IN" optional="false"/>	<!-- 角色状态 -->
+        <attribute name="descp" type="String" mode="IN" optional="true"/>	<!-- 角色描述 -->
+        
+        <attribute name="status" type="String" mode="IN" optional="false"/> <!-- 响应标识：SUCCESS、ERROR -->
+        <attribute name="code" type="Integer" mode="IN" optional="true"/> <!-- 编码： 1 成功 ，2 参数错误，3 没有数据产生，4 系统繁忙，5 操作失败 -->
+        <attribute name="msg" type="String" mode="IN" optional="true"/>	<!-- 响应消息 -->
+        <attribute name="data" type="String" mode="IN" optional="true"/>	<!-- 响应消息结果 -->
+        <attribute name="receivetime" type="String" mode="IN" optional="true"/>	<!-- 请求时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="backtime" type="String" mode="IN" optional="true"/>		<!-- 响应时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="syscode" type="String" mode="IN" optional="true"/>	<!-- 系统code -->
+        <attribute name="itfcode" type="String" mode="IN" optional="true"/>	<!-- 接口code -->
+    </service>
+    
+     <!-- CRM保存角色权限  add by liruishi 2017.04.25 -->
+    <service name="crmSaveRolePermission" engine="java"
+             location="com.qihua.ofbiz.category.CrmSyncPrivilege"
+             invoke="saveRolePermission"
+             auth="false">
+        <attribute name="roleId" type="String" mode="IN" optional="false"/> <!-- 角色id -->
+        <attribute name="menuIds" type="String" mode="IN" optional="false"/>	<!-- 菜单id，多个用逗号隔开 -->
+        
+        <attribute name="status" type="String" mode="IN" optional="false"/> <!-- 响应标识：SUCCESS、ERROR -->
+        <attribute name="code" type="Integer" mode="IN" optional="true"/> <!-- 编码： 1 成功 ，2 参数错误，3 没有数据产生，4 系统繁忙，5 操作失败 -->
+        <attribute name="msg" type="String" mode="IN" optional="true"/>	<!-- 响应消息 -->
+        <attribute name="data" type="String" mode="IN" optional="true"/>	<!-- 响应消息结果 -->
+        <attribute name="receivetime" type="String" mode="IN" optional="true"/>	<!-- 请求时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="backtime" type="String" mode="IN" optional="true"/>		<!-- 响应时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="syscode" type="String" mode="IN" optional="true"/>	<!-- 系统code -->
+        <attribute name="itfcode" type="String" mode="IN" optional="true"/>	<!-- 接口code -->
+    </service>
+    
+     <!-- CRM保存角色权限  add by liruishi 2017.04.25 -->
+    <service name="crmSaveRolePermission" engine="java"
+             location="com.qihua.ofbiz.category.CrmSyncPrivilege"
+             invoke="saveRolePermission"
+             auth="false">
+        <attribute name="roleId" type="String" mode="IN" optional="false"/> <!-- 角色id -->
+        <attribute name="menuIds" type="String" mode="IN" optional="false"/>	<!-- 菜单id，多个用逗号隔开 -->
+        
+        <attribute name="status" type="String" mode="IN" optional="false"/> <!-- 响应标识：SUCCESS、ERROR -->
+        <attribute name="code" type="Integer" mode="IN" optional="true"/> <!-- 编码： 1 成功 ，2 参数错误，3 没有数据产生，4 系统繁忙，5 操作失败 -->
+        <attribute name="msg" type="String" mode="IN" optional="true"/>	<!-- 响应消息 -->
+        <attribute name="data" type="String" mode="IN" optional="true"/>	<!-- 响应消息结果 -->
+        <attribute name="receivetime" type="String" mode="IN" optional="true"/>	<!-- 请求时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="backtime" type="String" mode="IN" optional="true"/>		<!-- 响应时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="syscode" type="String" mode="IN" optional="true"/>	<!-- 系统code -->
+        <attribute name="itfcode" type="String" mode="IN" optional="true"/>	<!-- 接口code -->
+    </service>
+    
+     <!-- CRM保存角色权限  add by liruishi 2017.04.25 -->
+    <service name="crmGetMenusByRoleId" engine="java"
+             location="com.qihua.ofbiz.category.CrmSyncPrivilege"
+             invoke="getMenusByRoleId"
+             auth="false">
+        <attribute name="roleId" type="String" mode="IN" optional="false"/> <!-- 角色id -->
+        
+        <attribute name="status" type="String" mode="IN" optional="false"/> <!-- 响应标识：SUCCESS、ERROR -->
+        <attribute name="code" type="Integer" mode="IN" optional="true"/> <!-- 编码： 1 成功 ，2 参数错误，3 没有数据产生，4 系统繁忙，5 操作失败 -->
+        <attribute name="msg" type="String" mode="IN" optional="true"/>	<!-- 响应消息 -->
+        <attribute name="data" type="String" mode="IN" optional="true"/>	<!-- 响应消息结果 -->
+        <attribute name="receivetime" type="String" mode="IN" optional="true"/>	<!-- 请求时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="backtime" type="String" mode="IN" optional="true"/>		<!-- 响应时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="syscode" type="String" mode="IN" optional="true"/>	<!-- 系统code -->
+        <attribute name="itfcode" type="String" mode="IN" optional="true"/>	<!-- 接口code -->
+    </service>
+    
+     <!-- CRM保存角色权限  add by liruishi 2017.04.25 -->
+    <service name="crmGetBrandMenuList" engine="java"
+             location="com.qihua.ofbiz.category.CrmSyncPrivilege"
+             invoke="getBrandMenuList"
+             auth="false">
+        <attribute name="brandCode" type="String" mode="IN" optional="false"/> <!-- 商户编码  -->
+        
+        <attribute name="status" type="String" mode="IN" optional="false"/> <!-- 响应标识：SUCCESS、ERROR -->
+        <attribute name="code" type="Integer" mode="IN" optional="true"/> <!-- 编码： 1 成功 ，2 参数错误，3 没有数据产生，4 系统繁忙，5 操作失败 -->
+        <attribute name="msg" type="String" mode="IN" optional="true"/>	<!-- 响应消息 -->
+        <attribute name="data" type="String" mode="IN" optional="true"/>	<!-- 响应消息结果 -->
+        <attribute name="receivetime" type="String" mode="IN" optional="true"/>	<!-- 请求时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="backtime" type="String" mode="IN" optional="true"/>		<!-- 响应时间：格式yyyy-MM-dd HH:mm:ss -->
+        <attribute name="syscode" type="String" mode="IN" optional="true"/>	<!-- 系统code -->
+        <attribute name="itfcode" type="String" mode="IN" optional="true"/>	<!-- 接口code -->
+    </service>
+
+
+    <!-- 商家新增-->
+    <service name="getCategoryTree" engine="java"
+             location="com.qihua.ofbiz.business.BusinessCommonServices"
+             invoke="getCategoryTree" auth="false">
+        <description>获取产品目录的树json</description>
+        <attribute name="categoryList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <!-- 根据code得出省市区的中文名称-->
+    <service name="getGeoNameById" engine="java"
+             location="com.qihua.ofbiz.business.BusinessCommonServices"
+             invoke="getGeoNameById" auth="false">
+        <description>根据code得出省市区的中文名称</description>
+        <attribute name="geoId" type="String" mode="IN"/>
+        <attribute name="geoName" type="String" mode="OUT"/>
+    </service>
+
+    <!-- 积分贈送操作	add by ct 2018 5 11 -->
+    <service name="findIntegralGiftes" engine="java"
+             location="com.qihua.ofbiz.integral.partyIntegralGiftService"
+             invoke="findIntegralGiftes">
+        <description>findIntegralGiftes</description>
+        <attribute name="orderIntegralRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="orderIntegralRuleProd" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!--查找首次积分赠送信息回显到页面findIntegralNewService by ct 2018 5 11-->
+    <service name="findIntegralNewService" engine="java"
+             location="com.qihua.ofbiz.integral.partyIntegralGiftService"
+             invoke="findIntegralNewService" auth="false">
+        <description>findIntegralNewService</description>
+        <attribute name="orderIntegralRule" type="org.ofbiz.entity.GenericValue" mode="OUT" optional="true" />
+        <attribute name="orderIntegralRuleProd" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 积分贈送操作	add by ct 2018 5 11 -->
+    <service name="saveOrUpdateGiftes" engine="java"
+             location="com.qihua.ofbiz.integral.partyIntegralGiftService"
+             invoke="saveOrUpdateGiftes">
+        <description>saveOrUpdateGiftes</description>
+        <attribute name="productLineList" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="isFullOpen" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="isAssignOpen" type="java.lang.String" mode="IN" optional="true"/>
+        <attribute name="orderMoney" type="java.math.BigDecimal" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 平台端 品牌审核页面 查看待审核的商家品牌-->
+    <service name="findStoreBrandForWaiting" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="findStoreBrandForWaiting" auth="true">
+        <!--<attribute name="productStoreId" type="String" mode="IN" optional="true"/>-->
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="partyName" type="String" mode="IN" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="hideFields" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="groupList" type="java.util.List" mode="OUT"/>
+        <attribute name="groupListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 获取商家新增时的商品一级分类 -->
+    <service name="getPartyProductCategoryList" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="getPartyProductCategoryList" auth="false">
+        <attribute name="productCategoryList" type="List" mode="OUT"/>
+    </service>
+
+    <!-- 根据productBrandId查询出待审核的品牌 -->
+    <service name="findProductBrandById" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="findProductBrandById" auth="false">
+        <attribute name="productBrandId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="groupList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <!-- 根据id删除品牌 -->
+    <service name="deleteBrand" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="deleteBrand" auth="true">
+        <attribute name="productBrandId" type="String" mode="IN"/>
+    </service>
+
+    <!-- 审核品牌 -->
+    <service name="auditProductBrand" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="auditProductBrand" auth="true">
+        <attribute name="partyBusinessBrandId" type="String" mode="IN"/>
+        <attribute name="productBrandId" type="String" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="activityAuditStatus" type="String" mode="IN"/>
+        <attribute name="auditMessage" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- 商家端 查看品牌驳回原因 -->
+    <service name="findBrandAuditMessage" engine="java"  location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="findBrandAuditMessage" auth="false">
+        <attribute name="partyBusinessBrandId" type="String" mode="IN"/>
+        <attribute name="curAuditMessage" type="String" mode="OUT"/>
+    </service>
+
+    <!-- 商家端 查看品牌列表展示 -->
+    <service name="findPartyProductBrand" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="findPartyProductBrand" auth="true">
+        <!--<attribute name="productStoreId" type="String" mode="IN" optional="true"/>-->
+        <attribute name="lookupFlag" type="String" mode="IN" optional="true"/>
+        <attribute name="brandName" type="String" mode="IN" optional="true"/>
+        <attribute name="auditStatus" type="String" mode="IN" optional="true"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+
+        <attribute name="VIEW_INDEX" type="String" mode="IN" optional="true"/>
+        <attribute name="VIEW_SIZE" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_FILED" type="String" mode="IN" optional="true"/>
+        <attribute name="ORDER_BY" type="String" mode="IN" optional="true"/>
+
+        <attribute name="viewIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="viewSize" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="highIndex" type="Integer" mode="OUT" optional="false"/>
+        <attribute name="lowIndex" type="Integer" mode="OUT" optional="false"/>
+
+        <attribute name="brandList" type="java.util.List" mode="OUT"/>
+        <attribute name="brandListSize" type="Integer" mode="OUT"/>
+        <attribute name="paramList" type="String" mode="OUT"/>
+        <attribute name="auditStatus" type="String" mode="OUT"/>
+        <attribute name="orderFiled" type="String" mode="OUT" optional="true"/>
+        <attribute name="orderBy" type="String" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- 商家端 根据productBrandId查看品牌 -->
+    <service name="findPartyProductBrandById" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="findPartyProductBrandById" auth="false">
+        <attribute name="productBrandId" type="String" mode="INOUT" optional="true"/>
+        <attribute name="groupList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <!-- 商家端 根据productBrandId删除品牌  -->
+    <service name="deletePartyProductBrand" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="deletePartyProductBrand" auth="true">
+        <attribute name="partyBusinessBrandId" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+    </service>
+
+
+    <!-- 商家端 根据productBrandId查看品牌分类 -->
+    <service name="getPartyProductBrandCategoryList" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="getPartyProductBrandCategoryList" auth="false">
+        <attribute name="productBrandId" type="String" mode="IN" optional="true"/>
+        <attribute name="paramMap" type="Map" mode="OUT"/>
+    </service>
+
+    <!-- 平台 根据partyId查看品牌 商品一级分类 -->
+    <service name="getPartyProductCategoryListByParyId" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="getPartyProductCategoryListByParyId" auth="false">
+        <attribute name="productCategoryList" type="List" mode="OUT"/>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="brandAuth" engine="java" location="com.qihua.ofbiz.business.BusinessBrandServices" invoke="brandAuth" auth="false">
+        <attribute name="ids" type="String" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN"/>
+    </service>
+
+
+</services>

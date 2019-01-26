@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>System Manage Component Services</description>
+    <vendor>ICO</vendor>
+    <version>1.0</version>
+
+    <service name="productPromoCouponWarnEmailSender" engine="java" location="com.qihua.ofbiz.systemMgr.EmailService" invoke="productPromoCouponWarnEmailSender" auth="false">
+        <attribute name="productPromoCoupon" type="org.ofbiz.entity.GenericValue" mode="IN"/>
+    </service>
+
+    <service name="inventoryItemWarnEmailSender" engine="java" location="com.qihua.ofbiz.systemMgr.EmailService"  invoke="inventoryItemWarnEmailSender" auth="false">
+        <attribute name="inventoryItem" type="org.ofbiz.entity.GenericValue" mode="IN"/>
+    </service>
+
+    <service name="applyReturnEmailSender" engine="java" location="com.qihua.ofbiz.systemMgr.EmailService"  invoke="applyReturnEmailSender" auth="false">
+        <attribute name="userId" type="java.lang.String" mode="IN"/>
+        <attribute name="orderId" type="java.lang.String" mode="IN"/>
+        <attribute name="returnId" type="java.lang.String" mode="IN"/>
+    </service>
+
+    <service name="productOnlineEmailSender" engine="java" location="com.qihua.ofbiz.systemMgr.EmailService"  invoke="productOnlineEmailSender" auth="false">
+        <attribute name="productId" type="java.lang.String" mode="IN"/>
+    </service>
+</services>

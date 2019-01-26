@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <EnumerationType description="订单管理" enumTypeId="FIELD_ORDER" hasTable="N" parentTypeId=""/>
+    <EnumerationType description="发票内容" enumTypeId="FIELD_INVOICE" hasTable="N" parentTypeId="FIELD_ORDER"/>
+    <Enumeration description="增值税专用发票" enumCode="" enumId="" sequenceId="" enumTypeId="FIELD_INVOICE"/>
+    <Enumeration description="普通发票" enumCode="" enumId="" sequenceId="" enumTypeId="FIELD_INVOICE"/>
+    <EnumerationType description="订单取消原因" enumTypeId="FIELD_CANCEL" hasTable="N" parentTypeId="FIELD_ORDER"/>
+    <EnumerationType description="退货原因" enumTypeId="FIELD_RETURN" hasTable="N" parentTypeId="FIELD_ORDER"/>
+    <EnumerationType description="商家" enumTypeId="FIELD_BUSINESS" hasTable="N" parentTypeId=""/>
+    <EnumerationType description="商家类型" enumTypeId="BUSINESS_TYPE" hasTable="N" parentTypeId="FIELD_BUSINESS"/>
+
+    <Enumeration enumId="INSURANCE_BUSINESS" enumTypeId="BUSINESS_TYPE" enumCode="N" sequenceId="1" description="合作商家"/>
+    <Enumeration enumId="OTHER_BUSINESS" enumTypeId="BUSINESS_TYPE" enumCode="N" sequenceId="2" description="其他商家"/>
+
+</entity-engine-xml>

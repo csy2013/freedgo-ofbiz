@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of an Open For Business Project Component</title>
+    <description>None</description>
+    <version>1.0</version>
+
+    <!-- 物流公司  Add By AlexYao 2016-3-1 18:11:56 -->
+    <entity entity-name="LogisticsCompany"
+            package-name="org.ofbiz.order.order"
+            title="Logistics Company Entity">
+        <field name="id" type="id-ne"></field>
+        <field name="localCompanyId" type="id-ne"></field><!-- 快递公司编号（内部标识）  -->
+        <field name="companyId" type="id-ne"></field><!-- 快递公司编号（快递100）  -->
+        <field name="companyName" type="id-long"></field>   <!-- 快递公司  -->
+        <field name="companyWebsite" type="id-long"></field>   <!-- 公司网址  -->
+        <field name="inquireWebsite" type="description"></field>   <!-- 询件网址  -->
+        <field name="sequenceId" type="numeric"></field><!--排序-->
+        <field name="isEnabled" type="indicator"></field><!--是否启用-->
+        <field name="logisticsNumber1" type="id-long"></field> <!-- 物流单号1 -->
+        <field name="productStoreId" type="id-ne"><description>对应店铺</description></field>
+        <prim-key field="id"/>
+    </entity>
+    <!-- 物流模板  Add By AlexYao 2016-4-13 11:19:12 -->
+    <entity entity-name="LogisticsTemple"
+            package-name="org.ofbiz.order.order"
+            title="Logistics Temple Entity">
+        <field name="logisticsTempleId" type="id-ne"></field>
+        <field name="logisticsTempleName" type="id-long"></field><!-- 模板名称 -->
+        <field name="logisticsPackageMail" type="indicator"></field><!-- 运费承担 0：买家承担运费  1：卖家承担运费  -->
+        <field name="logisticsMethods" type="indicator"></field>   <!-- 计价方式  0：按件计价  1：按重计价  -->
+        <field name="isUrgent" type="indicator"></field>   <!-- 是否加急  0：否  1：是  -->
+        <field name="logisticsCompanyId" type="id-ne"></field>   <!-- 运送方式  -->
+        <prim-key field="logisticsTempleId"/>
+        <relation type="one" fk-name="LT_LC" rel-entity-name="LogisticsCompany">
+            <key-map field-name="logisticsCompanyId" rel-field-name="id"/>
+        </relation>
+    </entity>
+
+    <view-entity entity-name="LogisticsTempleAndCompany"
+                 package-name="org.ofbiz.order.order"
+                 title="LogisticsTempleAndCompany">
+        <member-entity entity-alias="LT" entity-name="LogisticsTemple"/>
+        <member-entity entity-alias="LC" entity-name="LogisticsCompany"/>
+        <alias-all entity-alias="LT"/>
+        <alias entity-alias="LC" name="companyId"/>
+        <alias entity-alias="LC" name="isEnabled"/>
+        <alias name="lastUpdatedStamp" entity-alias="LT"/>
+        <alias name="productStoreId" entity-alias="LC"/>
+        <view-link entity-alias="LT" rel-entity-alias="LC">
+            <key-map field-name="logisticsCompanyId" rel-field-name="id"/>
+        </view-link>
+    </view-entity>
+    <!-- 物流模板运费  Add By AlexYao 2016-4-13 11:45:06 -->
+    <entity entity-name="LogisticsTempleItem"
+            package-name="org.ofbiz.order.order"
+            title="Logistics Temple Item Entity">
+        <field name="id" type="id-ne"></field>
+        <field name="logisticsTempleId" type="id-ne"></field><!--物流模板表主键-->
+        <field name="areas" type="very-long"></field><!-- 收货地区 -->
+        <field name="start" type="currency-precise"></field><!-- 首件个数/首重个数 -->
+        <field name="postage" type="currency-amount"></field><!-- 首件运费/首重运费 -->
+        <field name="plus" type="currency-precise"></field><!-- 续件个数/续重个数 -->
+        <field name="postagePlus" type="currency-amount"></field><!-- 续件运费/续重运费 -->
+        <prim-key field="id"/>
+        <relation type="one" fk-name="LTI_LT" rel-entity-name="LogisticsTemple">
+            <key-map field-name="logisticsTempleId"/>
+        </relation>
+    </entity>
+    <!-- 店铺默认物流模板  Add By AlexYao 2016-4-13 14:03:07 -->
+    <entity entity-name="DefaultLogisticsTemple"
+            package-name="org.ofbiz.order.order"
+            title="Default Logistics Temple Entity">
+        <field name="id" type="id-ne"></field>
+        <field name="productStoreId" type="id-ne"></field><!-- 店铺id-->
+        <field name="logisticsTempleId" type="id-ne"></field><!-- 物流模板id-->
+        <field name="isDefault" type="indicator"></field><!-- 是否默认模板  Y：是 N：否  -->
+        <prim-key field="id"/>
+        <relation type="one" fk-name="DLT_PS" rel-entity-name="ProductStore">
+            <key-map field-name="productStoreId"/>
+        </relation>
+        <relation type="one" fk-name="DLT_LT" rel-entity-name="LogisticsTemple">
+            <key-map field-name="logisticsTempleId"/>
+        </relation>
+    </entity>
+    <!-- 物流单据  Add By AlexYao 2016-4-15 09:53:49 -->
+    <entity entity-name="LogisticsDocuments"
+            package-name="org.ofbiz.order.order"
+            title="Logistics Documents Entity">
+        <field name="logisticsDocumentsId" type="id-ne"></field>
+        <field name="logisticsCompanyId" type="id-ne"></field><!-- 物流公司 -->
+        <field name="width" type="numeric"></field><!-- 宽 -->
+        <field name="height" type="numeric"></field>   <!-- 高 -->
+        <field name="contentId" type="id-ne"></field>   <!-- 背景图片 -->
+        <field name="content" type="very-long"></field>   <!-- 背景图片 -->
+        <field name="productStoreId" type="id-ne"/>
+        <prim-key field="logisticsDocumentsId"/>
+        <relation type="one" fk-name="LD_LC" rel-entity-name="LogisticsCompany">
+            <key-map field-name="logisticsCompanyId" rel-field-name="id"/>
+        </relation>
+        <relation type="one" fk-name="LD_C" rel-entity-name="Content">
+            <key-map field-name="contentId"/>
+        </relation>
+    </entity>
+    <!-- 物流信息  Add By AlexYao 2016-5-24 17:35:33 -->
+    <entity entity-name="LogisticsInfo"
+            package-name="org.ofbiz.order.order"
+            title="Logistics Info Entity">
+        <field name="logisticsInfoId" type="id-ne"></field>
+        <field name="sendTelphone" type="id-long"></field> <!-- 发件人联系方式 -->
+        <field name="sendName" type="id-long"></field> <!-- 发件人姓名 -->
+        <field name="sendAddress" type="id-long"></field> <!-- 发件人地址 -->
+        <field name="isSame" type="indicator"></field><!--是否统一商品名称  Y：是 N：否-->
+        <field name="productName" type="name"></field><!--商品名称-->
+        <prim-key field="logisticsInfoId"/>
+    </entity>
+
+    <!-- 订单快递表 -->
+    <entity entity-name="OrderDelivery"
+            package-name="org.ofbiz.order.order"
+            title="Order Delivery Entity">
+        <field name="id" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>
+        <field name="deliveryCompany" type="id-ne"></field>   <!-- 物流模板ID  -->
+        <field name="logisticsNumber1" type="id-long"></field> <!-- 物流单号1 -->
+        <field name="logisticsNumber2" type="id-long"></field> <!-- 物流单号2 -->
+        <field name="logisticsNumber3" type="id-long"></field> <!-- 物流单号3 -->
+        <field name="state" type="id-ne"></field><!--快递单当前签收状态，包括0在途中、1已揽收、2疑难、3已签收、4退签、5同城派送中、6退回、7转单等7个状态，其中4-7需要另外开通才有效 -->
+        <field name="isPrint" type="indicator"></field><!--是否打印  Y：已打印 N：未打印-->
+        <field name="productName" type="name"></field><!--商品名称-->
+        <field name="sendTelphone" type="id-long"></field> <!-- 发件人联系方式 -->
+        <field name="sendName" type="id-long"></field> <!-- 发件人姓名 -->
+        <field name="sendAddress" type="id-long"></field> <!-- 发件人地址 -->
+
+        <prim-key field="id"/>
+        <relation type="one" fk-name="orderDelivery_orderId" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="orderDelivery_id" rel-entity-name="LogisticsTemple">
+            <key-map field-name="deliveryCompany" rel-field-name="logisticsTempleId"/>
+        </relation>
+    </entity>
+
+    <!-- 物流详情表 -->
+    <entity entity-name="DeliveryItem"
+            package-name="org.ofbiz.order.order"
+            title="Delivery Item Entity">
+        <field name="id" type="id-ne"></field>
+        <field name="deliveryCompany" type="id-ne"></field>  <!-- 物流模板ID -->
+        <field name="logisticsNumber" type="id-long"></field> <!-- 物流单号 -->
+        <field name="dateTime" type="date-time"></field> <!-- 时间 -->
+        <field name="description" type="description"></field> <!-- 内容 -->
+
+        <prim-key field="id"/>
+        <relation type="one" fk-name="orderDelivery_companyId" rel-entity-name="LogisticsTemple">
+            <key-map field-name="deliveryCompany" rel-field-name="logisticsTempleId"/>
+        </relation>
+        <relation type="one" fk-name="orderDelivery_logisticsNumber" rel-entity-name="LogisticsCompany">
+            <key-map field-name="logisticsNumber" rel-field-name="logisticsNumber1"/>
+        </relation>
+    </entity>
+
+    <!-- 出库操作日志表 -->
+    <entity entity-name="DeliveryOperateLog"
+            package-name="org.ofbiz.order.order"
+            title="DeliveryOperateLog">
+        <field name="id" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>
+        <field name="operateType" type="id-long"></field>       <!-- 操作类型  -->
+        <field name="operator" type="id-long"></field>          <!-- 操作人 -->
+        <field name="operateTime" type="date-time"></field>     <!-- 操作时间 -->
+        <field name="operateResult" type="id-vlong"></field>    <!-- 操作结果 -->
+
+        <prim-key field="id"/>
+        <relation type="one" fk-name="deliveryLog_orderId" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+    </entity>
+
+    <!-- 订单操作日志表 -->
+    <entity entity-name="OrderOperateLog"
+            package-name="org.ofbiz.order.order"
+            title="OrderOperateLog">
+        <field name="id" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>
+        <field name="operateType" type="id-long"></field>       <!-- 操作类型  -->
+        <field name="operator" type="id-long"></field>          <!-- 操作人 -->
+        <field name="operateTime" type="date-time"></field>     <!-- 操作时间 -->
+        <field name="operateReason" type="id-vlong"></field>    <!-- 操作原因 -->
+
+        <prim-key field="id"/>
+        <relation type="one" fk-name="orderOperateLog_orderId" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+    </entity>
+
+    <!-- 退货单操作日志表 -->
+    <entity entity-name="ReturnOperateLog"
+            package-name="org.ofbiz.order.order"
+            title="ReturnOperateLog">
+        <field name="id" type="id-ne"></field>
+        <field name="returnId" type="id-ne"></field>
+        <field name="operateType" type="id-long"></field>       <!-- 操作类型  -->
+        <field name="operator" type="id-long"></field>          <!-- 操作人 -->
+        <field name="operatorTel" type="id-long"></field>          <!-- 操作人电话 -->
+        <field name="operateTime" type="date-time"></field>     <!-- 操作时间 -->
+        <field name="operateReason" type="id-vlong"></field>    <!-- 操作原因 -->
+        <prim-key field="id"/>
+    </entity>
+
+    <!-- 订单评论表 -->
+    <entity entity-name="OrderComment"
+            package-name="org.ofbiz.order.order"
+            title="order comment">
+        <field name="id" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>               <!-- 产品id  -->
+        <field name="publishUserId" type="id-ne"></field>          <!-- 发表人userLoginId,保存用户的userloginId -->
+        <field name="isShow" type="indicator"></field>     <!-- 前台是否显示评论，1：是，0：否 -->
+        <field name="publishTime" type="date-time"></field>    <!-- 发表时间 -->
+        <field name="commentLevel" type="indicator"></field>    <!-- 评价级别，保存数字：1-5 -->
+        <field name="isReply" type="indicator"></field>    <!-- 是否回复，1：是，0:否 -->
+        <field name="comment" type="id-vlong"></field>    <!-- 评价内容 -->
+        <field name="replyComment" type="id-vlong"></field>    <!-- 回复内容 -->
+        <field name="seeType" type="indicator"></field>    <!-- 可见类型：0：所有人可见，1：评论者可见 -->
+        <prim-key field="id"/>
+        <relation type="one" fk-name="OrderComment_orderId" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OrderComment_productId" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+    </entity>
+
+
+    <!-- add by dong xiao 订单项半成品比例表 2016.4.25 -->
+    <entity entity-name="OrderItemSemiProductProportion"
+            package-name="org.ofbiz.order.order"
+            never-cache="true"
+            title="">
+        <field name="id" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>
+        <field name="orderItemSeqId" type="id-ne"></field>
+        <field name="semiProductProportionId" type="id-ne"></field> <!-- 半成品id -->
+        <field name="proportion" type="fixed-point"></field>    <!-- 比例 -->
+        <prim-key field="id"/>
+        <relation type="one" fk-name="oi_semi_orderItemId" rel-entity-name="OrderItem">
+            <key-map field-name="orderId"/>
+            <key-map field-name="orderItemSeqId"/>
+        </relation>
+        <relation type="one" fk-name="oi_semi_product" rel-entity-name="Product">
+            <key-map field-name="semiProductProportionId" rel-field-name="productId"/>
+        </relation>
+    </entity>
+
+    <!-- complain操作日志表 -->
+    <entity entity-name="ComplainOperateLog"
+            package-name="org.ofbiz.order.order"
+            title="ComplainOperateLog">
+        <field name="id" type="id-ne"></field>
+        <field name="complainId" type="id-ne"></field>
+        <field name="operateType" type="id-long"></field>  <!-- 操作类型  -->
+        <field name="operator" type="id-long"></field>    <!-- 操作人 -->
+        <field name="operateTime" type="date-time"></field>    <!-- 操作时间 -->
+        <field name="operateReason" type="id-vlong"></field>  <!-- 操作原因 -->
+        <prim-key field="id"/>
+    </entity>
+
+    <!-- complainHeader 表 add by dongxiao 2016.4.26-->
+    <entity entity-name="ComplainHeader"
+            package-name="org.ofbiz.order.order"
+            title="complainHeader">
+        <field name="complainId" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>  <!-- 订单id  -->
+        <field name="complainer" type="id-long"></field>    <!-- 操作人 -->
+        <field name="statusId" type="id"></field>    <!-- 状态 -->
+        <field name="complainQuestion" type="name"></field>  <!-- 操作原因 -->
+        <field name="remarks" type="comment"></field>  <!-- 备注 -->
+        <prim-key field="complainId"/>
+        <relation type="one" fk-name="ch_orh_ord" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="ch_orh_std" rel-entity-name="StatusItem">
+            <key-map field-name="statusId"/>
+        </relation>
+    </entity>
+
+    <!-- complainItem 表 add by dongxiao 2016.4.26-->
+    <entity entity-name="ComplainItem"
+            package-name="org.ofbiz.order.order"
+            title="ComplainItem">
+        <field name="complainItemId" type="id-ne"></field>
+        <field name="complainId" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>
+        <field name="orderItemSeqId" type="id-ne"></field>
+        <field name="productId" type="id-ne"></field>
+        <field name="quantity" type="fixed-point"></field>
+        <prim-key field="complainItemId"/>
+        <relation type="one" fk-name="ci_ch_id" rel-entity-name="ComplainHeader">
+            <key-map field-name="complainId"/>
+        </relation>
+        <relation type="one" fk-name="ci_p_pid" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+        <relation type="one" fk-name="ci_oi_orderItemId" rel-entity-name="OrderItem">
+            <key-map field-name="orderId"/>
+            <key-map field-name="orderItemSeqId"/>
+        </relation>
+    </entity>
+
+    <!-- 申诉凭证内容表（存放图片凭证） add by dongxiao 2016.4.26-->
+    <entity entity-name="ComplainContent"
+            package-name="org.ofbiz.order.order"
+            title="ComplainContent">
+        <field name="complainContentId" type="id-ne"></field>
+        <field name="complainId" type="id-ne"></field>
+        <field name="contentId" type="id-ne"></field>
+        <prim-key field="complainContentId"/>
+        <relation type="one" fk-name="cc_ch_id" rel-entity-name="ComplainHeader">
+            <key-map field-name="complainId"/>
+        </relation>
+        <relation type="one" fk-name="cc_c_cd" rel-entity-name="Content">
+            <key-map field-name="contentId"/>
+        </relation>
+    </entity>
+
+    <!--  SAP接口同步异常表 add by qianjin 2016.5.16-->
+    <entity entity-name="SapSyncException"
+            package-name="org.ofbiz.order.order"
+            title="Sap Sync Exception">
+        <field name="sapSyncExceptionId" type="id-ne"></field>
+        <field name="orderOrReturnId" type="id-ne"></field>
+        <!-- 类型  ORDER:订单  RETURN:退单 -->
+        <field name="type" type="id-ne"></field>
+        <field name="orderItemSeqId" type="id-ne"></field>
+        <!-- sap接口模块       -->
+        <!-- 订单创建：ZSD_SO_CREATE -->
+        <!-- 订单入库：ZMM_GRS  -->
+        <!-- 订单发货：ZMM_DO_POST -->
+        <!-- 销售开票：ZSD_BILLING_CREATE -->
+        <!-- 客户收付款(已支付):ZFI_CUST_PAY_YZF  客户收付款(已退款):ZFI_CUST_PAY_YTK -->
+        <!-- 客户发票(普通订单):ZFI_INV_POST_PTDD 客户发票(补货订单):ZFI_INV_POST_BHDD 客户发票(已审核的退款单):ZFI_INV_POST_YSH -->
+        <field name="module" type="id-ne"></field>
+        <field name="message" type="description"></field>
+        <prim-key field="sapSyncExceptionId"/>
+    </entity>
+
+    <!--预约单主表  Add By AlexYao-->
+    <entity entity-name="ReserveHeader"
+            package-name="org.ofbiz.order.order"
+            never-cache="true"
+            title="Reserve Header Entity">
+        <field name="reserveId" type="id-ne"></field><!--预约单号-->
+        <field name="reserveType" type="id"></field><!--预约类型-->
+        <field name="productStoreId" type="id"></field><!--店铺ID-->
+        <field name="partyId" type="id"></field><!-- 下单的会员ID add by wcy 2017-5-22 -->
+        <field name="userLoginId" type="id-ne"></field><!--预约账户-->
+        <field name="reservePerson" type="name"></field><!--预约人-->
+        <field name="reserveTel" type="id"></field><!--预约电话-->
+        <field name="reserveTime" type="date-time"></field><!--预约时间-->
+        <field name="createTime" type="date-time"></field><!--下单日期-->
+        <field name="statusId" type="id"></field><!--预约单状态-->
+        <field name="grandTotal" type="currency-amount"></field><!--预约单金额-->
+        <field name="plateNumber" type="id"></field><!--车牌号-->
+        <field name="idNumber" type="id"></field><!--身份证号-->
+        <field name="isTransfer" type="indicator"></field><!--是否过户-->
+        <field name="city" type="id"></field><!--投保城市-->
+        <field name="commStoreId" type="id"></field><!--预约门店-->
+        <field name="useDate" type="date"></field><!--上路时间-->
+        <field name="mileage" type="currency-amount"></field><!--行驶里程-->
+        <field name="plan1" type="id"></field><!--后续计划,SQLSErver 关键字-->
+        <field name="productBrandId" type="id-long"></field><!--喜欢品牌-->
+        <field name="carBudget" type="currency-amount"></field><!--买车预算-->
+        <field name="carValue" type="currency-amount"></field><!--车辆估价-->
+        <field name="reserveQuantity" type="numeric"></field><!--预约人数-->
+        <field name="productCarSeriesId" type="id-ne"></field><!--车型库的车系信息 add by wcy on 2017-5-3 -->
+        <field name="productCarModelId" type="id-ne"></field><!--车型库的车型信息 add by wcy on 2017-5-3 -->
+        <field name="productCarLibBrandId" type="id-ne"></field><!--车型库的品牌信息 add by wcy on 2017-5-3 -->
+        <field name="reserveEndTime" type="date-time"></field><!--预约结束时间 add by wcy on 2017-6-1-->
+        <field name="repairDescription" type="long-varchar"></field><!--维修描述 add by wcy on 2017-6-1-->
+        <field name="deadline" type="date"></field><!--投保截止日期 add by wcy on 2017-7-12-->
+        <field name="servicePartyId" type="id"></field><!-- 服务顾问会员ID、如果是休闲预约，该ID来自第三方 -->
+        <field name="servicePartyName" type="name"></field><!-- 休闲预约，该NAME来自第三方 -->
+        <field name="singleRoom" type="indicator"></field><!-- 是否预订包间 -->
+        <field name="reserveGender" type="indicator"></field><!-- 预约人性别 -->
+        <field name="remarks" type="description"></field><!-- 备注 -->
+        <field name="carId" type="id"></field><!-- 二手车商品ID -->
+        <field name="insuranceEndTime" type="date-time"></field><!-- 二手车保险到期时间 -->
+
+
+        <prim-key field="reserveId"/>
+        <relation type="one" fk-name="RESERVE_HDR_STORE" rel-entity-name="ProductStore">
+            <key-map field-name="productStoreId"/>
+        </relation>
+        <relation type="one" fk-name="RESERVE_HDR_BUSI" rel-entity-name="PartyBusiness">
+            <key-map field-name="partyId"/>
+        </relation>
+        <relation type="one" fk-name="RESERVE_HDR_LOGIN" rel-entity-name="UserLogin">
+            <key-map field-name="userLoginId"/>
+        </relation>
+        <relation type="one" fk-name="RESERVE_HDR_GEO" rel-entity-name="Geo">
+            <key-map field-name="city" rel-field-name="geoId"/>
+        </relation>
+        <relation type="one" fk-name="RESERVE_HDR_CS" rel-entity-name="CommunityStore">
+            <key-map field-name="commStoreId"/>
+        </relation>
+
+        <!--// end  -->
+    </entity>
+    <!--预约单商品  Add By AlexYao-->
+    <entity entity-name="ReserveItem"
+            package-name="org.ofbiz.order.order"
+            never-cache="true"
+            title="Reserve Item Entity">
+        <field name="reserveId" type="id-ne"></field><!--预约单号-->
+        <field name="reserveItemSeqId" type="id-ne"></field>
+        <field name="productId" type="id"></field><!--商品ID-->
+        <field name="itemDescription" type="name"></field><!--商品名称-->
+        <field name="partyId" type="id"></field><!--商家ID-->
+        <field name="businessName" type="name"></field><!--商家名称-->
+        <field name="unitPrice" type="currency-amount"></field><!--单价-->
+        <field name="quantity" type="numeric"></field><!--数量-->
+        <field name="statusId" type="id"></field><!--状态-->
+        <field name="orderId" type="id"></field><!---->
+        <prim-key field="reserveId"/>
+        <prim-key field="reserveItemSeqId"/>
+        <relation type="one" fk-name="RESERVE_ITEM_HDR" rel-entity-name="ReserveHeader">
+            <key-map field-name="reserveId"/>
+        </relation>
+        <relation type="one" fk-name="RESERVE_ITEM_PROD" rel-entity-name="Product">
+            <key-map field-name="productId"/>
+        </relation>
+        <relation type="one" fk-name="RESERVE_ITEM_ORDER" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+    </entity>
+    <!--预约单状态-->
+    <entity entity-name="ReserveStatus"
+            package-name="org.ofbiz.order.order"
+            never-cache="true"
+            title="Reserve Status Entity">
+        <field name="reserveStatusId" type="id-ne"></field>
+        <field name="statusId" type="id"></field>
+        <field name="reserveId" type="id"></field>
+        <field name="reserveItemSeqId" type="id"></field>
+        <field name="statusDatetime" type="date-time"></field>
+        <field name="statusUserLogin" type="id-vlong"></field>
+        <field name="changeReason" type="description"></field>
+        <prim-key field="reserveStatusId"/>
+        <relation type="one" fk-name="RESERVE_STTS_OHDR" rel-entity-name="ReserveHeader">
+            <key-map field-name="reserveId"/>
+        </relation>
+        <relation type="one-nofk" rel-entity-name="ReserveItem">
+            <key-map field-name="reserveId"/>
+            <key-map field-name="reserveItemSeqId"/>
+        </relation>
+        <relation type="one" fk-name="RESERVE_STTS_USER" rel-entity-name="UserLogin">
+            <key-map field-name="statusUserLogin" rel-field-name="userLoginId"/>
+        </relation>
+    </entity>
+
+
+    <!-- 预约属性 -->
+    <entity entity-name="ReserveAttribute" package-name="org.ofbiz.order.order"
+            never-cache="true"
+            title="Reserve Content Attribute">
+        <field name="reserveId" type="id-ne"></field><!--预约单号-->
+        <field name="reserveContentSeqId" type="id-ne"></field>
+        <field name="technician" type="name"></field><!--技师-->
+        <prim-key field="reserveId"/>
+        <prim-key field="reserveContentSeqId"/>
+        <relation type="one" fk-name="RESERVE_ATTRIBUTE_HDR" rel-entity-name="ReserveHeader">
+            <key-map field-name="reserveId"/>
+        </relation>
+    </entity>
+
+
+
+
+   <!-- <entity entity-name="OrderHotelPrice"
+            package-name="org.ofbiz.order.order"
+            never-cache="true"
+            title="Order Hotel Price">
+        <field name="orderHotelPriceId" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>&lt;!&ndash;订单Id&ndash;&gt;
+        <field name="date" type="date-time"></field>&lt;!&ndash;日期&ndash;&gt;
+        <field name="price" type="currency-amount"></field>&lt;!&ndash;价格&ndash;&gt;
+
+        <prim-key field="orderHotelPriceId"/>
+        <relation type="one" fk-name="OHP_OH_ID" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId" rel-field-name="orderId"/>
+        </relation>
+    </entity>-->
+
+    <!--Add By AlexYao 退货单图片表  2016/01/25-->
+    <entity entity-name="ReturnContent"
+            package-name="org.ofbiz.order.return"
+            title="Return Content Entity">
+        <field name="returnId" type="id-ne"></field>
+        <field name="returnContentSeqId" type="id"></field>
+        <field name="contentId" type="id-ne"></field>
+        <prim-key field="returnId"/>
+        <prim-key field="returnContentSeqId"/>
+        <relation type="one" fk-name="RTN_CONT_RTN" rel-entity-name="ReturnHeader">
+            <key-map field-name="returnId"/>
+        </relation>
+        <relation type="one" fk-name="RTN_CONT_CONT" rel-entity-name="Content">
+            <key-map field-name="contentId"/>
+        </relation>
+    </entity>
+    <!--Add By AlexYao 退款单yabiz商城券表  2016/01/26-->
+    <entity entity-name="ReturnTicket"
+            package-name="org.ofbiz.order.return"
+            title="Return Ticket Entity">
+        <field name="returnId" type="id-ne"></field>
+        <field name="returnTicketSeqId" type="id"></field>
+        <field name="ticketId" type="id-ne"></field>
+        <prim-key field="returnId"/>
+        <prim-key field="returnTicketSeqId"/>
+        <relation type="one" fk-name="RTN_TICK_RTN" rel-entity-name="ReturnHeader">
+            <key-map field-name="returnId"/>
+        </relation>
+        <relation type="one" fk-name="RTN_TICK_TICK" rel-entity-name="Ticket">
+            <key-map field-name="ticketId"/>
+        </relation>
+    </entity>
+
+      <!--  add by changsy 2018.3.24-->
+    <entity entity-name="OrderGroup" package-name="org.ofbiz.order.order" title="OrderGroup Entity">
+        <field name="orderGroupId" type="id-ne"></field>
+        <field name="groupName" type="name"></field>
+        <!--
+            ORDER_GIFT 赠送订单
+            ORDER_WISH 心愿订单
+            。。。
+            ORDER_NORMAL 正常订单
+        -->
+        <field name="orderGroupType" type="name"></field>
+        <!--订单对应的业务逻辑，赠送订单是赠送表的id等等-->
+        <field name="orderGroupBusId" type="name"></field>
+        <!--是否已经赠送积分给凯德-->
+        <field name="isSendScore2Kd" type="name"></field>
+        <prim-key field="orderGroupId"/>
+
+        <relation type="one" fk-name="ORDERITMGRP_PGRP" title="Parent" rel-entity-name="OrderItemGroup">
+            <key-map field-name="orderId"/>
+            <key-map field-name="parentGroupSeqId" rel-field-name="orderItemGroupSeqId"/>
+        </relation>
+    </entity>
+
+    <!--  add by changsy 2018.3.24-->
+    <entity entity-name="OrderGroupOrderRel" package-name="org.ofbiz.order.order" title="OrderGroup Entity">
+        <field name="orderGroupId" type="id-ne"></field>
+        <field name="orderId" type="id-ne"></field>
+        <prim-key field="orderGroupId"/>
+        <prim-key field="orderId"/>
+        <relation type="one" fk-name="OGOR_ORDER_REL" rel-entity-name="OrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OGOR_GR_REL" title="Parent" rel-entity-name="OrderGroup">
+            <key-map field-name="orderGroupId"/>
+        </relation>
+    </entity>
+
+
+
+
+
+    <!--Add by zhajh at 20180420 Begin-->
+    <!-- Mall 表 -->
+    <entity entity-name="KdMallInfo"
+            package-name="org.ofbiz.order.order"
+            title="Order Delivery Entity">
+        <field name="mallId" type="id-ne"></field><!--商场编码-->
+        <field name="mallName" type="name"></field>   <!-- 商场名称  -->
+        <field name="locationId" type="name"></field> <!-- 位置信息 -->
+        <prim-key field="mallId"/>
+    </entity>
+    <!--Add by zhajh at 20180420 End-->
+</entitymodel>

@@ -1,0 +1,1878 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+    <screen name="LookupProduct">
+        <section>
+           <!-- <condition>
+                <if-service-permission service-name="catalogPermissionCheck" main-action="VIEW"/>
+            </condition>-->
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <set field="title" value="${uiLabelMap.PageTitleLookupProduct}"/>
+                <set field="queryString" from-field="result.queryString"/>
+                <set field="entityName" value="ProductAndPartyBusiness"/>
+                <set field="searchFields" value="[productId]"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="LookupDecorator" location="component://common/widget/CommonScreens.xml">
+                    <decorator-section name="search-options">
+                        <include-form name="lookupProduct" location="component://prodPromo/widget/prodPromo/FieldLookupForms.xml"/>
+                    </decorator-section>
+                    <decorator-section name="search-results">
+                        <include-form name="listLookupProduct" location="component://prodPromo/widget/prodPromo/FieldLookupForms.xml"/>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    
+    <!-- 促销弹出框页面(单选) start add by qianjin 2016/01/20-->
+	<screen name="PromoListModalPage">
+		<section>
+			<actions>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="ProdPromoUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+			</actions>
+			<widgets>
+				<platform-specific>
+					<html>
+						<html-template
+							location="component://prodPromo/webapp/prodPromo/PromoListModalPage.ftl" />
+					</html>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 促销弹出框页面(单选) end add by qianjin 2016/01/20-->
+	
+	<!-- 促销弹出框页面(多选) start add by qianjin 2016/01/20-->
+	<screen name="PromoListMultiModalPage">
+		<section>
+			<actions>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="ProdPromoUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+			</actions>
+			<widgets>
+				<platform-specific>
+					<html>
+						<html-template
+							location="component://prodPromo/webapp/prodPromo/PromoListMultiModalPage.ftl" />
+					</html>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 促销弹出框页面(多选) end add by qianjin 2016/01/20-->
+	
+	<!-- 收藏人员弹出框页面 begin add by qianjin 2016.01.26-->
+	<screen name="collectionPartyListModalPage">
+		<section>
+			<actions>
+				<set field="activityId" value="${parameters.activityId}"/>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="ProdPromoUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+			</actions>
+			<widgets>
+				<platform-specific>
+					<html>
+						<html-template
+							location="component://prodPromo/webapp/prodPromo/CollectionPartyListModalPage.ftl" />
+					</html>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 收藏人员弹出框页面 end add by qianjin 2016.01.26-->
+
+
+	<!-- begin add by qianjin 活动管理列表 at 2016.02.15 -->
+    <screen name="activityMgrPage">
+        <section>
+             <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>内容管理</label>
+                                <label style="sub-title">专题列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="activityMgrPage" text="内容管理" style="breadcrumb"/>
+                                <link target="" text="专题列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="ACTIVITYMGR_LIST" action="_VIEW" />
+	                        </condition> 
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/ProActivityMgrList.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                    <fail-widgets>
+                                <label style="h3" text="需要活动管理查看的权限"/>
+                            </fail-widgets> 
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by qianjin 活动管理列表 at 2016.02.15 -->
+    
+    <!-- begin add by qianjin 活动管理新增 at 2016.02.15 -->
+    <screen name="activityMgrAddPage">
+        <section>
+             <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>内容管理</label>
+                                <label style="sub-title">专题新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="activityMgrPage" text="内容管理" style="breadcrumb"/>
+                                <link target="" text="专题新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="ACTIVITYMGR_LIST" action="_CREATE" />
+	                        </condition> 
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/ProActivityMgrAdd.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                    <fail-widgets>
+                                <label style="h3" text="需要活动管理新增的权限"/>
+                            </fail-widgets> 
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by qianjin 活动管理新增 at 2016.02.15 -->
+    
+    <!-- begin add by qianjin 活动管理修改 at 2016.02.18 -->
+    <screen name="activityMgrEditPage">
+        <section>
+             <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>内容管理</label>
+                                <label style="sub-title">专题编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="activityMgrPage" text="内容管理" style="breadcrumb"/>
+                                <link target="" text="专题编辑" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="ACTIVITYMGR_LIST" action="_UPDATE" />
+	                        </condition> 
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/ProActivityMgrEdit.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                    <fail-widgets>
+                                <label style="h3" text="需要活动管理编辑的权限"/>
+                            </fail-widgets> 
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by qianjin 活动管理修改 at 2016.02.18 -->
+
+    <!-- begin add by zhajh 活动管理查看 at 2018.04.28 -->
+    <screen name="activityMgrViewPage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>内容管理</label>
+                                <label style="sub-title">专题查看</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="activityMgrPage" text="内容管理" style="breadcrumb"/>
+                                <link target="" text="专题查看" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="ACTIVITYMGR_LIST" action="_UPDATE" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/ProActivityMgrView.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要活动管理编辑的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- end add by zhajh 活动管理查看 at 2018.04.28 -->
+    
+    <!-- 专题活动列表  begin add by qianjin at 2016.02.22 -->
+    <screen name="TopicActivityListPage">
+        <section>
+             <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>活动推荐</label>
+                                <label style="sub-title">活动推荐列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="TopicActivityListPage" text="活动推荐管理" style="breadcrumb"/>
+                                <link target="" text="活动推荐列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="TOPICACTIVITYMGR_LIST" action="_VIEW" />
+	                        </condition>  
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/ProTopicActivityList.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                   <fail-widgets>
+                                <label style="h3" text="需要活动推荐管理查看的权限"/>
+                            </fail-widgets>  
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 专题活动列表  begin end by qianjin at 2016.02.22 -->
+    
+    <!-- 专题活动新增  begin add by qianjin at 2016.02.22 -->
+    <screen name="TopicActivityAddPage">
+        <section>
+             <actions>
+             	<script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/TopicActivityEdit.groovy"/>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>活动推荐管理</label>
+                                <label style="sub-title">活动推荐新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="TopicActivityListPage" text="活动推荐管理" style="breadcrumb"/>
+                                <link target="" text="活动推荐新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="TOPICACTIVITYMGR_LIST" action="_CREATE" />
+	                        </condition>  
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/ProTopicActivityAdd.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                   	<fail-widgets>
+                                <label style="h3" text="需要活动推荐管理新增的权限"/>
+                            </fail-widgets>  
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 专题活动新增  begin end by qianjin at 2016.02.22 -->
+    
+    <!-- 专题活动编辑  begin add by qianjin at 2016.02.23 -->
+    <screen name="TopicActivityEditPage">
+        <section>
+             <actions>
+             	<script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/TopicActivityEdit.groovy"/>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>活动推荐管理</label>
+                                <label style="sub-title">活动推荐编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="TopicActivityListPage" text="活动推荐管理" style="breadcrumb"/>
+                                <link target="" text="活动推荐编辑" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                       	<condition>
+								<if-has-permission permission="TOPICACTIVITYMGR_LIST" action="_UPDATE" />
+	                        </condition>  
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/ProTopicActivityEdit.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                   	<fail-widgets>
+                                <label style="h3" text="需要活动推荐活动管理编辑的权限"/>
+                            </fail-widgets>  
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 专题活动新增  begin end by qianjin at 2016.02.23 -->
+    
+    <!-- 活动管理弹出框页面(单选) start add by qianjin 2016.02.22-->
+	<screen name="ProActivityMgrListModalPage">
+		<section>
+			<actions>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+				<property-map resource="ProdPromoUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+			</actions>
+			<widgets>
+				<platform-specific>
+					<html>
+						<html-template
+							location="component://prodPromo/webapp/prodPromo/ProActivityMgrListModalPage.ftl" />
+					</html>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 活动管理弹出框页面(单选) end add by qianjin 2016.02.22-->
+	
+	<!-- 活动收藏列表页面 begin add by qianjin 2016.02.25-->
+    <screen name="activityCollectionListPage">
+        <section>
+        	<actions>
+			   <entity-condition list="activityTypeList" entity-name="Enumeration">
+			   	<condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+			   </entity-condition>
+			   <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+			   	<condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+			   </entity-condition>
+          	</actions>
+        	<widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>营销管理</label>
+                                <label style="sub-title">活动收藏列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="ActivityCollectionListPage" text="营销管理" style="breadcrumb"/>
+                                <link target="" text="活动收藏列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="PRODPROMO_COLLECTION" action="_VIEW" />
+	                        </condition>  
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/activityCollection.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                   	<fail-widgets>
+                                <label style="h3" text="需要活动收藏查看的权限"/>
+                            </fail-widgets>  
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 活动收藏列表页面 end add by qianjin 2016.02.25-->
+    
+	<!-- 满减列表页面 begin add by Gss 2016.04.15-->
+    <screen name="findPromoReduce">
+        <section>
+        	<actions>
+        	    <set field="titleProperty" value="PromoManageTitle"/>
+			   <entity-condition list="activityTypeList" entity-name="Enumeration">
+			   	<condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+			   </entity-condition>
+			   <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+			   	<condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+			   </entity-condition>
+			   <service service-name="findPromos"></service>
+          	</actions>
+        	<widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>满减</label>
+                                <label style="sub-title">满减列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="满减" style="breadcrumb"/>
+                                <link target="findPromoReduce" text="满减列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="PRODPROMO_REDUCE" action="_LIST" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/findPromoReduce.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                   	<fail-widgets>
+                                <label style="h3" text="需要满减查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 满减列表页面 end add by Gss 2016.01.15-->
+
+	<!-- 满减新增 begin add byGss 2016.04.15-->
+    <screen name="addPromoReduce">
+        <section>
+        	<actions>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductReduce.groovy"/>
+			   <entity-condition list="activityTypeList" entity-name="Enumeration">
+                <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+			   <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+			   	<condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+			   </entity-condition>
+			    <set field="titleProperty" value="PromoManageTitle"/>
+          	</actions>
+        	<widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>满减</label>
+                                <label style="sub-title">满减新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="满减" style="breadcrumb"/>
+                                <link target="addPromoReduce" text="满减新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="PRODPROMO_REDUCE" action="_ADD" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/addPromoReduce.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                   	<fail-widgets>
+                                <label style="h3" text="需要活满减新增的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 满减新增 end add by Gss 2016.01.15-->
+
+    <!-- 满减编辑增 begin add byGss 2016.04.15-->
+    <screen name="editPromoReduce">
+        <section>
+        	<actions>
+        	  <set field="titleProperty" value="PromoManageTitle"/>
+              <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductReduce.groovy"/>
+			  <service service-name="editPromoReduceDetail"></service>
+          	</actions>
+        	<widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>营销管理</label>
+                                <label style="sub-title">满减编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="ActivityCollectionListPage" text="营销管理" style="breadcrumb"/>
+                                <link target="" text="满减编辑" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="PRODPROMO_REDUCE" action="_UPDATE" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/editPromoReduce.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                   	<fail-widgets>
+                                <label style="h3" text="需要满减修改的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 满减编辑 end add by Gss 2016.04.15-->
+
+    <!-- 满赠新增页面 begin add by nf 2018.03.05-->
+    <screen name="addPromoGift">
+        <section>
+            <actions>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductReduce.groovy"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <set field="titleProperty" value="PromoManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>满赠</label>
+                                <label style="sub-title">满赠新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="满赠" style="breadcrumb"/>
+                                <link target="addPromoGift" text="满赠新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_GIFT" action="_ADD" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/addPromoGift.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要满赠新增的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+    <!-- 满减编辑增 begin add by nf 2018.03.14-->
+    <screen name="editPromoGift">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductReduce.groovy"/>
+                <service service-name="editPromoGiftDetail"></service>
+
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>营销管理</label>
+                                <label style="sub-title">满赠编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="ActivityCollectionListPage" text="营销管理" style="breadcrumb"/>
+                                <link target="" text="满赠编辑" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_GIFT" action="_UPDATE" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/editPromoGift.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要满赠编辑的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 满减编辑 end add by nf 2018.03.14-->
+
+
+    <!--满赠列表页面 end add by nf 2018.03.05-->
+    <screen name="findPromoGift">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <service service-name="findPromosGift"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>满赠</label>
+                                <label style="sub-title">满赠列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="满赠" style="breadcrumb"/>
+                                <link target="findPromoGift" text="满赠列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_GIFT" action="_LIST" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/findPromoGift.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要满赠查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 会员首次促销新增页面 begin add by nf 2018.03.09-->
+    <screen name="addPromoNewCust">
+        <section>
+            <actions>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddPromoNewCust.groovy"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <set field="titleProperty" value="PromoManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员首次促销</label>
+                                <label style="sub-title">会员首次促销新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="会员首次促销" style="breadcrumb"/>
+                                <link target="addPromoNewCust" text="会员首次促销新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_NEWCUST" action="_ADD" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/addPromoNewCust.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要会员首次促销的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!--会员首次促销列表页面 end add by nf 2018.03.05-->
+    <screen name="findPromoNewCust">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <service service-name="findPromosNewCust"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>会员首次促销</label>
+                                <label style="sub-title">会员首次促销列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="会员首次促销" style="breadcrumb"/>
+                                <link target="findPromoReduce" text="会员首次促销列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_NEWCUST" action="_LIST" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/findPromoNewCust.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要会员首次促销查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+
+    <!-- 优惠券列表页面 begin add by Gss 2016.04.15-->
+    <screen name="findCoupon">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <!-- <set field="title" value="营销管理"/> -->
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/CouponList.groovy"/>
+                <!-- 优惠劵类型 -->
+                <entity-condition list="couponTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="PRO_COUPON_TYPE"/>
+                </entity-condition>
+                <!-- 优惠劵发放方式 -->
+                <entity-condition list="couponPublishTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="COUPON_PUBLISH_TYPE"/>
+                </entity-condition>
+                <!-- 优惠券优惠范围 -->
+                <entity-condition list="couponRangeTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="COUPON_RANGE_TYPE"/>
+                </entity-condition>
+                <service service-name="findCoupons"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>营销管理</label>
+                                <label style="sub-title">优惠券列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="营销管理" style="breadcrumb"/>
+                                <link target="" text="优惠券列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <!-- <condition>
+                                <if-has-permission permission="PRODPROMO_COUPON" action="_LIST" />
+                            </condition>  -->
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/findCoupon.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要优惠券查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+    <!-- 直降新增页面 add by chagnchen 2018.03.02-->
+    <screen name="addStraightDown">
+        <section>
+            <actions>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductDown.groovy"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <set field="titleProperty" value="PromoManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>直降新增</label>
+                                <label style="sub-title">直降新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="直降" style="breadcrumb"/>
+                                <link target="" text="直降新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                             <condition>
+                                <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_ADD" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/addStraightDown.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要直降查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 直降列表页面 add by changchen 2018.03.02 -->
+    <screen name="findStraightDown">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <service service-name="findStraightDowns"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>直降列表</label>
+                                <label style="sub-title">直降列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="直降" style="breadcrumb"/>
+                                <link target="" text="直降列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_LIST" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/findStraightDown.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要折扣查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 直降编辑 -->
+    <screen name="editStraightDown">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductDown.groovy"/>
+                <service service-name="editStraightDownDetail"></service>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>直降编辑</label>
+                                <label style="sub-title">直降编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="直降" style="breadcrumb"/>
+                                <link target="" text="直降编辑" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_UPDATE" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/editStraightDown.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要直降查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 包邮新增  -->
+    <screen name="addPackage">
+        <section>
+            <actions>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddPackage.groovy"/>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>包邮新增</label>
+                                <label style="sub-title">包邮新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="包邮" style="breadcrumb"/>
+                                <link target="" text="包邮新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_ADD" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/addPackage.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要折扣查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 包邮列表 -->
+    <screen name="findPackage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <service service-name="findPackage"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>包邮列表</label>
+                                <label style="sub-title">包邮列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="包邮" style="breadcrumb"/>
+                                <link target="" text="包邮列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_LIST" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/findPackage.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要折扣查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 包邮编辑 -->
+    <screen name="editPackage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddPackage.groovy"/>
+
+                <service service-name="editPackageDetail"></service>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>包邮修改</label>
+                                <label style="sub-title">包邮修改</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="ActivityCollectionListPage" text="包邮" style="breadcrumb"/>
+                                <link target="" text="包邮修改" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_SPE_PRICE" action="_UPDATE" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/editPackage.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要包邮修改的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 折扣新增页面 begin add by changchen 2018.03.02  -->
+    <screen name="addDiscount">
+        <section>
+            <actions>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductReduce.groovy"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <set field="titleProperty" value="PromoManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>折扣新增</label>
+                                <label style="sub-title">折扣新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="折扣" style="breadcrumb"/>
+                                <link target="" text="折扣新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                             <condition>
+                                <if-has-permission permission="PRODPROMO_DISCOUNT" action="_ADD" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/addDiscount.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要折扣查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 折扣编辑 -->
+    <screen name="editDiscount">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductReduce.groovy"/>
+                <service service-name="editDiscountDetail"></service>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>折扣编辑</label>
+                                <label style="sub-title">折扣编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="折扣" style="breadcrumb"/>
+                                <link target="" text="折扣编辑" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_DISCOUNT" action="_UPDATE" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/editDiscount.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要折扣查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <!-- 折扣列表页面 begin add by changchen 2018.03.02 -->
+    <screen name="findDiscount">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <service service-name="findDiscounts"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>折扣列表</label>
+                                <label style="sub-title">折扣列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="折扣" style="breadcrumb"/>
+                                <link target="" text="折扣列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                             <condition>
+                                <if-has-permission permission="PRODPROMO_DISCOUNT" action="_LIST" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/findDiscount.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要折扣查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+                </widgets>
+        </section>
+    </screen>
+
+    <!-- 优惠券新增页面 begin add by Gss 2016.04.15-->
+    <screen name="addCoupon">
+        <section>
+        	<actions>
+        	   <set field="titleProperty" value="PromoManageTitle"/>
+        	   <!-- 优惠劵类型 -->
+			   <entity-condition list="couponTypeList" entity-name="Enumeration">
+			   	<condition-expr field-name="enumTypeId" value="PRO_COUPON_TYPE"/>
+			   </entity-condition>
+			   <!-- 优惠劵发放方式 -->
+			   <entity-condition list="couponPublishTypeList" entity-name="Enumeration">
+			   	 <condition-expr field-name="enumTypeId" value="COUPON_PUBLISH_TYPE"/>
+			   </entity-condition>
+			   <!-- 优惠券优惠范围 -->
+                <!-- ？？？？？？-->
+                <!-- 优惠劵范围有疑问 在页面上只显示通用类型 根据数据库中查到的数据是通用类型、单品优惠、品牌优惠、分类优惠-->
+			   <entity-condition list="couponRangeTypeList" entity-name="Enumeration">
+			   	<condition-expr field-name="enumTypeId" value="COUPON_RANGE_TYPE"/>
+			   </entity-condition>
+			   <!--会员等级列表-->
+			   <entity-condition list="partyLevels" entity-name="PartyLevelType">
+			   </entity-condition>
+          	</actions>
+        	<widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>代金券新增</label>
+                                <label style="sub-title">代金券新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="代金券" style="breadcrumb"/>
+                                <link target="" text="代金券新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+	                   	<section>
+	                        <condition>
+								<if-has-permission permission="PRODPROMO_COUPON" action="_ADD" />
+	                        </condition>
+							<widgets>
+		                        <platform-specific>
+		                            <html>
+		                                <html-template location="component://prodPromo/webapp/prodPromo/addCoupon.ftl"/>
+		                            </html>
+		                        </platform-specific>
+		                    </widgets>
+		                   	<fail-widgets>
+                                <label style="h3" text="需要代金券查看的权限"/>
+                            </fail-widgets>  
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--优惠券新增页面end add by Gss 2016.05.9-->
+
+    <!-- 优惠券编辑页面-->
+    <screen name="editCoupon">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <!-- 优惠劵类型 -->
+                <entity-condition list="couponTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="PRO_COUPON_TYPE"/>
+                </entity-condition>
+                <!-- 优惠劵发放方式 -->
+                <entity-condition list="couponPublishTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="COUPON_PUBLISH_TYPE"/>
+                </entity-condition>
+                <!-- 优惠券优惠范围 -->
+                <entity-condition list="couponRangeTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="COUPON_RANGE_TYPE"/>
+                </entity-condition>
+                <!--会员等级列表-->
+                <entity-condition list="partyLevels" entity-name="PartyLevelType">
+                </entity-condition>
+                <service service-name="productCouponDetail"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>代金券修改</label>
+                                <label style="sub-title">代金券修改</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="代金券" style="breadcrumb"/>
+                                <link target="" text="代金券修改" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODPROMO_COUPON" action="_UPDATE" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/editCoupon.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要代金券修改的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--优惠券编辑页面-->
+    
+    <!-- 优惠券列表弹出框页面 begin qianjin 2016.02.02 -->
+	<screen name="findCouponCode">
+		<section>
+			<actions>
+				<property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <!--<property-map resource="WorkEffortUiLabels" map-name="uiLabelMap" global="true"/>-->
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="AccountingUiLabels" map-name="uiLabelMap" global="true"/>
+			    <service service-name="disableCouponCode" auto-field-map="parameters">
+			    </service>
+			</actions>
+			<widgets>
+				<platform-specific>
+					<html>
+						<html-template
+							location="component://prodPromo/webapp/prodPromo/findCouponCode.ftl" />
+					</html>
+				</platform-specific>
+			</widgets>
+		</section>
+	</screen>
+	<!--优惠券列表弹出框页面 end qianjin 2016.02.02 -->
+
+
+
+    <!--Add by zhajh at 20180313 商品组合 Begin -->
+    <!-- 组合商品查询页面 -->
+    <screen name="findProductGrouping">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <service service-name="findProductGrouping"></service>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>商品组合</label>
+                                <label style="sub-title">商品组合列表</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="商品组合" style="breadcrumb"/>
+                                <link target="findProductGrouping" text="商品组合列表" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODUCT_GROUP" action="_LIST" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/findProductGrouping.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要商品组合查看的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+    <!-- 组合商品新增页面 -->
+    <screen name="addProductGrouping">
+        <section>
+            <actions>
+                <script location="component://prodPromo/webapp/prodPromo/WEB-INF/actions/AddProductReduce.groovy"/>
+                <entity-condition list="activityTypeList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_TYPE"/>
+                </entity-condition>
+                <entity-condition list="activityAuditStatusList" entity-name="Enumeration">
+                    <condition-expr field-name="enumTypeId" value="ACTY_AUDIT_STUATS"/>
+                </entity-condition>
+                <set field="titleProperty" value="PromoManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>组合商品</label>
+                                <label style="sub-title">组合商品新增</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="组合商品" style="breadcrumb"/>
+                                <link target="addProductGrouping" text="组合商品新增" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODUCT_GROUP" action="_ADD" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/editProductGrouping.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要组合商品新增的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+
+    <!-- 组合商品编辑-->
+    <screen name="editProductGrouping">
+        <section>
+            <actions>
+                <set field="titleProperty" value="PromoManageTitle"/>
+                <set field="productGrpId"  from-field="parameters.productGrpId"/>
+                <entity-one entity-name="ProductGroupPromo" value-field="productGroupPromo"/>
+                <set field="prodGrp" from-field="productGroupPromo" global="true"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>组合商品</label>
+                                <label style="sub-title">组合商品编辑</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="" text="组合商品管理" style="breadcrumb"/>
+                                <link target="" text="组合商品编辑" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="PRODUCT_GROUP" action="_UPDATE" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/editProductGrouping.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要组合商品修改的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--Add by zhajh at 20180313 商品组合 End -->
+
+
+
+    <!--Add by zhajh at 20180402 拆红包设置 at 20180402 Begin -->
+    <screen name="activityOpenRedSetPage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>活动管理</label>
+                                <label style="sub-title">拆红包设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="activityMgrPage" text="活动管理" style="breadcrumb"/>
+                                <link target="" text="拆红包设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="OPENRED_TEMPLATE" action="_SET" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/activityOpenRedSetPage.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要拆红包设置的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--Add by zhajh at 20180402 拆红包设置 at 20180402 End -->
+
+
+    <!--Add by zhajh at 20180402 答题设置 at 20180402 Begin -->
+    <screen name="answerTemplateSetPage">
+        <section>
+            <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                    <!-- 面包屑导航 -->
+                    <decorator-section name="pre-body">
+                        <column-container>
+                            <column style="body-title">
+                                <label>活动管理</label>
+                                <label style="sub-title">答题设置</label>
+                            </column>
+                            <column style="breadcrumb">
+                                <label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+                                <link target="activityMgrPage" text="活动管理" style="breadcrumb"/>
+                                <link target="" text="答题设置" style="breadcrumb active"/>
+                            </column>
+                        </column-container>
+                    </decorator-section>
+                    <decorator-section name="body">
+                        <section>
+                            <condition>
+                                <if-has-permission permission="ANSWER_TEMPLATE" action="_SET" />
+                            </condition>
+                            <widgets>
+                                <platform-specific>
+                                    <html>
+                                        <html-template location="component://prodPromo/webapp/prodPromo/answerTemplateSetPage.ftl"/>
+                                    </html>
+                                </platform-specific>
+                            </widgets>
+                            <fail-widgets>
+                                <label style="h3" text="需要答题设置的权限"/>
+                            </fail-widgets>
+                        </section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!--Add by zhajh at 20180402 设置 at 20180402 End -->
+
+
+    <!-- 促销优惠券弹出框页面(多选) start add by zhajh 2018/04/02-->
+    <screen name="PromoCouponListMultiModalPage">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="ProdPromoUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template
+                                location="component://prodPromo/webapp/prodPromo/PromoCouponListMultiModalPage.ftl" />
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 促销优惠券弹出框页面(多选) start add by zhajh 2018/04/02-->
+
+    <!-- 品牌弹出框页面(多选) start add by zhajh 2018/04/12-->
+    <screen name="BrandListMultiModalPage">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="ProdPromoUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template
+                                location="component://prodPromo/webapp/prodPromo/BrandListMultiModalPage.ftl" />
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 品牌弹出框页面(多选) start add by zhajh 2018/04/12-->
+
+    <!-- 店铺弹出框页面(多选) start add by zhajh 2018/04/13-->
+    <screen name="StoreListMultiModalPage">
+        <section>
+            <actions>
+                <property-map resource="ProductUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="ProdPromoUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonUiLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="CommonEntityLabels" map-name="uiLabelMap" global="true"/>
+                <property-map resource="PartyUiLabels" map-name="uiLabelMap" global="true"/>
+            </actions>
+            <widgets>
+                <platform-specific>
+                    <html>
+                        <html-template
+                                location="component://prodPromo/webapp/prodPromo/StoreListMultiModalPage.ftl" />
+                    </html>
+                </platform-specific>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 品牌弹出框页面(多选) start add by zhajh 2018/04/13-->
+</screens>

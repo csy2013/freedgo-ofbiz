@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>mobile product Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+    <service name="productsSummary" engine="java" location="com.yuaoq.yabiz.mobile.services.ProductService" invoke="productsSummary">
+        <attribute name="productIds" type="java.lang.String" mode="IN"/>
+        <attribute name="webSiteId" type="String" mode="IN" optional="true"/>
+        <attribute name="prodCatalogId" type="String" optional="true" mode="IN"/>
+        <attribute name="productStoreId" type="String" mode="IN" optional="true"/>
+        <attribute name="resultData" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="productDetail" engine="java" location="com.yuaoq.yabiz.mobile.services.ProductService" invoke="productDetail">
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+
+    <service name="recommendProduct" engine="java" location="com.yuaoq.yabiz.mobile.services.ProductService" invoke="recommendProduct">
+    <attribute name="resultData" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="getProductVariantSet" engine="java"
+             location="com.yuaoq.yabiz.mobile.services.ProductService" invoke="getProductVariantSet">
+        <description>Gets a Set of product features (distinct)</description>
+        <attribute name="productId" type="String" mode="IN"/>
+        <attribute name="variantTree" type="java.util.Set" mode="OUT" optional="true"/>
+        <attribute name="variantTreeChoose" type="java.util.Map" mode="OUT" optional="true"/>
+    </service>
+
+
+</services>

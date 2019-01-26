@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Product Category Component Services</description>
+    <vendor>yuaoq</vendor>
+    <version>1.0</version>
+
+    <!-- Product View Services -->
+    <service name="findTopCategories" engine="java"
+             location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="findTopCategories">
+        <description>根据目录获取指定分类下的根分类下的一级分类</description>
+        <permission-service service-name="catalogPermissionCheck" main-action="VIEW"/>
+        <attribute name="catalogId" type="String" mode="IN"/>
+        <attribute name="categoryType" type="String" mode="IN" optional="true" default-value="PCCT_BROWSE_ROOT">
+            <description>PCCT_BROWSE_ROOT,PCCT_MOST_POPULAR,PCCT_PROMOTIONS,PCCT_WHATS_NEW,PCCT_BEST_SELL</description>
+        </attribute>
+        <attribute name="categoryName" type="String" mode="IN" optional="true"/>
+        <attribute name="categories" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <service name="findCategoryMembers" engine="java"
+             location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="findCategoryMembers">
+        <description>根据一级分类获取下级分类</description>
+        <permission-service service-name="catalogPermissionCheck" main-action="VIEW"/>
+        <attribute name="categoryId" type="String" mode="IN"/>
+        <attribute name="categoryName" type="String" mode="IN" optional="true"/>
+        <attribute name="categories" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+    <service name="checkCategoryNameExist" engine="java" location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="checkCategoryNameExist">
+        <description>检查分类名称是否存在</description>
+        <permission-service service-name="catalogPermissionCheck" main-action="VIEW"/>
+        <attribute name="categoryName" type="String" mode="IN"/>
+        <attribute name="isExist" type="String" mode="OUT">
+            <description>0:不存在，1：存在</description>
+        </attribute>
+    </service>
+    <service name="addCategoryInCatalog" engine="java" location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="addCategoryInCatalog">
+        <description>新增分类即分类对应目录</description>
+        <permission-service service-name="catalogPermissionCheck" main-action="CREATE"/>
+        <attribute name="prodCatalogId" type="String" mode="IN"/>
+        <attribute name="categoryName" type="String" mode="IN"/>
+        <attribute name="sequenceNum" type="Long" mode="IN"/>
+        <attribute name="category" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+    <service name="queryCategoryById" engine="java" location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="queryCategoryById">
+        <description>新增分类即分类对应目录</description>
+        <permission-service service-name="catalogPermissionCheck" main-action="VIEW"/>
+        <attribute name="productCategoryId" type="String" mode="IN"/>
+        <attribute name="category" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+    <service name="updateCategoryInCatalog" engine="java" location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="updateCategoryInCatalog">
+        <description>修改分类即分类对应目录</description>
+        <attribute name="prodCatalogId" type="String" mode="IN"/>
+        <attribute name="categoryName" type="String" mode="IN"/>
+        <attribute name="productCategoryId" type="String" mode="IN"/>
+        <attribute name="sequenceNum" type="Long" mode="IN"/>
+        <attribute name="category" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+
+    <service name="checkCategoryDel" engine="java" location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="checkCategoryDel" auth="true">
+        <description>Create a ProdCatalog</description>
+        <permission-service service-name="catalogPermissionCheck" main-action="VIEW"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
+        <attribute name="canDel" type="String" mode="OUT" optional="false"/>
+    </service>
+
+    <service name="addThreeCategory" engine="java" location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="addThreeCategory">
+        <description>新增分类即分类对应目录</description>
+        <permission-service service-name="catalogPermissionCheck" main-action="CREATE"/>
+        <attribute name="parentProductCategoryId" type="String" mode="IN"/>
+        <attribute name="categoryName" type="String" mode="IN"/>
+        <attribute name="sequenceNum" type="Long" mode="IN"/>
+        <attribute name="category" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+
+    <service name="updateThreeCategory" engine="java" location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="updateThreeCategory">
+        <description>新增分类即分类对应目录</description>
+        <permission-service service-name="catalogPermissionCheck" main-action="CREATE"/>
+        <attribute name="parentProductCategoryId" type="String" mode="IN"/>
+        <attribute name="categoryName" type="String" mode="IN"/>
+        <attribute name="sequenceNum" type="Long" mode="IN"/>
+        <attribute name="productCategoryId" type="String" mode="IN"/>
+        <attribute name="category" type="org.ofbiz.entity.GenericValue" mode="OUT"/>
+    </service>
+
+    <service name="getInitProductCategoryByLevel" engine="java" location="com.yuaoq.yabiz.product.service.CategoryServices" invoke="getInitProductCategoryByLevel">
+        <description>新增分类即分类对应目录</description>
+         
+
+        <attribute name="productStoreId" type="String" mode="IN" optional="false"/>
+        <attribute name="productCategoryLevel1List" type="java.util.List" mode="OUT" optional="true"/>
+        <attribute name="productCategoryLevel1Info" type="org.ofbiz.entity.GenericValue" mode="OUT"  optional="true"/>
+        <attribute name="productCategoryLevel2List" type="java.util.List" mode="OUT"  optional="true"/>
+        <attribute name="productCategoryLevel2Info" type="org.ofbiz.entity.GenericValue" mode="OUT"  optional="true"/>
+        <attribute name="productCategoryLevel3List" type="java.util.List" mode="OUT"  optional="true"/>
+        <attribute name="productCategoryLevel3Info" type="org.ofbiz.entity.GenericValue" mode="OUT"  optional="true"/>
+    </service>
+</services>

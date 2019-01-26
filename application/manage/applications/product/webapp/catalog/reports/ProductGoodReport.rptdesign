@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.0.v20100531 Build &lt;2.6.0.v20100609-1613></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[importPackage(Packages.javolution.util)
+importPackage(Packages.org.ofbiz.base.util)
+importPackage(Packages.org.ofbiz.entity.util)
+importPackage(Packages.org.ofbiz.product.product)
+importPackage(Packages.org.ofbiz.entity.condition)
+		module = "new_report_2.rptdesign";]]></method>
+    <property name="iconFile">/templates/first_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+
+    <parameters>
+        <scalar-parameter name="ids" id="158">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+
+     
+    <data-sources>
+        <script-data-source name="OFBIZ" id="8"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="ProductData" id="247">
+            <list-property name="resultSetHints">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">productId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">productName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">productSubName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                     <structure>
+                        <property name="position">4</property>
+                        <property name="name">levelFirst</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">levelSecond</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">levelThird</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                     <structure>
+                        <property name="position">7</property>
+                        <property name="name">saleStartTime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">saleEndTime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">businessPartyId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                     <structure>
+                        <property name="position">10</property>
+                        <property name="name">productId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">salePrice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">marketPrice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                     <structure>
+                        <property name="position">13</property>
+                        <property name="name">costPrice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">volume</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">weight</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+             </list-property>
+             <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">productId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">productId</text-property>
+                    <text-property name="heading">productId</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">productName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">productName</text-property>
+                    <text-property name="heading">productName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">productSubName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">productSubName</text-property>
+                    <text-property name="heading">productSubName</text-property>
+                </structure>
+                
+                <structure>
+                    <property name="columnName">levelFirst</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">levelFirst</text-property>
+                    <text-property name="heading">levelFirst</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">levelSecond</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">levelSecond</text-property>
+                    <text-property name="heading">levelSecond</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">levelThird</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">levelThird</text-property>
+                    <text-property name="heading">levelThird</text-property>
+                </structure>
+                
+                <structure>
+                    <property name="columnName">saleStartTime</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">saleStartTime</text-property>
+                    <text-property name="heading">saleStartTime</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">saleEndTime</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">saleEndTime</text-property>
+                    <text-property name="heading">saleEndTime</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">businessPartyId</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">businessPartyId</text-property>
+                    <text-property name="heading">businessPartyId</text-property>
+                </structure>
+                
+                <structure>
+                    <property name="columnName">brandName</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">brandName</text-property>
+                    <text-property name="heading">brandName</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">salePrice</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">salePrice</text-property>
+                    <text-property name="heading">salePrice</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">marketPrice</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">marketPrice</text-property>
+                    <text-property name="heading">marketPrice</text-property>
+                </structure>
+                
+                
+                <structure>
+                    <property name="columnName">costPrice</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">costPrice</text-property>
+                    <text-property name="heading">costPrice</text-property>
+                </structure>
+                
+                <structure>
+                    <property name="columnName">volume</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">volume</text-property>
+                    <text-property name="heading">volume</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">weight</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">weight</text-property>
+                    <text-property name="heading">weight</text-property>
+                </structure>
+                 
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                     <structure>
+                        <property name="position">1</property>
+                        <property name="name">productId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">productName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">productSubName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    
+                     <structure>
+                        <property name="position">4</property>
+                        <property name="name">levelFirst</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">levelSecond</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">levelThird</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                     <structure>
+                        <property name="position">7</property>
+                        <property name="name">saleStartTime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">saleEndTime</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">businessPartyId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                     <structure>
+                        <property name="position">10</property>
+                        <property name="name">brandName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">salePrice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">marketPrice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                     <structure>
+                        <property name="position">13</property>
+                        <property name="name">costPrice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">volume</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">weight</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">OFBIZ</property>
+            <method name="open"><![CDATA[
+            productId = null;
+            ids="";
+            if (params["ids"].value) {
+			    ids = params["ids"].value;
+			}
+           
+            productGoods = null;
+	        productGoodList=null;
+			
+		    try {
+		         productGoods = ProductServices.productGoodListReport(delegator,ids);
+		         if(productGoods){
+		        	productGoodList=productGoods.get("productGoodList");
+		        	 
+		         }
+			} catch (e) {
+ 			     Debug.logError(e, module);
+			}
+
+          
+			totalRow = 0;
+			countOfRow = 0;
+			if (productGoodList) {
+			    totalRow = productGoodList.size();
+			}
+		
+			]]></method>
+            
+            <method name="fetch"><![CDATA[if (countOfRow > totalRow - 1) return false;
+                productGoodInfo = productGoodList.get(countOfRow);
+              	 
+				productId=productGoodInfo.get("productId");
+				productName=productGoodInfo.get("productName");
+				productSubName = productGoodInfo.get("productSubName");
+				
+				levelFirst=productGoodInfo.get("levelFirst");
+				levelSecond=productGoodInfo.get("levelSecond");
+				levelThird = productGoodInfo.get("levelThird");
+				
+				saleStartTime=productGoodInfo.get("saleStartTime");
+				saleEndTime=productGoodInfo.get("saleEndTime");
+				businessPartyId = productGoodInfo.get("businessPartyId");
+				
+				brandName=productGoodInfo.get("brandName");
+				salePrice=productGoodInfo.get("salePrice");
+				marketPrice = productGoodInfo.get("marketPrice");
+				
+				costPrice = productGoodInfo.get("costPrice");
+				volume=productGoodInfo.get("volume");
+				weight=productGoodInfo.get("weight");
+	
+	            
+	            row["productId"] = productId;
+	            row["productName"] = productName;
+	            row["productSubName"] = productSubName;
+	            
+	            row["levelFirst"] = levelFirst;
+	            row["levelSecond"] = levelSecond;
+	            row["levelThird"] = levelThird;
+	            
+	            row["saleStartTime"] = saleStartTime;
+	            row["saleEndTime"] = saleEndTime;
+	            row["businessPartyId"] = businessPartyId;
+	            
+	            row["brandName"] = brandName;
+	            row["salePrice"] = salePrice;
+	            row["marketPrice"] = marketPrice;
+	            
+	            row["costPrice"] = costPrice;
+	            row["volume"] = volume;
+	            row["weight"] = weight;
+	            Debug.logError( "zjhtest_dinnerWineDatad_productBrandList11133322: =================================================*********************   " + row["productId"], module);
+			countOfRow ++;
+			return true;]]></method>
+             </script-data-set>
+        
+    </data-sets>
+    <styles>
+        <style name="report" id="110">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="245">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-large</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">商品数据</text-property>
+        </label>
+        <table id="163">
+
+            <property name="width">100%</property>
+            <property name="dataSet">ProductData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">productId</property>
+                    <text-property name="displayName">productId</text-property>
+                    <expression name="expression" >dataSetRow["productId"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">productName</property>
+                    <text-property name="displayName">productName</text-property>
+                    <expression name="expression" >dataSetRow["productName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">productSubName</property>
+                    <text-property name="displayName">productSubName</text-property>
+                    <expression name="expression" >dataSetRow["productSubName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                
+                 <structure>
+                    <property name="name">levelFirst</property>
+                    <text-property name="displayName">levelFirst</text-property>
+                    <expression name="expression" >dataSetRow["levelFirst"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">levelSecond</property>
+                    <text-property name="displayName">levelSecond</text-property>
+                    <expression name="expression" >dataSetRow["levelSecond"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">levelThird</property>
+                    <text-property name="displayName">levelThird</text-property>
+                    <expression name="expression" >dataSetRow["levelThird"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                 <structure>
+                    <property name="name">saleStartTime</property>
+                    <text-property name="displayName">saleStartTime</text-property>
+                    <expression name="expression" >dataSetRow["saleStartTime"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">saleEndTime</property>
+                    <text-property name="displayName">saleEndTime</text-property>
+                    <expression name="expression" >dataSetRow["saleEndTime"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">businessPartyId</property>
+                    <text-property name="displayName">businessPartyId</text-property>
+                    <expression name="expression" >dataSetRow["businessPartyId"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">brandName</property>
+                    <text-property name="displayName">brandName</text-property>
+                    <expression name="expression" >dataSetRow["brandName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">salePrice</property>
+                    <text-property name="displayName">salePrice</text-property>
+                    <expression name="expression" >dataSetRow["salePrice"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">marketPrice</property>
+                    <text-property name="displayName">marketPrice</text-property>
+                    <expression name="expression" >dataSetRow["marketPrice"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                 <structure>
+                    <property name="name">costPrice</property>
+                    <text-property name="displayName">costPrice</text-property>
+                    <expression name="expression" >dataSetRow["costPrice"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">volume</property>
+                    <text-property name="displayName">volume</text-property>
+                    <expression name="expression" >dataSetRow["volume"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">weight</property>
+                    <text-property name="displayName">weight</text-property>
+                    <expression name="expression" >dataSetRow["weight"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+           
+            <column id="287"/>
+            <column id="288"/>
+            <column id="289"/>
+           
+            <header>
+                  <row id="164">
+                    <cell id="153">
+                        <label id="176">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">商品编号</text-property>
+                        </label>
+                    </cell>
+                    <cell id="154">
+                        <label id="177">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">商品名称</text-property>
+                        </label>
+                    </cell>
+                    <cell id="155">
+                        <label id="178">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">商品副标题</text-property>
+                        </label>
+                    </cell>
+                    
+                    <cell id="156">
+                        <label id="179">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">一级分类</text-property>
+                        </label>
+                    </cell>
+                    <cell id="157">
+                        <label id="180">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">二级分类</text-property>
+                        </label>
+                    </cell>
+                    <cell id="158">
+                        <label id="181">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">三级分类</text-property>
+                        </label>
+                    </cell>
+                    <cell id="159">
+                        <label id="182">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">销售开始时间</text-property>
+                        </label>
+                    </cell>
+                    <cell id="160">
+                        <label id="183">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">销售结束时间</text-property>
+                        </label>
+                    </cell>
+                    <cell id="161">
+                        <label id="184">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">商家名称</text-property>
+                        </label>
+                    </cell>
+                    <cell id="162">
+                        <label id="185">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">商品品牌</text-property>
+                        </label>
+                    </cell>
+                    <cell id="163">
+                        <label id="186">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">销售价格(元)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="164">
+                        <label id="187">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">市场价格(元)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="165">
+                        <label id="188">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">成本价格(元)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="166">
+                        <label id="189">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">体积(m3)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="167">
+                        <label id="190">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">重量(kg)</text-property>
+                        </label>
+                    </cell>
+                 
+                </row>
+            </header>
+            <detail>
+                <row id="173">
+                  <cell id="144">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="269">
+                            <property name="resultSetColumn">productId</property>
+                        </data>
+                    </cell>
+                    <cell id="276">
+                        <data id="373">
+                            <property name="resultSetColumn">productName</property>
+                        </data>
+                    </cell>
+                    
+                    <cell id="277">
+                        <data id="374">
+                            <property name="resultSetColumn">productSubName</property>
+                        </data>
+                    </cell>
+                    <cell id="278">
+                        <data id="375">
+                            <property name="resultSetColumn">levelFirst</property>
+                        </data>
+                    </cell>
+                     <cell id="279">
+                        <data id="376">
+                            <property name="resultSetColumn">levelSecond</property>
+                        </data>
+                    </cell>
+                    
+                    <cell id="280">
+                        <data id="377">
+                            <property name="resultSetColumn">levelThird</property>
+                        </data>
+                    </cell>
+                    <cell id="281">
+                        <data id="378">
+                            <property name="resultSetColumn">saleStartTime</property>
+                        </data>
+                    </cell>
+                     <cell id="282">
+                        <data id="379">
+                            <property name="resultSetColumn">saleEndTime</property>
+                        </data>
+                    </cell>
+                    
+                    <cell id="283">
+                        <data id="380">
+                            <property name="resultSetColumn">businessPartyId</property>
+                        </data>
+                    </cell>
+                    <cell id="284">
+                        <data id="381">
+                            <property name="resultSetColumn">brandName</property>
+                        </data>
+                    </cell>
+                     <cell id="285">
+                        <data id="282">
+                            <property name="resultSetColumn">salePrice</property>
+                        </data>
+                    </cell>
+                    
+                    <cell id="286">
+                        <data id="383">
+                            <property name="resultSetColumn">marketPrice</property>
+                        </data>
+                    </cell>
+                    <cell id="287">
+                        <data id="384">
+                            <property name="resultSetColumn">costPrice</property>
+                        </data>
+                    </cell>
+                     <cell id="288">
+                        <data id="385">
+                            <property name="resultSetColumn">volume</property>
+                        </data>
+                    </cell>
+                    
+                    <cell id="289">
+                        <data id="386">
+                            <property name="resultSetColumn">weight</property>
+                        </data>
+                    </cell>
+                   
+                </row>
+            </detail>
+            <footer>
+                <row id="182">
+                   <cell id="183"/>
+                    <cell id="184"/>
+                    <cell id="185"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

@@ -1,0 +1,9 @@
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>Content Component Services</description>
+    <vendor>OFBiz</vendor>
+    <service name="checkRegisterLoginId" engine="java" location="org.ofbiz.party.party.PartyServices" invoke="checkRegisterLoginId" auth="false">
+        <attribute name="USER_LOGIN_ID" type="String" mode="IN"/>
+        <attribute name="_PASSED_" type="Boolean" mode="OUT" optional="true"/>
+    </service>
+</services>

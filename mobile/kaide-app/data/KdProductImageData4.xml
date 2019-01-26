@@ -1,0 +1,364 @@
+<entity-engine-xml>
+    <ProductImageTemp productId="10290"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051532384976.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051532396226.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051532390601.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10291"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804171758338967.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804171758349434.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804171758344620.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10292"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804191752191691.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804191752202160.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804191752196847.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10293"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804081703298824.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804081703303199.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804081703305404.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10294"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804081708333305.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804081708338618.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804081708343618.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10295" images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711171121369446.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10296"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221557085042.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221557096137.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221557088480.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221557092855.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221557091293.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221557097885.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10297"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261818425003.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261818435316.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261818440629.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261818427347.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261818429379.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261818431566.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10298"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804261756029811.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261756034811.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261756040124.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261756119188.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261756124657.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261756129813.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10299"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703221559027498.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703221559029696.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703221559032029.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703221559037032.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10300"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071342435365.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071342437894.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071342439427.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071342444128.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071342449909.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10301"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091116266791.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091116268979.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091116276010.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091116280541.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10302"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117110688.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117112896.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117115063.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117116626.JPG|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117120844.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10303"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131448171040.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131448174321.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131448176197.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131448179947.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10304"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101023004566.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101023015660.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101023010503.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101023008628.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10305"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131509424335.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131509433866.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131509428866.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10306"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705231114298247.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705231114304478.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10307"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021111405198.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021111408167.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021111415979.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10308" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705161523111585.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10309"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021114372901.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021114375089.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021114388577.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10310"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021732427528.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021732431903.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021732436591.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10311"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021734191486.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021734196486.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703021734202423.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10312" images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703031125036960.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10313" images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703031131339988.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10314"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703031122429588.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703031122433823.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703031122438963.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10315"
+                      images="http://file.capitaland.com.cn/webupload/19-1/Inegral/images/201704/201704211707472487.jpg|http://file.capitaland.com.cn/webupload/19-1/Inegral/images/201704/201704211707587722.jpg|http://file.capitaland.com.cn/webupload/19-1/Inegral/images/201704/201704211708066161.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10316"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201704/201704201159427533.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201704/201704201202222385.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201704/201704201202333708.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10317"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804171438134224.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804171438137974.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804171438140474.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10318"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221720098004.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221720103943.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221720109279.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221720101286.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10319"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221722464161.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221722479164.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221722474788.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712221722476664.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10320"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705241717569246.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705241717574091.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705241717579716.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705241717571590.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10321"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201701/201701131815571510.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201701/201701131815576991.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10322" images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705271749197803.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10323"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201701/201701231542230254.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201701/201701231542232934.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201701/201701231542236203.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10324"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711221615030155.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711221615033143.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711221615038905.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10325"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709191425378393.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709191425382458.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709191425388706.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10326"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101023581091.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101023585760.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101023591854.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10327"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311710449305.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311710452742.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10328"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201603280032.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201603284095.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201603289563.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10329"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804161416244397.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161416246741.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161416252522.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10330"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803211508579103.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803211508582409.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803211508592697.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803211508587540.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10331"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091118291167.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091118293510.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091118296167.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091118301479.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091118306948.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10332"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071455204691.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071455210472.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071455215786.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10333"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071340493674.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071340504300.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071340508675.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10334"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071341433613.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071341438613.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703071341445176.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10335"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117540128.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117542472.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117545128.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703091117550597.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10336"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101027559716.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101027565218.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101027570185.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10337" images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131455369956.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10338" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704201637577436.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10339" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704201701588902.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10340" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704201704214132.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10341" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704211642012651.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10342" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704211701471796.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10343"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705251732560838.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705251732570057.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705251732564901.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705251732563338.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10344"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705251734376922.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705251734381421.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705251734386577.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705251734378921.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10345" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705251638369464.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10346"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703221653269890.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703221653274421.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703221653279577.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10347" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705161525388338.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10348" images="http://file.capitaland.com.cn/webupload//tempFolder//201804160949008722.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10349" images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201704/201704011102330108.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10350"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706271726349640.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706271726354484.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706271726359641.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706271726352140.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10351"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241330226823.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241330516795.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241330519920.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10352"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231740396482.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231740401951.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10353"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711091611307490.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711091611323584.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711091611318428.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711091611313584.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10354"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804161547536290.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161547544238.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161547539238.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10355"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261454033063.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261454043857.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261454038544.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261454035888.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10356"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261456210846.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261456218815.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261456220378.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261456214753.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261456217409.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261456225534.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10357"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707271512504615.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707271513039964.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10358" images="http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611271057541579.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10359"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051806409737.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051806414422.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051806416016.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10360"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201802/201802121519260200.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201802/201802121519264732.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201802/201802121519270513.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10361"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709191651280760.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709191651282479.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709191651287948.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10362"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803161710207156.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803161710399207.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803161711016893.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803161711024401.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10363"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201134460084.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201134472741.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201134467584.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10364"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201702/201702141556245424.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201702/201702141556254485.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201702/201702141556259641.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10365"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201138486962.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201138499774.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201138492743.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10366"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201142058004.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201142060347.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201142065817.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10367"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201144040528.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201144053497.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201144048341.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201144043810.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10368"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201145536417.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201145544542.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201145550011.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201145540167.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10369"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201152061277.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201152068152.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201152062996.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10370"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201153303751.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201153305469.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709201153311250.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10371"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706271740520687.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706271804481875.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706271805477044.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10372"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131541418965.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131541423653.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131541425372.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10373"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708171119338883.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708171119352489.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708171119347327.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708171119342789.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10374"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101111097140.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101111102609.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101111108234.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101111100109.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10375"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231624438498.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231624440673.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231624443486.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231624448799.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10376"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231623421408.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231623424065.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231623425784.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231623430784.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10377"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231614387180.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231614389561.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231614394993.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703231614400463.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10378"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703011550466938.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703011550471469.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10379" images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131546195128.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10380" images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201703/201703011553209935.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10381"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131515246232.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131515250920.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10382"
+                      images="http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201609/201609141354180187.jpg|http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611281848284660.jpg|http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611281848289035.jpg|http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611281848294660.jpg|http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611281848384254.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10383" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704211706002364.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10384"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707271515326868.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707271515470031.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10385" images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201708/201708100953498116.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10386"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709221723489833.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709221723497489.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709221723499051.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709221723493582.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709221723495926.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10387"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051722001508.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051722016035.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051722006042.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051722014480.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051722008381.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051722010724.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10388"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051732388509.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051732370707.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051732373050.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051732375392.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10389"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051802475605.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051802482633.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051802477479.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051802488881.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201801/201801051802480620.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10390"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804161520077779.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161520088742.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161520083898.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10391"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804161539360903.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161539372494.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161539367466.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10392"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804161322103880.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161322114349.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161322109352.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10393"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101129294914.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101129300378.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101129305847.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10394"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804171756448359.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804171756453984.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804171756451328.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10395"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803261442352067.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803261442354232.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803261442359857.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10396"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201705/201705091535292034.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201705/201705091535459112.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10397"
+                      images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705251544410533.jpg|http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705251544415845.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10398" images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705161520350986.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10399"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804261759489904.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261759495186.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261759500655.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10400"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804191753567117.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804191753571993.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804191753569337.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10401"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804191755096945.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804191755102413.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804191755107726.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10402"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804251813500743.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804251813505430.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804251813507182.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10403"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804261758358450.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261758363294.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804261758369544.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10404"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261618418057.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261618420714.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261618426182.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10405"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281555282479.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281555308574.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281555314212.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281555298886.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281555305449.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10406"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131537285613.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131537303584.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131537298582.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131537293113.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10407"
+                      images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705251633481869.JPG|http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705251633487970.JPG|http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705251633485001.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10408" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201705/201705251612316934.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10409"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311706329697.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311706322041.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311706334072.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10410" images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705161536489257.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10411" images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131548357372.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10412" images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201702/201702281606189223.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10413" images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201702/201702281606498879.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10414"
+                      images="http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611271348346760.jpg|http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611271348401918.jpg|http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611271348494923.jpg|http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611271348501173.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10415" images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705271739171029.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10416" images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705271742558693.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10417" images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201701/201701231543491252.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10418"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708171149399366.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708171149409703.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708171149404688.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708171149402187.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10419"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181618532235.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181618545673.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181618540539.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181618536142.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10420"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131524166393.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131524182798.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131524177676.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131524169078.JPG|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709131524172329.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10421"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241454008134.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241454157469.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241454162470.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10422"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241456425942.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241456578995.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201707/201707241456583371.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10423" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704201633313234.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10424" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704201603427634.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10425" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704211716101462.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10426" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704211655018223.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10427"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261825480676.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261825490848.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261825496318.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261825483035.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712261825484929.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10428"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804251809571394.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804251809576082.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804251809581863.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804251810054365.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804251810059521.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804251810064990.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10429"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804281611002733.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281611012265.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281611018671.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281611005233.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281611007265.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281611009609.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10430"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804281614334607.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281614344920.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281614340412.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281614336638.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804281614338533.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10431"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711171119383139.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711171119388435.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10432"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051658459719.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051658465484.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051658470953.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10433"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051718544739.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051718558802.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051718553646.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712051718547083.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10434"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131523500395.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131523504301.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131523509962.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10435"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709181613580231.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709181613583981.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10436"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131519440878.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131519452126.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131519447298.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10437"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709111733595073.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709111734006323.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709111734001167.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10438"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281624540371.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281624556778.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281624551465.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281624545864.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10439"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101047009430.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101047014430.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101047021003.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101047012555.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10440"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281633593159.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281633597534.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281634005816.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281634000347.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10441"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261633253086.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261633259024.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261633264180.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10442"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271710088971.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271710099127.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271710093815.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271710092096.JPG"></ProductImageTemp>
+    <ProductImageTemp productId="10443"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271737393715.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271737401684.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271737407621.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271737398559.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10444"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804171750578562.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804171750583719.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804171750588875.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10445"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804191749267302.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804191749272302.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804191749277927.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10446"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705161538496636.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705161538499761.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10447"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803211520161336.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803211520166023.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201803/201803211520172117.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10448"
+                      images="http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201706/201706131648457345.jpg|http://file.capitaland.com.cn/webupload/193-1/Inegral/images/201706/201706131648461565.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10449"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712111436186735.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712111436194703.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10450"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712111439068038.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712111439073195.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10451"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712111441103738.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712111441109356.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10452"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712111443122416.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201712/201712111443132540.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10453"
+                      images="http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271403045507.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271403054100.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271403048944.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271403059118.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10454"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101107169072.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101107175300.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101107180484.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10455"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311702433031.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311702557983.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311702567563.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201705/201705311702562670.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10456"
+                      images="http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271434213760.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271434218292.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271434223625.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271434221437.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10457"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706091438172047.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706091438176578.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706091438181891.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10458"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706191731074042.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706191731080917.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706191731078574.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10459"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706191741254865.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706191741257990.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706191741263615.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10460"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131517008773.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131517019086.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131517024398.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131517011273.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131517013773.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10461"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709181620214497.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709181620221529.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709181620216372.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10462"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804161328472270.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161328476646.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161328482583.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10463"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131516110229.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131516120698.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131516115698.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131516112886.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10464"
+                      images="http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271405427508.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271405436780.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271405442122.jpg|http://file.capitaland.com.cn/webupload/192-4/Inegral/images/201704/201704271405430945.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10465"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804161449214910.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161449216790.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161449222415.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10466"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181646407159.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181646409815.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181646414431.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181647087840.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181647083439.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708181647089377.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10467"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images//201708/201708241701147697.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708241701304296.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10468" images="http://file.capitaland.com.cn/webupload/346-1/Inegral/images/201611/201611281854005406.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10469" images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131534381088.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10470" images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711101026236969.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10471"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708231728466415.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201708/201708231728470009.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10472"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709011523279769.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709011523293282.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709011523298439.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709011523282918.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709011523288271.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10473"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709081521591711.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709081522000797.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709081521595799.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10474"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709111527294290.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709111527309447.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709111527304291.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709111527299134.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10475"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281607118600.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281607138757.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281607133460.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281607123913.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281607130475.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10476"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709291506158209.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709291506173992.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709291506168183.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709291506164120.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10477" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704191912309292.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10478" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704191907347549.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10479" images="http://file.capitaland.com.cn/webupload/354-1/Inegral/images/201704/201704201717385926.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10480"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images//201709/201709261611115581.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images//201709/201709261611468159.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images//201709/201709261611299827.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images//201709/201709261611302952.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images//201709/201709261611308108.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10481"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261650228688.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261650239157.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261650244938.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709261650233688.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10482"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271726538298.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271726545955.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709271726540955.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10483"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281604588909.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281604590315.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201709/201709281604595628.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10484"
+                      images="http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131510310526.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131510326620.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131510321464.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131510313660.jpg|http://file.capitaland.com.cn/webupload/433-1/Inegral/images/201711/201711131510315995.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10485"
+                      images="http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706201452088238.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706201502020096.jpg|http://file.capitaland.com.cn/webupload/355-1/Inegral/images/201706/201706201502110203.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10486"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201805071108175922.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201805071108181391.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201805071108186861.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10487"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804081711442408.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804081711447409.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804081711453034.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10488"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804081713379746.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804081713384902.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804081713382402.jpg"></ProductImageTemp>
+    <ProductImageTemp productId="10489"
+                      images="http://file.capitaland.com.cn/webupload//tempFolder//201804161205458993.jpg|http://file.capitaland.com.cn/webupload//tempFolder//201804161205463681.jpg"></ProductImageTemp>
+
+</entity-engine-xml>

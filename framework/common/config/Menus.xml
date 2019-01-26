@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus>
+    <!-- begin add by Wcy 会员管理 at 2016.01.6 -->
+    <app id="membermgr">
+        <location>application/manage/applications/party/widget/membermgr/MemberMenus.xml</location>
+        <name>MemberAppBar</name>
+        <uiLabel>PartyUiLabels</uiLabel>
+        <iconStyle>fa fa-users</iconStyle>
+    </app>
+    <!-- end add by Wcy 会员管理 at 2016.01.6 -->
+    <app id="partymgr">
+        <location>application/manage/applications/party/widget/partymgr/PartyMenus.xml</location>
+        <name>PartyAppBar</name>
+        <uiLabel>PartyUiLabels</uiLabel>
+        <iconStyle>fa fa-users</iconStyle>
+    </app>
+
+    <!-- end add by qianjin 商家管理 at 2016.01.26 -->
+    <app id="businessmgr">
+        <location>application/manage/applications/party/widget/businessmgr/BusinessMenus.xml</location>
+        <name>BusinessAppBar</name>
+        <uiLabel>PartyUiLabels</uiLabel>
+        <iconStyle>fa fa-briefcase</iconStyle>
+    </app>
+    <app id="customermgr">
+        <location>application/manage/applications/content/widget/customermgr/CustomerMenus.xml</location>
+        <name>CustomerAppBar</name>
+        <uiLabel>ContentUiLabels</uiLabel>
+        <iconStyle>fa fa-desktop</iconStyle>
+    </app>
+
+    <app id="ap">
+        <location>application/manage/applications/accounting/widget/ap/ApMenus.xml</location>
+        <name>ApAppBar</name>
+        <uiLabel>AccountingUiLabels</uiLabel>
+        <iconStyle>fa fa-balance-scale</iconStyle>
+    </app>
+    <app id="ar">
+        <location>application/manage/applications/accounting/widget/ar/ArMenus.xml</location>
+        <name>ArAppBar</name>
+        <uiLabel>AccountingUiLabels</uiLabel>
+        <iconStyle>fa fa-qrcode</iconStyle>
+    </app>
+    <app id="icoAccount">
+        <location>application/manage/applications/accounting/widget/icoAccount/icoAccountMenus.xml</location>
+        <name>AccountingAppBar</name>
+        <uiLabel>AccountingUiLabels</uiLabel>
+        <iconStyle>fa fa-qrcode</iconStyle>
+    </app>
+    <app id="accounting">
+        <location>application/manage/applications/accounting/widget/AccountingMenus.xml</location>
+        <name>AccountingAppBar</name>
+        <uiLabel>AccountingUiLabels</uiLabel>
+        <iconStyle>fa fa-money</iconStyle>
+    </app>
+    <app id="assetmaint">
+        <location>specialpurpose/assetmaint/widget/AssetmaintMenus.xml</location>
+        <name>AssetMaintAppBar</name>
+        <uiLabel>AssetMaintUiLabels,AccountingUiLabels,PartyUiLabels,ProductUiLabels,WorkEffortUiLabels</uiLabel>
+        <iconStyle>fa fa-magnet</iconStyle>
+    </app>
+    <app id="catalog">
+        <location>application/manage/applications/product/widget/catalog/CatalogMenus.xml</location>
+        <name>CatalogAppBar</name>
+        <uiLabel>ProductUiLabels</uiLabel>
+        <iconStyle>fa fa-folder-o</iconStyle>
+    </app>
+
+    <app id="content">
+        <location>application/manage/applications/content/widget/content/ContentMenus.xml</location>
+        <name>ContentAppBar</name>
+        <uiLabel>ContentUiLabels</uiLabel>
+       <!-- <iconStyle>fa fa-desktop</iconStyle>-->
+        <iconStyle>fa fa-file-text-o</iconStyle>
+    </app>
+
+    <app id="facility">
+        <location>application/manage/applications/product/widget/facility/FacilityMenus.xml</location>
+        <name>FacilityAppBar</name>
+        <uiLabel>ProductUiLabels</uiLabel>
+        <iconStyle>fa fa-building-o</iconStyle>
+    </app>
+    <app id="humanres">
+        <location>application/manage/applications/humanres/widget/HumanresMenus.xml</location>
+        <name>HumanResAppBar</name>
+        <uiLabel>HumanResUiLabels</uiLabel>
+        <iconStyle>fa fa-user-secret</iconStyle>
+    </app>
+    <app id="manufacturing">
+        <location>application/manage/applications/manufacturing/widget/manufacturing/ManufacturingMenus.xml</location>
+        <name>ManufacturingAppBar</name>
+        <uiLabel>ManufacturingUiLabels</uiLabel>
+        <iconStyle>fa fa-hand-paper-o</iconStyle>
+    </app>
+    <app id="marketing">
+        <location>application/manage/applications/marketing/widget/MarketingMenus.xml</location>
+        <name>MarketingAppBar</name>
+        <uiLabel>MarketingUiLabels</uiLabel>
+        <iconStyle>fa fa-coffee</iconStyle>
+    </app>
+    <app id="myportal">
+        <location>specialpurpose/myportal/widget/MyPortalMenus.xml</location>
+        <name>MyPortalAppBar</name>
+        <uiLabel>MyPortalUiLabels</uiLabel>
+        <iconStyle>fa fa-th-large</iconStyle>
+    </app>
+    <app id="ordermgr">
+        <location>application/manage/applications/order/widget/ordermgr/OrderMenus.xml</location>
+        <name>OrderAppBar</name>
+        <uiLabel>OrderUiLabels</uiLabel>
+        <!--<iconStyle>fa fa-shopping-cart</iconStyle>-->
+        <iconStyle>fa fa-file-o</iconStyle>
+    </app>
+    <app id="projectmgr">
+        <location>specialpurpose/projectmgr/widget/ProjectMenus.xml</location>
+        <name>ProjectMgrAppBar</name>
+        <uiLabel>ProjectMgrUiLabels</uiLabel>
+        <iconStyle>fa fa-object-ungroup</iconStyle>
+    </app>
+    <app id="sfa">
+        <location>application/manage/applications/marketing/widget/sfa/SfaMenus.xml</location>
+        <name>SfaAppBar</name>
+        <uiLabel>MarketingUiLabels</uiLabel>
+        <iconStyle>fa fa-comments</iconStyle>
+    </app>
+    <app id="scrum">
+        <location>specialpurpose/scrum/widget/scrumMenus.xml</location>
+        <name>ScrumAppBar</name>
+        <uiLabel>scrumUiLabels</uiLabel>
+        <iconStyle>fa fa-shopping-cart</iconStyle>
+    </app>
+    <app id="workeffort">
+        <location>application/manage/applications/workeffort/widget/WorkEffortMenus.xml</location>
+        <name>WorkEffortAppBar</name>
+        <uiLabel>WorkEffortUiLabels.xml</uiLabel>
+        <iconStyle>fa fa-smile-o</iconStyle>
+    </app>
+    <app id="bi">
+        <location>framework/bi/widget/BiMenus.xml</location>
+        <name>BiAppBar</name>
+        <uiLabel>BiUiLabels</uiLabel>
+        <iconStyle>fa fa-area-chart</iconStyle>
+    </app>
+
+    <app id="webtools">
+        <location>application/manage/applications/webtools/widget/Menus.xml</location>
+        <name>WebtoolsAppBar</name>
+        <uiLabel>WebtoolsUiLabels</uiLabel>
+        <iconStyle>fa fa-cube</iconStyle>
+    </app>
+    <app id="systemMgr">
+        <location>application/manage/applications/systemMgr/widget/systemMgr/SystemMgrMenus.xml</location>
+        <name>SystemMgrAppBar</name>
+        <uiLabel>SystemMgrUiLabels</uiLabel>
+        <!--<iconStyle>fa fa-cube</iconStyle>-->
+        <iconStyle>fa fa-cog</iconStyle>
+    </app>
+    <app id="prodPromo">
+        <location>application/manage/applications/prodPromo/widget/prodPromo/ProdPromoMenus.xml</location>
+        <name>ProdPromoAppBar</name>
+        <uiLabel>ProdPromoUiLabels</uiLabel>
+       <!-- <iconStyle>fa fa-cube</iconStyle>-->
+        <iconStyle>fa fa-fire</iconStyle>
+    </app>
+    <app id="webpos">
+        <location>specialpurpose/webpos/widget/WebPosMenus.xml</location>
+        <name>WebPosAppBar</name>
+        <uiLabel>WebPosUiLabels</uiLabel>
+        <iconStyle>fa fa-hand-scissors-o</iconStyle>
+    </app>
+</menus>

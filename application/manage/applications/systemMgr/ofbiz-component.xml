@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ofbiz-component name="systemMgr"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/ofbiz-component.xsd">
+    <resource-loader name="main" type="component"/>
+    <classpath type="jar" location="build/lib/*"/>
+    <classpath type="dir" location="config"/>
+    <entity-resource type="model" reader-name="main" loader="main" location="entitydef/entitymodel.xml"/>
+    <entity-resource type="data" reader-name="seed" loader="main" location="data/SystemMgrTypeData.xml"/>
+    <entity-resource type="data" reader-name="seed" loader="main" location="data/SystemMgrSecurityData.xml"/>
+    <!-- 支付方式及支付接口信息 add by gss 2015-1-16 -->
+    <entity-resource type="data" reader-name="seed" loader="main" location="data/PaymentGatewayConfData.xml"/>
+    <!-- 字段表类型 add by gss 2016-1-21 -->
+    <entity-resource type="data" reader-name="seed" loader="main" location="data/FieldTableConfData.xml"/>
+    <!-- 订单规则 add by gss 2016-1-21 -->
+    <entity-resource type="data" reader-name="seed" loader="main" location="data/OrderRuleConfData.xml"/>
+
+    <service-resource type="model" loader="main" location="servicedef/services_mail.xml"/>
+    <service-resource type="model" loader="main" location="servicedef/services.xml"/>
+
+    <webapp name="systemMgr"
+            title="systemMgr"
+            server="default-server"
+            location="webapp/systemMgr"
+            base-permission="SYSTEMMGR"
+            mount-point="/systemMgr"/>
+
+
+</ofbiz-component>

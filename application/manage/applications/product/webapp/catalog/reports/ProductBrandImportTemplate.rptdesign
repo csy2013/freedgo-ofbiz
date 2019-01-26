@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.6.0.v20100531 Build &lt;2.6.0.v20100609-1613></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[importPackage(Packages.javolution.util)
+importPackage(Packages.org.ofbiz.base.util)
+importPackage(Packages.org.ofbiz.entity.util)
+importPackage(Packages.org.ofbiz.product.product)
+importPackage(Packages.org.ofbiz.entity.condition)
+		module = "new_report_2.rptdesign";]]></method>
+    <property name="iconFile">/templates/first_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <body>
+        <label id="245">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">x-large</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">商品品牌数据</text-property>
+        </label>
+        <table id="163">
+
+            <property name="width">100%</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">brandName</property>
+                    <text-property name="displayName">brandName</text-property>
+                    <expression name="expression" ></expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">brandNameAlias</property>
+                    <text-property name="displayName">brandNameAlias</text-property>
+                    <expression name="expression" ></expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+                <structure>
+                    <property name="name">isUsed</property>
+                    <text-property name="displayName">isUsed</text-property>
+                    <expression name="expression" ></expression>
+                    <property name="dataType">string</property>
+                </structure>
+                
+            </list-property>
+            <property name="pageBreakInterval">50</property>
+           
+            <column id="187"/>
+            <column id="188"/>
+            <column id="189"/>
+           
+            <header>
+                  <row id="164">
+                    <cell id="153">
+                        <label id="156">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">品牌名称</text-property>
+                        </label>
+                    </cell>
+                    <cell id="165">
+                        <label id="166">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">品牌别名</text-property>
+                        </label>
+                    </cell>
+                    <cell id="167">
+                        <label id="168">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">是否启用</text-property>
+                        </label>
+                    </cell>
+                 
+                </row>
+            </header>
+            <detail>
+                <row id="173">
+                  <cell id="144">
+                        <property name="paddingTop">0pt</property>
+                        <property name="paddingLeft">0pt</property>
+                        <property name="paddingBottom">0pt</property>
+                        <property name="paddingRight">0pt</property>
+                        <data id="269">
+                            <property name="resultSetColumn">brandName</property>
+                        </data>
+                    </cell>
+                    <cell id="176">
+                        <data id="273">
+                            <property name="resultSetColumn">brandNameAlias</property>
+                        </data>
+                    </cell>
+                    
+                    <cell id="364">
+                        <data id="374">
+                            <property name="resultSetColumn">isUsed</property>
+                        </data>
+                    </cell>
+                   
+                </row>
+            </detail>
+            <footer>
+                <row id="182">
+                   <cell id="183"/>
+                    <cell id="184"/>
+                    <cell id="185"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

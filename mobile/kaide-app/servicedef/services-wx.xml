@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>yabiz商城接口</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="xgro-sendTemplateMsg" engine="java" location="com.yuaoq.yabiz.mobile.services.wx.WxTemplateServices" invoke="sendTemplateMsg">
+        <description>实时发送小程序模板消息</description>
+        <attribute name="touser" type="String" mode="IN" />
+        <attribute name="template_id" type="String" mode="IN"/>
+        <attribute name="page" type="String" mode="IN"/>
+        <attribute name="form_id" type="String" mode="IN"/>
+        <attribute name="data" type="String" mode="IN"/>
+        <attribute name="color" type="String" mode="IN" optional="true"/>
+        <attribute name="emphasis_keyword" type="String" mode="IN" optional="true"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="sendType" type="String" mode="IN"/>
+        <attribute name="objectValueId" type="String" mode="IN"/>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="sendTime" type="java.sql.Timestamp" mode="IN" optional="true"/>
+        <attribute name="responseMessage" type="String" mode="OUT" optional="true"/>
+        <attribute name="errorMessage" type="String" mode="OUT" optional="true"/>
+    </service>
+    <service name="xgro-sendTemplateMsg1" engine="java" location="com.yuaoq.yabiz.mobile.services.wx.WxTemplateServices" invoke="sendTemplateMsg1">
+        <description>实时发送小程序模板消息</description>
+        <attribute name="templateSendType" type="String" mode="IN"/>
+        <attribute name="touser" type="String" mode="IN" />
+        <attribute name="data" type="java.util.Map" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="objectValueId" type="String" mode="IN"/>
+        <attribute name="color" type="String" mode="IN" optional="true"/>
+        <attribute name="emphasis_keyword" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <service name="xgro-sendTemplateMsg2" engine="java" location="com.yuaoq.yabiz.mobile.services.wx.WxTemplateServices" invoke="sendTemplateMsg2">
+        <description>实时发送小程序模板消息</description>
+        <attribute name="templateSendType" type="String" mode="IN"/>
+        <attribute name="page" type="String" mode="IN"/>
+        <attribute name="touser" type="String" mode="IN" />
+        <attribute name="data" type="java.util.Map" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="objectValueId" type="String" mode="IN"/>
+        <attribute name="color" type="String" mode="IN" optional="true"/>
+        <attribute name="emphasis_keyword" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <service name="templateSendMsgTask" engine="java" location="com.yuaoq.yabiz.mobile.services.wx.WxTemplateServices" invoke="templateSendMsgTask">
+
+    </service>
+
+    <!-- 订单退款 审核通过发送小程序消息 -->
+    <service name="xgro-sendTemplateMsgReturnSuccess" engine="java" location="com.yuaoq.yabiz.mobile.services.wx.WxTemplateServices" invoke="sendTemplateMsgReturnSuccess">
+        <description>实时发送小程序模板消息</description>
+        <attribute name="templateSendType" type="String" mode="IN"/>
+        <!--<attribute name="template_id" type="String" mode="IN"/>-->
+        <attribute name="touser" type="String" mode="IN" />
+        <attribute name="data" type="java.util.Map" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="objectValueId" type="String" mode="IN"/>
+        <attribute name="color" type="String" mode="IN" optional="true"/>
+        <attribute name="emphasis_keyword" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <!-- 订单退款 审核不通过发送小程序消息 -->
+    <service name="xgro-sendTemplateMsgReturnFail" engine="java" location="com.yuaoq.yabiz.mobile.services.wx.WxTemplateServices" invoke="sendTemplateMsgReturnFail">
+        <description>实时发送小程序模板消息</description>
+        <attribute name="templateSendType" type="String" mode="IN"/>
+        <!--<attribute name="template_id" type="String" mode="IN"/>-->
+        <attribute name="touser" type="String" mode="IN" />
+        <attribute name="data" type="java.util.Map" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="objectValueId" type="String" mode="IN"/>
+        <attribute name="color" type="String" mode="IN" optional="true"/>
+        <attribute name="emphasis_keyword" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <!-- 订单退货 自动取消(申请不通过)发送小程序消息 -->
+    <service name="xgro-sendTemplateMsgReturnProductFail" engine="java" location="com.yuaoq.yabiz.mobile.services.wx.WxTemplateServices" invoke="sendTemplateMsgReturnProductFail">
+        <description>实时发送小程序模板消息</description>
+        <attribute name="templateSendType" type="String" mode="IN"/>
+        <!--<attribute name="template_id" type="String" mode="IN"/>-->
+        <attribute name="touser" type="String" mode="IN" />
+        <attribute name="data" type="java.util.Map" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="objectValueId" type="String" mode="IN"/>
+        <attribute name="color" type="String" mode="IN" optional="true"/>
+        <attribute name="emphasis_keyword" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+    <!-- 订单退货 审核通过发送小程序消息 -->
+    <service name="xgro-sendTemplateMsgReturnProductSuccess" engine="java" location="com.yuaoq.yabiz.mobile.services.wx.WxTemplateServices" invoke="sendTemplateMsgReturnProductSuccess">
+        <description>实时发送小程序模板消息</description>
+        <attribute name="templateSendType" type="String" mode="IN"/>
+        <!--<attribute name="template_id" type="String" mode="IN"/>-->
+        <attribute name="touser" type="String" mode="IN" />
+        <attribute name="data" type="java.util.Map" mode="IN"/>
+        <attribute name="partyId" type="String" mode="IN"/>
+        <attribute name="objectValueId" type="String" mode="IN"/>
+        <attribute name="color" type="String" mode="IN" optional="true"/>
+        <attribute name="emphasis_keyword" type="String" mode="IN" optional="true"/>
+
+    </service>
+
+
+
+</services>

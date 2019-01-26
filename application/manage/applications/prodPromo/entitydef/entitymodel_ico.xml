@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>促销用户相关表设计</title>
+    <description>add by changsy at 2016.01.08</description>
+    <version>1.0</version>
+    <!-- ========================================================= -->
+    <!-- org.ofbiz.product.promo -->
+    <!-- ========================================================= -->
+
+
+</entitymodel>

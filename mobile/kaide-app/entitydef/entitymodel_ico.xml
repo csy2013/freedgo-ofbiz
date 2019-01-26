@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>小程序</title>
+    <description>小程序实体</description>
+    <version>1.0</version>
+
+    <entity entity-name="WxLiteTemplateSendWait" package-name="org.ofbiz.mobile.wxLite" title="小程序发送模板消息">
+        <field name="sendId" type="id-ne"></field>
+        <field name="toUser" type="value"><description>接收者（用户）的 openid</description></field>
+        <field name="template_id" type="value"><description>所需下发的模板消息的id</description></field>
+        <field name="page" type="value"><description>点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。</description></field>
+        <field name="form_id" type="description"><description>表单提交场景下，为 submit 事件带上的 formId；支付场景下，为本次支付的 prepay_id</description></field>
+        <field name="data" type="very-long-varchar"><description>模板内容，不填则下发空模板</description></field>
+        <field name="color" type="value"><description>模板内容字体的颜色，不填默认黑色</description></field>
+        <field name="emphasis_keyword" type="value"><description>模板需要放大的关键词，不填则默认无放大</description></field>
+        <field name="sendTime" type="date-time"><description>发送时间</description></field>
+        <field name="result" type="very-long-varchar"><description>结果sucess,fail</description></field>
+        <field name="returnMsg" type="very-long-varchar"><description>返回消息</description></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="sendType" type="name"><description>0:立即发送，1：定时发送</description></field>
+        <field name="objectValueId" type="id-ne"><description>对应指定的对象如产品ID，优惠劵ID，订单ID等等</description></field>
+        <field name="status" type="indicator"><description>I:生成、F:发送中、S:已发送</description></field>
+        <field name="productId" type="id-ne"><description>商品Id</description></field>
+        <prim-key field="sendId" />
+
+    </entity>
+
+    <entity entity-name="WxLiteTemplateSendLog" package-name="org.ofbiz.mobile.wxLite" title="小程序发送模板消息历史-发送后成功失败记录">
+        <field name="sendId" type="id-ne"></field>
+        <field name="toUser" type="value"><description>接收者（用户）的 openid</description></field>
+        <field name="template_id" type="value"><description>所需下发的模板消息的id</description></field>
+        <field name="page" type="description"><description>点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。</description></field>
+        <field name="form_id" type="description"><description>表单提交场景下，为 submit 事件带上的 formId；支付场景下，为本次支付的 prepay_id</description></field>
+        <field name="data" type="very-long-varchar"><description>模板内容，不填则下发空模板</description></field>
+        <field name="color" type="value"><description>模板内容字体的颜色，不填默认黑色</description></field>
+        <field name="emphasis_keyword" type="value"><description>模板需要放大的关键词，不填则默认无放大</description></field>
+        <field name="sendTime" type="date-time"><description>发送时间</description></field>
+        <field name="result" type="very-long-varchar"><description>结果sucess,fail</description></field>
+        <field name="returnMsg" type="very-long-varchar"><description>返回消息</description></field>
+        <field name="partyId" type="id-ne"></field>
+        <field name="objectValueId" type="very-long-varchar"><description>对应指定的对象如产品ID，优惠劵ID，订单ID等等</description></field>
+        <field name="sendType" type="name"><description>0:立即发送，1：定时发送</description></field>
+        <field name="status" type="indicator"><description>I:生成、F:发送中、S:已发送</description></field>
+        <prim-key field="sendId" />
+    </entity>
+
+
+    <entity entity-name="WxLiteTemplateConfig" package-name="org.ofbiz.mobile.wxLite" title="小程序发送模板配置表">
+        <field name="templateId" type="id-ne"></field>
+        <field name="templateName" type="name"></field>
+        <field name="wxLiteTemplateName" type="name"></field>
+        <field name="templateKeyword" type="description"></field>
+        <field name="templateContent" type="long-varchar"></field>
+        <field name="gotoPage" type="long-varchar"></field>
+        <field name="templateRule" type="long-varchar"></field>
+        <field name="remark" type="long-varchar"></field>
+        <field name="wxLiteTemplateId" type="value"></field>
+        <field name="templateType" type="long-varchar"></field>
+        <prim-key field="templateId" />
+    </entity>
+    
+    <entity entity-name="WxLiteCoverPointData" package-name="org.ofbiz.mobile.wxLite" title="小程序数据埋点">
+        <field name="id" type="id-ne"></field>
+        <field name="eventCode" type="name"><description>事件code</description></field>
+        <field name="lng" type="name"><description>经度</description></field>
+        <field name="lat" type="name"><description>纬度</description></field>
+        <field name="brand" type="name"><description>品牌</description></field>
+        <field name="model" type="name"><description>手机型号</description></field>
+        <field name="vesion" type="name"><description>微信版本号</description></field>
+        <field name="platform" type="name"><description>客户端平台</description></field>
+        <field name="unionId" type="name"><description>微信用户唯一标识</description></field>
+        <field name="memberId" type="name"><description>Crm唯一标识</description></field>
+        <field name="partyId" type="id-ne"><description>商城唯一标识</description></field>
+        <field name="trigger1" type="name"><description>触发方式click,enter_page,share</description></field>
+        <field name="pageCode" type="name"><description>每个页面建立唯一标识</description></field>
+        <field name="buttonCode" type="name"><description>每个页面button都有唯一标识</description></field>
+        <field name="serviceUrl" type="url"><description>调用服务端url</description></field>
+        <field name="servicePostData" type="long-varchar"><description>postData</description></field>
+        <field name="channelCode" type="name"><description></description></field>
+        <field name="platformCode" type="indicator"><description>0:小程序、1：微信</description></field>
+        <field name="createDate" type="date-time"><description></description></field>
+        <field name="mallId" type="name"/>
+        
+        <field name="productId" type="id-ne"><description>产品标识</description></field>
+        <field name="valueId" type="name"><description>代表当前页面对应的唯一标识</description></field>
+        <field name="productName" type="name"><description>产品名称</description></field>
+        <field name="productPrice" type="name"><description>产品价格</description></field>
+        <field name="productType" type="name"><description>商品类型</description></field>
+        <field name="productTotalPrice" type="name"><description>商品合计金额</description></field>
+        <field name="productPromoPrice" type="name"><description>商品优惠金额</description></field>
+        <field name="grantTotal" type="name"><description>应付金额</description></field>
+        <field name="orderId" type="id-ne"><description>订单ID</description></field>
+        <field name="orderType" type="name"><description>订单类型</description></field>
+        <field name="promoCodeId" type="name"><description>代金劵ID</description></field>
+        <field name="registEntrance" type="url"><description>代金劵ID</description></field>
+        <prim-key field="id"/>
+    </entity>
+
+
+    <entity entity-name="VitualPerson" package-name="org.ofbiz.mobile.vitualperson" title="虚拟用户">
+        <field name="personId" type="id-ne"></field>
+        <field name="nickName" type="name"></field>
+        <field name="imgUrl" type="description"></field>
+        <prim-key field="personId" />
+    </entity>
+
+    <entity entity-name="WxLiteForm" package-name="org.ofbiz.mobile.wxLite" title="小程序formId">
+        <field name="formId" type="id-long-ne"></field>
+        <field name="openId" type="id-long-ne"/>
+        <prim-key field="formId"/>
+    </entity>
+
+
+    <entity entity-name="ProductImageTemp" package-name="org.ofbiz.mobile.product">
+        <field name="productId" type="id-ne"></field>
+        <field name="images" type="very-long-varchar"/>
+        <field name="productContent" type="very-long-varchar"/>
+        <prim-key field="productId"/>
+    </entity>
+
+    <entity entity-name="PartyScoreSendLog" package-name="org.ofbiz.mobile.product">
+        <field name="logId" type="id-ne"/>
+        <field name="userLoginId" type="id-ne"></field>
+        <field name="scoreCode" type="name"/>
+        <field name="sendDate" type="date-time"/>
+        <field name="scoreType" type="name"/>
+        <prim-key field="logId"/>
+    </entity>
+
+    <entity entity-name="PartyPostAddressTemp" package-name="org.ofbiz.mobile.product">
+        <field name="addressId" type="id-ne"/>
+        <field name="memberId" type="name"></field>
+        <field name="toName" type="name"></field>
+        <field name="mobile" type="name"></field>
+        <field name="address1" type="name"></field>
+        <field name="isDefault" type="indicator"/>
+        <prim-key field="addressId"/>
+    </entity>
+
+</entitymodel>

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-engine-xml>
+    <!-- Content Manager security -->
+
+    <SecurityPermission description="View operations in the Content Manager." permissionId="CONTENTMGR_VIEW"/>
+    <SecurityPermission description="Create operations in the Content Manager." permissionId="CONTENTMGR_CREATE"/>
+    <SecurityPermission description="Update operations in the Content Manager." permissionId="CONTENTMGR_UPDATE"/>
+    <SecurityPermission description="Delete operations in the Content Manager." permissionId="CONTENTMGR_DELETE"/>
+    <SecurityPermission description="ALL operations in the Content Manager." permissionId="CONTENTMGR_ADMIN"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="CONTENTMGR_ADMIN"/>
+    <!--<SecurityGroupPermission groupId="FLEXADMIN" permissionId="CONTENTMGR_CREATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CONTENTMGR_DELETE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CONTENTMGR_UPDATE"/>
+    <SecurityGroupPermission groupId="FLEXADMIN" permissionId="CONTENTMGR_VIEW"/>
+    <SecurityGroupPermission groupId="VIEWADMIN" permissionId="CONTENTMGR_VIEW"/>
+    <SecurityGroupPermission groupId="BIZADMIN" permissionId="CONTENTMGR_ADMIN"/>
+-->
+    <!-- Content ROLE security -->
+    <SecurityPermission description="Limited View operations in the Content Manager." permissionId="CONTENTMGR_ROLE_VIEW"/>
+    <SecurityPermission description="Limited Create operations in the Content Manager." permissionId="CONTENTMGR_ROLE_CREATE"/>
+    <SecurityPermission description="Limited Update operations in the Content Manager." permissionId="CONTENTMGR_ROLE_UPDATE"/>
+    <SecurityPermission description="Limited Delete operations in the Content Manager." permissionId="CONTENTMGR_ROLE_DELETE"/>
+    <!--<SecurityGroup groupId="CONTENT_USER" description="Content user group; all limited content permissions."/>-->
+    <!--<SecurityGroupPermission groupId="CONTENT_USER" permissionId="CONTENTMGR_ROLE_VIEW"/>
+    <SecurityGroupPermission groupId="CONTENT_USER" permissionId="CON                                                                                                                                                                                                                      TENTMGR_ROLE_CREATE"/>
+    <SecurityGroupPermission groupId="CONTENT_USER" permissionId="CONTENTMGR_ROLE_UPDATE"/>
+    <SecurityGroupPermission groupId="CONTENT_USER" permissionId="CONTENTMGR_ROLE_DELETE"/>-->
+
+    <!--  Control Applet security -->
+    <SecurityPermission description="Send to the Control Applet." permissionId="SEND_CONTROL_APPLET"/>
+    <SecurityGroupPermission groupId="SYSTEMMGR" permissionId="SEND_CONTROL_APPLET"/>
+    <!--<SecurityGroupPermission groupId="FLEXADMIN" permissionId="SEND_CONTROL_APPLET"/> -->
+
+    <!--首页模块配置-->
+    <SecurityPermission description="首页管理" name="首页管理" permissionId="MODULECONFIG" parentPermissionId="-1" menuType="A"/>
+    <SecurityPermission description="模块新增" name="模块新增" permissionId="MODULECONFIG_CREATE" parentPermissionId="MODULECONFIG" menuType="P"/>
+    <SecurityPermission description="模块删除" name="模块删除" permissionId="MODULECONFIG_DELETE" parentPermissionId="MODULECONFIG" menuType="P"/>
+    <SecurityPermission description="模块编辑" name="模块编辑" permissionId="MODULECONFIG_UPDATE" parentPermissionId="MODULECONFIG" menuType="P"/>
+    <SecurityPermission description="模块页面" name="模块页面" permissionId="MODULECONFIG_VIEW" parentPermissionId="MODULECONFIG" menuType="P"/>
+
+    <!--内容管理-->
+    <SecurityPermission description="内容管理" name="内容管理" permissionId="CONTENT_VIEW" parentPermissionId="-1" menuType="A"/>
+    <!--站点管理-->
+    <SecurityPermission description="站点管理" name="站点管理" permissionId="CONTENT_WEBSITE" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <SecurityPermission description="站点查看" name="站点查看" permissionId="CONTENT_WEBSITE_VIEW" parentPermissionId="CONTENT_WEBSITE" menuType="P"/>
+    <SecurityPermission description="站点新增" name="站点新增" permissionId="CONTENT_WEBSITE_CREATE" parentPermissionId="CONTENT_WEBSITE" menuType="P"/>
+    <SecurityPermission description="站点修改" name="站点修改" permissionId="CONTENT_WEBSITE_UPDATE" parentPermissionId="CONTENT_WEBSITE" menuType="P"/>
+    <SecurityPermission description="站点详细" name="站点详细" permissionId="CONTENT_WEBSITE_DETAIL" parentPermissionId="CONTENT_WEBSITE" menuType="P"/>
+    <!--标签管理-->
+    <SecurityPermission description="标签管理" name="标签管理" permissionId="CONTENT_TAG_VIEW" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <SecurityPermission description="标签分类" name="标签分类" permissionId="CONTENT_TAGTYPE" parentPermissionId="CONTENT_TAG_VIEW" menuType="P"/>
+    <SecurityPermission description="标签分类查看" name="标签分类查看" permissionId="CONTENT_TAGTYPE_VIEW" parentPermissionId="CONTENT_TAGTYPE" menuType="P"/>
+    <SecurityPermission description="标签分类修改" name="标签分类修改" permissionId="CONTENT_TAGTYPE_UPDATE" parentPermissionId="CONTENT_TAGTYPE" menuType="P"/>
+    <!-- 标签列表 -->
+    <SecurityPermission description="标签列表" name="标签列表" permissionId="CONTENT_TAGLIST" parentPermissionId="CONTENT_TAG_VIEW" menuType="P"/>
+    <SecurityPermission description="标签查看" name="标签查看" permissionId="CONTENT_TAGLIST_VIEW" parentPermissionId="CONTENT_TAGLIST" menuType="P"/>
+    <SecurityPermission description="标签新增" name="标签新增" permissionId="CONTENT_TAGLIST_CREATE" parentPermissionId="CONTENT_TAGLIST"menuType="P"/>
+    <SecurityPermission description="标签修改" name="标签修改" permissionId="CONTENT_TAGLIST_UPDATE" parentPermissionId="CONTENT_TAGLIST" menuType="P"/>
+    <SecurityPermission description="标签删除" name="标签删除" permissionId="CONTENT_TAGLIST_DELETE" parentPermissionId="CONTENT_TAGLIST" menuType="P"/>
+    <SecurityPermission description="标签详细" name="标签详细" permissionId="CONTENT_TAGLIST_DETAIL" parentPermissionId="CONTENT_TAGLIST" menuType="P"/>
+    <!--文章管理 -->
+    <SecurityPermission description="文章管理" name="文章管理" permissionId="CONTENT_ARTICLE_VIEW" parentPermissionId="CONTENT_VIEW" menuType="A"/>
+    <SecurityPermission description="文章分类" name="文章分类" permissionId="CONTENT_ARTICLETYPE" parentPermissionId="CONTENT_ARTICLE_VIEW" menuType="P"/>
+    <SecurityPermission description="文章分类查看" name="文章分类查看" permissionId="CONTENT_ARTICLETYPE_VIEW" parentPermissionId="CONTENT_ARTICLETYPE" menuType="A"/>
+    <SecurityPermission description="文章分类新增" name="文章分类新增" permissionId="CONTENT_ARTICLETYPE_CREATE" parentPermissionId="CONTENT_ARTICLETYPE" menuType="A"/>
+    <SecurityPermission description="文章分类修改" name="文章分类修改" permissionId="CONTENT_ARTICLETYPE_UPDATE" parentPermissionId="CONTENT_ARTICLETYPE" menuType="A"/>
+    <SecurityPermission description="文章分类删除" name="文章分类删除" permissionId="CONTENT_ARTICLETYPE_DELETE" parentPermissionId="CONTENT_ARTICLETYPE" menuType="A"/>
+    <SecurityPermission description="文章分类详细" name="文章分类详细" permissionId="CONTENT_ARTICLETYPE_DETAIL" parentPermissionId="CONTENT_ARTICLETYPE" menuType="A"/>
+    <!-- 文章列表 -->
+    <SecurityPermission description="文章列表" name="文章列表" permissionId="CONTENT_ARTICLELIST" parentPermissionId="CONTENT_ARTICLE_VIEW" menuType="A"/>
+    <SecurityPermission description="文章查看" name="文章列表查看" permissionId="CONTENT_ARTICLELIST_VIEW" parentPermissionId="CONTENT_ARTICLELIST" menuType="A"/>
+    <SecurityPermission description="文章新增" name="文章列表新增" permissionId="CONTENT_ARTICLELIST_CREATE" parentPermissionId="CONTENT_ARTICLELIST" menuType="A"/>
+    <SecurityPermission description="文章修改" name="文章列表修改" permissionId="CONTENT_ARTICLELIST_UPDATE" parentPermissionId="CONTENT_ARTICLELIST" menuType="A"/>
+    <SecurityPermission description="文章删除" name="文章列表删除" permissionId="CONTENT_ARTICLELIST_DELETE" parentPermissionId="CONTENT_ARTICLELIST" menuType="A"/>
+    <SecurityPermission description="文章详细" name="文章列表详细" permissionId="CONTENT_ARTICLELIST_DETAIL" parentPermissionId="CONTENT_ARTICLELIST" menuType="A"/>
+    <!-- 待审核列表 -->
+    <SecurityPermission description="文章审核" name="待审核列表" permissionId="CONTENT_ARTICLE_APPROVAL" parentPermissionId="CONTENT_ARTICLE_VIEW" menuType="A"/>
+    <SecurityPermission description="文章审核查看" name="待审核列表查看" permissionId="CONTENT_ARTICLEAPPROVAL_VIEW" parentPermissionId="CONTENT_ARTICLE_APPROVAL" menuType="A"/>
+    <SecurityPermission description="文章审核修改" name="待审核列表修改" permissionId="CONTENT_ARTICLEAPPROVAL_UPDATE" parentPermissionId="CONTENT_ARTICLE_APPROVAL" menuType="A"/>
+    <SecurityPermission description="待审核列表详细" name="待审核列表详细" permissionId="CONTENT_ARTICLEAPPROVAL_DETAIL" parentPermissionId="CONTENT_ARTICLE_APPROVAL" menuType="A"/>
+
+    <!--轮播图管理菜单-->
+    <SecurityPermission description="轮播图管理" name="轮播图管理" permissionId="BANNERMGR_VIEW" parentPermissionId="CONTENT_VIEW" menuType="A"/>
+    <!--轮播图列表-->
+    <SecurityPermission description="轮播图查看" name="轮播图查看" permissionId="BANNERMGR_LIST_VIEW" parentPermissionId="BANNERMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="轮播图新增" name="轮播图新增" permissionId="BANNERMGR_LIST_CREATE" parentPermissionId="BANNERMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="轮播图编辑" name="轮播图编辑" permissionId="BANNERMGR_LIST_UPDATE" parentPermissionId="BANNERMGR_VIEW" menuType="A"/>
+    <SecurityPermission description="轮播图删除" name="轮播图删除" permissionId="BANNERMGR_LIST_DEL" parentPermissionId="BANNERMGR_VIEW" menuType="A"/>
+
+    <!--公告管理-->
+    <SecurityPermission description="公告管理" name="公告管理" permissionId="NOTICEMGR_VIEW" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <!--公告列表-->
+    <SecurityPermission description="公告查看" name="公告查看" permissionId="NOTICEMGR_LIST_VIEW" parentPermissionId="NOTICEMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="公告新增" name="公告新增" permissionId="NOTICEMGR_LIST_CREATE" parentPermissionId="NOTICEMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="公告编辑" name="公告编辑" permissionId="NOTICEMGR_LIST_UPDATE" parentPermissionId="NOTICEMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="公告删除" name="公告删除" permissionId="NOTICEMGR_LIST_DEL" parentPermissionId="NOTICEMGR_VIEW" menuType="P"/>
+
+    <!--热门搜索,活动管理,专题活动管理,模板管理,分类导航,帮助中心,图片管理-->
+    <!-- <SecurityPermission description="模板管理" name="模板管理" permissionId="TEMPLATE_VIEW" parentPermissionId="CONTENT_VIEW"/> -->
+    <SecurityPermission description="分类导航" name="分类导航" permissionId="NAVIGATION_VIEW" parentPermissionId="CONTENT_VIEW"/>
+    <!-- <SecurityPermission description="帮助中心" name="帮助中心" permissionId="HELP_VIEW" parentPermissionId="CONTENT_VIEW"/> -->
+    <SecurityPermission description="图片管理" name="图片管理" permissionId="IMAGEMANAGE_VIEW" parentPermissionId="CONTENT_VIEW" menuType="A"/>
+
+    <!-- 礼品管理 -->
+    <SecurityPermission description="礼品管理" name="礼品管理" permissionId="GIFTMANAGE_VIEW" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <!-- 礼品列表 -->
+    <SecurityPermission description="礼品列表" name="礼品列表" permissionId="GIFTMANAGE_LIST_VIEW" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="礼品新增" name="礼品新增" permissionId="GIFTMANAGE_LIST_CREATE" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="礼品编辑" name="礼品编辑" permissionId="GIFTMANAGE_LIST_UPDATE" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="礼品删除" name="礼品删除" permissionId="GIFTMANAGE_LIST_DEL" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+
+    <!-- 礼品卡片管理-->
+    <SecurityPermission description="礼品卡片列表" name="礼品卡片列表" permissionId="PRESENTCARD_LIST_VIEW" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="礼品卡片添加" name="礼品卡片添加" permissionId="PRESENTCARD_LIST_CREATE" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="礼品卡片修改" name="礼品卡片修改" permissionId="PRESENTCARD_LIST_UPDATE" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="礼品卡片删除" name="礼品卡片删除" permissionId="PRESENTCARD_LIST_DELETE" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+
+
+    <!-- 赠送列表-->
+    <SecurityPermission description="赠送列表" name="赠送列表" permissionId="GIVEPRESENT_LIST_VIEW" parentPermissionId="GIFTMANAGE_VIEW" menuType="P"/>
+
+    <!-- 首页设置管理-->
+    <SecurityPermission description="首页设置" name="首页设置" permissionId="FIRSTPAGE_VIEW" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <!--<SecurityPermission description="首页设置列表" name="首页设置列表" permissionId="FIRSTPAGE_LIST_VIEW" parentPermissionId="FIRSTPAGE_VIEW" menuType="A"/>-->
+    <!--<SecurityPermission description="首页设置添加" name="首页设置添加" permissionId="FIRSTPAGE_LIST_CREATE" parentPermissionId="FIRSTPAGE_VIEW" menuType="A"/>-->
+    <!--<SecurityPermission description="首页设置修改" name="首页设置修改" permissionId="FIRSTPAGE_LIST_UPDATE" parentPermissionId="FIRSTPAGE_VIEW" menuType="A"/>-->
+    <!--<SecurityPermission description="首页设置删除" name="首页设置删除" permissionId="FIRSTPAGE_LIST_DELETE" parentPermissionId="FIRSTPAGE_VIEW" menuType="A"/>-->
+    <!--<SecurityPermission description="首页设置查看" name="首页设置查看" permissionId="FIRSTPAGE_LIST_DETAIL" parentPermissionId="FIRSTPAGE_VIEW" menuType="A"/>-->
+
+    <SecurityPermission description="推荐商品列表" name="推荐商品列表" permissionId="PRODRECOMEND_LIST_VIEW" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="推荐商品添加" name="推荐商品添加" permissionId="PRODRECOMEND_LIST_CREATE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="推荐商品修改" name="推荐商品修改" permissionId="PRODRECOMEND_LIST_UPDATE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="推荐商品删除" name="推荐商品删除" permissionId="PRODRECOMEND_LIST_DELETE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="推荐商品查看" name="推荐商品查看" permissionId="PRODRECOMEND_LIST_DETAIL" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+
+    <SecurityPermission description="热门品牌列表" name="热门品牌列表" permissionId="BRANDRECOMEND_LIST_VIEW" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="热门品牌添加" name="热门品牌添加" permissionId="BRANDRECOMEND_LIST_CREATE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="热门品牌修改" name="热门品牌修改" permissionId="BRANDRECOMEND_LIST_UPDATE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="热门品牌删除" name="热门品牌删除" permissionId="BRANDRECOMEND_LIST_DELETE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="热门品牌查看" name="热门品牌查看" permissionId="BRANDRECOMEND_LIST_DETAIL" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+
+    <SecurityPermission description="热门店铺列表" name="热门店铺列表" permissionId="STORERECOMEND_LIST_VIEW" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="热门店铺添加" name="热门店铺添加" permissionId="STORERECOMEND_LIST_CREATE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="热门店铺修改" name="热门店铺修改" permissionId="STORERECOMEND_LIST_UPDATE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="热门店铺删除" name="热门店铺删除" permissionId="STORERECOMEND_LIST_DELETE" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+    <SecurityPermission description="热门店铺查看" name="热门店铺查看" permissionId="STORERECOMEND_LIST_DETAIL" parentPermissionId="FIRSTPAGE_VIEW" menuType="P"/>
+
+
+
+    <!-- 题库管理 -->
+    <SecurityPermission description="题库管理" name="题库管理" permissionId="QUESTIONBANK_VIEW" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <SecurityPermission description="题库管理列表" name="题库管理列表" permissionId="QUESTIONBANK_LIST_VIEW" parentPermissionId="QUESTIONBANK_VIEW" menuType="P"/>
+    <SecurityPermission description="题库管理添加" name="题库管理添加" permissionId="QUESTIONBANK_LIST_CREATE" parentPermissionId="QUESTIONBANK_VIEW" menuType="P"/>
+    <SecurityPermission description="题库管理修改" name="题库管理修改" permissionId="QUESTIONBANK_LIST_UPDATE" parentPermissionId="QUESTIONBANK_VIEW" menuType="P"/>
+    <SecurityPermission description="题库管理删除" name="题库管理删除" permissionId="QUESTIONBANK_LIST_DELETE" parentPermissionId="QUESTIONBANK_VIEW" menuType="P"/>
+    <SecurityPermission description="题库管理查看" name="题库管理查看" permissionId="QUESTIONBANK_LIST_DETAIL" parentPermissionId="QUESTIONBANK_VIEW" menuType="P"/>
+    <SecurityPermission description="题库管理查看" name="题库管理导入" permissionId="QUESTIONBANK_LIST_IMP" parentPermissionId="QUESTIONBANK_VIEW" menuType="P"/>
+
+
+    <!--热门搜索菜单-->
+    <SecurityPermission description="热门搜索" name="热门搜索" permissionId="CONTENT_HOTSEARCH" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <SecurityPermission description="热门搜索查看" name="热门搜索查看" permissionId="CONTENT_HOTSEARCH_VIEW" parentPermissionId="CONTENT_HOTSEARCH" menuType="P"/>
+    <SecurityPermission description="热门搜索新增" name="热门搜索新增" permissionId="CONTENT_HOTSEARCH_CREATE" parentPermissionId="CONTENT_HOTSEARCH" menuType="P"/>
+    <SecurityPermission description="热门搜索编辑" name="热门搜索编辑" permissionId="CONTENT_HOTSEARCH_UPDATE" parentPermissionId="CONTENT_HOTSEARCH" menuType="P"/>
+    <SecurityPermission description="热门搜索删除" name="热门搜索删除" permissionId="CONTENT_HOTSEARCH_DEL" parentPermissionId="CONTENT_HOTSEARCH" menuType="P"/>
+
+
+    <!--活动管理菜单 add by qianjin -->
+    <SecurityPermission description="活动管理" name="活动管理" permissionId="ACTIVITYMGR_VIEW" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <!--活动管理列表 add by qianjin -->
+    <SecurityPermission description="活动管理查看" name="活动管理查看" permissionId="ACTIVITYMGR_LIST_VIEW" parentPermissionId="ACTIVITYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="活动管理新增" name="活动管理新增" permissionId="ACTIVITYMGR_LIST_CREATE" parentPermissionId="ACTIVITYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="活动管理编辑" name="活动管理编辑" permissionId="ACTIVITYMGR_LIST_UPDATE" parentPermissionId="ACTIVITYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="活动管理删除" name="活动管理删除" permissionId="ACTIVITYMGR_LIST_DEL" parentPermissionId="ACTIVITYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="拆红包设置" name="拆红包设置" permissionId="OPENRED_TEMPLATE_SET" parentPermissionId="ACTIVITYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="答题模板" name="答题模板" permissionId="ANSWER_TEMPLATE_SET" parentPermissionId="ACTIVITYMGR_VIEW" menuType="P"/>
+
+    <!--活动推荐管理菜单 add by qianjin -->
+    <SecurityPermission description="活动推荐管理" name="活动推荐管理" permissionId="TOPICACTIVITYMGR_VIEW" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <!--活动推荐管理列表 add by qianjin -->
+    <SecurityPermission description="活动推荐管理查看" name="活动推荐管理查看" permissionId="TOPICACTIVITYMGR_LIST_VIEW" parentPermissionId="TOPICACTIVITYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="活动推荐管理新增" name="活动推荐管理新增" permissionId="TOPICACTIVITYMGR_LIST_CREATE" parentPermissionId="TOPICACTIVITYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="活动推荐管理编辑" name="活动推荐管理编辑" permissionId="TOPICACTIVITYMGR_LIST_UPDATE" parentPermissionId="TOPICACTIVITYMGR_VIEW" menuType="P"/>
+    <SecurityPermission description="活动推荐管理删除" name="活动推荐管理删除" permissionId="TOPICACTIVITYMGR_LIST_DEL" parentPermissionId="TOPICACTIVITYMGR_VIEW" menuType="P"/>
+
+
+    <!--客服管理菜单 add by AlexYao -->
+    <SecurityPermission description="客服管理" name="客服管理" permissionId="CUSTOMERMGR_VIEW" parentPermissionId="-1" sequenceId="50" menuType="A"/>
+    <!--咨询列表管理菜单 add by AlexYao -->
+    <SecurityPermission description="咨询列表" name="咨询列表" permissionId="CONSULT_VIEW" parentPermissionId="CUSTOMERMGR_VIEW" sequenceId="5010" menuType="P" />
+    <!--咨询列表 add by AlexYao -->
+    <SecurityPermission description="查看" name="查看" permissionId="CONSULT_LIST_VIEW" parentPermissionId="CONSULT_VIEW" sequenceId="501010" menuType="P"/>
+    <SecurityPermission description="修改" name="修改" permissionId="CONSULT_LIST_UPDATE" parentPermissionId="CONSULT_VIEW" sequenceId="501020" menuType="P"/>
+    <!--意见反馈管理菜单 add by AlexYao -->
+    <SecurityPermission description="意见反馈" name="意见反馈" permissionId="FEEDBACK_VIEW" parentPermissionId="CUSTOMERMGR_VIEW" sequenceId="5020" menuType="P"/>
+    <!--意见反馈 add by AlexYao -->
+    <SecurityPermission description="查看" name="查看" permissionId="FEEDBACK_LIST_VIEW" parentPermissionId="FEEDBACK_VIEW" sequenceId="502010" menuType="P"/>
+    <SecurityPermission description="修改" name="修改" permissionId="FEEDBACK_LIST_UPDATE" parentPermissionId="FEEDBACK_VIEW" sequenceId="502020" menuType="P"/>
+
+    <!--<SecurityPermission description="申诉单" name="申诉单" permissionId="COMPLAIN" parentPermissionId="CUSTOMERMGR_VIEW" sequenceId="5030"/>-->
+    <!--<SecurityPermission description="查看" name="查看" permissionId="COMPLAIN_VIEW" parentPermissionId="COMPLAIN" sequenceId="503010"/>-->
+    <!--<SecurityPermission description="新增" name="新增" permissionId="COMPLAIN_CREATE" parentPermissionId="COMPLAIN" sequenceId="503020"/>-->
+    <!--<SecurityPermission description="处理" name="处理" permissionId="COMPLAIN_HANDLE" parentPermissionId="COMPLAIN" sequenceId="503030"/>-->
+    <!-- 评价管理 add by qianjin -->
+    <SecurityPermission description="评价管理" name="评价管理" permissionId="REVIEWMGR_VIEW" parentPermissionId="CUSTOMERMGR_VIEW" sequenceId="5040" menuType="P"/>
+    <!-- 评价标签 add by qianjin -->
+    <SecurityPermission description="评价标签" name="评价标签" permissionId="REVIEWMGR_LABE" parentPermissionId="REVIEWMGR_VIEW" sequenceId="504010" menuType="P"/>
+    <SecurityPermission description="查看" name="查看" permissionId="REVIEWMGR_LABEL_VIEW" parentPermissionId="REVIEWMGR_LABE" sequenceId="50401010" menuType="P"/>
+    <SecurityPermission description="新增" name="新增" permissionId="REVIEWMGR_LABEL_CREATE" parentPermissionId="REVIEWMGR_LABE" sequenceId="50401020" menuType="P"/>
+    <SecurityPermission description="修改" name="修改" permissionId="REVIEWMGR_LABEL_UPDATE" parentPermissionId="REVIEWMGR_LABE" sequenceId="50401030" menuType="P"/>
+    <SecurityPermission description="删除" name="删除" permissionId="REVIEWMGR_LABEL_DEL" parentPermissionId="REVIEWMGR_LABE" sequenceId="50401040" menuType="P"/>
+    <!-- 商品评价 add by qianjin -->
+    <SecurityPermission description="商品评价" name="商品评价" permissionId="ORDER_COMMENT" parentPermissionId="REVIEWMGR_VIEW" sequenceId="504020" menuType="P"/>
+    <SecurityPermission description="查看" name="查看" permissionId="ORDER_COMMENT_VIEW" parentPermissionId="ORDER_COMMENT" sequenceId="50402010" menuType="P"/>
+    <SecurityPermission description="回复" name="回复" permissionId="ORDER_COMMENTSAVE_VIEW" parentPermissionId="ORDER_COMMENT" sequenceId="50402030" menuType="P"/>
+    <SecurityPermission description="审核" name="审核" permissionId="ORDER_COMMENTBATCH_VIEW" parentPermissionId="ORDER_COMMENT" sequenceId="50402040" menuType="P"/>
+    <!--楼层管理权限-->
+    <SecurityPermission description="楼层设置" name="楼层设置" permissionId="FLOOR_VIEW" parentPermissionId="CONTENT_VIEW"/>
+    <SecurityPermission description="新增楼层" name="新增楼层" permissionId="FLOOR_CREATE" parentPermissionId="FLOOR_VIEW"/>
+    <SecurityPermission description="编辑楼层" name="编辑楼层" permissionId="FLOOR_UPDATE" parentPermissionId="FLOOR_VIEW"/>
+    <SecurityPermission description="删除楼层" name="删除楼层" permissionId="FLOOR_DELETE" parentPermissionId="FLOOR_VIEW"/>
+    <SecurityPermission description="楼层标签" name="楼层标签" permissionId="FLOOR_LABEL_VIEW" parentPermissionId="FLOOR_VIEW"/>
+    <SecurityPermission description="新增楼层标签" name="新增楼层标签" permissionId="FLOOR_LABEL_CREATE" parentPermissionId="FLOOR_LABEL_VIEW"/>
+    <SecurityPermission description="编辑楼层标签" name="编辑楼层标签" permissionId="FLOOR_LABEL_UPDATE" parentPermissionId="FLOOR_LABEL_VIEW"/>
+    <SecurityPermission description="删除楼层标签" name="删除楼层标签" permissionId="FLOOR_LABEL_DELETE" parentPermissionId="FLOOR_LABEL_VIEW"/>
+    <SecurityPermission description="楼层标签商品" name="标签商品" permissionId="FLOOR_LABEL_PRODUCT_VIEW" parentPermissionId="FLOOR_LABEL_VIEW"/>
+    <SecurityPermission description="新增楼层标签商品" name="新增标签商品" permissionId="FLOOR_LABEL_PRODUCT_CREATE" parentPermissionId="FLOOR_LABEL_PRODUCT_VIEW"/>
+    <SecurityPermission description="编辑楼层标签商品" name="编辑标签商品" permissionId="FLOOR_LABEL_PRODUCT_UPDATE" parentPermissionId="FLOOR_LABEL_PRODUCT_VIEW"/>
+    <SecurityPermission description="删除楼层标签商品" name="删除标签商品" permissionId="FLOOR_LABEL_PRODUCT_DELETE" parentPermissionId="FLOOR_LABEL_PRODUCT_VIEW"/>
+    <SecurityPermission description="楼层标签品牌" name="标签品牌" permissionId="FLOOR_LABEL_BRAND_VIEW" parentPermissionId="FLOOR_LABEL_VIEW"/>
+    <SecurityPermission description="新增楼层标签品牌" name="新增标签品牌" permissionId="FLOOR_LABEL_BRAND_CREATE" parentPermissionId="FLOOR_LABEL_BRAND_VIEW"/>
+    <SecurityPermission description="编辑楼层标签品牌" name="编辑标签品牌" permissionId="FLOOR_LABEL_BRAND_UPDATE" parentPermissionId="FLOOR_LABEL_BRAND_VIEW"/>
+    <SecurityPermission description="删除楼层标签品牌" name="删除标签品牌" permissionId="FLOOR_LABEL_BRAND_DELETE" parentPermissionId="FLOOR_LABEL_BRAND_VIEW"/>
+    <SecurityPermission description="楼层标签广告" name="标签广告" permissionId="FLOOR_LABEL_BANNER_VIEW" parentPermissionId="FLOOR_LABEL_VIEW"/>
+    <SecurityPermission description="新增楼层标签广告" name="新增标签广告" permissionId="FLOOR_LABEL_BANNER_CREATE" parentPermissionId="FLOOR_LABEL_BANNER_VIEW"/>
+    <SecurityPermission description="编辑楼层标签广告" name="编辑标签广告" permissionId="FLOOR_LABEL_BANNER_UPDATE" parentPermissionId="FLOOR_LABEL_BANNER_VIEW"/>
+    <SecurityPermission description="删除楼层标签广告" name="删除标签广告" permissionId="FLOOR_LABEL_BANNER_DELETE" parentPermissionId="FLOOR_LABEL_BANNER_VIEW"/>
+    <SecurityPermission description="楼层商品" name="楼层商品" permissionId="FLOOR_PRODUCT_VIEW" parentPermissionId="FLOOR_VIEW"/>
+    <SecurityPermission description="新增楼层商品" name="新增楼层商品" permissionId="FLOOR_PRODUCT_CREATE" parentPermissionId="FLOOR_PRODUCT_VIEW"/>
+    <SecurityPermission description="编辑楼层商品" name="编辑楼层商品" permissionId="FLOOR_PRODUCT_UPDATE" parentPermissionId="FLOOR_PRODUCT_VIEW"/>
+    <SecurityPermission description="删除楼层商品" name="删除楼层商品" permissionId="FLOOR_PRODUCT_DELETE" parentPermissionId="FLOOR_PRODUCT_VIEW"/>
+    <SecurityPermission description="楼层品牌" name="楼层品牌" permissionId="FLOOR_BRAND_VIEW" parentPermissionId="FLOOR_VIEW"/>
+    <SecurityPermission description="新增楼层品牌" name="新增楼层品牌" permissionId="FLOOR_BRAND_CREATE" parentPermissionId="FLOOR_BRAND_VIEW"/>
+    <SecurityPermission description="编辑楼层品牌" name="编辑楼层品牌" permissionId="FLOOR_BRAND_UPDATE" parentPermissionId="FLOOR_BRAND_VIEW"/>
+    <SecurityPermission description="删除楼层品牌" name="删除楼层品牌" permissionId="FLOOR_BRAND_DELETE" parentPermissionId="FLOOR_BRAND_VIEW"/>
+    <SecurityPermission description="楼层广告" name="楼层广告" permissionId="FLOOR_BANNER_VIEW" parentPermissionId="FLOOR_VIEW"/>
+    <SecurityPermission description="新增楼层广告" name="新增楼层广告" permissionId="FLOOR_BANNER_CREATE" parentPermissionId="FLOOR_BANNER_VIEW"/>
+    <SecurityPermission description="编辑楼层广告" name="编辑楼层广告" permissionId="FLOOR_BANNER_UPDATE" parentPermissionId="FLOOR_BANNER_VIEW"/>
+    <SecurityPermission description="删除楼层广告" name="删除楼层广告" permissionId="FLOOR_BANNER_DELETE" parentPermissionId="FLOOR_BANNER_VIEW"/>
+    <!-- 导航菜单管理 start by liruishi -->
+    <SecurityPermission description="导航菜单管理" name="导航菜单管理" permissionId="NAVIGATION_MENU_VIEW" parentPermissionId="CONTENT_VIEW" menuType="P"/>
+    <SecurityPermission description="导航菜单新增" name="导航菜单新增" permissionId="NAVIGATION_MENU_CREATE" parentPermissionId="NAVIGATION_MENU_VIEW" menuType="P"/>
+    <SecurityPermission description="导航菜单编辑" name="导航菜单编辑" permissionId="NAVIGATION_MENU_UPDATE" parentPermissionId="NAVIGATION_MENU_VIEW" menuType="P"/>
+    <SecurityPermission description="导航菜单删除" name="导航菜单删除" permissionId="NAVIGATION_MENU_DELETE" parentPermissionId="NAVIGATION_MENU_VIEW" menuType="P"/>
+    <!-- 导航菜单管理 end by liruishi -->
+
+    <!-- 帮助中心管理菜单 start-->
+    <SecurityPermission description="帮助中心" name="帮助中心" permissionId="CONSULT_HELP_VIEW" parentPermissionId="CONTENT_VIEW" menuType="A"/>
+    <!-- 帮助分类 -->
+    <SecurityPermission description="帮助分类列表" name="帮助分类列表" permissionId="CONSULT_HELPCATEGORY_VIEW" parentPermissionId="CONSULT_HELP_VIEW" menuType="A"/>
+    <SecurityPermission description="帮助分类添加" name="帮助分类添加" permissionId="CONSULT_HELPCATEGORY_CREATE" parentPermissionId="CONSULT_HELPCATEGORY_VIEW" menuType="A"/>
+    <SecurityPermission description="帮助分类修改" name="帮助分类修改" permissionId="CONSULT_HELPCATEGORY_UPDATE" parentPermissionId="CONSULT_HELPCATEGORY_VIEW" menuType="A"/>
+    <SecurityPermission description="帮助分类删除" name="帮助分类删除" permissionId="CONSULT_HELPCATEGORY_DELETE" parentPermissionId="CONSULT_HELPCATEGORY_VIEW" menuType="A"/>
+
+    <!-- 帮助信息 -->
+    <SecurityPermission description="帮助信息列表" name="帮助信息列表" permissionId="CONSULT_HELPINFO_VIEW" parentPermissionId="CONSULT_HELP_VIEW" menuType="A"/>
+    <SecurityPermission description="帮助信息添加" name="帮助信息添加" permissionId="CONSULT_HELPINFO_CREATE" parentPermissionId="CONSULT_HELPINFO_VIEW" menuType="A"/>
+    <SecurityPermission description="帮助信息修改" name="帮助信息修改" permissionId="CONSULT_HELPINFO_UPDATE" parentPermissionId="CONSULT_HELPINFO_VIEW" menuType="A"/>
+    <SecurityPermission description="帮助信息删除" name="帮助信息删除" permissionId="CONSULT_HELPINFO_DELETE" parentPermissionId="CONSULT_HELPINFO_VIEW" menuType="A"/>
+
+    <!-- 服务支持 -->
+    <SecurityPermission description="服务支持列表" name="服务支持列表" permissionId="CONSULT_SERVICESUPPORT_VIEW" parentPermissionId="CONSULT_HELP_VIEW" menuType="A"/>
+    <SecurityPermission description="服务支持添加" name="服务支持添加" permissionId="CONSULT_SERVICESUPPORT_CREATE" parentPermissionId="CONSULT_SERVICESUPPORT_VIEW" menuType="A"/>
+    <SecurityPermission description="服务支持修改" name="服务支持修改" permissionId="CONSULT_SERVICESUPPORT_UPDATE" parentPermissionId="CONSULT_SERVICESUPPORT_VIEW" menuType="A"/>
+    <SecurityPermission description="服务支持删除" name="服务支持删除" permissionId="CONSULT_SERVICESUPPORT_DELETE" parentPermissionId="CONSULT_SERVICESUPPORT_VIEW" menuType="A"/>
+    <!-- 帮助中心管理菜单 end-->
+
+    <!-- 社区店管理 start by liruishi 2017/04/05 -->
+    <SecurityPermission description="社区店管理" name="社区店管理" permissionId="COMMUNITY_STORE_VIEW" parentPermissionId="CONTENT_VIEW"/>
+    <SecurityPermission description="社区店新增" name="社区店新增" permissionId="COMMUNITY_STORE_CREATE" parentPermissionId="COMMUNITY_STORE_VIEW"/>
+    <SecurityPermission description="社区店编辑" name="社区店编辑" permissionId="COMMUNITY_STORE_EDIT" parentPermissionId="COMMUNITY_STORE_VIEW"/>
+    <SecurityPermission description="社区店删除" name="社区店删除" permissionId="COMMUNITY_STORE_DELETE" parentPermissionId="COMMUNITY_STORE_VIEW"/>
+    <!-- 社区店管理 end by liruishi 2017/04/05 -->
+
+    <!-- APP推送列表 -->
+    <SecurityPermission description="APP推送管理" name="APP推送管理" permissionId="CONTENT_APPPUSH_VIEW" parentPermissionId="CONTENT_VIEW"/>
+    <SecurityPermission description="APP推送新增" name="APP推送新增" permissionId="CONTENT_APPPUSH_CREATE" parentPermissionId="CONTENT_APPPUSH_VIEW"/>
+    <SecurityPermission description="APP推送修改" name="APP推送修改" permissionId="CONTENT_APPPUSH_UPDATE" parentPermissionId="CONTENT_APPPUSH_VIEW"/>
+    <SecurityPermission description="APP推送删除" name="APP推送删除" permissionId="CONTENT_APPPUSH_DELETE" parentPermissionId="CONTENT_APPPUSH_VIEW"/>
+    <SecurityPermission description="APP内容推送" name="APP内容推送" permissionId="CONTENT_APPPUSH_PUSH" parentPermissionId="CONTENT_APPPUSH_VIEW"/>
+</entity-engine-xml>

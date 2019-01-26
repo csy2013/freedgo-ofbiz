@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/services.xsd">
+    <description>mobile product Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+
+
+    <service name="partyPersonRegisterOrLogin" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="personRegister">
+        <description>product category list for mobile</description>
+        <attribute name="partyId" type="String" mode="IN" optional="true"/>
+        <attribute name="phone" type="String" mode="IN" optional="true" />
+        <attribute name="password" type="String" mode="IN"/>
+        <attribute name="nickName" type="String" mode="IN" allow-html="any"/>
+        <attribute name="memberId" type="String" mode="IN"/>
+        <attribute name="token" type="String" mode="IN"/>
+        <attribute name="wxAppOpenId" type="String" mode="IN" optional="true"/>
+        <attribute name="sex" type="String" mode="IN" optional="true"/>
+        <attribute name="headImgUrl" type="String" mode="IN"/>
+        <attribute name="unionId" type="String" mode="IN"/>
+        <attribute name="isNewCust" type="String" mode="IN" optional="true"/>
+        <attribute name="mallId" type="String" mode="IN" optional="true"/>
+        <attribute name="resultData" type="java.util.Map" mode="OUT"/>
+    </service>
+
+    <service name="app-uploadPartyContentFile" engine="group" transaction-timeout="300">
+        <description>Upload and attach a file to a party</description>
+        <group>
+            <!--<invoke name="getAppToken" result-to-context="true"/>-->
+            <invoke name="createContentFromUploadedFile" result-to-context="true"/>
+            <invoke name="createPartyContent"/>
+        </group>
+    </service>
+
+
+
+
+
+    <service name="queryPartyFavoriteProduct" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="queryPartyFavoriteProduct">
+        <attribute name="resultData" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="querySettleAmount" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="querySettleAmount">
+        <attribute name="resultData" type="java.util.List" mode="OUT"/>
+    </service>
+    
+    <service name="getPartyBrowseHistorys" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="getPartyBrowseHistorys">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="max" type="Integer" mode="OUT"/>
+        <attribute name="returnList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="deletePartyBrowseHistorys" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="deleteByPartyBrowseHistoryId">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="isAllClear" type="String" mode="IN" optional="true"/>
+        <attribute name="browseHistoryId" type="String" mode="IN" optional="true"/>
+    </service>
+    <service name="savePartyBrowse" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="savePartyBrowse">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="productIds" type="String" mode="IN" optional="true"/>
+    </service>
+    <service name="createFeedback" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="createFeedback">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="feedbackContent" type="String" mode="IN" optional="true"/>
+        <attribute name="contactMethod" type="String" mode="IN" optional="true"/>
+        <attribute name="imageIds" type="String" mode="IN" optional="true"/>
+    </service>
+    <service name="getFeedBackList" engine="java"  location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="getFeedBackList">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="viewIndex" type="String" mode="IN"/>
+        <attribute name="viewSize" type="String" mode="IN"/>
+        <attribute name="max" type="Integer" mode="OUT"/>
+        <attribute name="returnList" type="java.util.List" mode="OUT"/>
+    </service>
+
+    <service name="userScoreCodeSend" engine="java" location="com.yuaoq.yabiz.mobile.services.PartyService" invoke="userScoreCodeSend">
+        <attribute name="userLoginId" type="String" mode="IN"/>
+        <attribute name="sendType" type="String" mode="IN"/>
+        <attribute name="mallId" type="String" mode="IN"/>
+        <attribute name="memberId" type="String" mode="IN"/>
+    </service>
+</services>

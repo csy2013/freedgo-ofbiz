@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <!-- 跳转首页配置列表页面 start  -->
+    <screen name="firstPageSettingPage">
+        <section>
+             <actions>
+                <set field="titleProperty" value="ContentManageTitle"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+                	<!-- 面包屑导航 -->
+                	<decorator-section name="pre-body">
+               			<column-container>
+               				<column style="body-title">          
+               					<label>首页配置</label>
+               					<label style="sub-title">首页配置列表</label>
+               				</column>        
+               				<column style="breadcrumb">      
+               					<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+   						       	<link target="" text="首页配置" style="breadcrumb"/>
+   						       	<link target="" text="首页配置列表" style="breadcrumb active"/>
+     						</column>    
+               			</column-container>
+                	</decorator-section>
+                	<!-- body内容 -->
+                    <decorator-section name="body">
+                   		<section>
+							<condition>
+								<if-has-permission permission="FIRSTPAGE_LIST" action="_VIEW" />
+							</condition>
+							<widgets>
+		                        <platform-specific>
+				          			<html>
+				          				<html-template location="component://content/webapp/content/firstpage/firstPageSetting.ftl"/>
+				          			</html>
+				          		</platform-specific>
+				          	</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要首页配置查看的权限"/>
+							</fail-widgets>
+						</section>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <!-- 跳转首页配置页面 end  -->
+
+
+	<!-- 跳转推荐商品新增页面 start -->
+	<screen name="prodRecommendAddPage">
+		<section>
+			<actions>
+				<!--<script location="component://content/webapp/content/WEB-INF/actions/content/BannerEdit.groovy" />-->
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>首页配置</label>
+								<label style="sub-title">推荐商品新增</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="BannerListPage" text="首页配置" style="breadcrumb"/>
+								<link target="" text="推荐商品新增" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="PRODRECOMEND_LIST" action="_CREATE" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/firstpage/productRecommondAdd.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要推荐商品新增的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转推荐商品新增页面 end-->
+
+
+	<!-- 跳转推荐商品首页配置列表页面 start  -->
+	<screen name="prodRecommendPage">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>首页配置</label>
+								<label style="sub-title">推荐商品列表</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="首页配置" style="breadcrumb"/>
+								<link target="" text="推荐商品列表" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="PRODRECOMEND_LIST" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/firstpage/productRecommendList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要推荐商品首页配置查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转推荐商品首页配置页面 end  -->
+
+	<!-- 跳转热门品牌首页配置列表页面 start  -->
+	<screen name="brandRecommendPage">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>首页配置</label>
+								<label style="sub-title">热门品牌列表</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="首页配置" style="breadcrumb"/>
+								<link target="" text="热门品牌列表" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="BRANDRECOMEND_LIST" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/firstpage/brandRecommendList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要热门品牌首页配置查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转品牌管理首页配置页面 end  -->
+
+	<!-- 跳转热门品牌新增页面 start -->
+	<screen name="brandRecommendAddPage">
+		<section>
+			<actions>
+				<!--<script location="component://content/webapp/content/WEB-INF/actions/content/BannerEdit.groovy" />-->
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>首页配置</label>
+								<label style="sub-title">热门品牌新增</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="brandRecommendPage" text="首页配置" style="breadcrumb"/>
+								<link target="" text="热门品牌新增" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="BRANDRECOMEND_LIST" action="_CREATE" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/firstpage/brandRecommondAdd.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要热门品牌新增的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转热门品牌新增页面 end-->
+
+	<!-- 跳转热门店铺首页配置列表页面 start  -->
+	<screen name="storeRecommendPage">
+		<section>
+			<actions>
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>首页配置</label>
+								<label style="sub-title">热门店铺列表</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="" text="首页配置" style="breadcrumb"/>
+								<link target="" text="热门店铺列表" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="STORERECOMEND_LIST" action="_VIEW" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/firstpage/storeRecommendList.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要热门店铺首页配置查看的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转热门店铺首页配置页面 end  -->
+
+	<!-- 跳转热门门店新增页面 start -->
+	<screen name="storeRecommendAddPage">
+		<section>
+			<actions>
+				<!--<script location="component://content/webapp/content/WEB-INF/actions/content/BannerEdit.groovy" />-->
+				<set field="titleProperty" value="ContentManageTitle"/>
+			</actions>
+			<widgets>
+				<decorator-screen name="main-decorator" location="${parameters.mainDecoratorLocation}">
+					<!-- 面包屑导航 -->
+					<decorator-section name="pre-body">
+						<column-container>
+							<column style="body-title">
+								<label>首页配置</label>
+								<label style="sub-title">热门店铺新增</label>
+							</column>
+							<column style="breadcrumb">
+								<label text="${uiLabelMap.CommonFirst}" style="breadcrumb"></label>
+								<link target="storeRecommendPage" text="首页配置" style="breadcrumb"/>
+								<link target="" text="热门店铺新增" style="breadcrumb active"/>
+							</column>
+						</column-container>
+					</decorator-section>
+					<!-- body内容 -->
+					<decorator-section name="body">
+						<section>
+							<condition>
+								<if-has-permission permission="STORERECOMEND_LIST" action="_CREATE" />
+							</condition>
+							<widgets>
+								<platform-specific>
+									<html>
+										<html-template location="component://content/webapp/content/firstpage/storeRecommondAdd.ftl"/>
+									</html>
+								</platform-specific>
+							</widgets>
+							<fail-widgets>
+								<label style="h3" text="需要热门店铺新增的权限"/>
+							</fail-widgets>
+						</section>
+					</decorator-section>
+				</decorator-screen>
+			</widgets>
+		</section>
+	</screen>
+	<!-- 跳转热门品牌新增页面 end-->
+
+</screens>
